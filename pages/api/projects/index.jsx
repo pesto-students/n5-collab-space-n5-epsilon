@@ -4,7 +4,6 @@ import {
   insertProject,
 } from "../../../src/server/apiEndPoints";
 import { createHandler } from "../../../src/server/middleware";
-
 const handler = createHandler();
 
 handler.get(async (req, res) => {
@@ -15,7 +14,6 @@ handler.get(async (req, res) => {
 handler.post(async (req, res) => {
   if (!req.body) return res.status(400).send("You must write something");
   const projects = await insertProject(req.body);
-
   res.send(projects);
 });
 
