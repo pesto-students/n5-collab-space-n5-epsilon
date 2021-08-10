@@ -1,7 +1,12 @@
+import nextConnect from "next-connect";
 import { moveTask } from "../../../../src/server/db";
 
 import { createHandler } from "../../../../src/server/middleware";
+//import { middleware as handler} from "../../../middleware/database";
 
+// const handler = nextConnect();
+
+// handler.use(middleware);
 const handler = createHandler();
 
 handler.put(async (req, res) => {
@@ -9,5 +14,6 @@ handler.put(async (req, res) => {
   const task = await moveTask(req.body.data);
   res.send(task);
 });
+
 
 export default handler;

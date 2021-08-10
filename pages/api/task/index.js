@@ -1,3 +1,4 @@
+import nextConnect from "next-connect";
 import { createTask, deleteTask } from "../../../src/server/db";
 import { createHandler } from "../../../src/server/middleware";
 const handler = createHandler();
