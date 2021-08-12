@@ -1,4 +1,4 @@
-import { createTask, deleteTask } from "../../../src/server/apiEndPoints";
+import { createTask, deleteTask } from "../../../src/server/db";
 import { createHandler } from "../../../src/server/middleware";
 const handler = createHandler();
 

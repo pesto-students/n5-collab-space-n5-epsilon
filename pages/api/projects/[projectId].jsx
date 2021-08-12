@@ -1,4 +1,4 @@
-import { getProject, updateProject } from "../../../src/server/apiEndPoints";
+import { getProject, updateProject } from "../../../src/server/db";
 import { createHandler } from "../../../src/server/middleware";
 const handler = createHandler();
 
