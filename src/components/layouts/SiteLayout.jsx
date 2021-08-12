@@ -5,7 +5,7 @@ import navButtons from "./config/NavButtonConfig";
 
 const SiteLayout = ({ children }) => {
   return (
-    <div className={Style.sitelayout}>
+    <div className={Style.siteLayout}>
       <SideNav navButtons={navButtons} />
       {children}
     </div>

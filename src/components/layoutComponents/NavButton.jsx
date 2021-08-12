@@ -9,7 +9,7 @@ const NavButton = ({ path, icon, label, router }) => (
         router.pathname === path ? "active" : ""
       }`}
     >
-      <div className={Styles.NavButton.iconcontianer}>
+      <div className={Styles.NavButton.iconContainer}>
         <span className={Styles.NavButton.icon}>{icon}</span>
         <span className={Styles.NavButton.label}>{label}</span>
       </div>
