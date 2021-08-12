@@ -1,43 +1,66 @@
 import { projectURL } from "../../client_apis/configUrl";
 import {
-  AddProject,
-  ErrorProject,
   DeleteProject,
+  DeleteProjectFailure,
+  DeleteProjectSuccess,
+} from "../constants/projectActionConstants";
+import {
   GetAllProject,
-  CreateProject
+  CreateProject,
+  GetAllProjectSuccess,
+  GetAllProjectFailure,
+  CreateProjectSuccess,
+  CreateProjectFailure,
 } from "../constants/workspaceActionConstants";
 
 export const getWorkspaceProject = () => async (dispatch, getState) => {
   // getState is to collect data from current state from store
+  dispatch(GetAllProject({ loading: true }));
   try {
     await projectURL
       .get()
       .then((response) => {
-        dispatch(GetAllProject(response.data.projects));
+        dispatch(GetAllProjectSuccess(response.data.projects));
       })
       .catch((error) => {
         let errorResponse = error;
-        dispatch(ErrorProject(errorResponse));
+        dispatch(GetAllProjectFailure(errorResponse));
       });
-  } catch {}
+  } catch (err) {
+    dispatch(ErrorProject(err));
+  }
 };
 
 export const addNewProject = (newProject) => async (dispatch) => {
-  let response = await projectURL.post('/', newProject);
-  if (response) {
-    const data = response.data
-    const payload = {_id:data._id,projectName:data.projectName,description:response.data.description}
-    dispatch(CreateProject(payload));
+  try {
+    dispatch(CreateProject(newProject));
+    let response = await projectURL.post("/", newProject);
+    if (response) {
+      const data = response.data;
+      const payload = {
+        _id: data._id,
+        projectName: data.projectName,
+        description: response.data.description,
+      };
+      dispatch(CreateProjectSuccess(payload));
+    }
+  } catch (err) {
+    dispatch(CreateProjectFailure(err));
   }
 };
 
 export const deleteProject = (projectId) => async (dispatch) => {
-  let response = await projectURL.delete('/', {
-    data:  projectId ,
-  });
-  console.log("response",response)
-  if (response) {
-    console.log(projectId)
+  try {
     dispatch(DeleteProject(projectId));
+    let response = await projectURL.delete("/", {
+      data: projectId,
+    });
+    console.log("response", response);
+    if (response) {
+      console.log(projectId);
+      dispatch(DeleteProjectSuccess(projectId));
+    }
+  } catch (err) {
+    dispatch(DeleteProjectFailure(err));
   }
 };
