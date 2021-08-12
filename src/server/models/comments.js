@@ -6,7 +6,7 @@ const schema = new Schema({
   comment: String,
   by: {
     type: Schema.Types.ObjectId,
-    ref: "Projects",
+    ref: "projects",
   },
   projectId: {
     type: Schema.Types.ObjectId,

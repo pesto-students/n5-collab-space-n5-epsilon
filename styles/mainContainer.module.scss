@@ -1,12 +1,12 @@
-.maincontainer {
+.mainContainer {
   padding: 20px;
 }
 
-.maincontainerbody {
+.mainContainerBody {
   display: grid;
   grid-template-rows: repeat(auto-fit, minmax(100px, 1fr));
 
-  .userprojects {
+  .userProjects {
     display: grid;
     grid-gap: 16px;
     padding: 16px;
@@ -15,23 +15,27 @@
     grid-auto-columns: minmax(160px, 1fr);
     overflow-x: auto;
 
-    .project_card {
+    .projectCard {
       border-radius: 10px;
       text-align: center;
       box-shadow: 3px 8px 14px #a7a6a6;
       width: auto;
-     .project_card_container{
-         padding: 3% 7%;
-         a{
-             font-size: small;
-         }
-     }
-      .projectheading{
-          display: flex;
-          justify-content:space-between;
+      .projectCardContainer {
+        padding: 3% 7%;
+        a {
+          font-size: small;
+        }
       }
-      .deletproject{
+      .projectHeading {
+        display: flex;
+        justify-content: space-between;
+      }
+      .deleteProject {
+        button {
           background-color: white;
+          border: none;
+          cursor: pointer;
+        }
       }
     }
   }

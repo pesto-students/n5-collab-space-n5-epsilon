@@ -34,8 +34,8 @@ const MainContainer = (props) => {
       <div className={Styles.userProjects}>
         {projects.map((project) => {
           return (
-            <div className={Styles.project_card}>
-              <div className={Styles.project_card_container}>
+            <div className={Styles.projectCard}>
+              <div className={Styles.projectCardContainer}>
                 <div className={Styles.projectHeading}>
                   <h1 key={project._id}>
                     <Link href={`workspace/project/${project._id}`}>

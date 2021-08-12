@@ -1,15 +1,19 @@
-import mongoose, { Schema, Types } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const MODEL_NAME = "Users";
 
 const schema = new Schema({
   userName: Number,
-  email: String,
-  password: String,
-  contribution: [
+  ownProjects: [
     {
-      types: Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Projects",
+    },
+  ],
+  sharedProjects: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "SharedProjects",
     },
   ],
 });

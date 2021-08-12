@@ -1,43 +1,40 @@
-.sitelayout {
-    display: grid;
-    height: 100vh;
-    grid-template-columns: .2fr auto;
-    margin: 0;
-  }
+.siteLayout {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 0.2fr auto;
+  margin: 0;
+}
 
-  .sidelayoutpanel{
-    height: 100vh;
-    background: rgba(203, 202, 204, 0.281);
+.sideLayoutPanel {
+  height: 100vh;
+  background: rgba(203, 202, 204, 0.281);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .sideNavStaticList {
+    padding: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
-      align-items: center;
-    .sidenavStaticList{
-      padding: 0;
+    width: 200px;
+    height: 20vh;
+    .NavButton {
       display: flex;
+      padding: 5vw;
       flex-direction: column;
-      justify-content: center;
-      width: 200px;
-      height: 20vh;
-      .NavButton{
-        display: flex;
-        padding:5vw;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-  cursor: pointer;
-  border: 1px solid white;
+      align-items: center;
+      height: 100%;
+      cursor: pointer;
+      border: 1px solid white;
 
-        .Label {
-          text-transform: capitalize
-        }
-        
+      .Label {
+        text-transform: capitalize;
       }
     }
-    ul{
-      list-style-type: none;
-      text-align: left;
-      
-    }
-    
   }
+  ul {
+    list-style-type: none;
+    text-align: left;
+  }
+}

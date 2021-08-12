@@ -6,6 +6,7 @@ import {
 import {
   CREATE_PROJECT,
   GET_ALL_PROJECT,
+  GET_ALL_PROJECT_SUCCESS,
 } from "../constants/workspaceActionConstants";
 
 export const initialState = {
@@ -36,7 +37,7 @@ const WorkSpaceReducer = (state = initialState, action) => {
         draft.projects.splice(some, 1);
         break;
       }
-      case GET_ALL_PROJECT: {
+      case GET_ALL_PROJECT_SUCCESS: {
         draft.projects = payload;
         break;
       }

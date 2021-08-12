@@ -1,4 +1,4 @@
-import { projectURL } from "../../client_apis/configUrl";
+import { projectURL } from "../../client_apis/workSpaceApi";
 import {
   DeleteProject,
   DeleteProjectFailure,
