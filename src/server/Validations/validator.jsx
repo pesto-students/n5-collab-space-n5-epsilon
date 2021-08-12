@@ -1,4 +1,4 @@
-const validation = require('@hapi/joi');
+const validation = require("@hapi/joi");
 //validation.objectId = require('joi-objectid')(Joi)
 
-export default validation
+export default validation;

@@ -55,9 +55,7 @@ export const deleteProject = (projectId) => async (dispatch) => {
     let response = await projectURL.delete("/", {
       data: projectId,
     });
-    console.log("response", response);
     if (response) {
-      console.log(projectId);
       dispatch(DeleteProjectSuccess(projectId));
     }
   } catch (err) {

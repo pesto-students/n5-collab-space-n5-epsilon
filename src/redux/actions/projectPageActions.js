@@ -24,7 +24,6 @@ export const deleteProject = (projectId) => async (dispatch) => {
       data: projectId,
     });
     if (response) {
-      console.log(projectId);
       dispatch(DeleteProject(projectId));
     }
   } catch (err) {

@@ -23,4 +23,8 @@ const deleteProjectValidation = (data) => {
   return validation.validate(data, deleteProject);
 };
 
-export { getProjectInfoValidation, insertProjectValidation, deleteProjectValidation };
+export {
+  getProjectInfoValidation,
+  insertProjectValidation,
+  deleteProjectValidation,
+};

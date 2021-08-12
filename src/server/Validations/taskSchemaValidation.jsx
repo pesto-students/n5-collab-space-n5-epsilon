@@ -22,8 +22,4 @@ const deleteTaskValidation = (data) => {
   return validation.validate(data, deleteTask);
 };
 
-export {
-  getTaskInfoValidation,
-  insertTaskValidation,
-  deleteTaskValidation,
-};
+export { getTaskInfoValidation, insertTaskValidation, deleteTaskValidation };

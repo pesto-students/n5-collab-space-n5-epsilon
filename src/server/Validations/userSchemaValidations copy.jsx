@@ -1,4 +1,4 @@
-const validation = require('@hapi/joi');
+const validation = require("@hapi/joi");
 
 const signUp_UserValidation = (data) => {
   const signUp_User = {
