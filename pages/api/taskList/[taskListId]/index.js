@@ -1,5 +1,5 @@
 import nextConnect from "next-connect";
-import { getTaskList, createTask, deleteTask, createTaskList } from "../../../../src/server/db";
+import { getTaskList, createTask, deleteTask, createTaskList } from "../../../../src/server/apiEndPoints";
 import { createHandler } from "../../../../src/server/middleware";
 
 const handler = createHandler();

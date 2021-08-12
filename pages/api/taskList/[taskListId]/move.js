@@ -1,4 +1,4 @@
-import { moveTask } from "../../../../src/server/db";
+import { moveTask } from "../../../../src/server/apiEndPoints";
 
 import { createHandler } from "../../../../src/server/middleware";
 //import { middleware as handler} from "../../../middleware/database";

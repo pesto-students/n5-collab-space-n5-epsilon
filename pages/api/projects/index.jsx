@@ -2,7 +2,7 @@ import {
   deleteProject,
   getProjectsInfo,
   insertProject,
-} from "../../../src/server/db";
+} from "../../../src/server/apiEndPoints";
 import { createHandler } from "../../../src/server/middleware";
 const handler = createHandler();
 
