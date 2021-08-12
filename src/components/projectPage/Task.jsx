@@ -7,7 +7,7 @@ function Task({ task, index, deleteTaskHandler }) {
     ...draggableStyle,
   });
 
-  const { taskName, status, taskListId} = task;
+  const { taskListId } = task;
   return (
     <Draggable draggableId={task._id} index={index}>
       {(provided, snapshot) => (
@@ -17,12 +17,12 @@ function Task({ task, index, deleteTaskHandler }) {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           style={getItemStyle(
-            snapshot.isDragging,    
+            snapshot.isDragging,
             provided.draggableProps.style
           )}
         >
-          <div className="card-body">{task.taskName}</div>
-          <div className="task-status">{task.status}</div>
+          <div className={styles.cardBody}>{task.taskName}</div>
+          <div className={styles.taskStatus}>{task.status}</div>
           <button
             onClick={() => {
               deleteTaskHandler(taskListId, task._id);

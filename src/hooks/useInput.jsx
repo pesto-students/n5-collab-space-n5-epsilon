@@ -1,12 +1,14 @@
 import { useState, useCallback } from "react";
-export default function useInput({ type /*...*/ }) {
-  const [value, setValue] = useState("");
+export default function useInput(props) {
+  let initialValue = "";
+  if (props.value) initialValue = props.value;
+  const [value, setValue] = useState(initialValue);
   const input = (
     <input
       value={value}
       onChange={(e) => setValue(e.target.value)}
-      type={type}
+      {...props}
     />
   );
-  return [value, input,setValue];
+  return [value, input, setValue];
 }
