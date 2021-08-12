@@ -3,17 +3,19 @@ import { createHandler } from "../../../src/server/middleware";
 const handler = createHandler();
 
 handler.get(async (req, res) => {
+  if (!req.query)
+    return res.status(400).send(JSON.stringify({ error: "Invalid Request" }));
   const { projectId } = req.query;
-  console.log("this is project id ", projectId, req.query);
-  const projectinfo = await getProject(projectId);
-  res.send(projectinfo);
+  const projectInfo = await getProject(projectId);
+  res.send(projectInfo);
 });
 
 handler.put(async (req, res) => {
+  if (!req.query)
+    return res.status(400).send(JSON.stringify({ error: "Invalid Request" }));
   const { projectId, data } = req.query;
-  console.log("this is project id ", projectId, req.query);
-  const projectinfo = await updateProject(projectId, data);
-  res.send(projectinfo);
+  const projectInfo = await updateProject(projectId, data);
+  res.send(projectInfo);
 });
 
 export default handler;

@@ -3,26 +3,30 @@ import { createHandler } from "../../../src/server/middleware";
 const handler = createHandler();
 
 handler.get(async (req, res) => {
+  if (!req.query)
+    return res.status(400).send(JSON.stringify({ error: "Invalid Request" }));
   const { taskListId } = req.query;
-  const projects = await getTaskinfo(taskListId);
-  res.send(projects);
+  const taskInfo = await getTaskInfo(taskListId);
+  res.send(taskInfo);
 });
 
 handler.post(async (req, res) => {
-  if (!req.body) return res.status(400).send("You must write something");
+  if (!req.body)
+    return res.status(400).send(JSON.stringify({ error: "Invalid Request" }));
   const task = await createTask(req.body);
   res.send(task);
 });
 
 handler.put(async (req, res) => {
-  if (!req.body) return res.status(400).send("You must write something");
+  if (!req.body)
+    return res.status(400).send(JSON.stringify({ error: "Invalid Request" }));
   const task = await updateTask(req.body);
   res.send(task);
 });
 
 handler.delete(async (req, res) => {
-  console.log(req);
-  if (!req.body) return res.status(400).send("You must provide ProjectId");
+  if (!req.body)
+    return res.status(400).send(JSON.stringify({ error: "Invalid Request" }));
 
   const deletedTask = await deleteTask(req.body);
   res.send(deletedTask);

@@ -6,7 +6,6 @@ import {
 import { createHandler } from "../../../src/server/middleware";
 
 const handler = createHandler();
-
 handler.get(async (req, res) => {
   const projects = await getProjectsInfo();
   res.send({ projects });
@@ -15,13 +14,12 @@ handler.get(async (req, res) => {
 handler.post(async (req, res) => {
   if (!req.body) return res.status(400).send("You must write something");
   const projects = await insertProject(req.body);
-  console.log("this is project", projects);
   res.send(projects);
 });
 
 handler.delete(async (req, res) => {
   if (!req.body.projectId)
-    return res.status(400).send("You must provide ProjectId");
+    return res.status(400).send(JSON.stringify({ error: "Invalid Request" }));
   const projects = await deleteProject(req.body.projectId);
   res.send(projects);
 });
