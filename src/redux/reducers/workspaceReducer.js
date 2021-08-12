@@ -24,7 +24,6 @@ const WorkSpaceReducer = (state = initialState, action) => {
       }
       case CREATE_PROJECT: {
         draft.projects.push(payload);
-        console.log("newState", JSON.parse(JSON.stringify(draft)));
         break;
         //return draft;
       }
@@ -34,9 +33,7 @@ const WorkSpaceReducer = (state = initialState, action) => {
         const some = newDraft.projects.findIndex(
           (project) => project._id == payload.projectId
         );
-        console.log("this is index", some);
         draft.projects.splice(some, 1);
-        console.log("newState", JSON.parse(JSON.stringify(draft)));
         break;
       }
       case GET_ALL_PROJECT: {
@@ -44,7 +41,6 @@ const WorkSpaceReducer = (state = initialState, action) => {
         break;
       }
       default: {
-        console.log("Came in draft");
         return draft;
       }
     }

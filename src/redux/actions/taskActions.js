@@ -14,7 +14,6 @@ export const createNewTask = (taskInfo) => async (dispatch) => {
     dispatch(CreateTask(response.data));
     let response = await taskURL.post("", taskInfo);
     if (response) {
-      console.log(response.data);
       dispatch(CreateTaskSuccess(response.data));
     }
   } catch (err) {

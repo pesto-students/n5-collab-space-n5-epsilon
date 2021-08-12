@@ -1,4 +1,3 @@
-
 import {
   CreateTaskList,
   CreateTaskListFailure,
@@ -13,7 +12,6 @@ export const createNewTaskList = (taskListInfo) => async (dispatch) => {
     dispatch(CreateTaskList(taskListInfo));
     let response = await taskListURL.post("", taskListInfo);
     if (response) {
-      console.log(response.data);
       dispatch(CreateTaskListSuccess(response.data));
     }
   } catch (err) {
@@ -33,4 +31,3 @@ export const deleteTaskList = (taskListInfo) => async (dispatch) => {
     dispatch(DeleteTaskListFailure(err));
   }
 };
-
