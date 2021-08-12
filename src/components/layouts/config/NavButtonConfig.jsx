@@ -4,9 +4,7 @@ const navButtons = [
     label: "Projects",
     path: "/workspace",
     icon: "+",
-    child:{
-      
-    }
+    child: {},
   },
   {
     label: "User Panel",
