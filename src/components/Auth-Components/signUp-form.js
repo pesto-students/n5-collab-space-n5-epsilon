@@ -80,6 +80,7 @@ export default function SignUpForm(props) {
                 > SignIn
                 </span>
             </div>
+            
             {props.formStatus.error && (<p className='error'>{props.formStatus.error}</p>)}
 
         </form>
