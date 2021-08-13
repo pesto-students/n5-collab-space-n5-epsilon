@@ -1,13 +1,23 @@
+import { verify } from "jsonwebtoken";
 import { getProject, updateProject } from "../../../src/server/apiEndPoints";
 import { createHandler } from "../../../src/server/middleware";
 const handler = createHandler();
 
 handler.get(async (req, res) => {
-  if (!req.query)
-    return res.status(400).send(JSON.stringify({ error: "Invalid Request" }));
-  const { projectId } = req.query;
-  const projectInfo = await getProject(projectId);
-  res.send(projectInfo);
+  try {
+    const { userId, token, projectId } = req.query;
+    const validToken = await verify(token, process.env.REACT_APP_SECRET_TOKEN);
+    if (validToken) {
+      if (!req.query)
+        return res
+          .status(400)
+          .send(JSON.stringify({ error: "Invalid Request" }));
+      const projectInfo = await getProject(projectId, userId);
+      res.send(projectInfo);
+    }
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 handler.put(async (req, res) => {

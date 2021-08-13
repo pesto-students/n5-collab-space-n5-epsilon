@@ -6,17 +6,25 @@ import {
   DeleteProject,
 } from "../constants/projectActionConstants";
 
-export const getProjectInfo = (projectId) => async (dispatch, getState) => {
-  try {
-    // getState is to collect data from current state from store
-    const response = await projectURL.get(`/${projectId}`);
-    if (response) {
-      dispatch(GetProjectInfo(response.data));
+export const getProjectInfo =
+  ({ projectId, cookies }) =>
+  async (dispatch, getState) => {
+    try {
+      // getState is to collect data from current state from store
+      const { userId, token } = cookies;
+      const response = await projectURL.get(`/${projectId}`, {
+        params: {
+          userId,
+          token,
+        },
+      });
+      if (response) {
+        dispatch(GetProjectInfo(response.data));
+      }
+    } catch (err) {
+      dispatch(ErrorProject(err));
     }
-  } catch (err) {
-    dispatch(ErrorProject(err));
-  }
-};
+  };
 
 export const deleteProject = (projectId) => async (dispatch) => {
   try {

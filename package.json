@@ -36,6 +36,8 @@
     "react-dom": "17.0.2",
     "react-no-ssr": "^1.1.0",
     "react-redux": "^7.2.4",
+    "react-toastify": "^7.0.4",
+    "react-toastify-redux": "^1.0.0-rc.2",
     "redux": "^4.1.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-logger": "^3.0.6",

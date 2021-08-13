@@ -5,21 +5,68 @@ import Projects from "../models/projects";
 import Users from "../models/users";
 import TaskLists from "../models/taskLists";
 import Task from "../models/tasks";
+import Roles from "../models/roles";
 import Comments from "../models/comments";
+import Contributions from "../models/contributions";
 import { model, Types } from "mongoose";
 
-export async function getProjectsInfo(
-  projection = "projectName description",
+export async function getProjectsInfo(userId) {
+  try {
+    const allProject = await Contributions.aggregate([
+      {
+        $match: {
+          userId: Types.ObjectId(userId),
+        },
+      },
+      {
+        $lookup: {
+          from: "projects",
+          localField: "projectId",
+          foreignField: "_id",
+          as: "projectLookups",
+        },
+      },
+      {
+        $unwind: {
+          path: "$projectLookups",
+        },
+      },
+      {
+        $lookup: {
+          from: "roles",
+          localField: "roleId",
+          foreignField: "_id",
+          as: "roleLookups",
+        },
+      },
+      {
+        $unwind: {
+          path: "$roleLookups",
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          projectId: 1,
+          projectName: "$projectLookups.projectName",
+          description: "$projectLookups.description",
+          role: "$roleLookups.name",
+        },
+      },
+    ]);
+    return allProject;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getProject(
+  projectId,
+  userId,
+  projection = "",
   populate = ""
 ) {
-  const allProject = await Projects.find({}, projection)
-    .lean()
-    .populate(populate)
-    .exec();
-  return allProject;
-}
-export async function getProject(projectId, projection = "", populate = "") {
-  const Project = await Projects.aggregate([
+  const ProjectArray = await Projects.aggregate([
     {
       $match: {
         _id: Types.ObjectId(projectId),
@@ -130,22 +177,49 @@ export async function getProject(projectId, projection = "", populate = "") {
       },
     },
   ]);
-  return Project[0];
+  const Project = ProjectArray[0];
+  const userRoleArray = await Contributions.find(
+    { projectId, userId },
+    "roleId"
+  )
+    .populate("roleId")
+    .exec();
+  console.log("userRoleArray", userRoleArray);
+  const userRole = userRoleArray[0];
+  Project.roleInfo = userRole.roleId;
+
+  return Project;
 }
-export async function insertProject(project) {
-  project.projectOwner = Types.ObjectId(project.projectOwner);
+export async function insertProject(project, userId) {
   const newProject = new Projects(project);
-  const saveNewProject = await newProject.save();
-  return saveNewProject;
+  const savedNewProject = await newProject.save();
+  const adminRoleArray = await Roles.find({ name: "Admin" });
+  const adminRole = adminRoleArray[0];
+  const newContribution = new Contributions({
+    projectId: Types.ObjectId(savedNewProject._id),
+    userId: Types.ObjectId(userId),
+    roleId: Types.ObjectId(adminRole._id),
+  });
+  await newContribution.save();
+  const response = {
+    projectId: savedNewProject.projectId,
+    description: savedNewProject.description,
+    role: adminRole.name,
+  };
+  return response;
 }
 
 export async function deleteProject(projectId) {
-  const foundProjectInfo = Projects.findOneAndDelete({ _id: projectId });
+  console.log("Delete projectId", projectId);
+  const foundProjectInfo = await Projects.findOneAndDelete({ _id: projectId });
+  await Contributions.findOneAndDelete({
+    projectId: projectId,
+  });
   return foundProjectInfo;
 }
 
 export async function updateProject(projectInfo) {
-  const foundProjectInfo = Projects.findOneAndUpdate(
+  const foundProjectInfo = await Projects.findOneAndUpdate(
     { _id: projectId },
     projectInfo,
     { upsert: true }

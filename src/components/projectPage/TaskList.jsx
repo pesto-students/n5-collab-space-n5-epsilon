@@ -13,6 +13,8 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
 function TaskList({ taskList }) {
   const dispatch = useDispatch();
+  const projectInfo = useSelector((state) => state.ProjectReducer.projectInfo);
+  const userPermission = projectInfo.roleInfo;
   const [taskName, userInput] = useInput({ type: "text" });
   const { _id, taskListName, task } = taskList;
   const taskListId = _id;
@@ -53,13 +55,16 @@ function TaskList({ taskList }) {
           <div className={styles.cardHeader}>
             <h5>{taskListName}</h5>
             <h6>{task && task.length > 0 ? task.length : ""}</h6>
-            <button
-              onClick={() => {
-                deleteTaskListHandler(taskListId);
-              }}
-            >
-              x
-            </button>
+            {userPermission.hasOwnProperty("taskList") &&
+              userPermission.taskList.includes("Delete") && (
+                <button
+                  onClick={() => {
+                    deleteTaskListHandler(taskListId);
+                  }}
+                >
+                  x
+                </button>
+              )}
           </div>
           <div>
             {userInput}

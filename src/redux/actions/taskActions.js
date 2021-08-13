@@ -8,6 +8,8 @@ import {
   MoveTaskFailure,
   MoveTaskSuccess,
 } from "../constants/taskActionConstants";
+import { toast } from "react-toastify";
+import { taskListURL } from "../../client_apis/workSpaceApi";
 
 export const createNewTask = (taskInfo) => async (dispatch) => {
   try {
@@ -33,7 +35,8 @@ export const deleteTask = (taskInfo) => async (dispatch) => {
   }
 };
 
-export const moveTaskAction = (taskInfo) => async (dispatch) => {
+export const moveTaskAction = (taskInfo) => async (dispatch, getState) => {
+  const prevState = getState().ProjectReducer;
   try {
     const { sourceTaskListId } = taskInfo;
     dispatch(MoveTask(taskInfo));
@@ -42,8 +45,10 @@ export const moveTaskAction = (taskInfo) => async (dispatch) => {
     });
     if (response) {
       dispatch(MoveTaskSuccess(taskInfo));
+      toast.success("Task Moved ");
     }
   } catch (err) {
-    dispatch(MoveTaskFailure(err));
+    dispatch(MoveTaskFailure(prevState));
+    toast.warn("Couldn't Connect to Server ");
   }
 };

@@ -4,10 +4,10 @@ const MODEL_NAME = "Roles";
 
 const RolesSchema = new Schema({
   name: String,
-  projects: [[String]],
-  comments: [[String]],
-  taskList: [[String]],
-  taskTask: [[String]],
+  project: [String],
+  comments: [String],
+  taskList: [String],
+  task: [String],
 });
 
 const Model =
