@@ -3,7 +3,7 @@
 // }
 import Projects from "../models/projects";
 import Users from "../models/users";
-import TaskLists from "../models/tasklists";
+import TaskLists from "../models/taskLists";
 import Task from "../models/tasks";
 import Comments from "../models/comments";
 import { model, Types } from "mongoose";
@@ -115,14 +115,14 @@ export async function getProject(projectId, projection = "", populate = "") {
       },
     },
     {
-      $addFields:{
-        "taskLists":{
-          $filter:{
-            "input":"$taskLists",
-            "cond": { "$ifNull": ["$$this._id", false] }
-          }
-        }
-      }
+      $addFields: {
+        taskLists: {
+          $filter: {
+            input: "$taskLists",
+            cond: { $ifNull: ["$$this._id", false] },
+          },
+        },
+      },
     },
     {
       $project: {
@@ -130,19 +130,16 @@ export async function getProject(projectId, projection = "", populate = "") {
       },
     },
   ]);
-  console.log("aggregate project info", Project);
   return Project[0];
 }
 export async function insertProject(project) {
   project.projectOwner = Types.ObjectId(project.projectOwner);
   const newProject = new Projects(project);
   const saveNewProject = await newProject.save();
-  console.log(saveNewProject);
   return saveNewProject;
 }
 
 export async function deleteProject(projectId) {
-  console.log("thishis", projectId);
   const foundProjectInfo = Projects.findOneAndDelete({ _id: projectId });
   return foundProjectInfo;
 }

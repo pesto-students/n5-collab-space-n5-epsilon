@@ -25,24 +25,24 @@ const MainContainer = (props) => {
     dispatch(deleteProject({ projectId: projectId }));
   };
   return (
-    <div className={Styles.maincontainerbody}>
+    <div className={Styles.mainContainerBody}>
       <WorkSpaceTitle />
       <div className="add-project">
         {userInput}
         <button onClick={addProjectHandler}>name</button>
       </div>
-      <div className={Styles.userprojects}>
+      <div className={Styles.userProjects}>
         {projects.map((project) => {
           return (
-            <div className={Styles.project_card}>
-              <div className={Styles.project_card_container}>
-                <div className={Styles.projectheading}>
+            <div className={Styles.projectCard}>
+              <div className={Styles.projectCardContainer}>
+                <div className={Styles.projectHeading}>
                   <h1 key={project._id}>
                     <Link href={`workspace/project/${project._id}`}>
                       <a>{`${project.projectName}`}</a>
                     </Link>
                   </h1>
-                  <div className={Styles.deletproject}>
+                  <div className={Styles.deleteProject}>
                     <button
                       onClick={() => {
                         deleteProjectHandler(project._id);
@@ -54,7 +54,11 @@ const MainContainer = (props) => {
                 </div>
 
                 <div className="project-description">
-                  <p>{project.description.length > 10 ? project.description.slice(0,20)+"..." : project.description }</p>
+                  <p>
+                    {project.description.length > 10
+                      ? project.description.slice(0, 20) + "..."
+                      : project.description}
+                  </p>
                 </div>
               </div>
             </div>

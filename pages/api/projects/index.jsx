@@ -1,12 +1,10 @@
-import nextConnect from "next-connect";
-import { deleteProject, getProjectsInfo, insertProject } from "../../../src/server/db";
+import {
+  deleteProject,
+  getProjectsInfo,
+  insertProject,
+} from "../../../src/server/apiEndPoints";
 import { createHandler } from "../../../src/server/middleware";
-//import { middleware as handler} from "../../../middleware/database";
-
-// const handler = nextConnect();
-
-// handler.use(middleware);
-const handler = createHandler(); 
+const handler = createHandler();
 
 handler.get(async (req, res) => {
   const projects = await getProjectsInfo();
@@ -14,16 +12,15 @@ handler.get(async (req, res) => {
 });
 
 handler.post(async (req, res) => {
-  if (!req.body)
-    return res.status(400).send("You must write something");
+  if (!req.body) return res.status(400).send("You must write something");
   const projects = await insertProject(req.body);
-  console.log("this is project",projects)
-  res.send( projects );
+
+  res.send(projects);
 });
 
 handler.delete(async (req, res) => {
   if (!req.body.projectId)
-    return res.status(400).send("You must provide ProjectId");
+    return res.status(400).send(JSON.stringify({ error: "Invalid Request" }));
   const projects = await deleteProject(req.body.projectId);
   res.send(projects);
 });

@@ -2,8 +2,8 @@ import { useRouter } from "next/router";
 import {
   createNewTaskList,
   getProjectInfo,
-  moveTaskAction,
 } from "../../../src/redux/actions/projectPageActions";
+import { moveTaskAction } from "../../../src/redux/actions/taskActions";
 import { wrapper } from "../../../src/redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import TaskList from "../../../src/components/projectPage/TaskList";
@@ -11,7 +11,7 @@ import InfoBanner from "../../../src/components/projectPage/infoBanner";
 import styles from "../../../styles/projectPage.module.scss";
 import { DragDropContext } from "react-beautiful-dnd";
 import { resetServerContext } from "react-beautiful-dnd";
-import { CHANGE_TASK_ORDER } from "../../../src/redux/constants/projectActionConstants";
+import { CHANGE_TASK_ORDER } from "../../../src/redux/constants/taskActionConstants";
 import NoSSR from "react-no-ssr";
 import useInput from "../../../src/hooks/useInput";
 import { Types } from "mongoose";
@@ -22,18 +22,17 @@ const ProjectPage = () => {
   const dispatch = useDispatch();
   const projectInfo = useSelector((state) => state.ProjectReducer.projectInfo);
   const [username, userInput] = useInput({ type: "text" });
-  const { projectid } = router.query;
+  const { projectId } = router.query;
   const { taskLists, loading } = projectInfo;
   const addTaskListHandler = () => {
     dispatch(
       createNewTaskList({
         taskListName: username,
-        projectId: projectid,
+        projectId: projectId,
       })
     );
   };
   const onDragEnd = (result) => {
-    console.log("drag result", result);
     if (!result.destination) {
       return;
     }
@@ -64,19 +63,18 @@ const ProjectPage = () => {
     }
   };
   return (
-    <div className={styles.project_page}>
+    <div className={styles.projectPage}>
       <InfoBanner />
-      <div className={styles.add_tasklist}>
+      <div className={styles.addTaskList}>
         Task List{userInput}
         <button onClick={addTaskListHandler}>Add</button>
       </div>
       <div className={styles.taskListContainer}>
         <NoSSR>
           <DragDropContext onDragEnd={onDragEnd}>
-            {}
             {taskLists &&
-              taskLists.map((tasklist) => {
-                return <TaskList key={tasklist._id} tasklist={tasklist} />;
+              taskLists.map((taskList) => {
+                return <TaskList key={taskList._id} taskList={taskList} />;
               })}
           </DragDropContext>
         </NoSSR>
@@ -90,6 +88,6 @@ export default ProjectPage;
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) =>
     async ({ req, params }) => {
-      await store.dispatch(getProjectInfo(params.projectid));
+      await store.dispatch(getProjectInfo(params.projectId));
     }
 );

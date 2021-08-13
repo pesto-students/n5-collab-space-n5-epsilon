@@ -34,7 +34,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
 const Workspace = () => {
   return (
-    <div className={Styles.maincontainer}>
+    <div className={Styles.mainContainer}>
       <MainContainer />
     </div>
   );

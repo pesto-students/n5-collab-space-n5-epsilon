@@ -12,14 +12,10 @@ const ProjectSchema = new Schema({
 });
 
 ProjectSchema.post("findOneAndDelete", async function (doc) {
-  console.log(doc);
-
   if (doc) {
     const deleteResult = await mongoose.models["TaskLists"].deleteMany({
       projectId: doc._id,
     });
-
-    console.log("Child delete result: ", deleteResult);
   }
 });
 const Model =

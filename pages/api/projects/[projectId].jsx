@@ -1,44 +1,21 @@
-import nextConnect from "next-connect";
-import {
-  deleteProject,
-  getProject,
-  insertProject,
-  updateProject,
-} from "../../../src/server/db";
+import { getProject, updateProject } from "../../../src/server/apiEndPoints";
 import { createHandler } from "../../../src/server/middleware";
-//import { middleware as handler} from "../../../middleware/database";
-
-// const handler = nextConnect();
-
-// handler.use(middleware);
 const handler = createHandler();
 
 handler.get(async (req, res) => {
-const {projectId} = req.query
-console.log("this is project id ",projectId,req.query)
-  const projectinfo = await getProject(projectId);
-  res.send(projectinfo);
+  if (!req.query)
+    return res.status(400).send(JSON.stringify({ error: "Invalid Request" }));
+  const { projectId } = req.query;
+  const projectInfo = await getProject(projectId);
+  res.send(projectInfo);
 });
 
 handler.put(async (req, res) => {
-  const {projectId,data} = req.query
-  console.log("this is project id ",projectId,req.query)
-    const projectinfo = await updateProject(projectId,data);
-    res.send(projectinfo);
-  });
-
-// handler.post(async (req, res) => {
-//   if (!req.body) return res.status(400).send("You must write something");
-//   const projects = await insertProject(req.body);
-//   console.log("this is project", projects);
-//   res.send(projects);
-// });
-
-// handler.delete(async (req, res) => {
-//   if (!req.body.projectId)
-//     return res.status(400).send("You must provide ProjectId");
-//   const projects = await deleteProject(req.body.projectId);
-//   res.send(projects);
-// });
+  if (!req.query)
+    return res.status(400).send(JSON.stringify({ error: "Invalid Request" }));
+  const { projectId, data } = req.query;
+  const projectInfo = await updateProject(projectId, data);
+  res.send(projectInfo);
+});
 
 export default handler;

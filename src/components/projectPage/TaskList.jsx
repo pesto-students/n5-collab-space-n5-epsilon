@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
 import Task from "./Task";
-import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { LOADING } from "../../redux/constants/projectActionConstants";
 import {
-  getAllTasks,
   createNewTask,
   deleteTask,
   deleteTaskList,
@@ -14,13 +11,11 @@ import useInput from "../../hooks/useInput";
 import styles from "../../../styles/Home.module.scss";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 
-function TaskList({ tasklist }) {
+function TaskList({ taskList }) {
   const dispatch = useDispatch();
-  const projectInfo = useSelector((state) => state.ProjectReducer.projectInfo);
-  const { loading } = projectInfo;
   const [taskName, userInput] = useInput({ type: "text" });
-  const { _id, taskListName, task } = tasklist;
-  const taskListId = _id
+  const { _id, taskListName, task } = taskList;
+  const taskListId = _id;
   const getStatusStyle = (isDraggingOver) => ({
     background: isDraggingOver ? "#00BFFF" : "",
   });
@@ -43,19 +38,19 @@ function TaskList({ tasklist }) {
     );
   };
 
-  const deleteTaskListHandler = (taskListId) =>{
-    dispatch(deleteTaskList({taskListId:taskListId}))
-  }
+  const deleteTaskListHandler = (taskListId) => {
+    dispatch(deleteTaskList({ taskListId: taskListId }));
+  };
 
   return (
-    <Droppable droppableId={tasklist._id}>
+    <Droppable droppableId={taskList._id}>
       {(provided, snapshot) => (
         <div
           className={styles.taskList}
           ref={provided.innerRef}
           style={getStatusStyle(snapshot.isDraggingOver)}
         >
-          <div className={styles.cardheader}>
+          <div className={styles.cardHeader}>
             <h5>{taskListName}</h5>
             <h6>{task && task.length > 0 ? task.length : ""}</h6>
             <button
@@ -65,7 +60,6 @@ function TaskList({ tasklist }) {
             >
               x
             </button>
-
           </div>
           <div>
             {userInput}
@@ -78,17 +72,18 @@ function TaskList({ tasklist }) {
             </button>
           </div>
 
-          {task && task.map((taskin, index) => {
-            return (
-              <Task
-                key={taskin._id}
-                taskListId={taskListId}
-                deleteTaskHandler={deleteTaskHandler}
-                index={index}
-                task={taskin}
-              />
-            );
-          })}
+          {task &&
+            task.map((taskIn, index) => {
+              return (
+                <Task
+                  key={taskIn._id}
+                  taskListId={taskListId}
+                  deleteTaskHandler={deleteTaskHandler}
+                  index={index}
+                  task={taskIn}
+                />
+              );
+            })}
           {provided.placeholder}
         </div>
       )}
