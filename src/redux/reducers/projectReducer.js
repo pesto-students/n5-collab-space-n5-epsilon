@@ -86,7 +86,6 @@ const ProjectReducer = (state = initialState, action) => {
         break;
       }
       case CHANGE_TASK_ORDER: {
-        console.log("payload", payload);
         const { initialIndex, finalIndex, taskListId, tasksOrder } = payload;
         draft.projectInfo.taskLists[taskListId].tasksOrder = tasksOrder;
         break;

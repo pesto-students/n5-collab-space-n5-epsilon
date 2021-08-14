@@ -33,7 +33,7 @@ export async function createTaskList(taskListInfo) {
         },
       }
     ).exec();
-    console.log("saveNewTaskLIst._id", saveNewTaskLIst._id);
+
     const newTaskOrder = new TasksOrder({
       taskListsId: Types.ObjectId(saveNewTaskLIst._id),
       tasksOrder: [],

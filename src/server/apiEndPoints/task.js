@@ -54,7 +54,6 @@ export async function moveTask(taskInfo, projection = "", populate = "") {
     sourceTaskOrder,
     destinationTaskOrder,
   } = taskInfo;
-  console.log("taskInfomoveTask", taskInfo);
   const convertedSourceTaskOrder = sourceTaskOrder.map((id) =>
     Types.ObjectId(id)
   );
@@ -68,18 +67,16 @@ export async function moveTask(taskInfo, projection = "", populate = "") {
     }
   ).exec();
   const reorderSource = await TasksOrder.findOneAndUpdate(
-    { tasksListId: Types.ObjectId(sourceTaskListId) },
+    { taskListsId: Types.ObjectId(sourceTaskListId) },
     { tasksOrder: convertedSourceTaskOrder }
   ).exec();
   const reorderDestination = await TasksOrder.findOneAndUpdate(
-    { tasksListId: Types.ObjectId(destinationTaskListId) },
+    { taskListsId: Types.ObjectId(destinationTaskListId) },
     { tasksOrder: convertedDestinationTaskOrder }
   ).exec();
-  console.log("final result ", foundTask, reorderSource, reorderDestination);
   return foundTask;
 }
 export async function reorderTask(taskInfo, projection = "", populate = "") {
-  console.log("taskInfo", taskInfo);
   const foundTask = TasksOrder.findOneAndUpdate(
     { taskListsId: taskInfo.taskListId },
     {

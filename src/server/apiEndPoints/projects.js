@@ -246,8 +246,6 @@ export async function insertProject(project, userId) {
 
     const newProject = new Projects(project);
     const savedNewProject = await newProject.save();
-
-    console.log("savedNewProject", savedNewProject);
     const newContribution = new Contributions({
       projectId: Types.ObjectId(savedNewProject._id),
       userId: Types.ObjectId(userId),
@@ -264,7 +262,7 @@ export async function insertProject(project, userId) {
 
     const response = {
       projectId: savedNewProject._id,
-      projectName:savedNewProject.projectName,
+      projectName: savedNewProject.projectName,
       description: savedNewProject.description,
       role: adminRole.name,
     };
@@ -275,7 +273,6 @@ export async function insertProject(project, userId) {
 }
 
 export async function deleteProject(projectId) {
-  console.log("Delete projectId", projectId);
   const foundProjectInfo = await Projects.findOneAndDelete({ _id: projectId });
   await Contributions.findOneAndDelete({
     projectId: projectId,

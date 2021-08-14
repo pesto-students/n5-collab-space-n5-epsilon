@@ -10,7 +10,6 @@ import Styles from "../../../styles/mainContainer.module.scss";
 import ProjectContainer from "./ProjectContainer";
 const MainContainer = (props) => {
   const projects = useSelector((state) => state.WorkSpaceReducer.projects);
-  console.log("this is project", projects);
   const ownProjects = projects.filter((project) => project.role == "Admin");
   const sharedProjects = projects.filter((project) => project.role == "Guest");
   const dispatch = useDispatch();

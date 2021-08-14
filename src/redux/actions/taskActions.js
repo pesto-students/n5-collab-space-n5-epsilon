@@ -56,8 +56,6 @@ export const deleteTask = (taskInfo) => async (dispatch) => {
 
 export const moveTaskAction = (taskInfo) => async (dispatch, getState) => {
   const prevState = getState().ProjectReducer;
-
-  console.log("taskInfotaskInfo", taskInfo);
   const {
     taskId,
     sourceTaskListId,
@@ -92,14 +90,12 @@ export const reorderTask = (taskInfo) => async (dispatch, getState) => {
     let { tasksOrder } = taskInfo;
     tasksOrder = moveInArray(tasksOrder, initialIndex, finalIndex);
     taskInfo.tasksOrder = tasksOrder;
-    console.log("taskInfo.tasksOrder", taskInfo.tasksOrder);
     try {
       dispatch(ChangeTaskOrder(taskInfo));
       let response = await taskListURL.put(`/${taskListId}/reorder`, {
         data: taskInfo,
       });
       if (response) {
-        console.log("tasksOrderresponse", response);
         dispatch(ChangeTaskOrderSuccess(taskInfo));
         toast.success("Task Moved ");
       }
