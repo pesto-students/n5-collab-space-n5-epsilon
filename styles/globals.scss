@@ -84,6 +84,9 @@ a {
   }
 }
 
+.mainContainerBody{
+  overflow: hidden;
+}
 
 .container {
   position: absolute;
@@ -547,66 +550,143 @@ a {
 
 }
 
-.project-space-wrapper{
-  height: calc(100vh - 90px);
-  padding: 0 30px 0 50px;
-  .top-row{
-    display: flex;
-    justify-content: space-between;
+.top-panel-row{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 30px 30px 50px;
 
-    .layout-toggle{
-      .icon{
-        cursor: pointer;
-        margin: 0 10px;
-        &.active{
-          svg{
-            path{
-              fill:#5d2bff;
-            }
+  .layout-toggle{
+    position: relative;
+    .icon{
+      cursor: pointer;
+      margin: 0 10px;
+      &.active{
+        pointer-events: none;
+        svg{
+          path{
+            fill:#5d2bff;
           }
         }
+      }
+    }
+    .trash-can{
+      height: 49px;
+      width: 100px;
+      display: inline-block;
+      position: absolute;
+      left: -150px;
+      top: -17px;
+      border-radius: 10px;
+      svg{
+        height: 100%;
+        width: 100%;
+      }
+      &:hover{
+        background: #0000001f;
       }
     }
   }
 }
 
-.grid{
-  .user-projects{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    grid-gap: 32px;
+.project-space-wrapper{
+  height: calc(100vh - 141px);
+  overflow: auto;
+  background: #fff;
+  border-radius: 10px;
+  margin: 0 20px 0;
+  &.grid{
+    .user-projects{
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      grid-gap: 32px;
+      grid-auto-flow: row;
+      overflow: visible;
+      .projectCard {
+        width: 180px;
+        height: 180px;
+        h5{
+          -webkit-line-clamp: 4!important;
+        }
+      }
+      &.center{
+        .projectCard {
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+  .projectContainer{
+    padding: 0 15px 30px;
+    h1{
+      margin-bottom: 0;
+      padding-left: 5px;
+      color: #303037;
+      font-size: 25px;
+    }
   }
 }
 
 .user-projects {
   display: grid;
   grid-gap: 16px;
-  padding: 16px;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   grid-auto-flow: column;
   grid-auto-columns: minmax(160px, 1fr);
   overflow-x: auto;
+  padding: 22px 10px;
 
   .projectCard {
     border-radius: 10px;
     text-align: center;
     box-shadow: 3px 8px 14px #a7a6a6;
     width: auto;
-    .projectCardContainer {
-      padding: 3% 7%;
-      a {
-        font-size: small;
+    max-width: 200px;
+    position: relative;
+    &.shared{
+      h2{
+        padding-top: 10px;
+      }
+      h5{
+        padding-bottom: 30px;
       }
     }
-    .projectHeading {
-      display: flex;
-      justify-content: space-between;
+    h2{
+      padding: 40px 15px 10px;
+      margin: 0;
+      white-space: nowrap;
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-transform: capitalize;
     }
-    .deleteProject {
-      button {
-        background-color: white;
-        border: none;
-        cursor: pointer;
+    h5{
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      padding: 0 15px;
+      font-weight: 500;
+      font-family: monospace;
+      text-transform: capitalize;
+    }
+    .delete{
+      top: 8px;
+    }
+    .leave{
+      bottom: 8px;
+    }
+    .delete,.leave{
+      position: absolute;
+      cursor: pointer;
+      background: transparent;
+      height: 25px;
+      width: 25px;
+      border: 0;
+      padding: 0;
+      right: 8px;
+      svg{
+        height: 100%;
+        width: 100%;
       }
     }
   }

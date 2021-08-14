@@ -13,7 +13,7 @@ function ProjectIcon(props) {
         <path
             fill="none"
             stroke="#6d6d73"
-            stroke-width="1.3"
+            strokeWidth="1.3"
             d="M9 15v8H1v-8h8zm14 0v8h-8v-8h8zM9 1v8H1V1h8zm14 0v8h-8V1h8z"/>
       </svg>
   )

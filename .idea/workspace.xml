@@ -3,23 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="103cd474-1403-40f5-96a1-636418099c6b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/workspace/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/workspace/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/workspace/project/[projectid].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/workspace/project/[projectId].jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/workspace/user-panel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/workspace/user-panel.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layoutComponents/NavButton.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layoutComponents/NavButton.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layoutComponents/SideNav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layoutComponents/SideNav.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/layouts/iconComponents/ProjectIcon.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layouts/iconComponents/ProjectIcon.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layouts/iconComponents/SettingIcon.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layouts/iconComponents/SettingIcon.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layouts/iconComponents/UserIcon.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layouts/iconComponents/UserIcon.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/projectPage/infoBanner.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projectPage/infoBanner.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/workspace/MainContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workspace/MainContainer.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/workspace/ProjectContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workspace/ProjectContainer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/workspace/WorkSpaceTitle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workspace/WorkSpaceTitle.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/mainContainer.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/siteLayout.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/siteLayout.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
