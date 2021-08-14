@@ -1,6 +1,25 @@
 import {useEffect, useState} from "react";
 import cookie from "js-cookie";
+import {wrapper} from "../../src/redux/store";
+import {getWorkspaceProject} from "../../src/redux/actions/workSpaceActions";
+import { useSelector, useDispatch } from "react-redux";
 
+export const getServerSideProps = wrapper.getServerSideProps(
+    (store) =>
+        async ({ req, params }) => {
+          if (!req.cookies.token) {
+            return {
+              redirect: {
+                destination: "/",
+                permanent: true,
+              },
+            };
+          }
+
+          await store.dispatch(getWorkspaceProject());
+          return { props: { token: req.cookies.token } };
+        }
+);
 
 const UserPanel = (props) => {
 
@@ -19,6 +38,9 @@ const UserPanel = (props) => {
     email: '',
   })
   const [showForm, setShowForm]= useState(false);
+  const projects = useSelector((state) => state.WorkSpaceReducer.projects);
+  console.log("this is project", projects);
+  const dispatch = useDispatch();
 
   function invite() {
     props.setFormStatus({
