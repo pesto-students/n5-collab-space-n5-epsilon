@@ -88,6 +88,59 @@ a {
   overflow: hidden;
 }
 
+.modal-form {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.35);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .content-wrapper {
+    background: #fff;
+    border-radius: 10px;
+    padding: 45px 25px 40px;
+    text-align: center;
+    position: relative;
+    min-width: 400px;
+    .cross {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      cursor: pointer;
+    }
+    .error {
+      color: red;
+      margin: 0;
+      position: absolute;
+      bottom: 13px;
+    }
+    h1 {
+      margin: 0 0 10px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      input {
+        width: 100%;
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 1px;
+        border: 1px solid #ccc;
+        font-family: inherit;
+      }
+      button {
+        margin: 10px 0 0;
+      }
+    }
+  }
+}
+
 .container {
   position: absolute;
   width: 100%;
@@ -417,10 +470,10 @@ a {
     }
     .project-list {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
       grid-gap: 32px;
       padding-right: 30px;
-      height: calc(100% - 61px);
+      max-height: calc(100% - 61px);
       overflow: auto;
 
       .project {
@@ -448,58 +501,6 @@ a {
             border: 2px dashed #0006;
             background: transparent;
           }
-        }
-      }
-    }
-  }
-  .invite-form {
-    position: fixed;
-    left: 0;
-    top: 0;
-    height: 100vh;
-    width: 100vw;
-    background: rgba(0, 0, 0, 0.35);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .content-wrapper {
-      background: #fff;
-      border-radius: 10px;
-      padding: 45px 25px 40px;
-      text-align: center;
-      position: relative;
-      min-width: 400px;
-      .cross {
-        position: absolute;
-        right: 15px;
-        top: 15px;
-        cursor: pointer;
-      }
-      .error {
-        color: red;
-        margin: 0;
-        position: absolute;
-        bottom: 13px;
-      }
-      h1 {
-        margin: 0 0 10px;
-      }
-      form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        input {
-          width: 100%;
-          padding: 15px;
-          margin: 10px 0;
-          border-radius: 1px;
-          border: 1px solid #ccc;
-          font-family: inherit;
-        }
-        button {
-          margin: 10px 0 0;
         }
       }
     }

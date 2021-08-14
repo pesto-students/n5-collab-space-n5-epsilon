@@ -14,26 +14,37 @@ const MainContainer = (props) => {
   const sharedProjects = projects.filter((project) => project.role === "Guest");
   const dispatch = useDispatch();
   const [username, userInput] = useInput({ type: "text" });
-  const addProjectHandler = () => {
-    dispatch(
-      addNewProject({
-        projectName: username,
-        description: "this is description ",
-        role: "Admin",
-      })
-    );
-  };
-  const deleteProjectHandler = (projectId) => {
-    dispatch(deleteProject({ projectId: projectId }));
-  };
   const[layout, setLayout] = useState('');
   const[projectIdForTrash, setProjectIdForTrash] = useState('');
+  const [submittedForm, setSubmittedForm] = useState({
+        formTouched: false,
+        error: false,
+        submitting : false
+    });
+  const [projectForm, setProjectForm]= useState({
+      name: '',
+      description: '',
+    });
+  const [showForm, setShowForm]= useState(false);
+
+    const addProjectHandler = () => {
+        dispatch(
+            addNewProject({
+                projectName: projectForm.name,
+                description: projectForm.description,
+                role: "Admin",
+            })
+        );
+    };
+    const deleteProjectHandler = (projectId) => {
+        dispatch(deleteProject({ projectId: projectId }));
+    };
 
     useEffect(()=>{
         setLayout(localStorage.getItem('layout')||'grid');
     },[]);
 
-  function toggle(layout){
+    function toggle(layout){
       localStorage.setItem('layout', layout);
       setLayout(layout);
     }
@@ -50,14 +61,18 @@ const MainContainer = (props) => {
 
     };
 
+    const regex = {
+        nameRegex: /^([a-zA-Z]+( [a-zA-Z]+)|[a-zA-Z]){2,50}$/,
+    }
+
   return (
     <div className='mainContainerBody'>
       <WorkSpaceTitle title='Workspace Name'/>
         <div className="top-panel-row">
-            <div>
-                {userInput}
-                <span className='default-btn image-btn' onClick={addProjectHandler}>Add new project</span>
-            </div>
+            <span className='default-btn image-btn' onClick={()=>{
+                setShowForm(true);
+            }}>Add new project</span>
+
             <div className='layout-toggle'>
                 <span className={`icon trash-can`} onDragOver={dragOver} onDrop={dragDrop} data-position="delete">
                     <svg className='empty' xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
@@ -99,6 +114,29 @@ const MainContainer = (props) => {
                 </div>
             </div>
         </div>
+
+        {showForm && (<div className='modal-form'>
+            <div className='content-wrapper'>
+                <img className='cross' onClick={()=>{setShowForm(false) }} src='https://api.iconify.design/maki/cross.svg?color=black' alt='cross'/>
+                <h1>Add New Project</h1>
+                <form>
+                    <input type="text" placeholder="Project Name"
+                           onKeyUp={e => {
+                               if (e.charCode !== 13) {
+                                   if(!regex.nameRegex.test(e.target.value)){
+                                       setSubmittedForm({ ...submittedForm, error: 'Enter a valid name'})
+                                   } else{
+                                       setProjectForm({ ...projectForm, name: e.target.value });
+                                       setSubmittedForm({...submittedForm, formTouched: true, error: false });
+                                   }
+                               }
+                           }}/>
+                    <button disabled={!submittedForm.formTouched || !!submittedForm.error || submittedForm.submitting} onClick={addProjectHandler}>Add Project</button>
+                    {submittedForm.error && (<p className='error'>{submittedForm.error}</p>)}
+                </form>
+            </div>
+        </div>)}
+
     </div>
   );
 };

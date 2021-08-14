@@ -36,7 +36,7 @@ const UserPanel = (props) => {
   const [inviteForm, setInviteForm]= useState({
     name: '',
     email: '',
-  })
+  });
   const [showForm, setShowForm]= useState(false);
   const projects = useSelector((state) => state.WorkSpaceReducer.projects);
   console.log("this is project", projects);
@@ -157,7 +157,7 @@ const UserPanel = (props) => {
       </div>
     </div>
 
-    {showForm && (<div className='invite-form'>
+    {showForm && (<div className='modal-form'>
       <div className='content-wrapper'>
         <img className='cross' onClick={()=>{setShowForm(false) }} src='https://api.iconify.design/maki/cross.svg?color=black' alt='cross'/>
         <h1>Send Invite</h1>
