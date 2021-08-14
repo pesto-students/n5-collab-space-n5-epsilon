@@ -5,7 +5,7 @@ function InfoBanner() {
   const information = useSelector((state) => state.ProjectReducer.projectInfo);
   const { projectName, description } = information;
   return (
-    <div className={styles.infoBanner}>
+    <div className='infoBanner'>
       <h1>{projectName}</h1>
       <p>
         <strong>Description</strong> {description}

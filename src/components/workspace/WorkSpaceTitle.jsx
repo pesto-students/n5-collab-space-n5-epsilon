@@ -1,10 +1,13 @@
 import React from "react";
 
-const WorkSpaceTitle = () => {
+const WorkSpaceTitle = ({title}) => {
   return (
-    <div>
-      <h1>Workspace</h1>
-    </div>
+    <section className='common-header'>
+      <h1>{title}</h1>
+        <div className='user-profile'>
+          <span className='icon'><span>Himanshu</span></span>
+        </div>
+    </section>
   );
 };
 

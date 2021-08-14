@@ -16,7 +16,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
             };
           }
 
-          await store.dispatch(getWorkspaceProject());
+          await store.dispatch(getWorkspaceProject(req));
           return { props: { token: req.cookies.token } };
         }
 );

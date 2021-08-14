@@ -3,8 +3,23 @@
   <component name="ChangeListManager">
     <list default="true" id="103cd474-1403-40f5-96a1-636418099c6b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/workspace/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/workspace/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/workspace/project/[projectid].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/workspace/project/[projectId].jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/workspace/user-panel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/workspace/user-panel.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/globals.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layoutComponents/NavButton.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layoutComponents/NavButton.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layoutComponents/SideNav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layoutComponents/SideNav.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layouts/iconComponents/ProjectIcon.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layouts/iconComponents/ProjectIcon.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layouts/iconComponents/SettingIcon.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layouts/iconComponents/SettingIcon.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layouts/iconComponents/UserIcon.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layouts/iconComponents/UserIcon.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/projectPage/infoBanner.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projectPage/infoBanner.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/workspace/MainContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workspace/MainContainer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/workspace/ProjectContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workspace/ProjectContainer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/workspace/WorkSpaceTitle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workspace/WorkSpaceTitle.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/mainContainer.module.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/siteLayout.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/siteLayout.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,6 +30,11 @@
     <execution />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="rbac_integration" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1wV8wPNQC9bWnrTHDX0BZVAmimB" />
@@ -30,7 +50,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -38,6 +58,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -83,5 +104,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

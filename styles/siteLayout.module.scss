@@ -7,34 +7,85 @@
 
 .sideLayoutPanel {
   height: 100vh;
-  background: rgba(203, 202, 204, 0.281);
+  background: #f4f5f7;
+  width: 200px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  img{
+    max-width: 100%;
+    padding: 20px 0;
+    cursor: pointer;
+  }
+  .side-wrapper{
+    height: calc(100% - 88px);
+    background: #bdff83b3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+  }
   .sideNavStaticList {
     padding: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    width: 200px;
-    height: 20vh;
+    width: 100%;
     .NavButton {
       display: flex;
-      padding: 5vw;
+      justify-content: center;
       flex-direction: column;
       align-items: center;
       height: 100%;
       cursor: pointer;
       border: 1px solid white;
-
-      .Label {
-        text-transform: capitalize;
+      svg{
+        width: 50pt;
+        height: 50pt;
+        margin-bottom: 15px;
+        color: #6d6d73;
+      }
+      span{
+        font-weight: 500;
       }
     }
   }
   ul {
     list-style-type: none;
     text-align: left;
+    margin: 0;
+    height: 500px;
+    li{
+      height: 100%;
+      &:nth-of-type(1){
+        &:hover{
+          svg{
+            path{
+              stroke: #5d2bff;
+              fill: none;
+            }
+          }
+        }
+      }
+      &:hover{
+        svg{
+          path{
+            fill: #5d2bff;
+          }
+        }
+        color:#5d2bff;
+      }
+    }
+  }
+  .LogButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    font-weight: 500;
+    svg{
+      width: 25pt;
+      height: 25pt;
+      color: #6d6d73;
+      margin-right: 10px;
+    }
   }
 }

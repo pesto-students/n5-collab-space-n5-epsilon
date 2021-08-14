@@ -5,14 +5,10 @@ import Styles from "../../../styles/siteLayout.module.scss";
 const NavButton = ({ path, icon, label, router }) => (
   <Link href={path}>
     <div
-      className={`${Styles.NavButton} ${
-        router.pathname === path ? "active" : ""
-      }`}
+      className={`${Styles.NavButton} ${router.pathname === path ? "active" : ""}`}
     >
-      <div className={Styles.NavButton.iconContainer}>
-        <span className={Styles.NavButton.icon}>{icon}</span>
+        {icon}
         <span className={Styles.NavButton.label}>{label}</span>
-      </div>
     </div>
   </Link>
 );

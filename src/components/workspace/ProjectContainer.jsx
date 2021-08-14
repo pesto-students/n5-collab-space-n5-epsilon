@@ -1,21 +1,20 @@
 import React from "react";
-import styles from "../../../styles/mainContainer.module.scss";
 import Link from "next/link";
 function ProjectContainer({ projectList, deleteProjectHandler, role }) {
   return (
     <>
       {projectList.map((project) => {
         return (
-          <div className={styles.projectCard}>
-            <div className={styles.projectCardContainer}>
-              <div className={styles.projectHeading}>
+          <div className='projectCard'>
+            <div className='projectCardContainer'>
+              <div className='projectHeading'>
                 <h1 key={project._id}>
                   <Link href={`workspace/project/${project.projectId}`}>
                     <a>{`${project.projectName}`}</a>
                   </Link>
                 </h1>
                 {role == "Admin" && (
-                  <div className={styles.deleteProject}>
+                  <div className='deleteProject'>
                     <button
                       onClick={() => {
                         deleteProjectHandler(project.projectId);
