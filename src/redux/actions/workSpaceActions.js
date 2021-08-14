@@ -52,7 +52,6 @@ export const addNewProject = (newProject) => async (dispatch) => {
 
 export const deleteProject = (projectId) => async (dispatch) => {
   try {
-    console.log("this is projectId", projectId);
     dispatch(DeleteProject(projectId));
     let response = await projectURL.delete("/", {
       data: projectId,

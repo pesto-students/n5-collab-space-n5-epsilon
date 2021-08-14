@@ -184,7 +184,6 @@ export async function getProject(
   )
     .populate("roleId")
     .exec();
-  console.log("userRoleArray", userRoleArray);
   const userRole = userRoleArray[0];
   Project.roleInfo = userRole.roleId;
 
@@ -210,7 +209,6 @@ export async function insertProject(project, userId) {
 }
 
 export async function deleteProject(projectId) {
-  console.log("Delete projectId", projectId);
   const foundProjectInfo = await Projects.findOneAndDelete({ _id: projectId });
   await Contributions.findOneAndDelete({
     projectId: projectId,

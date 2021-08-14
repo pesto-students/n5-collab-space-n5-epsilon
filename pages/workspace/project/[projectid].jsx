@@ -25,7 +25,6 @@ const ProjectPage = () => {
   const projectInfo = useSelector((state) => state.ProjectReducer.projectInfo);
   const userRole = projectInfo.roleInfo.name;
   const userPermission = projectInfo.roleInfo;
-  console.log("userPermission", userPermission);
   const [username, userInput] = useInput({ type: "text" });
   const { projectId } = router.query;
   const { taskLists, loading } = projectInfo;

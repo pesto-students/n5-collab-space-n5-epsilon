@@ -21,7 +21,6 @@ handler.get(async (req, res) => {
 });
 
 handler.post(async (req, res) => {
-  console.log("this is insertProject", req.cookies);
   const { userId } = req.cookies;
   if (!req.body) return res.status(400).send("You must write something");
   const projects = await insertProject(req.body, userId);
@@ -30,7 +29,6 @@ handler.post(async (req, res) => {
 });
 
 handler.delete(async (req, res) => {
-  console.log("request came here");
   if (!req.body.projectId)
     return res.status(400).send(JSON.stringify({ error: "Invalid Request" }));
   const projects = await deleteProject(req.body.projectId);
