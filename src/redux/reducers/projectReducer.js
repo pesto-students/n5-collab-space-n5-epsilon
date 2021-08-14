@@ -10,6 +10,7 @@ import {
   DELETE_TASK,
   GET_ALL_TASKS,
   MOVE_TASK,
+  MOVE_TASK_FAILURE,
 } from "../constants/taskActionConstants";
 import {
   CREATE_TASK_LIST,
@@ -102,6 +103,10 @@ const ProjectReducer = (state = initialState, action) => {
           new_draft
         );
         break;
+      }
+
+      case MOVE_TASK_FAILURE: {
+        return payload;
       }
       case MOVE_TASK: {
         const {

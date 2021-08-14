@@ -13,12 +13,13 @@ import {
   CreateProjectFailure,
 } from "../constants/workspaceActionConstants";
 
-export const getWorkspaceProject = () => async (dispatch, getState) => {
+export const getWorkspaceProject = (req) => async (dispatch, getState) => {
   // getState is to collect data from current state from store
+  const { userId, token } = req.cookies;
   dispatch(GetAllProject({ loading: true }));
   try {
     await projectURL
-      .get()
+      .get("", { params: { userId, token } })
       .then((response) => {
         dispatch(GetAllProjectSuccess(response.data.projects));
       })
