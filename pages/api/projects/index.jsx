@@ -21,11 +21,10 @@ handler.get(async (req, res) => {
 });
 
 handler.post(async (req, res) => {
-  console.log("this is insertProject", req.cookies);
   const { userId } = req.cookies;
   if (!req.body) return res.status(400).send("You must write something");
   const projects = await insertProject(req.body, userId);
-
+  console.log("this is response project ",projects)
   res.send(projects);
 });
 

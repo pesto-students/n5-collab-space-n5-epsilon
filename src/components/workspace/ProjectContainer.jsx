@@ -6,11 +6,11 @@ function ProjectContainer({ projectList, deleteProjectHandler, role }) {
     <>
       {projectList.map((project) => {
         return (
-          <div className={styles.projectCard}>
+          <div key={project._id} className={styles.projectCard}>
             <div className={styles.projectCardContainer}>
               <div className={styles.projectHeading}>
-                <h1 key={project._id}>
-                  <Link href={`workspace/project/${project.projectId}`}>
+                <h1>
+                  <Link href={`/workspace/project/${project.projectId}`}>
                     <a>{`${project.projectName}`}</a>
                   </Link>
                 </h1>

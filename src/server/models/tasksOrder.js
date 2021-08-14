@@ -3,7 +3,7 @@ import mongoose, { Schema } from "mongoose";
 const MODEL_NAME = "TasksOrder";
 
 const TasksOrderSchema = new Schema({
-  taskListId: {
+  taskListsId: {
     type: Schema.Types.ObjectId,
     ref: "TaskLists",
   },

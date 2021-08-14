@@ -11,9 +11,11 @@ import {
   GET_ALL_TASKS,
   MOVE_TASK,
   MOVE_TASK_FAILURE,
+  REORDER_TASK_SUCCESS,
 } from "../constants/taskActionConstants";
 import {
   CREATE_TASK_LIST,
+  CREATE_TASK_LIST_SUCCESS,
   DELETE_TASK_LIST,
 } from "../constants/taskListActionConstants";
 
@@ -43,15 +45,14 @@ const ProjectReducer = (state = initialState, action) => {
         break;
       }
       case CREATE_TASK: {
-        const index = draft.projectInfo.taskLists.findIndex((taskList) => {
-          return taskList._id === payload.taskListId;
-        });
-        if (index != -1) draft.projectInfo.taskLists[index].task.push(payload);
+        const { _id, taskListId } = payload;
+        draft.projectInfo.taskLists[taskListId].task[_id] = payload;
+        draft.projectInfo.taskLists[taskListId].tasksOrder.push(_id);
         break;
       }
-      case CREATE_TASK_LIST: {
-        payload.task = [];
-        draft.projectInfo.taskLists.push(payload);
+      case CREATE_TASK_LIST_SUCCESS: {
+        draft.projectInfo.taskLists[payload._id] = payload;
+        draft.projectInfo.taskListsOrder.push(payload._id);
         break;
       }
 
@@ -61,27 +62,23 @@ const ProjectReducer = (state = initialState, action) => {
         return newDraft;
       }
       case DELETE_TASK: {
-        const taskListIndex = draft.projectInfo.taskLists.findIndex(
-          (taskList) => {
-            return taskList._id === payload.taskListId;
-          }
+        const { taskListId, taskId } = payload;
+        delete draft.projectInfo.taskLists[taskListId].task[taskId];
+        const taskOrderIndex =
+          draft.projectInfo.taskLists[taskListId].tasksOrder.indexOf(taskId);
+        draft.projectInfo.taskLists[taskListId].tasksOrder.splice(
+          taskOrderIndex,
+          1
         );
-        const taskIndex = draft.projectInfo.taskLists[
-          taskListIndex
-        ].task.findIndex((task) => {
-          return task._id === payload.taskId;
-        });
-        draft.projectInfo.taskLists[taskListIndex].task.splice(taskIndex, 1);
         break;
       }
 
       case DELETE_TASK_LIST: {
-        const taskListIndex = draft.projectInfo.taskLists.findIndex(
-          (taskList) => {
-            return taskList._id === payload.taskListId;
-          }
-        );
-        draft.projectInfo.taskLists.splice(taskListIndex, 1);
+        const taskListId = payload.taskListId;
+        delete draft.projectInfo.taskLists[taskListId];
+        const taskListOrderIndex =
+          draft.projectInfo.taskListsOrder.indexOf(taskListId);
+        draft.projectInfo.taskListsOrder.splice(taskListOrderIndex, 1);
         break;
       }
       case GET_PROJECT_INFO: {
@@ -89,19 +86,9 @@ const ProjectReducer = (state = initialState, action) => {
         break;
       }
       case CHANGE_TASK_ORDER: {
-        const { initialIndex, finalIndex, taskListId } = payload;
-        const index = draft.projectInfo.taskLists.findIndex((taskList) => {
-          return taskList._id === taskListId;
-        });
-        const new_draft = draft.projectInfo.taskLists[index].task.splice(
-          initialIndex,
-          1
-        )[0];
-        draft.projectInfo.taskLists[index].task.splice(
-          finalIndex,
-          0,
-          new_draft
-        );
+        console.log("payload", payload);
+        const { initialIndex, finalIndex, taskListId, tasksOrder } = payload;
+        draft.projectInfo.taskLists[taskListId].tasksOrder = tasksOrder;
         break;
       }
 
@@ -110,29 +97,26 @@ const ProjectReducer = (state = initialState, action) => {
       }
       case MOVE_TASK: {
         const {
+          taskId,
           initialIndex,
           finalIndex,
           sourceTaskListId,
           destinationTaskListId,
+          sourceTaskOrder,
+          destinationTaskOrder,
         } = payload;
-        const sourceIndex = draft.projectInfo.taskLists.findIndex(
-          (taskList) => {
-            return taskList._id === sourceTaskListId;
-          }
-        );
-        const destinationIndex = draft.projectInfo.taskLists.findIndex(
-          (taskList) => {
-            return taskList._id === destinationTaskListId;
-          }
-        );
-        const item =
-          draft.projectInfo.taskLists[sourceIndex].task[initialIndex];
-        draft.projectInfo.taskLists[sourceIndex].task.splice(initialIndex, 1);
-        draft.projectInfo.taskLists[destinationIndex].task.splice(
-          finalIndex,
-          0,
-          item
-        );
+
+        draft.projectInfo.taskLists[sourceTaskListId].tasksOrder =
+          sourceTaskOrder;
+        draft.projectInfo.taskLists[destinationTaskListId].tasksOrder =
+          destinationTaskOrder;
+        draft.projectInfo.taskLists[destinationTaskListId].task[taskId] =
+          draft.projectInfo.taskLists[sourceTaskListId].task[taskId];
+        delete draft.projectInfo.taskLists[sourceTaskListId].task[taskId];
+        break;
+      }
+      case REORDER_TASK_SUCCESS: {
+        const { taskListId, initialIndex, finalIndex } = payload;
         break;
       }
       default: {

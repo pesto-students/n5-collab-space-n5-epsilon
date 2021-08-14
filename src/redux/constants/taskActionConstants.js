@@ -47,7 +47,7 @@ export const ChangeTaskOrderSuccess = (data) => ({
   payload: data,
 });
 export const ChangeTaskOrderFailure = (data) => ({
-  type: CHANGE_TASK_ORDER_FAILURE,
+  type: tasksOrder,
   payload: data,
 });
 export const MoveTask = (data) => ({
