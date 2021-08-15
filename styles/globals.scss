@@ -379,6 +379,45 @@ a {
   }
 }
 
+.drop-trash-can{
+  position: absolute;
+  right: 130px;
+  top: 0px;
+  height: 40px;
+  width: 40px;
+  padding: 3px;
+  border-radius: 9px;
+  &:hover{
+    background: #f1f1f1;
+  }
+  svg{
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.filter-wrapper{
+  display: flex;
+  flex-direction: column;
+  p{
+    position: relative;
+    margin: 0 0 10px;
+  }
+  select{
+    position: relative;
+    appearance: none;
+    background-repeat: no-repeat;
+    border: 1px solid #00000057;
+    padding: 5px 25px 5px 10px;
+    border-radius: 30px;
+    width: 160px;
+    outline: none;
+    background-position-y: center;
+    background-position-x: calc(100% - 6px);
+    background-image: url("https://api.iconify.design/pepicons/angle-down.svg?color=%236d6d73");
+  }
+}
+
 .user-panel {
   display: flex;
   flex-wrap: wrap;
@@ -693,7 +732,6 @@ a {
   }
 }
 
-
 .project-data{
   background: #fff;
   border-radius: 10px;
@@ -703,7 +741,7 @@ a {
   .tab-list{
     border-bottom: 1px solid #d7d7da;
     padding: 0 0 15px;
-    margin-bottom: 20px;
+    margin-bottom: 9px;
     span{
       font-size: 16px;
       padding: 0 10px;
@@ -729,12 +767,37 @@ a {
   .top-panel-row{
     border-bottom: 1px solid #00000057;
     margin-bottom: 20px;
+    padding: 5px 10px 16px;
+    align-items: center;
   }
   .task-list-box{
     height: calc(100% - 33px);
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    position: relative;
+    &.rowLayout{
+      .taskListContainer{
+        flex-direction: column;
+        overflow: auto;
+        .taskList{
+          flex-direction: row;
+          min-width: auto;
+          max-width: none;
+          width: 100%;
+          .list-wrapper{
+            display: flex;
+            .task{
+              min-width: 200px;
+              max-width: 200px;
+              height: 100px;
+              justify-content: space-between;
+              margin-right: 15px;
+            }
+          }
+        }
+      }
+    }
     .taskListContainer {
       display: flex;
       align-items: end;
@@ -753,6 +816,7 @@ a {
         border-radius: 10px;
         position: relative;
         min-width: 250px;
+        max-width: 250px;
         .list-header{
           position: absolute;
           left: 0;
@@ -804,21 +868,6 @@ a {
           overflow: auto;
           padding: 0 10px;
         }
-        .task {
-          display: flex;
-          justify-content: space-between  ;
-          border-radius: 10px;
-          text-align: center;
-          -webkit-box-shadow: 3px 8px 14px #a7a6a6;
-          box-shadow: 3px 8px 14px #a7a6a6;
-          width: 100%;
-          background: #fff;
-          padding: 10px;
-          margin-bottom: 3px;
-          &:nth-last-of-type(1){
-            margin-bottom: 20px;
-          }
-        }
       }
       .add-task-list{
         cursor: pointer;
@@ -835,7 +884,6 @@ a {
         min-width: 40px;
         transition: 0.5s;
         justify-content: space-between;
-        left: -10px;
         svg{
           height: 100%;
           width: 25px;
@@ -851,5 +899,61 @@ a {
         }
       }
     }
+  }
+}
+
+.task {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  text-align: center;
+  -webkit-box-shadow: 3px 8px 14px #a7a6a6;
+  box-shadow: 3px 8px 14px #a7a6a6;
+  width: 100%;
+  background: #fff;
+  padding: 10px;
+  margin-bottom: 10px;
+  position: relative;
+  .status{
+    display: none;
+  }
+  .name{
+    position: relative;
+    text-align: left;
+    text-transform: capitalize;
+    font-size: 15px;
+    max-width: calc(100% - 30px);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .tags{
+    display: flex;
+    overflow: auto;
+    span{
+      background: #b39ddb8a;
+      padding: 4px 8px;
+      border-radius: 25px;
+      font-size: 12px;
+      text-transform: capitalize;
+      margin: 15px 8px 0 0;
+      cursor: pointer;
+    }
+  }
+  .delete{
+    position: absolute;
+    right: 6px;
+    top: 6px;
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+    svg{
+      height: 100%;
+      width: 100%;
+    }
+  }
+  &:nth-last-of-type(1){
+    margin-bottom: 20px;
   }
 }

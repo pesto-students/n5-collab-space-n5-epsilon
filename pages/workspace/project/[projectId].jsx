@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
 import { getProjectInfo } from "../../../src/redux/actions/projectPageActions";
-import {moveTaskAction, reorderTask} from "../../../src/redux/actions/taskActions";
+import {deleteTask, moveTaskAction, reorderTask} from "../../../src/redux/actions/taskActions";
 import { wrapper } from "../../../src/redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import TaskList from "../../../src/components/projectPage/TaskList";
-import { DragDropContext } from "react-beautiful-dnd";
+import {  DragDropContext, Droppable } from "react-beautiful-dnd";
 import { resetServerContext } from "react-beautiful-dnd";
 import { CHANGE_TASK_ORDER } from "../../../src/redux/constants/taskActionConstants";
 import NoSSR from "react-no-ssr";
@@ -12,7 +12,7 @@ import useInput from "../../../src/hooks/useInput";
 import { verify } from "jsonwebtoken";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import { createNewTaskList } from "../../../src/redux/actions/taskListActions";
+import {createNewTaskList, deleteTaskList} from "../../../src/redux/actions/taskListActions";
 import WorkSpaceTitle from "../../../src/components/workspace/WorkSpaceTitle";
 import {useEffect, useState} from "react";
 
@@ -23,25 +23,48 @@ const ProjectPage = () => {
   const projectInfo = useSelector((state) => state.ProjectReducer.projectInfo);
   const userRole = projectInfo.roleInfo.name;
   const userPermission = projectInfo.roleInfo;
-  const [username, userInput] = useInput({ type: "text" });
   const { projectId } = router.query;
   const { taskLists, taskListsOrder, loading } = projectInfo;
   const [tab, setTab] = useState('TaskList');
   const[layout, setLayout] = useState('');
-
+  const[taskTypeFilter, setTaskTypeFilter] = useState('');
+  const[taskTagFilter, setTaskTagFilter] = useState('');
+  const[taskAssignedFilter, setTaskAssignedFilter] = useState('');
+  const [submittedForm, setSubmittedForm] = useState({
+        formTouched: false,
+        error: false,
+        submitting : false
+    });
+  const [taskListName, setTaskListName]= useState('');
+  const [showForm, setShowForm]= useState(false);
+  const regex = {
+        nameRegex: /^([a-zA-Z]+( [a-zA-Z]+)|[a-zA-Z]){2,50}$/,
+  }
   const addTaskListHandler = () => {
-        dispatch(
-            createNewTaskList({
-                taskListName: username,
-                projectId: projectId,
-            })
-        );
+      setTaskListName('');
+      setSubmittedForm({
+          formTouched: false,
+          error: false,
+          submitting : false
+      });
+      setShowForm(true);
     };
+
   const onDragEnd = (result) => {
+      console.log('===check===', result);
+
         if (!result.destination) {
             return;
         }
 
+      if (result.destination.droppableId === 'delete'){
+          console.log('===cccc==');
+          // dispatch(deleteTask({
+          //     taskId: taskId,
+          //     taskListId: taskListId,
+          // }));
+          return;
+      }
         if (result.destination.droppableId === result.source.droppableId) {
             if (result.destination.index === result.source.index) {
                 return;
@@ -81,35 +104,18 @@ const ProjectPage = () => {
         localStorage.setItem('task-layout', layout);
         setLayout(layout);
   }
-  const dragOver = event => {
-        event.preventDefault();
-        console.log('===test===', projectIdForTrash);
-    };
-  const dragDrop = event => {
-        const target = event.currentTarget.dataset;
-        // console.log('test', target);
-        deleteProjectHandler(projectIdForTrash);
-        console.log('===test===', projectIdForTrash);
-
-    };
 
 
   useEffect(()=>{
-        setLayout(localStorage.getItem('task-layout')||'grid');
+        setLayout(localStorage.getItem('task-layout')||'vertical');
     },[]);
 
     return (
     <>
       {userRole && (
         <div className='mainContainerBody'>
+            <NoSSR>
             <WorkSpaceTitle title={projectInfo.projectName} description={projectInfo.description} isProject={true} />
-            {userPermission.hasOwnProperty("taskList") &&
-            userPermission.taskList.includes("Create")
-              // && <div className='addTaskList'>
-              //   Task List{userInput}
-              //   <button onClick={addTaskListHandler}>Add</button>
-              // </div>
-            }
             <div className='project-data'>
             <div className='tab-list'>
                 <span className={`${tab === 'TaskList' && 'active'}`} onClick={()=>{setTab('TaskList')}}>
@@ -119,26 +125,38 @@ const ProjectPage = () => {
                     Notes
                 </span>
             </div>
-            <NoSSR>
                 {tab === 'TaskList' &&
-                <div className='task-list-box'>
+                <div className={`task-list-box ${layout==='horizontal'? 'rowLayout':''}`}>
+                    <DragDropContext onDragEnd={onDragEnd}>
                     <div className="top-panel-row">
-                        <>
-                            <div className='filter-wrapper'/>
-                        </>
-
+                        <div>
+                            <div className='filter-wrapper'>
+                                <p>Task Type</p>
+                                <select onChange={e => setTaskTypeFilter(e.target.value)}>
+                                    <option value="any">Any</option>
+                                    <option value="test list">Test List</option>
+                                    <option value="blank">Blank</option>
+                                </select>
+                            </div>
+                        </div>
                         <div className='layout-toggle'>
-                            <span className={`icon trash-can`} onDragOver={dragOver} onDrop={dragDrop} data-position="delete">
+                            <Droppable droppableId='delete'>
+                                {(provided, snapshot) => (
+                                    <span  ref={provided.innerRef} className={`icon trash-can`} data-position="delete">
                                 <svg className='empty' xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
                                     <path d="M20.37 8.91l-1 1.73l-12.13-7l1-1.73l3.04 1.75l1.36-.37l4.33 2.5l.37 1.37l3.03 1.75M6 19V7h5.07L18 11v8a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2m2 0h8v-6.8L10.46 9H8v10z" fill="#6d6d73"/>
                                 </svg>
                             </span>
-                            <span className={`icon ${layout==='grid'?'active':''}`} onClick={()=>{toggle('grid')}}>
-                        <svg width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M0,0 L3,0 L3,3 L0,3 L0,0 Z M6,0 L9,0 L9,3 L6,3 L6,0 Z M12,0 L15,0 L15,3 L12,3 L12,0 Z M0,6 L3,6 L3,9 L0,9 L0,6 Z M6,6 L9,6 L9,9 L6,9 L6,6 Z M12,6 L15,6 L15,9 L12,9 L12,6 Z M0,12 L3,12 L3,15 L0,15 L0,12 Z M6,12 L9,12 L9,15 L6,15 L6,12 Z M12,12 L15,12 L15,15 L12,15 L12,12 Z" fill-rule="nonzero"/>
-                        </svg>
+                                )}
+                            </Droppable>
+                            <span className={`icon ${layout==='vertical'?'active':''}`} onClick={()=>{toggle('vertical')}}>
+                                <svg width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                    <g stroke="none" strokeWidth="1" fillRule="evenodd">
+                                        <path d="M0,0 L15,0 L15,3 L0,3 L0,0 Z M0,6 L15,6 L15,9 L0,9 L0,6 Z M0,12 L15,12 L15,15 L0,15 L0,12 Z" id="column_ic" fillRule="nonzero" transform="translate(7.500000, 7.500000) rotate(-270.000000) translate(-7.500000, -7.500000) "/>
+                                    </g>
+                                </svg>
                     </span>
-                            <span className={`icon ${layout==='row'?'active':''}`} onClick={()=>{toggle('row')}}>
+                            <span className={`icon ${layout==='horizontal'?'active':''}`} onClick={()=>{toggle('horizontal')}}>
                         <svg width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0,0 L15,0 L15,3 L0,3 L0,0 Z M0,6 L15,6 L15,9 L0,9 L0,6 Z M0,12 L15,12 L15,15 L0,15 L0,12 Z" fill-rule="nonzero"/>
                         </svg>
@@ -146,16 +164,23 @@ const ProjectPage = () => {
                         </div>
                     </div>
                     <div className='taskListContainer'>
-                        <DragDropContext onDragEnd={onDragEnd}>
                         {taskListsOrder &&
                         taskListsOrder.map((taskListId) => {
                             return (
                                 <TaskList
                                     key={taskListId}
                                     taskList={taskLists[taskListId]}
+                                    layout={layout||'Vertical'}
+                                    taskTypeFilter={taskTypeFilter}
+                                    taskTagFilter={taskTagFilter}
+                                    taskAssignedFilter={taskAssignedFilter}
                                 />
                             );
                         })}
+
+
+                        {userPermission.hasOwnProperty("taskList") &&
+                        userPermission.taskList.includes("Create") &&
                             <button className='add-task-list' onClick={addTaskListHandler}>
                                 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
                                     <g fill="none" stroke="#6d6d73" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -165,15 +190,41 @@ const ProjectPage = () => {
                                     </g>
                                 </svg>
                                 <span>Add New Task List</span>
-                            </button>
-                    </DragDropContext>
+                            </button>}
                     </div>
+                    </DragDropContext>
                 </div>
                 }
                 {tab === 'TaskList' && <div className='notes'/>}
-            </NoSSR>
             </div>
-          <ToastContainer autoClose={2000} />
+                <ToastContainer autoClose={2000} />
+                {showForm && (<div className='modal-form'>
+                    <div className='content-wrapper'>
+                        <img className='cross' onClick={()=>{setShowForm(false) }} src='https://api.iconify.design/maki/cross.svg?color=black' alt='cross'/>
+                        <h1>Add New Task List</h1>
+                        <form>
+                            <input type="text" placeholder="Task List Name"
+                                   onKeyUp={e => {
+                                           if(!regex.nameRegex.test(e.target.value)){
+                                               setSubmittedForm({ ...submittedForm, error: 'Enter a valid name'})
+                                           } else{
+                                               setTaskListName( e.target.value );
+                                               setSubmittedForm({...submittedForm, formTouched: true, error: false });
+                                           }
+                                   }}/>
+                            <button disabled={!submittedForm.formTouched || !!submittedForm.error || submittedForm.submitting} onClick={async (e)=>{
+                                e.preventDefault();
+                                await dispatch(createNewTaskList({
+                                        taskListName: taskListName,
+                                        projectId: projectId,
+                                    }));
+                                setShowForm(false);
+                            }}>Add Project</button>
+                            {submittedForm.error && (<p className='error'>{submittedForm.error}</p>)}
+                        </form>
+                    </div>
+                </div>)}
+            </NoSSR>
         </div>
       )}
     </>

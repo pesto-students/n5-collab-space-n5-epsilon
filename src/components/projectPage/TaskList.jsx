@@ -4,11 +4,11 @@ import { useSelector, useDispatch } from "react-redux";
 
 import useInput from "../../hooks/useInput";
 
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { Droppable } from "react-beautiful-dnd";
 import { createNewTask, deleteTask } from "../../redux/actions/taskActions";
 import { deleteTaskList } from "../../redux/actions/taskListActions";
 
-function TaskList({ taskList }) {
+function TaskList({ taskList, layout, taskTypeFilter, taskTagFilter, taskAssignedFilter }) {
   const dispatch = useDispatch();
   const projectInfo = useSelector((state) => state.ProjectReducer.projectInfo);
   const userPermission = projectInfo.roleInfo;
@@ -17,12 +17,12 @@ function TaskList({ taskList }) {
   const { taskListName, task, tasksOrder } = taskList;
   const taskListId = taskList._id;
   const getStatusStyle = (isDraggingOver) => ({
-    background: isDraggingOver ? "#00BFFF" : "",
+    background: isDraggingOver ? "#b39ddb8a" : "",
   });
   const addTaskHandler = (taskListId) => {
     dispatch(
       createNewTask({
-        taskName: taskName,
+        taskName: taskName||'dummy',
         status: "inactive",
         taskListId: taskListId,
       })
@@ -47,7 +47,7 @@ function TaskList({ taskList }) {
   }
 
   return (
-    <Droppable droppableId={taskList._id}>
+    <Droppable droppableId={taskList._id} direction={layout}>
       {(provided, snapshot) => (
         <div
           className='taskList'
@@ -86,19 +86,84 @@ function TaskList({ taskList }) {
           {tasksOrder &&
             tasksOrder.map((taskId, index) => {
               const taskObj = task[taskId];
-              return (
-                <>
-                  {taskObj && (
-                    <Task
-                      key={taskObj._id}
-                      taskListId={taskListId}
-                      deleteTaskHandler={deleteTaskHandler}
-                      index={index}
-                      task={taskObj}
-                    />
-                  )}
-                </>
-              );
+              let filtersApplied = '';
+              // if(taskTagFilter === taskLists[taskListId].taskListName.toLowerCase())
+              if(taskTypeFilter && taskTypeFilter !== 'any')
+                filtersApplied = 1;
+              if(taskTagFilter && taskTagFilter !== 'any')
+                filtersApplied = 2;
+              if(taskTagFilter && taskTypeFilter && taskTypeFilter !== 'any' && taskTagFilter !== 'any')
+                filtersApplied = 3;
+              switch (filtersApplied) {
+                case 1: {
+                  if(taskTypeFilter === taskListName.toLowerCase())
+                  return (
+                      <>
+                        {taskObj && (
+                            <Task
+                                key={taskObj._id}
+                                taskListId={taskListId}
+                                deleteTaskHandler={deleteTaskHandler}
+                                index={index}
+                                task={taskObj}
+                            />
+                        )}
+                      </>
+                  );
+                  break;
+                }
+                case 2: {
+                  if(taskObj.tags?.includes(taskTagFilter))
+                  return (
+                      <>
+                        {taskObj && (
+                            <Task
+                                key={taskObj._id}
+                                taskListId={taskListId}
+                                deleteTaskHandler={deleteTaskHandler}
+                                index={index}
+                                task={taskObj}
+                            />
+                        )}
+                      </>
+                  );
+                  break;
+                }
+                case 3: {
+                  if(taskTypeFilter === taskListName.toLowerCase() && taskObj?.tags?.includes(taskTagFilter))
+                  return (
+                      <>
+                        {taskObj && (
+                            <Task
+                                key={taskObj._id}
+                                taskListId={taskListId}
+                                deleteTaskHandler={deleteTaskHandler}
+                                index={index}
+                                task={taskObj}
+                            />
+                        )}
+                      </>
+                  );
+                  break;
+                }
+                default: {
+                  console.log('===check===',)
+                  return (
+                      <>
+                        {taskObj && (
+                            <Task
+                                key={taskObj._id}
+                                taskListId={taskListId}
+                                deleteTaskHandler={deleteTaskHandler}
+                                index={index}
+                                task={taskObj}
+                            />
+                        )}
+                      </>
+                  );
+                }
+              }
+
             })}
           {provided.placeholder}
           </div>
