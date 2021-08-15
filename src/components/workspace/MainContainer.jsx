@@ -27,14 +27,16 @@ const MainContainer = (props) => {
     });
   const [showForm, setShowForm]= useState(false);
 
-    const addProjectHandler = () => {
-        dispatch(
+    const addProjectHandler = async (e) => {
+        e.preventDefault();
+        await dispatch(
             addNewProject({
                 projectName: projectForm.name,
                 description: projectForm.description,
                 role: "Admin",
             })
         );
+        setShowForm(false);
     };
     const deleteProjectHandler = (projectId) => {
         dispatch(deleteProject({ projectId: projectId }));

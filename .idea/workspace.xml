@@ -2,30 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="103cd474-1403-40f5-96a1-636418099c6b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/pages/api/taskList/[taskListId]/reorder.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/models/taskListsOrder.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/models/tasksOrder.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/projects/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/projects/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/task/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/task/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/taskList/[taskListId]/move.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/taskList/[taskListId]/move.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/workspace/project/[projectId].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/workspace/project/[projectId].jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/projectPage/Task.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projectPage/Task.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/projectPage/TaskList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projectPage/TaskList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/projectPage/infoBanner.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projectPage/infoBanner.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/workspace/MainContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workspace/MainContainer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/workspace/ProjectContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workspace/ProjectContainer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/workspace/WorkSpaceTitle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workspace/WorkSpaceTitle.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/actions/taskActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions/taskActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/actions/taskListActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions/taskListActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/actions/workSpaceActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions/workSpaceActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/constants/taskActionConstants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/constants/taskActionConstants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/reducers/projectReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducers/projectReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/reducers/workspaceReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducers/workspaceReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/Services/sendEmail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Services/sendEmail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/apiEndPoints/projects.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/apiEndPoints/projects.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/apiEndPoints/task.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/apiEndPoints/task.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/apiEndPoints/taskList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/apiEndPoints/taskList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/projectPage.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/projectPage.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/Home.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Home.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/projectPage.module.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/siteLayout.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/siteLayout.module.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +45,7 @@
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">

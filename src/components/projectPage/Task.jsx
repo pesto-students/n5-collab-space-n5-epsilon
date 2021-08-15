@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Draggable } from "react-beautiful-dnd";
-import styles from "../../../styles/Home.module.scss";
 function Task({ task, index, deleteTaskHandler }) {
   const projectInfo = useSelector((state) => state.ProjectReducer.projectInfo);
   const userPermission = projectInfo.roleInfo;
@@ -16,7 +15,7 @@ function Task({ task, index, deleteTaskHandler }) {
     <Draggable draggableId={task._id} index={index}>
       {(provided, snapshot) => (
         <div
-          className={styles.task}
+          className='task'
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
@@ -25,8 +24,8 @@ function Task({ task, index, deleteTaskHandler }) {
             provided.draggableProps.style
           )}
         >
-          <div className={styles.cardBody}>{task.taskName}</div>
-          <div className={styles.taskStatus}>{task.status}</div>
+          <div>{task.taskName}</div>
+          <div>{task.status}</div>
           {userPermission.hasOwnProperty("taskList") &&
             userPermission.taskList.includes("Delete") && (
               <button

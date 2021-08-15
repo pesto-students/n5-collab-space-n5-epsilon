@@ -148,45 +148,6 @@
   font-size: 12px;
   text-transform: capitalize;
 }
-.projectPage{
-  width: 100vw;
-}
-.taskList {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-left: 10px;
-  background-color: rgb(241, 241, 241);
-  flex-grow: 1;
-  min-height: 300px;
-}
-.taskListColored {
-  background-color: lightblue;
-  flex-grow: 1;
-  min-height: 300px;
-}
-.task {
-  display: flex;
-  justify-content: space-between  ;
-  width: 200px;
-  border: 1px solid grey;
-  margin-bottom: 3px;
-  background-color: lightblue;
-  padding: 3px;
-}
-.Coloredtask{
-  width: 200px;
-  border: 1px solid grey;
-  margin-bottom: 3px;
-  background-color: rgb(173, 230, 190);
-  padding: 3px;
-}
-.taskListContainer{
-  display: flex;
-  margin: 30px;
-  min-height: 40vh;
-}
 
 .cardHeader {
   display: flex;
