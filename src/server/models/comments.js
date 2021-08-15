@@ -2,18 +2,23 @@ import mongoose, { Schema } from "mongoose";
 
 const MODEL_NAME = "Comments";
 
-const schema = new Schema({
-  comment: String,
+const CommentSchema = new Schema({
+  commentText: String,
   by: {
     type: Schema.Types.ObjectId,
-    ref: "projects",
+    ref: "users",
   },
-  projectId: {
-    type: Schema.Types.ObjectId,
-    ref: "projects",
+  createdAt: {
+    type: Schema.Types.Date,
   },
 });
+CommentSchema.pre("save", function (next) {
+  var comment = this;
+  comment.createdAt = comment.createdAt || new Date();
+  next();
+});
 
-const Model = mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema);
+const Model =
+  mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, CommentSchema);
 
 export default Model;

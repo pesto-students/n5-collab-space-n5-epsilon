@@ -79,9 +79,13 @@ const ProjectPage = () => {
   return (
     <>
       {userRole && (
-        <div className='mainContainerBody'>
-            <WorkSpaceTitle title={projectInfo.projectName} description={projectInfo.description} isProject={true} />
-            {userPermission.hasOwnProperty("taskList") &&
+        <div className="mainContainerBody">
+          <WorkSpaceTitle
+            title={projectInfo.projectName}
+            description={projectInfo.description}
+            isProject={true}
+          />
+          {userPermission.hasOwnProperty("taskList") &&
             userPermission.taskList.includes("Create") && (
               <div className={styles.addTaskList}>
                 Task List{userInput}
@@ -104,6 +108,7 @@ const ProjectPage = () => {
             </NoSSR>
           </div>
           <ToastContainer autoClose={2000} />
+          
         </div>
       )}
     </>
