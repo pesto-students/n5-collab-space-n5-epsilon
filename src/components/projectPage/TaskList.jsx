@@ -1,23 +1,22 @@
 import React, { useEffect } from "react";
 import Task from "./Task";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  createNewTask,
-  deleteTask,
-  deleteTaskList,
-} from "../../redux/actions/projectPageActions";
+
 import useInput from "../../hooks/useInput";
 
 import styles from "../../../styles/Home.module.scss";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { createNewTask, deleteTask } from "../../redux/actions/taskActions";
+import { deleteTaskList } from "../../redux/actions/taskListActions";
 
 function TaskList({ taskList }) {
   const dispatch = useDispatch();
   const projectInfo = useSelector((state) => state.ProjectReducer.projectInfo);
   const userPermission = projectInfo.roleInfo;
+  const projectId = projectInfo._id;
   const [taskName, userInput] = useInput({ type: "text" });
-  const { _id, taskListName, task } = taskList;
-  const taskListId = _id;
+  const { taskListName, task, tasksOrder } = taskList;
+  const taskListId = taskList._id;
   const getStatusStyle = (isDraggingOver) => ({
     background: isDraggingOver ? "#00BFFF" : "",
   });
@@ -40,8 +39,8 @@ function TaskList({ taskList }) {
     );
   };
 
-  const deleteTaskListHandler = (taskListId) => {
-    dispatch(deleteTaskList({ taskListId: taskListId }));
+  const deleteTaskListHandler = (taskListInfo) => {
+    dispatch(deleteTaskList(taskListInfo));
   };
 
   return (
@@ -59,7 +58,7 @@ function TaskList({ taskList }) {
               userPermission.taskList.includes("Delete") && (
                 <button
                   onClick={() => {
-                    deleteTaskListHandler(taskListId);
+                    deleteTaskListHandler({ taskListId, projectId });
                   }}
                 >
                   x
@@ -77,16 +76,21 @@ function TaskList({ taskList }) {
             </button>
           </div>
 
-          {task &&
-            task.map((taskIn, index) => {
+          {tasksOrder &&
+            tasksOrder.map((taskId, index) => {
+              const taskObj = task[taskId];
               return (
-                <Task
-                  key={taskIn._id}
-                  taskListId={taskListId}
-                  deleteTaskHandler={deleteTaskHandler}
-                  index={index}
-                  task={taskIn}
-                />
+                <>
+                  {taskObj && (
+                    <Task
+                      key={taskObj._id}
+                      taskListId={taskListId}
+                      deleteTaskHandler={deleteTaskHandler}
+                      index={index}
+                      task={taskObj}
+                    />
+                  )}
+                </>
               );
             })}
           {provided.placeholder}

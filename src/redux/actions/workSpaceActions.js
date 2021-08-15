@@ -1,3 +1,4 @@
+import { Types } from "mongoose";
 import { projectURL } from "../../client_apis/workSpaceApi";
 import {
   DeleteProject,
@@ -34,15 +35,9 @@ export const getWorkspaceProject = (req) => async (dispatch, getState) => {
 
 export const addNewProject = (newProject) => async (dispatch) => {
   try {
-    dispatch(CreateProject(newProject));
     let response = await projectURL.post("/", newProject);
     if (response) {
-      const data = response.data;
-      const payload = {
-        _id: data._id,
-        projectName: data.projectName,
-        description: response.data.description,
-      };
+      const payload = response.data;
       dispatch(CreateProjectSuccess(payload));
     }
   } catch (err) {

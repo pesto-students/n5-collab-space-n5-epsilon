@@ -5,6 +5,7 @@ import {
 } from "../constants/projectActionConstants";
 import {
   CREATE_PROJECT,
+  CREATE_PROJECT_SUCCESS,
   GET_ALL_PROJECT,
   GET_ALL_PROJECT_SUCCESS,
 } from "../constants/workspaceActionConstants";
@@ -23,7 +24,8 @@ const WorkSpaceReducer = (state = initialState, action) => {
         const index = draft.findIndex((project) => project._id === payload._id);
         return (draft[index] = payload);
       }
-      case CREATE_PROJECT: {
+      case CREATE_PROJECT_SUCCESS: {
+        console.log("payload", payload);
         draft.projects.push(payload);
         break;
         //return draft;

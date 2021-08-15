@@ -7,10 +7,11 @@ function ProjectContainer({ projectList, deleteProjectHandler, role, projectId }
     <>
       {projectList.map((project) => {
         return (
+            <Link prefetch href={`workspace/project/${project.projectId}`}>
               <a draggable="true" onDragStart={()=>{
                 console.log('===check===', project.projectId);
                 projectId(project.projectId);
-              }} className={`projectCard ${role !== "Admin" && 'shared'}`} key={project._id} href={`workspace/project/${project.projectId}`} data-id={project.projectId} >
+              }} className={`projectCard ${role !== "Admin" && 'shared'}`} key={project._id}  data-id={project.projectId} >
                 <h2>{project.projectName}</h2>
                 <h5>{project.description}</h5>
                 {role === "Admin"? <button className='delete' onClick={(e) => {
@@ -33,6 +34,7 @@ function ProjectContainer({ projectList, deleteProjectHandler, role, projectId }
                   </svg>
                 </button> }
               </a>
+            </Link>
         );
       })}
     </>

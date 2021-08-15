@@ -10,8 +10,8 @@ import ProjectContainer from "./ProjectContainer";
 import {useEffect, useState} from "react";
 const MainContainer = (props) => {
   const projects = useSelector((state) => state.WorkSpaceReducer.projects);
-  const ownProjects = projects.filter((project) => project.role === "Admin");
-  const sharedProjects = projects.filter((project) => project.role === "Guest");
+  const ownProjects = projects.filter((project) => project.role == "Admin");
+  const sharedProjects = projects.filter((project) => project.role == "Guest");
   const dispatch = useDispatch();
   const [username, userInput] = useInput({ type: "text" });
   const[layout, setLayout] = useState('');

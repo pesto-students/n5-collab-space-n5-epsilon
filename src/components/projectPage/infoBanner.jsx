@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import styles from "../../../styles/projectPage.module.scss";
 function InfoBanner() {
   const information = useSelector((state) => state.ProjectReducer.projectInfo);
   const { projectName, description } = information;

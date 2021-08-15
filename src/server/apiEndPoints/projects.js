@@ -8,7 +8,18 @@ import Task from "../models/tasks";
 import Roles from "../models/roles";
 import Comments from "../models/comments";
 import Contributions from "../models/contributions";
+import TaskListsOrder from "../models/taskListsOrder";
 import { model, Types } from "mongoose";
+
+const convertArrayToObject = (array, key) => {
+  const initialValue = {};
+  return array.reduce((obj, item) => {
+    return {
+      ...obj,
+      [item[key]]: item,
+    };
+  }, initialValue);
+};
 
 export async function getProjectsInfo(userId) {
   try {
@@ -98,6 +109,25 @@ export async function getProject(
     },
     {
       $lookup: {
+        from: "tasks.order",
+        localField: "taskListLookups._id",
+        foreignField: "taskListsId",
+        as: "string",
+      },
+    },
+    {
+      $addFields: {
+        "taskListLookups.tasksOrder": "$string.tasksOrder",
+      },
+    },
+    {
+      $unwind: {
+        path: "$taskListLookups.tasksOrder",
+        preserveNullAndEmptyArrays: true,
+      },
+    },
+    {
+      $lookup: {
         from: "tasks",
         let: {
           taskListId: "$taskListLookups._id",
@@ -138,6 +168,9 @@ export async function getProject(
         taskListName: {
           $first: "$taskListLookups.taskListName",
         },
+        tasksOrder: {
+          $first: "$taskListLookups.tasksOrder",
+        },
       },
     },
     {
@@ -148,6 +181,7 @@ export async function getProject(
             _id: "$_id",
             taskListName: "$taskListName",
             task: "$tasks",
+            tasksOrder: "$tasksOrder",
           },
         },
         projectName: {
@@ -166,7 +200,9 @@ export async function getProject(
         taskLists: {
           $filter: {
             input: "$taskLists",
-            cond: { $ifNull: ["$$this._id", false] },
+            cond: {
+              $ifNull: ["$$this._id", false],
+            },
           },
         },
       },
@@ -177,6 +213,7 @@ export async function getProject(
       },
     },
   ]);
+
   const Project = ProjectArray[0];
   const userRoleArray = await Contributions.find(
     { projectId, userId },
@@ -187,25 +224,52 @@ export async function getProject(
   const userRole = userRoleArray[0];
   Project.roleInfo = userRole.roleId;
 
+  Project.taskLists = Project.taskLists.map((taskList) => {
+    taskList.task = convertArrayToObject(taskList.task, "_id");
+    return taskList;
+  });
+  Project.taskLists = convertArrayToObject(Project.taskLists, "_id");
+  const taskListsOrder = await TaskListsOrder.find(
+    {
+      projectId: Types.ObjectId(Project._id),
+    },
+    "taskListsOrder"
+  );
+  Project.taskListsOrder = taskListsOrder[0].taskListsOrder;
+
   return Project;
 }
 export async function insertProject(project, userId) {
-  const newProject = new Projects(project);
-  const savedNewProject = await newProject.save();
-  const adminRoleArray = await Roles.find({ name: "Admin" });
-  const adminRole = adminRoleArray[0];
-  const newContribution = new Contributions({
-    projectId: Types.ObjectId(savedNewProject._id),
-    userId: Types.ObjectId(userId),
-    roleId: Types.ObjectId(adminRole._id),
-  });
-  await newContribution.save();
-  const response = {
-    projectId: savedNewProject.projectId,
-    description: savedNewProject.description,
-    role: adminRole.name,
-  };
-  return response;
+  try {
+    const adminRoleArray = await Roles.find({ name: "Admin" });
+    const adminRole = adminRoleArray[0];
+
+    const newProject = new Projects(project);
+    const savedNewProject = await newProject.save();
+    const newContribution = new Contributions({
+      projectId: Types.ObjectId(savedNewProject._id),
+      userId: Types.ObjectId(userId),
+      roleId: Types.ObjectId(adminRole._id),
+    });
+
+    const taskListsOrder = new TaskListsOrder({
+      projectId: Types.ObjectId(savedNewProject._id),
+      taskListsOrder: [],
+    });
+
+    await newContribution.save();
+    await taskListsOrder.save();
+
+    const response = {
+      projectId: savedNewProject._id,
+      projectName: savedNewProject.projectName,
+      description: savedNewProject.description,
+      role: adminRole.name,
+    };
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export async function deleteProject(projectId) {

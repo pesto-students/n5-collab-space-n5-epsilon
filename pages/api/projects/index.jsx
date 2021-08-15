@@ -24,7 +24,7 @@ handler.post(async (req, res) => {
   const { userId } = req.cookies;
   if (!req.body) return res.status(400).send("You must write something");
   const projects = await insertProject(req.body, userId);
-
+  console.log("this is response project ",projects)
   res.send(projects);
 });
 

@@ -1,13 +1,12 @@
 import { useRouter } from "next/router";
+import { getProjectInfo } from "../../../src/redux/actions/projectPageActions";
 import {
-  createNewTaskList,
-  getProjectInfo,
-} from "../../../src/redux/actions/projectPageActions";
-import { moveTaskAction } from "../../../src/redux/actions/taskActions";
+  moveTaskAction,
+  reorderTask,
+} from "../../../src/redux/actions/taskActions";
 import { wrapper } from "../../../src/redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import TaskList from "../../../src/components/projectPage/TaskList";
-import InfoBanner from "../../../src/components/projectPage/infoBanner";
 import styles from "../../../styles/projectPage.module.scss";
 import { DragDropContext } from "react-beautiful-dnd";
 import { resetServerContext } from "react-beautiful-dnd";
@@ -17,6 +16,8 @@ import useInput from "../../../src/hooks/useInput";
 import { verify } from "jsonwebtoken";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { createNewTaskList } from "../../../src/redux/actions/taskListActions";
+import WorkSpaceTitle from "../../../src/components/workspace/WorkSpaceTitle";
 
 const ProjectPage = () => {
   resetServerContext();
@@ -27,7 +28,7 @@ const ProjectPage = () => {
   const userPermission = projectInfo.roleInfo;
   const [username, userInput] = useInput({ type: "text" });
   const { projectId } = router.query;
-  const { taskLists, loading } = projectInfo;
+  const { taskLists, taskListsOrder, loading } = projectInfo;
   const addTaskListHandler = () => {
     dispatch(
       createNewTaskList({
@@ -45,14 +46,17 @@ const ProjectPage = () => {
       if (result.destination.index === result.source.index) {
         return;
       }
-      dispatch({
-        type: CHANGE_TASK_ORDER,
-        payload: {
+      dispatch(
+        reorderTask({
+          taskId: result.draggableId,
           initialIndex: result.source.index,
           finalIndex: result.destination.index,
           taskListId: result.destination.droppableId,
-        },
-      });
+          tasksOrder: [
+            ...projectInfo.taskLists[result.destination.droppableId].tasksOrder,
+          ],
+        })
+      );
     }
     if (result.destination.droppableId !== result.source.droppableId) {
       dispatch(
@@ -62,6 +66,12 @@ const ProjectPage = () => {
           destinationTaskListId: result.destination.droppableId,
           initialIndex: result.source.index,
           finalIndex: result.destination.index,
+          sourceTaskOrder: [
+            ...projectInfo.taskLists[result.source.droppableId].tasksOrder,
+          ],
+          destinationTaskOrder: [
+            ...projectInfo.taskLists[result.destination.droppableId].tasksOrder,
+          ],
         })
       );
     }
@@ -69,9 +79,9 @@ const ProjectPage = () => {
   return (
     <>
       {userRole && (
-        <div className={styles.projectPage}>
-          <InfoBanner />
-          {userPermission.hasOwnProperty("taskList") &&
+        <div className='mainContainerBody'>
+            <WorkSpaceTitle title={projectInfo.projectName} description={projectInfo.description} isProject={true} />
+            {userPermission.hasOwnProperty("taskList") &&
             userPermission.taskList.includes("Create") && (
               <div className={styles.addTaskList}>
                 Task List{userInput}
@@ -81,9 +91,14 @@ const ProjectPage = () => {
           <div className={styles.taskListContainer}>
             <NoSSR>
               <DragDropContext onDragEnd={onDragEnd}>
-                {taskLists &&
-                  taskLists.map((taskList) => {
-                    return <TaskList key={taskList._id} taskList={taskList} />;
+                {taskListsOrder &&
+                  taskListsOrder.map((taskListId) => {
+                    return (
+                      <TaskList
+                        key={taskListId}
+                        taskList={taskLists[taskListId]}
+                      />
+                    );
                   })}
               </DragDropContext>
             </NoSSR>
