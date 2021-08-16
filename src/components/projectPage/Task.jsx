@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Draggable } from "react-beautiful-dnd";
+import styles from "../../../styles/Home.module.scss";
+import Modal from "../common/modal/Modal";
+import SingleTask from "../common/singleTask/SingleTask";
 function Task({ task, index, deleteTaskHandler }) {
   const projectInfo = useSelector((state) => state.ProjectReducer.projectInfo);
   const userPermission = projectInfo.roleInfo;
+  const [showModal, setShowModal] = useState(false);
 
   const getItemStyle = (isDragging, draggableStyle) => ({
     background: isDragging ? "C0C0C0" : "",
@@ -11,31 +15,38 @@ function Task({ task, index, deleteTaskHandler }) {
   });
 
   const { taskListId } = task;
+  const toggleModal = () => {
+    let stateShowModal = !showModal;
+    setShowModal(stateShowModal);
+  };
   return (
-    <Draggable draggableId={task._id} index={index}>
-      {(provided, snapshot) => (
-        <div
-          className='task'
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-          style={getItemStyle(
-            snapshot.isDragging,
-            provided.draggableProps.style
-          )}
-        >
-          <div className='name'>{task.taskName}</div>
-          <div className='status'>{task.status}</div>
-          <div className='tags'>
-            {
-              task.tags?.map((tag) => {
-                return <span>{tag}</span>
-              })
-            }
-          </div>
-          {userPermission.hasOwnProperty("taskList") &&
-            userPermission.taskList.includes("Delete") && (
-              <span className='delete' onClick={() => {deleteTaskHandler(taskListId, task._id);}}>
+    <React.Fragment>
+
+      <Draggable draggableId={task._id} index={index}>
+        {(provided, snapshot) => (
+            <div
+                className='task'
+                ref={provided.innerRef}
+                {...provided.draggableProps}
+                {...provided.dragHandleProps}
+                style={getItemStyle(
+                    snapshot.isDragging,
+                    provided.draggableProps.style
+                )}
+                onClick={toggleModal}
+            >
+              <div className='name'>{task.taskName}</div>
+              <div className='status'>{task.status}</div>
+              <div className='tags'>
+                {
+                  task.tags?.map((tag) => {
+                    return <span>{tag}</span>
+                  })
+                }
+              </div>
+              {userPermission.hasOwnProperty("taskList") &&
+              userPermission.taskList.includes("Delete") && (
+                  <span className='delete' onClick={() => {deleteTaskHandler(taskListId, task._id);}}>
                 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 48 48">
                   <g fill="#D1C4E9"><path d="M38 7H10c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h28c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2z"/>
                     <path d="M38 19H10c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h28c1.1 0 2-.9 2-2v-6c0-1.1-.9-2-2-2z"/>
@@ -47,10 +58,16 @@ function Task({ task, index, deleteTaskHandler }) {
                   </g>
                 </svg>
               </span>
-            )}
-        </div>
-      )}
-    </Draggable>
+              )}
+            </div>
+        )}
+      </Draggable>
+      {showModal ? (
+        <Modal closeCallback={toggleModal}>
+          <SingleTask taskId={task._id} />
+        </Modal>
+      ) : null}
+    </React.Fragment>
   );
 }
 

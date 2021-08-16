@@ -5,12 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="103cd474-1403-40f5-96a1-636418099c6b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/pages/api/task/[taskId]/comments.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/api/task/[taskId]/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/api/task/[taskId]/tags.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/workspace/task/[taskId].js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/common/modal/Modal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/common/singleTask/CommentBox.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/common/singleTask/NewCommentBox.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/common/singleTask/SingleTask.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/common/singleTask/TagBox.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/common/singleTask/TaskHeader.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/server/apiEndPoints/comments.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/server/apiEndPoints/tags.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/styles/modal.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/styles/singleTask.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/workspace/project/[projectId].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/workspace/project/[projectId].jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/workspace/setting.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/workspace/setting.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/projectPage/Task.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projectPage/Task.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/projectPage/TaskList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projectPage/TaskList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/workspace/MainContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workspace/MainContainer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/apiEndPoints/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/apiEndPoints/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/apiEndPoints/task.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/apiEndPoints/task.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/models/comments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/models/comments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/models/tasks.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/models/tasks.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/siteLayout.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/siteLayout.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,6 +97,8 @@
       <workItem from="1628620621002" duration="3751000" />
       <workItem from="1628707760097" duration="7302000" />
       <workItem from="1628881576197" duration="373000" />
+      <workItem from="1629105582173" duration="517000" />
+      <workItem from="1629128641922" duration="3074000" />
     </task>
     <servers />
   </component>
