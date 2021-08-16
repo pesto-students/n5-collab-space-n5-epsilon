@@ -8,7 +8,6 @@ import {
   DeleteTaskListSuccess,
 } from "../constants/taskListActionConstants";
 
-
 export const createNewTaskList = (taskListInfo) => async (dispatch) => {
   try {
     //dispatch(CreateTaskList(taskListInfo));

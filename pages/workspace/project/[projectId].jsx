@@ -158,7 +158,7 @@ const ProjectPage = () => {
                     </span>
                             <span className={`icon ${layout==='horizontal'?'active':''}`} onClick={()=>{toggle('horizontal')}}>
                         <svg width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0,0 L15,0 L15,3 L0,3 L0,0 Z M0,6 L15,6 L15,9 L0,9 L0,6 Z M0,12 L15,12 L15,15 L0,15 L0,12 Z" fill-rule="nonzero"/>
+                            <path d="M0,0 L15,0 L15,3 L0,3 L0,0 Z M0,6 L15,6 L15,9 L0,9 L0,6 Z M0,12 L15,12 L15,15 L0,15 L0,12 Z" fillRule="nonzero"/>
                         </svg>
                     </span>
                         </div>

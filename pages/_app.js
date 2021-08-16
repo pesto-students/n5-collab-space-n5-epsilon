@@ -4,7 +4,7 @@ import { wrapper } from "../src/redux/store";
 
 function MyApp({ Component, pageProps }) {
   const getLayout =
-    Component.getLayout || ((page) => <SiteLayout children={page} />);
+    Component.getLayout || ((page) => <SiteLayout>page</SiteLayout>);
   return getLayout(<Component {...pageProps} />);
 }
 
