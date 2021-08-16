@@ -50,14 +50,11 @@ const MainContainer = (props) => {
     }
     const dragOver = event => {
         event.preventDefault();
-        console.log('===test===', projectIdForTrash);
   };
 
     const dragDrop = event => {
         const target = event.currentTarget.dataset;
-        // console.log('test', target);
         deleteProjectHandler(projectIdForTrash);
-        console.log('===test===', projectIdForTrash);
 
     };
 

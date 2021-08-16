@@ -10,7 +10,7 @@ handler.get(async (req, res) => {
     const taskInfo = await getTaskInfo(taskListId);
     res.send(taskInfo);
   } catch (error) {
-    console.log(error);
+    res.status(500).send("Internal Server Error");
   }
 });
 
@@ -21,23 +21,31 @@ handler.post(async (req, res) => {
     const task = await createTask(req.body);
     res.send(task);
   } catch (error) {
-    console.log(error);
+    res.status(500).send("Internal Server Error");
   }
 });
 
 handler.put(async (req, res) => {
-  if (!req.body)
-    return res.status(400).send(JSON.stringify({ error: "Invalid Request" }));
-  const task = await updateTask(req.body);
-  res.send(task);
+  try {
+    if (!req.body)
+      return res.status(400).send(JSON.stringify({ error: "Invalid Request" }));
+    const task = await updateTask(req.body);
+    res.send(task);
+  } catch (error) {
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 handler.delete(async (req, res) => {
-  if (!req.body)
-    return res.status(400).send(JSON.stringify({ error: "Invalid Request" }));
+  try {
+    if (!req.body)
+      return res.status(400).send(JSON.stringify({ error: "Invalid Request" }));
 
-  const deletedTask = await deleteTask(req.body);
-  res.send(deletedTask);
+    const deletedTask = await deleteTask(req.body);
+    res.send(deletedTask);
+  } catch (error) {
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 export default handler;

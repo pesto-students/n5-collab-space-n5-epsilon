@@ -18,7 +18,6 @@ function ProjectContainer({
             <a
               draggable="true"
               onDragStart={() => {
-                console.log("===check===", project.projectId);
                 projectId(project.projectId);
               }}
               className={`projectCard ${role !== "Admin" && "shared"}`}

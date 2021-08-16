@@ -12,7 +12,6 @@ handler.post(async (req, res) => {
     expiresIn: "300000",
   });
   mailerService(jwtToken, user.name).then((mailSent) => {
-    console.log("===test===", mailSent);
     if (mailSent) {
       res.status(200).send(`Email Sent`);
     } else {
