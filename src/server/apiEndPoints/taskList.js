@@ -48,7 +48,7 @@ export async function createTaskList(taskListInfo) {
     };
     return response;
   } catch (error) {
-    console.log(error);
+    return {};
   }
 }
 

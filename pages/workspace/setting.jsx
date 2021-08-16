@@ -5,7 +5,7 @@ import {getWorkspaceProject} from "../../src/redux/actions/workSpaceActions";
 
 const Setting = () => {
 
-    return <>
+    return  <div className='mainContainerBody'>
         <WorkSpaceTitle title='Workspace Name'/>
         <section className='settings-tab'>
             <div className='tab-list'>
@@ -16,7 +16,7 @@ const Setting = () => {
 
             </div>
         </section>
-    </>
+    </div>
 };
 
 Setting.getLayout = getSiteLayout;

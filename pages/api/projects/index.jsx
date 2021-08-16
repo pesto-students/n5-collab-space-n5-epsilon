@@ -21,18 +21,25 @@ handler.get(async (req, res) => {
 });
 
 handler.post(async (req, res) => {
-  const { userId } = req.cookies;
-  if (!req.body) return res.status(400).send("You must write something");
-  const projects = await insertProject(req.body, userId);
-  console.log("this is response project ",projects)
-  res.send(projects);
+  try {
+    const { userId } = req.cookies;
+    if (!req.body) return res.status(400).send("You must write something");
+    const projects = await insertProject(req.body, userId);
+    res.send(projects);
+  } catch (error) {
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 handler.delete(async (req, res) => {
-  if (!req.body.projectId)
-    return res.status(400).send(JSON.stringify({ error: "Invalid Request" }));
-  const projects = await deleteProject(req.body.projectId);
-  res.send(projects);
+  try {
+    if (!req.body.projectId)
+      return res.status(400).send(JSON.stringify({ error: "Invalid Request" }));
+    const projects = await deleteProject(req.body.projectId);
+    res.send(projects);
+  } catch (error) {
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 export default handler;

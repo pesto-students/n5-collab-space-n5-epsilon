@@ -147,7 +147,6 @@ function TaskList({ taskList, layout, taskTypeFilter, taskTagFilter, taskAssigne
                   break;
                 }
                 default: {
-                  console.log('===check===',)
                   return (
                       <>
                         {taskObj && (

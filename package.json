@@ -17,6 +17,7 @@
     "@hapi/joi": "^15.0.3",
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
+    "case-sensitive-paths-webpack-plugin": "^2.4.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "draft-js": "^0.11.7",

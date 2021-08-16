@@ -5,31 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="103cd474-1403-40f5-96a1-636418099c6b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/pages/api/task/[taskId]/comments.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/api/task/[taskId]/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/api/task/[taskId]/tags.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/workspace/task/[taskId].js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/common/modal/Modal.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/common/singleTask/CommentBox.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/common/singleTask/NewCommentBox.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/common/singleTask/SingleTask.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/common/singleTask/TagBox.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/common/singleTask/TaskHeader.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/apiEndPoints/comments.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/apiEndPoints/tags.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/styles/modal.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/styles/singleTask.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.eslintrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/server/models/taskLists.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/auth/forgotPassword.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/auth/forgotPassword.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/auth/resetPassword.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/auth/resetPassword.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/projects/[projectId].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/projects/[projectId].jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/projects/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/projects/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/task/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/task/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/taskList/[taskListId]/reorder.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/taskList/[taskListId]/reorder.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/workspace/project/[projectId].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/workspace/project/[projectId].jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/workspace/setting.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/workspace/setting.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/projectPage/Task.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projectPage/Task.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/apiEndPoints/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/apiEndPoints/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/apiEndPoints/task.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/apiEndPoints/task.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/models/comments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/models/comments.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/models/tasks.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/models/tasks.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/siteLayout.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/siteLayout.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/workspace/user-panel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/workspace/user-panel.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Auth-Components/signIn-form.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Auth-Components/signIn-form.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/projectPage/TaskList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projectPage/TaskList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/workspace/MainContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workspace/MainContainer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/workspace/ProjectContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workspace/ProjectContainer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/actions/projectPageActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions/projectPageActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/actions/taskActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions/taskActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/actions/taskListActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions/taskListActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/reducers/projectReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducers/projectReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/reducers/workspaceReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducers/workspaceReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/Services/sendEmail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Services/sendEmail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/apiEndPoints/projects.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/apiEndPoints/projects.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/apiEndPoints/taskList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/apiEndPoints/taskList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/models/tasklists.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/models/tasklists.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +103,7 @@
       <workItem from="1628707760097" duration="7302000" />
       <workItem from="1628881576197" duration="373000" />
       <workItem from="1629105582173" duration="517000" />
-      <workItem from="1629128641922" duration="3074000" />
+      <workItem from="1629128641922" duration="3736000" />
     </task>
     <servers />
   </component>
