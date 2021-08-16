@@ -1,4 +1,4 @@
-import { getLayout as getSiteLayout } from "../../src/components/Layouts/SiteLayout";
+import { getLayout as getSiteLayout } from "../../src/components/layouts/SiteLayout";
 
 const Setting = () => <h1>Setting</h1>;
 

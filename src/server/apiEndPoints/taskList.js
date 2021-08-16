@@ -47,7 +47,9 @@ export async function createTaskList(taskListInfo) {
       tasksOrder: [],
     };
     return response;
-  } 
+  } catch (error) {
+    return {};
+  }
 }
 
 export async function deleteTaskList(taskListInfo) {

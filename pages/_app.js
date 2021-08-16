@@ -1,5 +1,5 @@
 import "../styles/globals.scss";
-import SiteLayout from "../src/components/Layouts/SiteLayout";
+import SiteLayout from "../src/components/layouts/SiteLayout";
 import { wrapper } from "../src/redux/store";
 
 function MyApp({ Component, pageProps }) {

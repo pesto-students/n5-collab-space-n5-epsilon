@@ -66,7 +66,9 @@ export async function getProjectsInfo(userId) {
       },
     ]);
     return allProject;
-  } 
+  } catch (err) {
+    return {};
+  }
 }
 
 export async function getProject(
@@ -265,7 +267,9 @@ export async function insertProject(project, userId) {
       role: adminRole.name,
     };
     return response;
-  } 
+  } catch (error) {
+    return {};
+  }
 }
 
 export async function deleteProject(projectId) {
