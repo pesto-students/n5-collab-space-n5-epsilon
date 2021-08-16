@@ -3,14 +3,11 @@ import { taskURL } from "../../../client_apis/workSpaceApi";
 import useInput from "../../../hooks/useInput";
 import produce from "immer";
 import { EditorState } from "draft-js";
-import dynamic from "next/dynamic";
-const Editor = dynamic(
-  () => import("react-draft-wysiwyg").then((mod) => mod.Editor),
-  { ssr: false }
-);
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-
+import styles from "../../../../styles/singleTask.module.scss";
 import React from "react";
+import CommentBox from "./CommentBox";
+import TagBox from "./TagBox";
+import TaskHeader from "./TaskHeader";
 
 function SingleTask({ taskId }) {
   const [commentInputValue, commentInput, setComment] = useInput({
@@ -111,63 +108,30 @@ function SingleTask({ taskId }) {
     );
   };
   return (
-    <div className="singTask">
+    <div className={styles.singleTask}>
       {taskInfo && (
         <>
-          <h1>{taskInfo.taskName}</h1>
-          <h1>{taskInfo.status}</h1>
-          <div className="description"></div>
-          {toggle ? (
-            <p
-              onDoubleClick={() => {
-                setToggle(false);
-              }}
-            >
-              Description
-            </p>
-          ) : (
-            <Editor
+          <div className={styles.first_panel}>
+            <TaskHeader
+              taskInfo={taskInfo}
+              toggle={toggle}
+              setToggle={setToggle}
               editorState={editorState}
-              toolbarClassName="toolbarClassName"
-              wrapperClassName="wrapperClassName"
-              editorClassName="editorClassName"
             />
-          )}
-          <div className="comment-box">
-            <div className="existing-comments">
-              {taskInfo.comments.map((commentInfo) => {
-                return (
-                  <div className="comments">
-                    <p>{commentInfo.commentText}</p>
-                    <button
-                      onClick={() => deleteCommentHandler(commentInfo._id)}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                );
-              })}
-            </div>
-            <div className="comment-form">
-              {commentInput}
-              <button onClick={addCommentHandler}>Comment</button>
-            </div>
-            <div className="tag-box">
-              <h1>Tags</h1>
-              <div className="tags-form">
-                {tagInput}
-                <button onClick={addTagsHandler}>Add Tag</button>
-              </div>
-              <div className="existing-tags">
-                {taskInfo.tags.map((tag) => {
-                  return (
-                    <div className="tags">
-                      <p onClick={() => deleteTagsHandler(tag)}>{tag}</p>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+            <CommentBox
+              comments={taskInfo.comments}
+              deleteCommentHandler={deleteCommentHandler}
+              addCommentHandler={addCommentHandler}
+              commentInput={commentInput}
+            />
+          </div>
+          <div className={styles.second_panel}>
+            <TagBox
+              tagsCollection={taskInfo.tags}
+              addTagsHandler={addTagsHandler}
+              deleteTagsHandler={deleteTagsHandler}
+              tagInput={tagInput}
+            />
           </div>
         </>
       )}

@@ -10,9 +10,9 @@ function Modal(props) {
             <span className={styles.heading}>{props.heading}</span>
           ) : null}
           {props.showCloseButton ? (
-            <span className={styles.close_modal} onClick={props.closeCallback}>
+            <p className={styles.close_modal} onClick={props.closeCallback}>
               x
-            </span>
+            </p>
           ) : null}
         </div>
         <div className={styles.modal_body}>{props.children}</div>
