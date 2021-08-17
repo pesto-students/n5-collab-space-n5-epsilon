@@ -7,6 +7,7 @@ class AuthAPI {
         });
     }
 
+
     emailLogin(data) {
         return this.API.post(`/auth/signIn`, data);
     }
