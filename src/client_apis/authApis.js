@@ -9,15 +9,15 @@ class AuthAPI {
 
 
     emailLogin(data) {
-        return this.API.post(`/auth/signIn`, data);
+        return this.API.post(`/api/auth/signIn`, data);
     }
 
     emailSignUp(data) {
-        return this.API.post(`/auth/signUp`, data);
+        return this.API.post(`/api/auth/signUp`, data);
     }
 
     forgotPassword(data) {
-        return this.API.post(`/auth/forgotPassword`, data);
+        return this.API.post(`/api/auth/forgotPassword`, data);
     }
 
 }
