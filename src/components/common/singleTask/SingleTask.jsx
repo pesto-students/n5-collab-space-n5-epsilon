@@ -8,16 +8,22 @@ import CommentBox from "./CommentBox";
 import TagBox from "./TagBox";
 import TaskHeader from "./TaskHeader";
 import SingleTaskLoader from "../contentLoader/SingleTaskLoader";
+import {
+  addTags,
+  deleteTags,
+  updateTaskName,
+} from "../../../redux/actions/taskActions";
+import { useDispatch } from "react-redux";
 
-function SingleTask({ taskId }) {
-  const [commentInputValue, commentInput, setComment] = useInput({
-    type: "text",
-  });
+function SingleTask({ taskId, taskListId }) {
+  const taskInfoDetails = { taskId, taskListId };
   const [loading, setLoading] = useState(true);
 
   const [taskInfo, setTaskInfo] = useState();
 
   const [commentBox, setCommentBox] = useState("");
+  const dispatch = useDispatch();
+
   useEffect(() => {
     console.log("taskId", taskId);
     if (taskId) {
@@ -66,33 +72,33 @@ function SingleTask({ taskId }) {
       });
   };
 
-  const updateTaskName = (updateTaskNameText) => {
+  const updateTaskNameHandler = (updateTaskNameText) => {
     setTaskInfo(
       produce((draft) => {
         draft.taskName = updateTaskNameText;
       })
     );
-    taskURL
-      .put(`/${taskId}`, {
-        data: { taskName: updateTaskNameText },
-      })
-      .then((response) => {
-        console.log(response.data);
-      });
+    const updateTaskNameInfo = {
+      ...taskInfoDetails,
+      updateTaskName: updateTaskNameText,
+    };
+    dispatch(updateTaskName(updateTaskNameInfo));
   };
   const addTagsHandler = (tagInputValue) => {
-    const newTag = {
-      taskId: taskId,
+    const newTagInfo = {
+      ...taskInfoDetails,
       tag: tagInputValue,
     };
-    taskURL.post(`/${taskId}/tags`, newTag).then((response) => {
-      console.log(response.data);
-    });
+    // taskURL.post(`/${taskId}/tags`, newTag).then((response) => {
+    //   console.log(response.data);
+    // });
+
     setTaskInfo(
       produce((draft) => {
         draft.tags.push(tagInputValue);
       })
     );
+    dispatch(addTags(newTagInfo));
   };
   const deleteCommentHandler = (commentID) => {
     const data = {
@@ -118,16 +124,16 @@ function SingleTask({ taskId }) {
     );
   };
   const deleteTagsHandler = (tag) => {
-    const tagToBeDeleted = {
-      taskId: taskId,
+    const tagToBeDeletedInfo = {
+      ...taskInfoDetails,
       tag: tag,
     };
-    console.log(tagToBeDeleted);
-    taskURL
-      .delete(`/${taskId}/tags`, { data: tagToBeDeleted })
-      .then((response) => {
-        console.log(response.data);
-      });
+    // taskURL
+    //   .delete(`/${taskId}/tags`, { data: tagToBeDeleted })
+    //   .then((response) => {
+    //     console.log(response.data);
+    //   });
+    dispatch(deleteTags(tagToBeDeletedInfo));
     setTaskInfo(
       produce((draft) => {
         const index = draft.tags.indexOf(tag);
@@ -145,7 +151,7 @@ function SingleTask({ taskId }) {
                 <TaskHeader
                   taskInfo={taskInfo}
                   updateTaskDescription={updateTaskDescription}
-                  updateTaskName={updateTaskName}
+                  updateTaskName={updateTaskNameHandler}
                 />
                 <CommentBox
                   comments={taskInfo.comments}

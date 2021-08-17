@@ -85,7 +85,7 @@ function Task({ task, index, deleteTaskHandler }) {
           showModal={showModal}
           styles={modalStyles}
         >
-          <SingleTask taskId={task._id} />
+          <SingleTask taskId={task._id} taskListId={taskListId}/>
         </Modal>
       ) : null}
     </React.Fragment>
