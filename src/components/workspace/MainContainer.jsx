@@ -1,6 +1,5 @@
 import WorkSpaceTitle from "./WorkSpaceTitle";
 import { useSelector, useDispatch } from "react-redux";
-import useInput from "../../hooks/useInput";
 import Cookies from "js-cookie";
 import {
   addNewProject,
@@ -10,10 +9,9 @@ import ProjectContainer from "./ProjectContainer";
 import {useEffect, useState} from "react";
 const MainContainer = (props) => {
   const projects = useSelector((state) => state.WorkSpaceReducer.projects);
-  const ownProjects = projects.filter((project) => project.role == "Admin");
-  const sharedProjects = projects.filter((project) => project.role == "Guest");
+  const ownProjects = projects.filter((project) => project.role === "Admin");
+  const sharedProjects = projects.filter((project) => project.role === "Guest");
   const dispatch = useDispatch();
-  const [username, userInput] = useInput({ type: "text" });
   const[layout, setLayout] = useState('');
   const[projectIdForTrash, setProjectIdForTrash] = useState('');
   const [submittedForm, setSubmittedForm] = useState({
@@ -27,14 +25,16 @@ const MainContainer = (props) => {
     });
   const [showForm, setShowForm]= useState(false);
 
-    const addProjectHandler = () => {
-        dispatch(
+    const addProjectHandler = async (e) => {
+        e.preventDefault();
+        await dispatch(
             addNewProject({
                 projectName: projectForm.name,
                 description: projectForm.description,
                 role: "Admin",
             })
         );
+        setShowForm(false);
     };
     const deleteProjectHandler = (projectId) => {
         dispatch(deleteProject({ projectId: projectId }));
@@ -50,14 +50,11 @@ const MainContainer = (props) => {
     }
     const dragOver = event => {
         event.preventDefault();
-        console.log('===test===', projectIdForTrash);
   };
 
     const dragDrop = event => {
         const target = event.currentTarget.dataset;
-        // console.log('test', target);
         deleteProjectHandler(projectIdForTrash);
-        console.log('===test===', projectIdForTrash);
 
     };
 
@@ -81,12 +78,12 @@ const MainContainer = (props) => {
                 </span>
                 <span className={`icon ${layout==='grid'?'active':''}`} onClick={()=>{toggle('grid')}}>
                         <svg width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M0,0 L3,0 L3,3 L0,3 L0,0 Z M6,0 L9,0 L9,3 L6,3 L6,0 Z M12,0 L15,0 L15,3 L12,3 L12,0 Z M0,6 L3,6 L3,9 L0,9 L0,6 Z M6,6 L9,6 L9,9 L6,9 L6,6 Z M12,6 L15,6 L15,9 L12,9 L12,6 Z M0,12 L3,12 L3,15 L0,15 L0,12 Z M6,12 L9,12 L9,15 L6,15 L6,12 Z M12,12 L15,12 L15,15 L12,15 L12,12 Z" fill-rule="nonzero"/>
+                                <path d="M0,0 L3,0 L3,3 L0,3 L0,0 Z M6,0 L9,0 L9,3 L6,3 L6,0 Z M12,0 L15,0 L15,3 L12,3 L12,0 Z M0,6 L3,6 L3,9 L0,9 L0,6 Z M6,6 L9,6 L9,9 L6,9 L6,6 Z M12,6 L15,6 L15,9 L12,9 L12,6 Z M0,12 L3,12 L3,15 L0,15 L0,12 Z M6,12 L9,12 L9,15 L6,15 L6,12 Z M12,12 L15,12 L15,15 L12,15 L12,12 Z" fillRule="nonzero"/>
                         </svg>
                     </span>
                 <span className={`icon ${layout==='row'?'active':''}`} onClick={()=>{toggle('row')}}>
                         <svg width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0,0 L15,0 L15,3 L0,3 L0,0 Z M0,6 L15,6 L15,9 L0,9 L0,6 Z M0,12 L15,12 L15,15 L0,15 L0,12 Z" fill-rule="nonzero"/>
+                            <path d="M0,0 L15,0 L15,3 L0,3 L0,0 Z M0,6 L15,6 L15,9 L0,9 L0,6 Z M0,12 L15,12 L15,15 L0,15 L0,12 Z" fillRule="nonzero"/>
                         </svg>
                     </span>
             </div>

@@ -1,31 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="103cd474-1403-40f5-96a1-636418099c6b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/pages/api/taskList/[taskListId]/reorder.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/models/taskListsOrder.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/models/tasksOrder.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/projects/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/projects/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/task/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/task/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/taskList/[taskListId]/move.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/taskList/[taskListId]/move.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/workspace/project/[projectId].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/workspace/project/[projectId].jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/projectPage/TaskList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projectPage/TaskList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/projectPage/infoBanner.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projectPage/infoBanner.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/workspace/MainContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workspace/MainContainer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/workspace/ProjectContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workspace/ProjectContainer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/workspace/WorkSpaceTitle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workspace/WorkSpaceTitle.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/actions/taskActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions/taskActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/actions/taskListActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions/taskListActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/actions/workSpaceActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions/workSpaceActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/constants/taskActionConstants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/constants/taskActionConstants.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/reducers/projectReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducers/projectReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/reducers/workspaceReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducers/workspaceReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/Services/sendEmail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Services/sendEmail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/apiEndPoints/projects.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/apiEndPoints/projects.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/apiEndPoints/task.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/apiEndPoints/task.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/apiEndPoints/taskList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/apiEndPoints/taskList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/projectPage.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/projectPage.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/singleTask/NewCommentBox.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/singleTask/NewCommentBox.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +23,14 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="1wV8wPNQC9bWnrTHDX0BZVAmimB" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -60,6 +49,7 @@
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -84,6 +74,10 @@
       <workItem from="1628620621002" duration="3751000" />
       <workItem from="1628707760097" duration="7302000" />
       <workItem from="1628881576197" duration="373000" />
+      <workItem from="1629105582173" duration="517000" />
+      <workItem from="1629128641922" duration="7720000" />
+      <workItem from="1629205654036" duration="2219000" />
+      <workItem from="1629223048523" duration="474000" />
     </task>
     <servers />
   </component>

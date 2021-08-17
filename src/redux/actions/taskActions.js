@@ -37,7 +37,6 @@ export const createNewTask = (taskInfo) => async (dispatch) => {
       dispatch(CreateTaskSuccess(response.data));
     }
   } catch (err) {
-    console.log("this is error", err);
     dispatch(CreateTaskFailure(err));
   }
 };
@@ -100,12 +99,10 @@ export const reorderTask = (taskInfo) => async (dispatch, getState) => {
         toast.success("Task Moved ");
       }
     } catch (err) {
-      console.log(err);
       dispatch(ChangeTaskOrderFailure(prevState));
       toast.warn("Couldn't Connect to Server ");
     }
   } catch (err) {
-    console.log(err);
     toast.warn("Couldn't Connect to Server ");
   }
 };

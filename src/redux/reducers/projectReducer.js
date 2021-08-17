@@ -11,7 +11,6 @@ import {
   GET_ALL_TASKS,
   MOVE_TASK,
   MOVE_TASK_FAILURE,
-  REORDER_TASK_SUCCESS,
 } from "../constants/taskActionConstants";
 import {
   CREATE_TASK_LIST,
@@ -112,10 +111,6 @@ const ProjectReducer = (state = initialState, action) => {
         draft.projectInfo.taskLists[destinationTaskListId].task[taskId] =
           draft.projectInfo.taskLists[sourceTaskListId].task[taskId];
         delete draft.projectInfo.taskLists[sourceTaskListId].task[taskId];
-        break;
-      }
-      case REORDER_TASK_SUCCESS: {
-        const { taskListId, initialIndex, finalIndex } = payload;
         break;
       }
       default: {

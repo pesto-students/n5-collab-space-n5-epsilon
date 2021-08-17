@@ -66,8 +66,8 @@ export async function getProjectsInfo(userId) {
       },
     ]);
     return allProject;
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    return {};
   }
 }
 
@@ -268,7 +268,7 @@ export async function insertProject(project, userId) {
     };
     return response;
   } catch (error) {
-    console.log(error);
+    return {};
   }
 }
 

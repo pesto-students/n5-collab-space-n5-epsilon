@@ -3,9 +3,10 @@ export const urlBackEnd = process.env.REACT_APP_LOCAL_URL;
 class AuthAPI {
     constructor() {
         this.API = Axios.create({
-            baseURL: 'http://localhost:3000/api',
+            baseURL: urlBackEnd,
         });
     }
+
 
     emailLogin(data) {
         return this.API.post(`/auth/signIn`, data);

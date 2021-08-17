@@ -2,8 +2,8 @@ import { projectURL } from "../../client_apis/workSpaceApi";
 
 import {
   GetProjectInfo,
-  ErrorProject,
   DeleteProject,
+  GetProjectInfoFailure,
 } from "../constants/projectActionConstants";
 
 export const getProjectInfo =
@@ -22,7 +22,7 @@ export const getProjectInfo =
         dispatch(GetProjectInfo(response.data));
       }
     } catch (err) {
-      dispatch(ErrorProject(err));
+      dispatch(GetProjectInfoFailure(err));
     }
   };
 

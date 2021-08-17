@@ -16,16 +16,20 @@ handler.get(async (req, res) => {
       res.send(projectInfo);
     }
   } catch (error) {
-    console.log(error);
+    res.status(500).send("Internal Server Error");
   }
 });
 
 handler.put(async (req, res) => {
-  if (!req.query)
-    return res.status(400).send(JSON.stringify({ error: "Invalid Request" }));
-  const { projectId, data } = req.query;
-  const projectInfo = await updateProject(projectId, data);
-  res.send(projectInfo);
+  try {
+    if (!req.query)
+      return res.status(400).send(JSON.stringify({ error: "Invalid Request" }));
+    const { projectId, data } = req.query;
+    const projectInfo = await updateProject(projectId, data);
+    res.send(projectInfo);
+  } catch (error) {
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 export default handler;

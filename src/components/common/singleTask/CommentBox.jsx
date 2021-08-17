@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import styles from "../../../../styles/singleTask.module.scss";
 import ResizableTextArea from "../../textArea/ResizeableTextArea";
 import Container from "../contextMenu/ContextMenuContainer";
-  
 
 export default function CommentBox({
   comments,
@@ -21,7 +20,6 @@ export default function CommentBox({
   }, [comments]);
   return (
     <div className={styles.comment_box}>
-
       <div className={styles.box_header}>
         <h1>Discussion</h1>
       </div>

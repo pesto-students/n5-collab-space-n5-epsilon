@@ -11,10 +11,6 @@ export default function SignInForm(props) {
   });
   const router = useRouter();
 
-  // useEffect(()=>{
-  //     // console.log(props.formStatus);
-  // },[props.formStatus]);
-
   function submit() {
     props.setFormStatus({
       submitting: true,
@@ -27,7 +23,6 @@ export default function SignInForm(props) {
         });
         cookie.set("token", response["auth-token"]);
         cookie.set("userId", response["id"]);
-        console.log("===test===", response["auth-token"]);
         router.push("/workspace");
       })
       .catch((error) => {

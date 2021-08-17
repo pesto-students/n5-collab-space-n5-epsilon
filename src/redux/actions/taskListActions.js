@@ -16,7 +16,6 @@ export const createNewTaskList = (taskListInfo) => async (dispatch) => {
       dispatch(CreateTaskListSuccess(response.data));
     }
   } catch (err) {
-    console.log(err);
     dispatch(CreateTaskListFailure(err));
   }
 };

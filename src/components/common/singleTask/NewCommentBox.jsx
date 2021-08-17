@@ -76,7 +76,6 @@ function CommentForm() {
     </form>
   );
 }
-import React from "react";
 
 function Comment() {
   const deleteComment = () => {

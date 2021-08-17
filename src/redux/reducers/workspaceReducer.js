@@ -25,10 +25,8 @@ const WorkSpaceReducer = (state = initialState, action) => {
         return (draft[index] = payload);
       }
       case CREATE_PROJECT_SUCCESS: {
-        console.log("payload", payload);
         draft.projects.push(payload);
         break;
-        //return draft;
       }
 
       case DELETE_PROJECT: {
