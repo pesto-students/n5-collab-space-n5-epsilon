@@ -1,4 +1,7 @@
 import {
+  AddComment,
+  AddCommentFailure,
+  AddCommentSuccess,
   ChangeTaskOrder,
   ChangeTaskOrderFailure,
   ChangeTaskOrderSuccess,
@@ -14,6 +17,7 @@ import {
   ReorderTask,
   ReorderTaskFailure,
   ReorderTaskSuccess,
+  UpdateTaskName,
 } from "../constants/taskActionConstants";
 import { toast } from "react-toastify";
 import { taskListURL, taskURL } from "../../client_apis/workSpaceApi";
@@ -30,7 +34,7 @@ var moveInArray = function (arr, from, to) {
 };
 export const createNewTask = (taskInfo) => async (dispatch) => {
   try {
-    taskInfo._id = Types.ObjectId().toString();
+    taskInfo = { ...taskInfo, _id: Types.ObjectId().toString() };
     dispatch(CreateTask(taskInfo));
     let response = await taskURL.post("", taskInfo);
     if (response) {
@@ -106,3 +110,32 @@ export const reorderTask = (taskInfo) => async (dispatch, getState) => {
     toast.warn("Couldn't Connect to Server ");
   }
 };
+
+export const addComment = (taskInfo, newComment) => async (dispatch) => {
+  try {
+    const { taskId } = taskInfo;
+    let response = await taskURL.post(`/${taskId}/comments`, newComment);
+
+    if (response) {
+      dispatch(AddCommentSuccess(taskInfo));
+    }
+  } catch (err) {
+    dispatch(AddCommentFailure(err));
+  }
+};
+
+export const updateTaskName =
+  (taskInfo, updateTaskNameText) => async (dispatch) => {
+    try {
+      const { taskId } = taskInfo;
+      let response = await taskURL.put(`/${taskId}`, {
+        data: { taskName: updateTaskNameText },
+      });
+
+      if (response) {
+        dispatch(UpdateTaskName(taskInfo));
+      }
+    } catch (err) {
+      dispatch(AddCommentFailure(err));
+    }
+  };

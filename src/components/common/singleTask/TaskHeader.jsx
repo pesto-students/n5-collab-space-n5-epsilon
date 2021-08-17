@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import styles from "../../../../styles/singleTask.module.scss";
 import ResizableTextArea from "../../textArea/ResizeableTextArea";
-export default function TaskHeader({ taskInfo, updateTaskDescription }) {
+export default function TaskHeader({
+  taskInfo,
+  updateTaskName,
+  updateTaskDescription,
+}) {
   const [descriptionToggle, setDescriptionToggle] = useState(true);
   const [taskNameToggle, setTaskNameToggle] = useState(true);
   const [description, setDescription] = useState(taskInfo.description);
@@ -15,7 +19,7 @@ export default function TaskHeader({ taskInfo, updateTaskDescription }) {
     setTaskNameToggle(newTaskNameToggle);
   };
   const saveTaskNameHandler = () => {
-    //updateTaskDescription(description);
+    updateTaskName(taskName);
     handleTaskNameToggle();
   };
   const saveDescriptionHandler = () => {
@@ -27,9 +31,6 @@ export default function TaskHeader({ taskInfo, updateTaskDescription }) {
       <div className={styles.task_header}>
         <div className="task_information">
           {/* <h1>{taskInfo.taskName}</h1> */}
-          <div className="task_name_heading">
-            <h1> Task Name</h1>
-          </div>
           {taskNameToggle ? (
             <h1
               onDoubleClick={() => {

@@ -1,8 +1,9 @@
 import React, { useRef, useEffect } from "react";
 import PropTypes from "prop-types";
-import styles from "../../../../styles/modal.module.scss";
+
 function Modal(props) {
   const ref = useRef();
+  const { styles } = props;
   useEffect(() => {
     const checkIfClickedOutside = (e) => {
       if (props.showModal && ref.current && !ref.current.contains(e.target)) {

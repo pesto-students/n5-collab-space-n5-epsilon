@@ -65,6 +65,21 @@ function SingleTask({ taskId }) {
         console.log(response.data);
       });
   };
+
+  const updateTaskName = (updateTaskNameText) => {
+    setTaskInfo(
+      produce((draft) => {
+        draft.taskName = updateTaskNameText;
+      })
+    );
+    taskURL
+      .put(`/${taskId}`, {
+        data: { taskName: updateTaskNameText },
+      })
+      .then((response) => {
+        console.log(response.data);
+      });
+  };
   const addTagsHandler = (tagInputValue) => {
     const newTag = {
       taskId: taskId,
@@ -130,6 +145,7 @@ function SingleTask({ taskId }) {
                 <TaskHeader
                   taskInfo={taskInfo}
                   updateTaskDescription={updateTaskDescription}
+                  updateTaskName={updateTaskName}
                 />
                 <CommentBox
                   comments={taskInfo.comments}
