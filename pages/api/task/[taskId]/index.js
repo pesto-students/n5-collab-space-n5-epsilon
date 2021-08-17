@@ -1,4 +1,4 @@
-import { getTaskInfo } from "../../../../src/server/apiEndPoints";
+import { getTaskInfo, updateTask } from "../../../../src/server/apiEndPoints";
 import { createHandler } from "../../../../src/server/middleware";
 
 const handler = createHandler();
@@ -11,18 +11,15 @@ handler.get(async (req, res) => {
   res.send(task);
 });
 
-handler.post(async (req, res) => {
+handler.put(async (req, res) => {
+  console.log("req.body", { taskId: req.query.taskId, updatedField: req.body });
   if (!req.body)
     return res.status(400).send(JSON.stringify({ error: "Invalid Request" }));
-  const task = await createTaskList(req.body);
+  const task = await updateTask({
+    taskId: req.query.taskId,
+    updatedField: req.body.data,
+  });
   res.send(task);
-});
-
-handler.delete(async (req, res) => {
-  if (!req.body)
-    return res.status(400).send(JSON.stringify({ error: "Invalid Request" }));
-  const deletedTask = await deleteTaskList(req.body);
-  res.send(deletedTask);
 });
 
 export default handler;

@@ -11,6 +11,7 @@ const schema = new Schema({
   },
   tags: [String],
   comments: [Object],
+  description: String,
 });
 
 const Model = mongoose.models[MODEL_NAME] || mongoose.model(MODEL_NAME, schema);

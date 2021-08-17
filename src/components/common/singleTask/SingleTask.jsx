@@ -2,31 +2,29 @@ import { useState, useEffect } from "react";
 import { taskURL } from "../../../client_apis/workSpaceApi";
 import useInput from "../../../hooks/useInput";
 import produce from "immer";
-import { EditorState } from "draft-js";
 import styles from "../../../../styles/singleTask.module.scss";
 import React from "react";
 import CommentBox from "./CommentBox";
 import TagBox from "./TagBox";
 import TaskHeader from "./TaskHeader";
+import SingleTaskLoader from "../contentLoader/SingleTaskLoader";
 
 function SingleTask({ taskId }) {
   const [commentInputValue, commentInput, setComment] = useInput({
     type: "text",
   });
-  const [tagInputValue, tagInput, setTagInputValue] = useInput({
-    type: "text",
-  });
+  const [loading, setLoading] = useState(true);
+
   const [taskInfo, setTaskInfo] = useState();
-  const [toggle, setToggle] = useState(true);
-  const [editorState, setEditorState] = useState(() =>
-    EditorState.createEmpty()
-  );
+
+  const [commentBox, setCommentBox] = useState("");
   useEffect(() => {
     console.log("taskId", taskId);
     if (taskId) {
       const taskInfo = taskURL.get(`/${taskId}`).then((response) => {
         console.log(response.data);
         setTaskInfo(response.data[0]);
+        setLoading(false);
       });
     }
   }, [taskId]);
@@ -36,12 +34,13 @@ function SingleTask({ taskId }) {
     const newComment = {
       taskId: taskId,
       commentInfo: {
-        commentText: commentInputValue,
+        commentText: commentBox,
         by: "6111674d267948b6906ee442",
         createdAt: currentTime,
       },
     };
     console.log(newComment);
+    setCommentBox("");
     setTaskInfo(
       produce((draft) => {
         draft.comments.push(newComment.commentInfo);
@@ -52,7 +51,21 @@ function SingleTask({ taskId }) {
       console.log(response.data);
     });
   };
-  const addTagsHandler = () => {
+  const updateTaskDescription = (updateTaskDescriptionText) => {
+    setTaskInfo(
+      produce((draft) => {
+        draft.description = updateTaskDescriptionText;
+      })
+    );
+    taskURL
+      .put(`/${taskId}`, {
+        data: { description: updateTaskDescriptionText },
+      })
+      .then((response) => {
+        console.log(response.data);
+      });
+  };
+  const addTagsHandler = (tagInputValue) => {
     const newTag = {
       taskId: taskId,
       tag: tagInputValue,
@@ -83,7 +96,7 @@ function SingleTask({ taskId }) {
     setTaskInfo(
       produce((draft) => {
         const index = draft.comments.findIndex(
-          (comment) => comment.id === commentID
+          (comment) => comment._id === commentID
         );
         draft.comments.splice(index, 1);
       })
@@ -108,34 +121,38 @@ function SingleTask({ taskId }) {
     );
   };
   return (
-    <div className={styles.singleTask}>
-      {taskInfo && (
-        <>
-          <div className={styles.first_panel}>
-            <TaskHeader
-              taskInfo={taskInfo}
-              toggle={toggle}
-              setToggle={setToggle}
-              editorState={editorState}
-            />
-            <CommentBox
-              comments={taskInfo.comments}
-              deleteCommentHandler={deleteCommentHandler}
-              addCommentHandler={addCommentHandler}
-              commentInput={commentInput}
-            />
-          </div>
-          <div className={styles.second_panel}>
-            <TagBox
-              tagsCollection={taskInfo.tags}
-              addTagsHandler={addTagsHandler}
-              deleteTagsHandler={deleteTagsHandler}
-              tagInput={tagInput}
-            />
-          </div>
-        </>
+    <>
+      {!loading ? (
+        <div className={styles.singleTask}>
+          {taskInfo && (
+            <>
+              <div className={styles.first_panel}>
+                <TaskHeader
+                  taskInfo={taskInfo}
+                  updateTaskDescription={updateTaskDescription}
+                />
+                <CommentBox
+                  comments={taskInfo.comments}
+                  deleteCommentHandler={deleteCommentHandler}
+                  addCommentHandler={addCommentHandler}
+                  setCommentBox={setCommentBox}
+                  value={commentBox}
+                />
+              </div>
+              <div className={styles.second_panel}>
+                <TagBox
+                  tagsCollection={taskInfo.tags}
+                  addTagsHandler={addTagsHandler}
+                  deleteTagsHandler={deleteTagsHandler}
+                />
+              </div>
+            </>
+          )}
+        </div>
+      ) : (
+        <SingleTaskLoader />
       )}
-    </div>
+    </>
   );
 }
 

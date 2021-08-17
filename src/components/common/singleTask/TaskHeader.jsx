@@ -1,46 +1,110 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../../../../styles/singleTask.module.scss";
-import dynamic from "next/dynamic";
-const Editor = dynamic(
-  () => import("react-draft-wysiwyg").then((mod) => mod.Editor),
-  { ssr: false }
-);
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-export default function TaskHeader({
-  taskInfo,
-  toggle,
-  setToggle,
-  editorState,
-}) {
+import ResizableTextArea from "../../textArea/ResizeableTextArea";
+export default function TaskHeader({ taskInfo, updateTaskDescription }) {
+  const [descriptionToggle, setDescriptionToggle] = useState(true);
+  const [taskNameToggle, setTaskNameToggle] = useState(true);
+  const [description, setDescription] = useState(taskInfo.description);
+  const [taskName, setTaskName] = useState(taskInfo.taskName);
+  const handleDescriptionToggle = () => {
+    const newDescriptionToggle = !descriptionToggle;
+    setDescriptionToggle(newDescriptionToggle);
+  };
+  const handleTaskNameToggle = () => {
+    const newTaskNameToggle = !taskNameToggle;
+    setTaskNameToggle(newTaskNameToggle);
+  };
+  const saveTaskNameHandler = () => {
+    //updateTaskDescription(description);
+    handleTaskNameToggle();
+  };
+  const saveDescriptionHandler = () => {
+    updateTaskDescription(description);
+    handleDescriptionToggle();
+  };
   return (
     <>
       <div className={styles.task_header}>
         <div className="task_information">
-          <h1>{taskInfo.taskName}</h1>
-          <h1>{taskInfo.status}</h1>
+          {/* <h1>{taskInfo.taskName}</h1> */}
+          <div className="task_name_heading">
+            <h1> Task Name</h1>
+          </div>
+          {taskNameToggle ? (
+            <h1
+              onDoubleClick={() => {
+                handleTaskNameToggle();
+              }}
+              className={styles.task_name_heading_name}
+            >
+              {taskInfo.taskName
+                ? taskInfo.taskName
+                : "double click here to add a taskName"}
+            </h1>
+          ) : (
+            <div className={styles.edit_description}>
+              <div className={styles.edit_textArea}>
+                <ResizableTextArea
+                  className={styles.description_textarea}
+                  setValue={setTaskName}
+                  value={taskName}
+                  maxRows={1}
+                  minRows={1}
+                  rows={1}
+                  placeholder="task Name ..."
+                />
+              </div>
+              <div className={styles.edit_actions}>
+                <button
+                  className={styles.edit_actions_save}
+                  onClick={saveTaskNameHandler}
+                >
+                  save
+                </button>
+                <button onClick={saveTaskNameHandler}>cancel</button>
+              </div>
+            </div>
+          )}
         </div>
-        <div className={styles.task_option}>
-          <button>edit</button>
-          <button>...</button>
+
+        <div className={styles.task_description}>
+          <div className="task_description_heading">
+            <h1> Description</h1>
+          </div>
+          {descriptionToggle ? (
+            <p
+              onDoubleClick={() => {
+                handleDescriptionToggle();
+              }}
+            >
+              {taskInfo.description
+                ? taskInfo.description
+                : "double click here to add a description"}
+            </p>
+          ) : (
+            <div className={styles.edit_description}>
+              <div className={styles.edit_textArea}>
+                <ResizableTextArea
+                  className={styles.description_textarea}
+                  setValue={setDescription}
+                  value={description}
+                  maxRows={5}
+                  placeholder="description ..."
+                />
+              </div>
+              <div className={styles.edit_actions}>
+                <button
+                  className={styles.edit_actions_save}
+                  onClick={saveDescriptionHandler}
+                >
+                  save
+                </button>
+                <button onClick={handleDescriptionToggle}>cancel</button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
-      <div className={styles.task_description}></div>
-      {toggle ? (
-        <p
-          onDoubleClick={() => {
-            setToggle(false);
-          }}
-        >
-          Description
-        </p>
-      ) : (
-        <Editor
-          editorState={editorState}
-          toolbarClassName="toolbarClassName"
-          wrapperClassName="wrapperClassName"
-          editorClassName="editorClassName"
-        />
-      )}
     </>
   );
 }
