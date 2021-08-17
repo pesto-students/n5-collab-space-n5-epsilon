@@ -62,9 +62,7 @@ const ProjectPage = () => {
     if (!result.destination) {
       return;
     }
-      console.log('===test===', result)
     if (result.destination.droppableId === "delete") {
-        // console.log('===test===', result)
         dispatch(deleteTask({
             taskId: result.draggableId,
             taskListId: result.source.droppableId,
