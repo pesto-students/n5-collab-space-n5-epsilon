@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import styles from "../../../../styles/singleTask.module.scss";
 import ResizableTextArea from "../../textArea/ResizeableTextArea";
 import Container from "../contextMenu/ContextMenuContainer";
+  
 
 export default function CommentBox({
   comments,
@@ -13,17 +14,18 @@ export default function CommentBox({
 }) {
   const messagesEndRef = useRef(null);
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
   };
   useEffect(() => {
     scrollToBottom();
   }, [comments]);
   return (
     <div className={styles.comment_box}>
+
       <div className={styles.box_header}>
         <h1>Discussion</h1>
       </div>
-      <div className={styles.existing_comments}>
+      <div className={styles.existing_comments} ref={messagesEndRef}>
         {comments.map((commentInfo) => {
           return (
             <>
@@ -57,10 +59,10 @@ export default function CommentBox({
                   </div>
                 </div>
               </div>
+              <div />
             </>
           );
         })}
-        <div ref={messagesEndRef} />
       </div>
       <div className={styles.comment_form}>
         <div className={styles.comment_form_fields}>

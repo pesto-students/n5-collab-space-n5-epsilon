@@ -7,11 +7,13 @@ import React from "react";
 import CommentBox from "./CommentBox";
 import TagBox from "./TagBox";
 import TaskHeader from "./TaskHeader";
+import SingleTaskLoader from "../contentLoader/SingleTaskLoader";
 
 function SingleTask({ taskId }) {
   const [commentInputValue, commentInput, setComment] = useInput({
     type: "text",
   });
+  const [loading, setLoading] = useState(true);
 
   const [taskInfo, setTaskInfo] = useState();
 
@@ -22,6 +24,7 @@ function SingleTask({ taskId }) {
       const taskInfo = taskURL.get(`/${taskId}`).then((response) => {
         console.log(response.data);
         setTaskInfo(response.data[0]);
+        setLoading(false);
       });
     }
   }, [taskId]);
@@ -118,32 +121,38 @@ function SingleTask({ taskId }) {
     );
   };
   return (
-    <div className={styles.singleTask}>
-      {taskInfo && (
-        <>
-          <div className={styles.first_panel}>
-            <TaskHeader
-              taskInfo={taskInfo}
-              updateTaskDescription={updateTaskDescription}
-            />
-            <CommentBox
-              comments={taskInfo.comments}
-              deleteCommentHandler={deleteCommentHandler}
-              addCommentHandler={addCommentHandler}
-              setCommentBox={setCommentBox}
-              value={commentBox}
-            />
-          </div>
-          <div className={styles.second_panel}>
-            <TagBox
-              tagsCollection={taskInfo.tags}
-              addTagsHandler={addTagsHandler}
-              deleteTagsHandler={deleteTagsHandler}
-            />
-          </div>
-        </>
+    <>
+      {!loading ? (
+        <div className={styles.singleTask}>
+          {taskInfo && (
+            <>
+              <div className={styles.first_panel}>
+                <TaskHeader
+                  taskInfo={taskInfo}
+                  updateTaskDescription={updateTaskDescription}
+                />
+                <CommentBox
+                  comments={taskInfo.comments}
+                  deleteCommentHandler={deleteCommentHandler}
+                  addCommentHandler={addCommentHandler}
+                  setCommentBox={setCommentBox}
+                  value={commentBox}
+                />
+              </div>
+              <div className={styles.second_panel}>
+                <TagBox
+                  tagsCollection={taskInfo.tags}
+                  addTagsHandler={addTagsHandler}
+                  deleteTagsHandler={deleteTagsHandler}
+                />
+              </div>
+            </>
+          )}
+        </div>
+      ) : (
+        <SingleTaskLoader />
       )}
-    </div>
+    </>
   );
 }
 

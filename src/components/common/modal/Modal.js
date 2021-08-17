@@ -6,7 +6,6 @@ function Modal(props) {
   useEffect(() => {
     const checkIfClickedOutside = (e) => {
       if (props.showModal && ref.current && !ref.current.contains(e.target)) {
-        console.log("click outside");
         props.closeCallback();
       }
     };

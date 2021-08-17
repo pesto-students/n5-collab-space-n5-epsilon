@@ -11,8 +11,8 @@
   .task_header {
     display: grid;
     grid-template-columns: auto;
-    .task_name_heading_name{
-      margin-left:1vw;
+    .task_name_heading_name {
+      margin-left: 1vw;
       color: rgb(87 88 86);
     }
     .task_option {
@@ -136,6 +136,7 @@
       }
     }
   }
+
   .second_panel {
     .tag_box {
       .tags_form {
