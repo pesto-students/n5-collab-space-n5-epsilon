@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import styles from "../../../../styles/modal.module.scss";
 function Modal(props) {
+  const ref = useRef();
+  useEffect(() => {
+    const checkIfClickedOutside = (e) => {
+      if (props.showModal && ref.current && !ref.current.contains(e.target)) {
+        console.log("click outside");
+        props.closeCallback();
+      }
+    };
+    document.addEventListener("mousedown", checkIfClickedOutside);
+    return () => {
+      document.removeEventListener("mousedown", checkIfClickedOutside);
+    };
+  }, [props.showModal]);
   return (
     <div className={styles.modal}>
-      <div className={styles.modal_content}>
+      <div className={styles.modal_content} ref={ref}>
         <div className={styles.modal_header}>
           {props.showHeading ? (
             <span className={styles.heading}>{props.heading}</span>

@@ -43,7 +43,14 @@ export async function deleteTask(taskInfo, projection = "", populate = "") {
 }
 
 export async function updateTask(taskInfo, projection = "", populate = "") {
-  const foundTask = Task.findOneAndUpdate({ _id: taskInfo.taskId });
+  const { taskId, updatedField } = taskInfo;
+
+  console.log("updatedField", { _id: Types.ObjectId(taskId) }, updatedField);
+  const foundTask = Task.findOneAndUpdate(
+    { _id: Types.ObjectId(taskId) },
+    updatedField,
+    { new: true }
+  );
   return foundTask;
 }
 export async function moveTask(taskInfo, projection = "", populate = "") {
@@ -85,4 +92,3 @@ export async function reorderTask(taskInfo, projection = "", populate = "") {
   );
   return foundTask;
 }
-

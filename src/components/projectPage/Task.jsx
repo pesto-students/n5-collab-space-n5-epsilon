@@ -50,7 +50,7 @@ function Task({ task, index, deleteTaskHandler }) {
         )}
       </Draggable>
       {showModal ? (
-        <Modal closeCallback={toggleModal}>
+        <Modal closeCallback={toggleModal} showModal={showModal}>
           <SingleTask taskId={task._id} />
         </Modal>
       ) : null}
