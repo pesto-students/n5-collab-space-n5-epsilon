@@ -63,6 +63,7 @@ const ProjectPage = () => {
     }
 
     if (result.destination.droppableId === "delete") {
+        // dispatch(deleteTask())
       return;
     }
     if (result.destination.droppableId === result.source.droppableId) {

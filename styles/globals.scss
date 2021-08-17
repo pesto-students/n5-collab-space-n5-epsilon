@@ -957,3 +957,20 @@ a {
     margin-bottom: 20px;
   }
 }
+
+.settings-tab{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 20px;
+  .tab-list{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 10px;
+  }
+  .tab-container{
+    width: calc(100% - 350px);
+  }
+}
