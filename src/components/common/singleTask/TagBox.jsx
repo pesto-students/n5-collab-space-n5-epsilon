@@ -30,7 +30,7 @@ export default function TagBox({
       <div className={styles.existing_tags}>
         {tagsCollection.map((tag) => {
           return (
-            <div className={styles.tags} onClick={() => deleteTagsHandler(tag)}>
+            <div key={tag} className={styles.tags} onClick={() => deleteTagsHandler(tag)}>
               <span>{tag}</span>
             </div>
           );

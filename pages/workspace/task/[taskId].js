@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { getLayout as getSiteLayout } from "../../../src/components/Layouts/SiteLayout";
+import { getLayout as getSiteLayout } from "../../../src/components/layouts/SiteLayout";
 import SingleTask from "../../../src/components/common/singleTask/SingleTask";
 const TaskPage = () => {
   const router = useRouter();
