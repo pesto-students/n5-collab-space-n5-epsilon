@@ -14,7 +14,7 @@ export default function CommentBox({
       <div className={styles.existing_comments}>
         {comments.map((commentInfo) => {
           return (
-            <div className={styles.comment}>
+            <div key={commentInfo._id} className={styles.comment}>
               <div className="commenter">
                 <p>user</p>
               </div>

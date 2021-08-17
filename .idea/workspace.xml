@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="103cd474-1403-40f5-96a1-636418099c6b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/client_apis/authApis.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client_apis/authApis.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/singleTask/NewCommentBox.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/singleTask/NewCommentBox.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +76,8 @@
       <workItem from="1628881576197" duration="373000" />
       <workItem from="1629105582173" duration="517000" />
       <workItem from="1629128641922" duration="7720000" />
-      <workItem from="1629205654036" duration="1682000" />
+      <workItem from="1629205654036" duration="2219000" />
+      <workItem from="1629223048523" duration="474000" />
     </task>
     <servers />
   </component>
