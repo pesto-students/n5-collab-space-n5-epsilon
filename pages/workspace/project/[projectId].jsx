@@ -47,6 +47,7 @@ const ProjectPage = () => {
   const regex = {
     nameRegex: /^([a-zA-Z]+( [a-zA-Z]+)|[a-zA-Z]){2,50}$/,
   };
+  const [taskListsName, setTaskListsName] = useState([])
   const addTaskListHandler = () => {
     setTaskListName("");
     setSubmittedForm({
@@ -61,9 +62,11 @@ const ProjectPage = () => {
     if (!result.destination) {
       return;
     }
-
     if (result.destination.droppableId === "delete") {
-        // dispatch(deleteTask())
+        dispatch(deleteTask({
+            taskId: result.draggableId,
+            taskListId: result.source.droppableId,
+        }));
       return;
     }
     if (result.destination.droppableId === result.source.droppableId) {
@@ -108,7 +111,15 @@ const ProjectPage = () => {
 
   useEffect(() => {
     setLayout(localStorage.getItem("task-layout") || "vertical");
-  }, []);
+
+      const taskLNames = []
+    Object.keys(taskLists).map((taskListId)=>{
+        if(!taskLNames.includes(taskLists[taskListId].taskListName))
+           taskLNames.push(taskLists[taskListId].taskListName);
+    });
+      setTaskListsName(taskLNames)
+
+  }, [taskLists]);
 
   return (
     <>
@@ -153,9 +164,11 @@ const ProjectPage = () => {
                           <select
                             onChange={(e) => setTaskTypeFilter(e.target.value)}
                           >
-                            <option value="any">Any</option>
-                            <option value="test list">Test List</option>
-                            <option value="blank">Blank</option>
+                              <option value='any'>Any</option>
+                              {taskListsName.length && taskListsName.map((taskListName) => {
+                                 return <option key={taskListName} value={taskListName}>{taskListName}</option>
+                              })
+                              }
                           </select>
                         </div>
                       </div>

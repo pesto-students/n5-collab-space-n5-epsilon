@@ -1,11 +1,8 @@
 import { getLayout as getSiteLayout } from "../../src/components/layouts/SiteLayout";
 import WorkSpaceTitle from "../../src/components/workspace/WorkSpaceTitle";
-import {wrapper} from "../../src/redux/store";
-import {getWorkspaceProject} from "../../src/redux/actions/workSpaceActions";
 import {useState} from "react";
 
 const Setting = () => {
-
     const [submittedForm, setSubmittedForm] = useState({
         formTouched: false,
         error: false,
@@ -13,10 +10,14 @@ const Setting = () => {
     });
     const [newPassword, setNewPassword] = useState('');
     const [copyPassword, setCopyPassword] = useState('');
+    const [passwordShow, setPasswordShow] = useState({
+        input1: false,
+        input2: false
+    });
 
 
     const regex = {
-        emailRegex: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i,
+        passwordRegex: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[ !"#\$%&'\(\)*+,-./:;<=>?@\[\\\]^_`{|}~]).{8,}$/,
     }
 
     return  <div className='mainContainerBody'>
@@ -33,9 +34,9 @@ const Setting = () => {
                         <p>New Password</p>
                         <div className='input-wrapper'>
                             <input
-                                type="password"
+                                type={passwordShow.input1?'text':'password'}
                                 onKeyUp={(e) => {
-                                    if (!regex.emailRegex.test(e.target.value)) {
+                                    if (!regex.passwordRegex.test(e.target.value) && e.target.value.length) {
                                         setSubmittedForm({
                                             ...submittedForm,
                                             error: "Enter a valid name",
@@ -49,18 +50,23 @@ const Setting = () => {
                                     }
                                 }}
                             />
-                            <div className='eye'/>
+                            <div className={`eye ${passwordShow.input1 ? 'show':''}`} onClick={()=>{
+                                setPasswordShow({...passwordShow, input1: !passwordShow.input1})
+                            }}/>
                         </div>
                         <p>Retype New Password</p>
                         <div className='input-wrapper'>
                             <input
-                                type="password"
+                                type={passwordShow.input2?'text':'password'}
                                 onKeyUp={(e) => {
                                     setCopyPassword(e.target.value)
                                 }}
                             />
+                            <div className={`eye ${passwordShow.input2 ? 'show':''}`} onClick={()=>{
+                                setPasswordShow({...passwordShow, input2: !passwordShow.input2})
+                            }}/>
                         </div>
-                        <p className={`error-space ${submittedForm.error || copyPassword !== newPassword? 'error':''}`}>{submittedForm.error ? submittedForm.error: copyPassword === newPassword ?'Use 6 or more characters with a mix of letters, numbers & symbols':'Both password does not match'}</p>
+                        <p className={`error-space ${submittedForm.error || copyPassword !== newPassword? 'error':''}`}>{submittedForm.error ? submittedForm.error: copyPassword === newPassword ?'Atleast 8 characters, one lower case character, one upper case character, one number and one special character.':'Both password does not match'}</p>
                         <button disabled={!submittedForm.formTouched || !!submittedForm.error || copyPassword !== newPassword || submittedForm.submitting}>Save Password</button>
                     </div>
                 </div>
@@ -72,31 +78,3 @@ const Setting = () => {
 Setting.getLayout = getSiteLayout;
 
 export default Setting;
-
-// export const getServerSideProps = wrapper.getServerSideProps(
-//     (store) =>
-//         async ({ req, params }) => {
-//             if (!req.cookies.token)
-//                 return {
-//                     redirect: {
-//                         destination: "/",
-//                         permanent: true,
-//                     },
-//                 };
-//             const validToken = await verify(
-//                 req.cookies.token,
-//                 process.env.REACT_APP_SECRET_TOKEN
-//             );
-//             if (validToken) {
-//                 await store.dispatch(getWorkspaceProject(req));
-//                 return { props: { token: req.cookies.token } };
-//             } else {
-//                 return {
-//                     redirect: {
-//                         destination: "/",
-//                         permanent: false,
-//                     },
-//                 };
-//             }
-//         }
-// );
