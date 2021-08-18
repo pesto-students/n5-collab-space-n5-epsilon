@@ -14,6 +14,10 @@ export const GET_ALL_PROJECT = "GET_ALL_PROJECT";
 export const GET_ALL_PROJECT_SUCCESS = "GET_ALL_PROJECT_SUCCESS";
 export const GET_ALL_PROJECT_FAILURE = "GET_ALL_PROJECT_FAILURE";
 
+export const ADD_USER = "ADD_USER";
+export const ADD_USER_SUCCESS = "ADD_USER_SUCCESS";
+export const ADD_USER_FAILURE = "ADD_USER_FAILURE";
+
 export const EditTitle = (data) => ({
   type: EDIT_TITLE,
   payload: data,
@@ -60,5 +64,20 @@ export const GetAllProjectSuccess = (data) => ({
 });
 export const GetAllProjectFailure = (data) => ({
   type: GET_ALL_PROJECT_FAILURE,
+  payload: data,
+});
+
+export const AddUser = (data) => ({
+  type: ADD_USER,
+  payload: data,
+});
+
+export const AddUserSuccess = (data) => ({
+  type: ADD_USER_SUCCESS,
+  payload: data,
+});
+
+export const AddUserFailure = (data) => ({
+  type: ADD_USER_FAILURE,
   payload: data,
 });

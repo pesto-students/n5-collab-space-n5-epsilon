@@ -3,9 +3,7 @@ import { getWorkspaceProject } from "../../src/redux/actions/workSpaceActions";
 import { wrapper } from "../../src/redux/store";
 import { verify } from "jsonwebtoken";
 const Workspace = () => {
-  return (
-      <MainContainer />
-  );
+  return <MainContainer />;
 };
 
 export default Workspace;
@@ -13,10 +11,11 @@ export default Workspace;
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) =>
     async ({ req, params }) => {
+      console.log("this came here");
       if (!req.cookies.token)
         return {
           redirect: {
-            destination: "/",
+            destination: `/auth?redirect="/users/inviteUser?userId${req.query.userId}&projectId${req.query.projectId}"`,
             permanent: true,
           },
         };
@@ -30,7 +29,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       } else {
         return {
           redirect: {
-            destination: "/",
+            destination: `/auth?redirect="/users/inviteUser?userId${req.query.userId}&projectId${req.query.projectId}"`,
             permanent: false,
           },
         };
