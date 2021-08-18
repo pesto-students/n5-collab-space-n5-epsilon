@@ -5,12 +5,15 @@ import {
   UPDATE_PROJECT,
 } from "../constants/projectActionConstants";
 import {
+  ADD_TAG,
   CHANGE_TASK_ORDER,
   CREATE_TASK,
+  DELETE_TAG,
   DELETE_TASK,
   GET_ALL_TASKS,
   MOVE_TASK,
   MOVE_TASK_FAILURE,
+  UPDATE_TASK_NAME,
 } from "../constants/taskActionConstants";
 import {
   CREATE_TASK_LIST,
@@ -47,6 +50,29 @@ const ProjectReducer = (state = initialState, action) => {
         const { _id, taskListId } = payload;
         draft.projectInfo.taskLists[taskListId].task[_id] = payload;
         draft.projectInfo.taskLists[taskListId].tasksOrder.push(_id);
+        break;
+      }
+      case UPDATE_TASK_NAME: {
+        const { taskId, taskListId, updateTaskName } = payload;
+        draft.projectInfo.taskLists[taskListId].task[taskId].taskName =
+          updateTaskName;
+        break;
+      }
+      case ADD_TAG: {
+        const { taskId, taskListId, tag } = payload;
+        draft.projectInfo.taskLists[taskListId].task[taskId].tags.push(tag);
+        break;
+      }
+      case DELETE_TAG: {
+        const { taskId, taskListId, tag } = payload;
+        const index =
+          draft.projectInfo.taskLists[taskListId].task[taskId].tags.indexOf(
+            tag
+          );
+        draft.projectInfo.taskLists[taskListId].task[taskId].tags.splice(
+          index,
+          1
+        );
         break;
       }
       case CREATE_TASK_LIST_SUCCESS: {

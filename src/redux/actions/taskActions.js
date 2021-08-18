@@ -1,10 +1,19 @@
 import {
+  AddComment,
+  AddCommentFailure,
+  AddCommentSuccess,
+  AddTag,
+  AddTagFailure,
+  AddTagSuccess,
   ChangeTaskOrder,
   ChangeTaskOrderFailure,
   ChangeTaskOrderSuccess,
   CreateTask,
   CreateTaskFailure,
   CreateTaskSuccess,
+  DeleteTag,
+  DeleteTagFailure,
+  DeleteTagSuccess,
   DeleteTask,
   DeleteTaskFailure,
   DeleteTaskSuccess,
@@ -14,6 +23,8 @@ import {
   ReorderTask,
   ReorderTaskFailure,
   ReorderTaskSuccess,
+  UpdateTaskName,
+  UpdateTaskNameSuccess,
 } from "../constants/taskActionConstants";
 import { toast } from "react-toastify";
 import { taskListURL, taskURL } from "../../client_apis/workSpaceApi";
@@ -30,7 +41,7 @@ var moveInArray = function (arr, from, to) {
 };
 export const createNewTask = (taskInfo) => async (dispatch) => {
   try {
-    taskInfo._id = Types.ObjectId().toString();
+    taskInfo = { ...taskInfo, _id: Types.ObjectId().toString() };
     dispatch(CreateTask(taskInfo));
     let response = await taskURL.post("", taskInfo);
     if (response) {
@@ -104,5 +115,52 @@ export const reorderTask = (taskInfo) => async (dispatch, getState) => {
     }
   } catch (err) {
     toast.warn("Couldn't Connect to Server ");
+  }
+};
+
+export const updateTaskName = (updateTaskNameInfo) => async (dispatch) => {
+  try {
+    const { taskId, updateTaskName } = updateTaskNameInfo;
+    dispatch(UpdateTaskName(updateTaskNameInfo));
+    let response = await taskURL.put(`/${taskId}`, {
+      data: { taskName: updateTaskName },
+    });
+
+    if (response) {
+      dispatch(UpdateTaskNameSuccess(updateTaskNameInfo));
+    }
+  } catch (err) {
+    dispatch(AddCommentFailure(err));
+  }
+};
+
+export const addTags = (newTagInfo) => async (dispatch) => {
+  try {
+    dispatch(AddTag(newTagInfo));
+    const { taskId } = newTagInfo;
+    let response = await taskURL.post(`/${taskId}/tags`, newTagInfo);
+
+    if (response) {
+      dispatch(AddTagSuccess(newTagInfo));
+    }
+  } catch (err) {
+    dispatch(AddTagFailure(err));
+  }
+};
+
+export const deleteTags = (tagToBeDeletedInfo) => async (dispatch) => {
+  try {
+    const { taskId, tag } = tagToBeDeletedInfo;
+    dispatch(DeleteTag(tagToBeDeletedInfo));
+    let response = await taskURL.delete(`/${taskId}/tags`, {
+      data: tagToBeDeletedInfo,
+    });
+
+    if (response) {
+      dispatch(DeleteTagSuccess(tagToBeDeletedInfo));
+    }
+  } catch (err) {
+    console.error(err);
+    dispatch(DeleteTagFailure(err));
   }
 };

@@ -16,20 +16,21 @@ a {
   box-sizing: border-box;
 }
 
-.default-btn{
+.default-btn {
   background: #5d2bff;
   color: #fff;
   border-radius: 16px;
-  transition: box-shadow .3s ease, background .3s ease;
+  transition: box-shadow 0.3s ease, background 0.3s ease;
   position: relative;
   padding: 8px 17px 10px;
   cursor: pointer;
 
-  &.image-btn{
+  &.image-btn {
     padding-left: 40px;
-    &:before{
-      content: '';
-      background: url('https://api.iconify.design/fa-solid/plus.svg?color=white') no-repeat center center / contain;
+    &:before {
+      content: "";
+      background: url("https://api.iconify.design/fa-solid/plus.svg?color=white")
+        no-repeat center center / contain;
       height: 14px;
       width: 14px;
       position: absolute;
@@ -40,51 +41,51 @@ a {
   }
 }
 
-.transparent-btn{
-  border:2px solid transparent;
-  -webkit-transition: all 0.4s cubic-bezier(.5, .24, 0, 1);
-  transition: all 0.4s cubic-bezier(.5, .24, 0, 1);
+.transparent-btn {
+  border: 2px solid transparent;
+  -webkit-transition: all 0.4s cubic-bezier(0.5, 0.24, 0, 1);
+  transition: all 0.4s cubic-bezier(0.5, 0.24, 0, 1);
   position: relative;
   padding: 8px 17px 10px;
   background: #5d2cff66;
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
-    bottom:0;
+    bottom: 0;
     width: 0;
-    height:2px;
-    background: #6098FF;
-    box-shadow: inset 0 0 0 #6098FF;
+    height: 2px;
+    background: #6098ff;
+    box-shadow: inset 0 0 0 #6098ff;
     display: block;
-    transition: all 0.4s cubic-bezier(.5, .24, 0, 1)
+    transition: all 0.4s cubic-bezier(0.5, 0.24, 0, 1);
   }
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     right: 0;
-    top:0;
+    top: 0;
     width: 0;
-    height:2px;
-    background: #6098FF;
-    transition: all 0.4s cubic-bezier(.5, .24, 0, 1)
+    height: 2px;
+    background: #6098ff;
+    transition: all 0.4s cubic-bezier(0.5, 0.24, 0, 1);
   }
   &:hover:before {
-    width:100%;
+    width: 100%;
   }
   &:hover:after {
-    width:100%;
+    width: 100%;
   }
-  &:hover{
-    border-left:2px solid #6098FF;
-    border-right:2px solid #6098FF;
+  &:hover {
+    border-left: 2px solid #6098ff;
+    border-right: 2px solid #6098ff;
     border-top: 0;
     border-bottom: 0;
     background: transparent;
   }
 }
 
-.mainContainerBody{
+.mainContainerBody {
   overflow: hidden;
 }
 
@@ -379,7 +380,7 @@ a {
   }
 }
 
-.drop-trash-can{
+.drop-trash-can {
   position: absolute;
   right: 130px;
   top: 0px;
@@ -387,23 +388,23 @@ a {
   width: 40px;
   padding: 3px;
   border-radius: 9px;
-  &:hover{
+  &:hover {
     background: #f1f1f1;
   }
-  svg{
+  svg {
     height: 100%;
     width: 100%;
   }
 }
 
-.filter-wrapper{
+.filter-wrapper {
   display: flex;
   flex-direction: column;
-  p{
+  p {
     position: relative;
     margin: 0 0 10px;
   }
-  select{
+  select {
     position: relative;
     appearance: none;
     background-repeat: no-repeat;
@@ -547,15 +548,14 @@ a {
   }
 }
 
-.common-header{
+.common-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 30px 0 50px;
   height: 90px;
 
-
-  .user-profile{
+  .user-profile {
     position: relative;
     height: 40px;
     width: 40px;
@@ -588,29 +588,28 @@ a {
       }
     }
   }
-
 }
 
-.top-panel-row{
+.top-panel-row {
   display: flex;
   justify-content: space-between;
   padding: 0 30px 30px 50px;
 
-  .layout-toggle{
+  .layout-toggle {
     position: relative;
-    .icon{
+    .icon {
       cursor: pointer;
       margin: 0 10px;
-      &.active{
+      &.active {
         pointer-events: none;
-        svg{
-          path{
-            fill:#5d2bff;
+        svg {
+          path {
+            fill: #5d2bff;
           }
         }
       }
     }
-    .trash-can{
+    .trash-can {
       height: 49px;
       width: 100px;
       display: inline-block;
@@ -618,25 +617,25 @@ a {
       left: -150px;
       top: -17px;
       border-radius: 10px;
-      svg{
+      svg {
         height: 100%;
         width: 100%;
       }
-      &:hover{
+      &:hover {
         background: #0000001f;
       }
     }
   }
 }
 
-.project-space-wrapper{
+.project-space-wrapper {
   height: calc(100vh - 141px);
   overflow: auto;
   background: #fff;
   border-radius: 10px;
   margin: 0 20px 0;
-  &.grid{
-    .user-projects{
+  &.grid {
+    .user-projects {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
       grid-gap: 32px;
@@ -645,20 +644,20 @@ a {
       .projectCard {
         width: 180px;
         height: 180px;
-        h5{
-          -webkit-line-clamp: 4!important;
+        h5 {
+          -webkit-line-clamp: 4 !important;
         }
       }
-      &.center{
+      &.center {
         .projectCard {
           margin: 0 auto;
         }
       }
     }
   }
-  .projectContainer{
+  .projectContainer {
     padding: 0 15px 30px;
-    h1{
+    h1 {
       margin-bottom: 0;
       padding-left: 5px;
       color: #303037;
@@ -683,15 +682,15 @@ a {
     width: auto;
     max-width: 200px;
     position: relative;
-    &.shared{
-      h2{
+    &.shared {
+      h2 {
         padding-top: 10px;
       }
-      h5{
+      h5 {
         padding-bottom: 30px;
       }
     }
-    h2{
+    h2 {
       padding: 40px 15px 10px;
       margin: 0;
       white-space: nowrap;
@@ -700,7 +699,7 @@ a {
       text-overflow: ellipsis;
       text-transform: capitalize;
     }
-    h5{
+    h5 {
       display: -webkit-box;
       -webkit-line-clamp: 1;
       -webkit-box-orient: vertical;
@@ -710,13 +709,14 @@ a {
       font-family: monospace;
       text-transform: capitalize;
     }
-    .delete{
+    .delete {
       top: 8px;
     }
-    .leave{
+    .leave {
       bottom: 8px;
     }
-    .delete,.leave{
+    .delete,
+    .leave {
       position: absolute;
       cursor: pointer;
       background: transparent;
@@ -725,7 +725,7 @@ a {
       border: 0;
       padding: 0;
       right: 8px;
-      svg{
+      svg {
         height: 100%;
         width: 100%;
       }
@@ -733,28 +733,28 @@ a {
   }
 }
 
-.project-data{
+.project-data {
   background: #fff;
   border-radius: 10px;
   margin: 0 20px 0;
   height: calc(100vh - 91px);
   padding: 20px;
-  .tab-list{
+  .tab-list {
     border-bottom: 1px solid #d7d7da;
     padding: 0 0 15px;
     margin-bottom: 9px;
-    span{
+    span {
       font-size: 16px;
       padding: 0 10px;
       margin: 0 10px;
       font-weight: 500;
       -webkit-font-smoothing: antialiased;
       cursor: pointer;
-      &.active{
+      &.active {
         color: #5d2cff;
         position: relative;
-        &:after{
-          content: '';
+        &:after {
+          content: "";
           position: absolute;
           width: calc(100% + 20px);
           left: -10px;
@@ -765,30 +765,30 @@ a {
       }
     }
   }
-  .top-panel-row{
+  .top-panel-row {
     border-bottom: 1px solid #00000057;
     margin-bottom: 20px;
     padding: 5px 10px 16px;
     align-items: center;
   }
-  .task-list-box{
+  .task-list-box {
     height: calc(100% - 33px);
     display: flex;
     flex-direction: column;
     overflow: hidden;
     position: relative;
-    &.rowLayout{
-      .taskListContainer{
+    &.rowLayout {
+      .taskListContainer {
         flex-direction: column;
         overflow: auto;
-        .taskList{
+        .taskList {
           flex-direction: row;
           min-width: auto;
           max-width: none;
           width: 100%;
-          .list-wrapper{
+          .list-wrapper {
             display: flex;
-            .task{
+            .task {
               min-width: 200px;
               max-width: 200px;
               height: 100px;
@@ -807,7 +807,7 @@ a {
       width: 100%;
       overflow-x: auto;
       overflow-y: hidden;
-      .taskList{
+      .taskList {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -818,7 +818,7 @@ a {
         position: relative;
         min-width: 250px;
         max-width: 250px;
-        .list-header{
+        .list-header {
           position: absolute;
           left: 0;
           top: 0;
@@ -827,12 +827,12 @@ a {
           justify-content: space-between;
           flex-wrap: wrap;
           padding: 23px 8px;
-          .header-content{
+          .header-content {
             display: flex;
             flex-wrap: wrap;
             width: calc(100% - 65px);
           }
-          h5{
+          h5 {
             font-size: 17px;
             margin: 0 10px 0 0;
             text-transform: capitalize;
@@ -840,11 +840,12 @@ a {
             overflow: hidden;
             text-overflow: ellipsis;
             max-width: calc(100% - 45px);
-            span{
+            span {
               opacity: 0.5;
             }
           }
-          .delete,.add{
+          .delete,
+          .add {
             position: relative;
             border: 0;
             outline: none;
@@ -854,23 +855,23 @@ a {
             width: 25px;
             top: -2px;
             background: transparent;
-            svg{
+            svg {
               width: 100%;
               height: 100%;
             }
           }
-          .add{
+          .add {
             margin-right: 10px;
           }
         }
-        .list-wrapper{
+        .list-wrapper {
           height: 100%;
           width: 100%;
           overflow: auto;
           padding: 0 10px;
         }
       }
-      .add-task-list{
+      .add-task-list {
         cursor: pointer;
         border-radius: 25px;
         background-color: #f1f1f1;
@@ -885,17 +886,17 @@ a {
         min-width: 40px;
         transition: 0.5s;
         justify-content: space-between;
-        svg{
+        svg {
           height: 100%;
           width: 25px;
           margin-left: 3px;
         }
-        span{
+        span {
           position: absolute;
           margin-left: 40px;
           width: 130px;
         }
-        &:hover{
+        &:hover {
           min-width: 180px;
         }
       }
@@ -915,10 +916,10 @@ a {
   padding: 10px;
   margin-bottom: 10px;
   position: relative;
-  .status{
+  .status {
     display: none;
   }
-  .name{
+  .name {
     position: relative;
     text-align: left;
     text-transform: capitalize;
@@ -929,42 +930,45 @@ a {
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  .tags{
+  .tags {
     display: flex;
     overflow: auto;
-    span{
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       background: #b39ddb8a;
       padding: 4px 8px;
       border-radius: 25px;
-      font-size: 12px;
+      font-size: x-small;
       text-transform: capitalize;
       margin: 15px 8px 0 0;
       cursor: pointer;
     }
   }
-  .delete{
+  .delete {
     position: absolute;
     right: 6px;
     top: 6px;
     height: 25px;
     width: 25px;
     cursor: pointer;
-    svg{
+    svg {
       height: 100%;
       width: 100%;
     }
   }
-  &:nth-last-of-type(1){
+  &:nth-last-of-type(1) {
     margin-bottom: 20px;
   }
 }
 
-.settings-tab{
+.settings-tab {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 0 20px;
-  .tab-list{
+  .tab-list {
     width: 300px;
     display: flex;
     flex-direction: column;
@@ -1001,7 +1005,7 @@ a {
       }
     }
   }
-  .tab-container{
+  .tab-container {
     width: calc(100% - 350px);
     display: flex;
     flex-direction: column;

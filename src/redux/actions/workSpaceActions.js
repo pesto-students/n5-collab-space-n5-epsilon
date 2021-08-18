@@ -1,5 +1,5 @@
 import { Types } from "mongoose";
-import { projectURL } from "../../client_apis/workSpaceApi";
+import { projectURL, usersURL } from "../../client_apis/workSpaceApi";
 import {
   DeleteProject,
   DeleteProjectFailure,
@@ -12,6 +12,9 @@ import {
   GetAllProjectFailure,
   CreateProjectSuccess,
   CreateProjectFailure,
+  AddUser,
+  AddUserSuccess,
+  AddUserFailure,
 } from "../constants/workspaceActionConstants";
 
 export const getWorkspaceProject = (req) => async (dispatch, getState) => {
@@ -56,5 +59,19 @@ export const deleteProject = (projectId) => async (dispatch) => {
     }
   } catch (err) {
     dispatch(DeleteProjectFailure(err));
+  }
+};
+
+export const addUser = (inviteUserInfo) => async (dispatch) => {
+  try {
+    dispatch(AddUser(projectId));
+    let response = await usersURL.get("/inviteUser", {
+      params: inviteUserInfo,
+    });
+    if (response) {
+      dispatch(AddUserSuccess(projectId));
+    }
+  } catch (err) {
+    dispatch(AddUserFailure(err));
   }
 };

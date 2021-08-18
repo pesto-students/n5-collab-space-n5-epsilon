@@ -4,6 +4,7 @@ import { Draggable } from "react-beautiful-dnd";
 import styles from "../../../styles/Home.module.scss";
 import Modal from "../common/modal/Modal";
 import SingleTask from "../common/singleTask/SingleTask";
+import modalStyles from "../../../styles/modal.module.scss";
 function Task({ task, index, deleteTaskHandler }) {
   const projectInfo = useSelector((state) => state.ProjectReducer.projectInfo);
   const userPermission = projectInfo.roleInfo;
@@ -79,8 +80,12 @@ function Task({ task, index, deleteTaskHandler }) {
         )}
       </Draggable>
       {showModal ? (
-        <Modal closeCallback={toggleModal} showModal={showModal}>
-          <SingleTask taskId={task._id} />
+        <Modal
+          closeCallback={toggleModal}
+          showModal={showModal}
+          styles={modalStyles}
+        >
+          <SingleTask taskId={task._id} taskListId={taskListId}/>
         </Modal>
       ) : null}
     </React.Fragment>

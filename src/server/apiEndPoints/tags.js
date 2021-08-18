@@ -32,6 +32,6 @@ export async function deleteTags(tagData, projection = "", populate = "") {
 
     return deleteTag;
   } catch (error) {
-    console.error(error);
+    console.log(error);
   }
 }

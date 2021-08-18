@@ -10,7 +10,8 @@ export default function SignInForm(props) {
     password: "",
   });
   const router = useRouter();
-
+  const { redirect } = router.query;
+  console.log(router.query);
   function submit() {
     props.setFormStatus({
       submitting: true,
@@ -23,7 +24,11 @@ export default function SignInForm(props) {
         });
         cookie.set("token", response["auth-token"]);
         cookie.set("userId", response["id"]);
-        router.push("/workspace");
+        if (redirect) {
+          router.push(redirect);
+        } else {
+          router.push("/workspace");
+        }
       })
       .catch((error) => {
         props.setFormStatus({

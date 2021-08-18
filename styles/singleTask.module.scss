@@ -194,3 +194,94 @@
     color: rgb(133 73 255 / 95%);
   }
 }
+
+.add_single_task {
+  display: grid;
+  grid-template-rows: auto;
+  width: 100%;
+  height: 100%;
+  margin: 20px 20px 20px 30px;
+  h1 {
+    font-size: x-large;
+    color: rgb(133 73 255 / 95%);
+  }
+  input {
+    width: 30%;
+    border: none;
+
+    border-bottom: 1px solid rgb(0 0 0 / 22%);
+    margin-bottom: 2vh;
+  }
+  button {
+    margin-left: 1vw;
+    width: 6vw;
+    height: 4vh;
+    border: none;
+  }
+  .edit_actions_save {
+    background-color: #8c52ff;
+    color: white;
+  }
+  .edit_description {
+    .description_textarea {
+    }
+    textarea {
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      border: 1px solid rgba(0, 0, 0, 0.22);
+
+      border-radius: 3px;
+      resize: none;
+      width: 35vw;
+      font-size: 14px;
+      line-height: 19px;
+      margin-bottom: 2vh;
+      overflow: auto;
+      height: auto;
+      padding: 8px;
+      -webkit-box-shadow: -1px 7px 16px -13px black;
+      box-shadow: -1px 7px 16px -13px black;
+    }
+  }
+  .second_panel {
+    .tag_box {
+      .tags_form {
+        width: 20vw;
+        .tag_input_box {
+          width: 100%;
+          border: none;
+
+          border-bottom: 1px solid rgb(0 0 0 / 22%);
+          margin-bottom: 2vh;
+        }
+      }
+      .existing_tags {
+        display: flex;
+        max-width: 30vw;
+        max-height: 30vh;
+        height: 40vh;
+        cursor: pointer;
+        overflow-y: auto;
+        flex-wrap: wrap;
+        padding: 11px;
+        .tags {
+          box-shadow: rgb(0 0 0 / 22%) 0px 5px 10px;
+          transform: translate3d(0px, -1px, 0px);
+          height: 10vh;
+          justify-content: center;
+          display: flex;
+          align-items: center;
+          background-color: #ede3fd;
+          border-radius: 2vw;
+          min-width: 8vw;
+          text-align: center;
+          max-height: 5vh;
+          min-height: 2vh;
+          font-size: x-small;
+          margin-top: 2vh;
+          margin-right: 1vw;
+        }
+      }
+    }
+  }
+}

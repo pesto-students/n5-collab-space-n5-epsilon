@@ -16,16 +16,28 @@ handler.get(async (req, res) => {
 });
 
 handler.post(async (req, res) => {
+  const { taskId } = req.query;
+  console.log("req.body.tag", req.body.tag);
+  const tagData = {
+    taskId,
+    tag: req.body.tag,
+  };
   if (!req.body)
     return res.status(400).send(JSON.stringify({ error: "Invalid Request" }));
-  const task = await addTags(req.body);
+  const task = await addTags(tagData);
   res.send(task);
 });
 
 handler.delete(async (req, res) => {
+  const { taskId } = req.query;
+  const tagData = {
+    taskId,
+    tag: req.body.tag,
+  };
+  console.log(tagData);
   if (!req.body)
     return res.status(400).send(JSON.stringify({ error: "Invalid Request" }));
-  const deletedTask = await deleteTags(req.body);
+  const deletedTask = await deleteTags(tagData);
   res.send(deletedTask);
 });
 

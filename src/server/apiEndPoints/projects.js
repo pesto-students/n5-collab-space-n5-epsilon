@@ -288,3 +288,17 @@ export async function updateProject(projectInfo) {
   );
   return foundProjectInfo;
 }
+
+export async function addUserToProject(inviteUserInfo) {
+  const { projectId, userId } = inviteUserInfo;
+  const guestRoleArray = await Roles.find({ name: "Guest" });
+  const guestRole = guestRoleArray[0];
+
+  const newContribution = new Contributions({
+    projectId: Types.ObjectId(projectId),
+    userId: Types.ObjectId(userId),
+    roleId: Types.ObjectId(guestRole._id),
+  });
+  savedNewContribution = newContribution.save();
+  return savedNewContribution;
+}
