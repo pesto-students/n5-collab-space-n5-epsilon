@@ -296,7 +296,8 @@ export async function addUserToProject(inviteUserInfo) {
     const guestRoleArray = await Roles.find({ name: "Guest" });
     const guestRole = guestRoleArray[0];
     console.log(guestRole);
-    const User = Users.findOne({ name: userEmail });
+    const User = await Users.findOne({ email: userEmail });
+    console.log(User, guestRole, inviteUserInfo);
     if (User) {
       const newContribution = new Contributions({
         projectId: Types.ObjectId(projectId),
@@ -311,5 +312,38 @@ export async function addUserToProject(inviteUserInfo) {
     }
   } catch (error) {
     console.log(error);
+  }
+}
+export async function removeUserFoProject(removeUserInfo) {
+  console.log(removeUserInfo);
+  const { projectId, userId, userToBeRemovedId } = removeUserInfo;
+  const allRolesArray = await Roles.find({});
+  const adminRole = allRolesArray.map((role) => role.name == "Admin");
+  const guestRole = allRolesArray.map((role) => role.name == "Guest");
+  if (userId === userToBeRemovedId) {
+    const userContribution = await Contributions.find({
+      projectId: Types.ObjectId(projectId),
+      userId: Types.ObjectId(userId),
+    });
+    if (userContribution.roleId == guestRole._id) {
+      const deletedContribution = await Contributions.findOneAndDelete({
+        projectId: Types.ObjectId(projectId),
+        userId: Types.ObjectId(userId),
+      }).exec();
+      return deletedContribution;
+    }
+  } else {
+    const ProjectOwner = await Contributions.find({
+      projectId: Types.ObjectId(projectId),
+      userId: Types.ObjectId(userId),
+    });
+    if (ProjectOwner.roleId == adminRole._id) {
+      const deletedContribution = await Contributions.findOneAndDelete({
+        projectId: Types.ObjectId(projectId),
+        userId: Types.ObjectId(userToBeRemovedId),
+      }).exec();
+      return deletedContribution;
+    }
+    return {};
   }
 }

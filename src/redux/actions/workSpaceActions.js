@@ -15,6 +15,9 @@ import {
   AddUser,
   AddUserSuccess,
   AddUserFailure,
+  LeaveProject,
+  LeaveProjectSuccess,
+  LeaveProjectFailure,
 } from "../constants/workspaceActionConstants";
 
 export const getWorkspaceProject = (req) => async (dispatch, getState) => {
@@ -73,5 +76,18 @@ export const addUser = (inviteUserInfo) => async (dispatch) => {
     }
   } catch (err) {
     dispatch(AddUserFailure(err));
+  }
+};
+
+export const leaveProject = (leaveProjectInfo) => async (dispatch) => {
+  try {
+    //dispatch(LeaveProject(leaveProjectInfo));
+    let response = await usersURL.post("/leaveProject", leaveProjectInfo);
+    if (response) {
+      dispatch(LeaveProject(leaveProjectInfo));
+    }
+  } catch (err) {
+    console.log(err);
+    dispatch(LeaveProjectFailure(err));
   }
 };

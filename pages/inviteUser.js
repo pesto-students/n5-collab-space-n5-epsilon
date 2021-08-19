@@ -36,27 +36,17 @@ export const getServerSideProps = wrapper.getServerSideProps(
         process.env.REACT_APP_SECRET_TOKEN
       );
       if (validToken) {
-        if (userId == req.cookies.userId) {
-          const inviteUserInfo = {
-            userId,
-            projectId,
-            projectId,
-          };
-          await store.dispatch(addUser(inviteUserInfo));
-          return {
-            redirect: {
-              destination: "/workspace",
-              permanent: false,
-            },
-          };
-        } else {
-          return {
-            redirect: {
-              destination: "/un-authorized",
-              permanent: false,
-            },
-          };
-        }
+        const inviteUserInfo = {
+          userEmail,
+          projectId,
+        };
+        await store.dispatch(addUser(inviteUserInfo));
+        return {
+          redirect: {
+            destination: "/workspace",
+            permanent: false,
+          },
+        };
       } else {
         return {
           redirect: {
