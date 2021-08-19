@@ -3,6 +3,7 @@ import cookie from "js-cookie";
 import { wrapper } from "../../src/redux/store";
 import { getWorkspaceProject } from "../../src/redux/actions/workSpaceActions";
 import { useSelector, useDispatch } from "react-redux";
+import WorkSpaceTitle from "../../src/components/workspace/WorkSpaceTitle";
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) =>
@@ -27,7 +28,6 @@ const UserPanel = (props) => {
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i,
     nameRegex: /^([a-zA-Z]+( [a-zA-Z]+)|[a-zA-Z]){2,50}$/,
   };
-  const [stateChanging, setStateChanging] = useState(false);
   const [submittedForm, setSubmittedForm] = useState({
     formTouched: false,
     error: false,
@@ -36,10 +36,19 @@ const UserPanel = (props) => {
   const [inviteForm, setInviteForm] = useState({
     name: "",
     email: "",
+    projectId: ""
   });
   const [showForm, setShowForm] = useState(false);
   const projects = useSelector((state) => state.WorkSpaceReducer.projects);
   const dispatch = useDispatch();
+  const[usersList, setUsersList] = useState('');
+  const[projectList, setProjectList] = useState('');
+
+  useEffect(() => {
+   console.log('===test===', projects);
+  }, []);
+
+
 
   function invite() {
     props.setFormStatus({
@@ -61,10 +70,13 @@ const UserPanel = (props) => {
           submitting: false,
         });
       });
+    // <img src='/logo.png' alt='logo'/>
   }
 
   return (
-    <section className="user-panel">
+      <div className="mainContainerBody">
+        <WorkSpaceTitle/>
+        <section className="user-panel">
       <div className="user-list">
         <div className="description">
           <h4>Description</h4>
@@ -150,57 +162,61 @@ const UserPanel = (props) => {
       </div>
       <div className="project-list-space">
         <h4>Projects</h4>
-        <div className="project-list">
+        {usersList ? <div className="project-list">
           <div className="project">
             <img
-              src="https://api.iconify.design/bi/plus-lg.svg?color=%235c75ac"
-              alt="image"
+                src="https://api.iconify.design/bi/plus-lg.svg?color=%235c75ac"
+                alt="image"
             />
             Nwe Project
           </div>
           <div className="project">
             <img
-              src="https://api.iconify.design/clarity/bubble-chart-solid-badged.svg?color=white"
-              alt="image"
+                src="https://api.iconify.design/clarity/bubble-chart-solid-badged.svg?color=white"
+                alt="image"
             />
             Nwe Project
           </div>
           <div className="project">
             <img
-              src="https://api.iconify.design/clarity/bubble-chart-solid-badged.svg?color=white"
-              alt="image"
+                src="https://api.iconify.design/clarity/bubble-chart-solid-badged.svg?color=white"
+                alt="image"
             />
             Nwe Project
           </div>
           <div className="project">
             <img
-              src="https://api.iconify.design/clarity/bubble-chart-solid-badged.svg?color=white"
-              alt="image"
+                src="https://api.iconify.design/clarity/bubble-chart-solid-badged.svg?color=white"
+                alt="image"
             />
             Nwe Project
           </div>
           <div className="project">
             <img
-              src="https://api.iconify.design/clarity/bubble-chart-solid-badged.svg?color=white"
-              alt="image"
+                src="https://api.iconify.design/clarity/bubble-chart-solid-badged.svg?color=white"
+                alt="image"
             />
             Nwe Project
           </div>
           <div className="project">
             <img
-              src="https://api.iconify.design/clarity/bubble-chart-solid-badged.svg?color=white"
-              alt="image"
+                src="https://api.iconify.design/clarity/bubble-chart-solid-badged.svg?color=white"
+                alt="image"
             />
             Nwe Project
           </div>
           <div className="project">
             <img
-              src="https://api.iconify.design/clarity/bubble-chart-solid-badged.svg?color=white"
-              alt="image"
+                src="https://api.iconify.design/clarity/bubble-chart-solid-badged.svg?color=white"
+                alt="image"
             />
             Nwe Project
           </div>
-        </div>
+        </div> : <div className='empty-box'>
+          <h1>You have not started sharing projects with others.
+          <span>Please Invite Other Users And Start Collaborating</span></h1>
+          <img src='/empty.gif' alt='empty'/>
+        </div>}
       </div>
 
       {showForm && (
@@ -258,11 +274,21 @@ const UserPanel = (props) => {
                   }
                 }}
               />
+              <select
+                  onChange={(e) =>  setInviteForm({ ...inviteForm, projectId: e.target.value })}
+              >
+                <option value='any'>Any</option>
+                {projects.length && projects.map((project) => {
+                  return <option key={project.projectId} value={project.projectId}>{project.projectName}</option>
+                })
+                }
+              </select>
               <button
                 disabled={
                   !submittedForm.formTouched ||
                   !!submittedForm.error ||
-                  submittedForm.submitting
+                  submittedForm.submitting ||
+                  !inviteForm.name || !inviteForm.email || !inviteForm.projectId
                 }
                 onClick={invite}
               >
@@ -276,6 +302,7 @@ const UserPanel = (props) => {
         </div>
       )}
     </section>
+      </div>
   );
 };
 
