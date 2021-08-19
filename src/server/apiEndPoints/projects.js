@@ -296,7 +296,7 @@ export async function addUserToProject(inviteUserInfo) {
     const guestRoleArray = await Roles.find({ name: "Guest" });
     const guestRole = guestRoleArray[0];
     console.log(guestRole);
-    const User = await Users.findOne({ email: userEmail });
+    const User = await Users.findOne({ email: userEmail }).exec();
     console.log(User, guestRole, inviteUserInfo);
     if (User) {
       const newContribution = new Contributions({
