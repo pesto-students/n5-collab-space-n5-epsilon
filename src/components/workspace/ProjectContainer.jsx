@@ -60,7 +60,7 @@ function ProjectContainer({
                   className="leave"
                   onClick={(e) => {
                     e.stopPropagation();
-                    // deleteProjectHandler(project.projectId)
+                    deleteProjectHandler(project.projectId);
                   }}
                 >
                   <svg

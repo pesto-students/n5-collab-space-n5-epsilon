@@ -8,6 +8,7 @@ import {
   CREATE_PROJECT_SUCCESS,
   GET_ALL_PROJECT,
   GET_ALL_PROJECT_SUCCESS,
+  LEAVE_PROJECT,
 } from "../constants/workspaceActionConstants";
 
 export const initialState = {
@@ -31,10 +32,17 @@ const WorkSpaceReducer = (state = initialState, action) => {
 
       case DELETE_PROJECT: {
         const newDraft = original(draft);
-        const some = newDraft.projects.findIndex(
+        const projectIndex = newDraft.projects.findIndex(
           (project) => project._id == payload.projectId
         );
-        draft.projects.splice(some, 1);
+        draft.projects.splice(projectIndex, 1);
+        break;
+      }
+      case LEAVE_PROJECT: {
+        const projectIndex = draft.projects.findIndex(
+          (project) => project._id == payload.projectId
+        );
+        draft.projects.splice(projectIndex, 1);
         break;
       }
       case GET_ALL_PROJECT_SUCCESS: {

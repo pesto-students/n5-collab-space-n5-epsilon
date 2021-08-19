@@ -290,15 +290,60 @@ export async function updateProject(projectInfo) {
 }
 
 export async function addUserToProject(inviteUserInfo) {
-  const { projectId, userId } = inviteUserInfo;
-  const guestRoleArray = await Roles.find({ name: "Guest" });
-  const guestRole = guestRoleArray[0];
-
-  const newContribution = new Contributions({
-    projectId: Types.ObjectId(projectId),
-    userId: Types.ObjectId(userId),
-    roleId: Types.ObjectId(guestRole._id),
-  });
-  savedNewContribution = newContribution.save();
-  return savedNewContribution;
+  try {
+    const { projectId, userEmail } = inviteUserInfo;
+    console.log("inviteUserInfo", inviteUserInfo);
+    const guestRoleArray = await Roles.find({ name: "Guest" });
+    const guestRole = guestRoleArray[0];
+    console.log(guestRole);
+    const User = await Users.findOne({ email: userEmail });
+    console.log(User, guestRole, inviteUserInfo);
+    if (User) {
+      const newContribution = new Contributions({
+        projectId: Types.ObjectId(projectId),
+        userId: Types.ObjectId(User._id),
+        roleId: Types.ObjectId(guestRole._id),
+      });
+      const savedNewContribution = await newContribution.save();
+      console.log("savedNewContribution", savedNewContribution);
+      return savedNewContribution;
+    } else {
+      return { error: "User not found" };
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+export async function removeUserFoProject(removeUserInfo) {
+  console.log(removeUserInfo);
+  const { projectId, userId, userToBeRemovedId } = removeUserInfo;
+  const allRolesArray = await Roles.find({});
+  const adminRole = allRolesArray.map((role) => role.name == "Admin");
+  const guestRole = allRolesArray.map((role) => role.name == "Guest");
+  if (userId === userToBeRemovedId) {
+    const userContribution = await Contributions.find({
+      projectId: Types.ObjectId(projectId),
+      userId: Types.ObjectId(userId),
+    });
+    if (userContribution.roleId == guestRole._id) {
+      const deletedContribution = await Contributions.findOneAndDelete({
+        projectId: Types.ObjectId(projectId),
+        userId: Types.ObjectId(userId),
+      }).exec();
+      return deletedContribution;
+    }
+  } else {
+    const ProjectOwner = await Contributions.find({
+      projectId: Types.ObjectId(projectId),
+      userId: Types.ObjectId(userId),
+    });
+    if (ProjectOwner.roleId == adminRole._id) {
+      const deletedContribution = await Contributions.findOneAndDelete({
+        projectId: Types.ObjectId(projectId),
+        userId: Types.ObjectId(userToBeRemovedId),
+      }).exec();
+      return deletedContribution;
+    }
+    return {};
+  }
 }

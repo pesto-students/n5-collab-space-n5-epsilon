@@ -15,7 +15,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       if (!req.cookies.token)
         return {
           redirect: {
-            destination: `/auth?redirect="/users/inviteUser?userId${req.query.userId}&projectId${req.query.projectId}"`,
+            destination: "/",
             permanent: true,
           },
         };
@@ -29,7 +29,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       } else {
         return {
           redirect: {
-            destination: `/auth?redirect="/users/inviteUser?userId${req.query.userId}&projectId${req.query.projectId}"`,
+            destination: "/",
             permanent: false,
           },
         };

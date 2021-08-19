@@ -18,6 +18,10 @@ export const ADD_USER = "ADD_USER";
 export const ADD_USER_SUCCESS = "ADD_USER_SUCCESS";
 export const ADD_USER_FAILURE = "ADD_USER_FAILURE";
 
+export const LEAVE_PROJECT = "LEAVE_PROJECT";
+export const LEAVE_PROJECT_SUCCESS = "LEAVE_PROJECT_SUCCESS";
+export const LEAVE_PROJECT_FAILURE = "LEAVE_PROJECT_FAILURE";
+
 export const EditTitle = (data) => ({
   type: EDIT_TITLE,
   payload: data,
@@ -79,5 +83,20 @@ export const AddUserSuccess = (data) => ({
 
 export const AddUserFailure = (data) => ({
   type: ADD_USER_FAILURE,
+  payload: data,
+});
+
+export const LeaveProject = (data) => ({
+  type: LEAVE_PROJECT,
+  payload: data,
+});
+
+export const LeaveProjectSuccess = (data) => ({
+  type: LEAVE_PROJECT_SUCCESS,
+  payload: data,
+});
+
+export const LeaveProjectFailure = (data) => ({
+  type: LEAVE_PROJECT_FAILURE,
   payload: data,
 });
