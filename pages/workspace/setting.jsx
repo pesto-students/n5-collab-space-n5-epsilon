@@ -14,6 +14,7 @@ const Setting = () => {
         input1: false,
         input2: false
     });
+    const [tab, setTab] = useState('password');
 
 
     const regex = {
@@ -24,11 +25,15 @@ const Setting = () => {
         <WorkSpaceTitle title='Workspace Name'/>
         <section className='settings-tab'>
             <div className='tab-list'>
-                <span><img src='https://api.iconify.design/icon-park-outline/edit-name.svg' alt='name'/>change workspace name</span>
-                <span><img src='https://api.iconify.design/teenyicons/password-outline.svg' alt='lock'/>change password</span>
+                <span onClick={()=>{
+                    setTab('workspace')
+                }} className={`${tab === 'workspace'? 'active':''}`}><img src='https://api.iconify.design/icon-park-outline/edit-name.svg' alt='name'/>change workspace name</span>
+                <span onClick={()=>{
+                    setTab('password')
+                }} className={`${tab === 'password'? 'active':''}`}><img src='https://api.iconify.design/teenyicons/password-outline.svg' alt='lock'/>change password</span>
             </div>
             <div className='tab-container'>
-                <div className='tab'>
+                {tab === 'password' &&     <div className='tab'>
                     <h1>Change Password</h1>
                     <div className='content-wrapper'>
                         <p>New Password</p>
@@ -69,7 +74,8 @@ const Setting = () => {
                         <p className={`error-space ${submittedForm.error || copyPassword !== newPassword? 'error':''}`}>{submittedForm.error ? submittedForm.error: copyPassword === newPassword ?'Atleast 8 characters, one lower case character, one upper case character, one number and one special character.':'Both password does not match'}</p>
                         <button disabled={!submittedForm.formTouched || !!submittedForm.error || copyPassword !== newPassword || submittedForm.submitting}>Save Password</button>
                     </div>
-                </div>
+                </div>}
+                {tab === 'workspace' &&  <div className='tab'/>}
             </div>
         </section>
     </div>

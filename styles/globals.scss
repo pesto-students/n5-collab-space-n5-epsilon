@@ -85,8 +85,136 @@ a {
   }
 }
 
+.sideLayoutPanel {
+  height: 100vh;
+  background: #f4f5f7;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  @media (max-width: 767px) {
+    width: 100%;
+    height: 100px;
+    img{
+      display: none;
+    }
+  }
+  img {
+    max-width: 100%;
+    padding: 20px 0;
+    cursor: pointer;
+  }
+  .side-wrapper {
+    height: calc(100% - 88px);
+    background: #b39ddb61;
+    border-radius: 0 15px 0 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    @media (max-width: 767px) {
+      height: 100%;
+      border-radius: 0;
+      flex-direction: row;
+    }
+  }
+  .sideNavStaticList {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    @media (max-width: 767px) {
+      width: calc(100% - 200px);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
+      grid-gap: 32px;
+    }
+
+    .NavButton {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      cursor: pointer;
+      border-bottom: 1px solid white;
+      padding: 20px 0 20px 20px;
+      &.active{
+        color: #004cff;
+      }
+      @media (max-width: 767px) {
+        padding: 20px;
+        justify-content: center;
+      }
+      svg {
+        width: 25pt;
+        height: 25pt;
+        margin-right: 15px;
+        color: #6d6d73;
+        @media (max-width: 767px) {
+          margin: 0;
+          width: 30pt;
+          height: 30pt;
+        }
+      }
+      span {
+        font-weight: 500;
+        @media (max-width: 767px) {
+          display: none;
+        }
+      }
+    }
+  }
+  ul {
+    list-style-type: none;
+    text-align: left;
+    margin: 0;
+    li {
+      height: 100%;
+      &:nth-of-type(1) {
+        &:hover {
+          svg {
+            path {
+              stroke: #5d2bff;
+              fill: none;
+            }
+          }
+        }
+      }
+      &:hover {
+        color: #5d2bff;
+        background: #89eee69e;
+        svg {
+          path {
+            fill: #5d2bff;
+          }
+        }
+      }
+    }
+  }
+  .LogButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    font-weight: 500;
+    &:hover{
+      background: #9771ef;
+      svg{
+        path{
+          fill: #00e1ff;
+        }
+      }
+    }
+    svg {
+      width: 25pt;
+      height: 25pt;
+      color: #6d6d73;
+      margin-right: 10px;
+    }
+  }
+}
+
 .mainContainerBody {
   overflow: hidden;
+  height: 100%;
 }
 
 .modal-form {
@@ -634,6 +762,9 @@ a {
   background: #fff;
   border-radius: 10px;
   margin: 0 20px 0;
+  @media (max-width: 767px) {
+    height: calc(100% - 171px);
+  }
   &.grid {
     .user-projects {
       display: grid;
@@ -739,6 +870,9 @@ a {
   margin: 0 20px 0;
   height: calc(100vh - 91px);
   padding: 20px;
+  @media (max-width: 767px) {
+    height: calc(100% - 111px);
+  }
   .tab-list {
     border-bottom: 1px solid #d7d7da;
     padding: 0 0 15px;
