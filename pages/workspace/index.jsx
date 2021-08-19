@@ -2,8 +2,15 @@ import MainContainer from "../../src/components/workspace/MainContainer";
 import { getWorkspaceProject } from "../../src/redux/actions/workSpaceActions";
 import { wrapper } from "../../src/redux/store";
 import { verify } from "jsonwebtoken";
+import TourGuide from "../../src/components/TourGuide";
+
 const Workspace = () => {
-  return <MainContainer />;
+  return (
+    <>
+      <MainContainer />
+      <TourGuide />
+    </>
+  );
 };
 
 export default Workspace;

@@ -12,7 +12,7 @@ const SideNav = ({ navButtons }) => {
         <ul className='sideNavStaticList'>
         {navButtons.map((button, index) => {
           return (
-            <li key={index}>
+            <li key={index} className={button.label}>
               <NavButton
                 path={button.path}
                 icon={button.icon}
