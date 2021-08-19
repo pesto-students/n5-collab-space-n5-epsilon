@@ -5,14 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="103cd474-1403-40f5-96a1-636418099c6b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/empty.gif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/auth/forgotPassword.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/auth/forgotPassword.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/workspace/user-panel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/workspace/user-panel.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Auth-Components/signIn-form.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Auth-Components/signIn-form.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Auth-Components/signUp-form.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Auth-Components/signUp-form.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/workspace/WorkSpaceTitle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workspace/WorkSpaceTitle.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/Services/sendEmail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Services/sendEmail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client_apis/authApis.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client_apis/authApis.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client_apis/workSpaceApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client_apis/workSpaceApi.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -87,7 +83,7 @@
       <workItem from="1629223048523" duration="7524000" />
       <workItem from="1629290020789" duration="266000" />
       <workItem from="1629314640407" duration="5008000" />
-      <workItem from="1629394513216" duration="6109000" />
+      <workItem from="1629394513216" duration="13029000" />
     </task>
     <servers />
   </component>
