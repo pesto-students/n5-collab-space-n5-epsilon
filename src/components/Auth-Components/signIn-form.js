@@ -11,7 +11,7 @@ export default function SignInForm(props) {
   });
   const router = useRouter();
   const { redirect } = router.query;
-  console.log(router.query);
+  console.log("router.query", router.query);
   function submit() {
     props.setFormStatus({
       submitting: true,
@@ -25,7 +25,10 @@ export default function SignInForm(props) {
         cookie.set("token", response["auth-token"]);
         cookie.set("userId", response["id"]);
         if (redirect) {
-          router.push(redirect);
+          router.push({
+            pathname: router.query.url,
+            query: router.query,
+          });
         } else {
           router.push("/workspace");
         }

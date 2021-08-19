@@ -22,10 +22,12 @@ inviteUser.getLayout = getEmptyLayout;
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) =>
     async ({ req, params }) => {
+      console.log("req.query", req.__NEXT_INIT_QUERY);
+      const { userEmail, projectId } = req.__NEXT_INIT_QUERY;
       if (!req.cookies.token)
         return {
           redirect: {
-            destination: `/auth?redirect="/users/inviteUser?userId${req.query.userId}&projectId${req.query.projectId}"`,
+            destination: `/auth?redirect=true&url=/inviteUser&userEmail=${userEmail}&projectId=${projectId}`,
             permanent: true,
           },
         };
@@ -34,7 +36,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
         process.env.REACT_APP_SECRET_TOKEN
       );
       if (validToken) {
-        const { userId, projectId, userEmail } = req.query;
         if (userId == req.cookies.userId) {
           const inviteUserInfo = {
             userId,
@@ -59,7 +60,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
       } else {
         return {
           redirect: {
-            destination: `/auth?redirect="/users/inviteUser?userId${req.query.userId}&projectId${req.query.projectId}"`,
+            destination: `/auth?redirect=true&url=/inviteUser&userId=${userEmail}&projectId=${projectId}`,
             permanent: false,
           },
         };

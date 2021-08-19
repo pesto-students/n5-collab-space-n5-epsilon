@@ -290,15 +290,26 @@ export async function updateProject(projectInfo) {
 }
 
 export async function addUserToProject(inviteUserInfo) {
-  const { projectId, userId } = inviteUserInfo;
-  const guestRoleArray = await Roles.find({ name: "Guest" });
-  const guestRole = guestRoleArray[0];
-
-  const newContribution = new Contributions({
-    projectId: Types.ObjectId(projectId),
-    userId: Types.ObjectId(userId),
-    roleId: Types.ObjectId(guestRole._id),
-  });
-  savedNewContribution = newContribution.save();
-  return savedNewContribution;
+  try {
+    const { projectId, userEmail } = inviteUserInfo;
+    console.log("inviteUserInfo", inviteUserInfo);
+    const guestRoleArray = await Roles.find({ name: "Guest" });
+    const guestRole = guestRoleArray[0];
+    console.log(guestRole);
+    const User = Users.findOne({ name: userEmail });
+    if (User) {
+      const newContribution = new Contributions({
+        projectId: Types.ObjectId(projectId),
+        userId: Types.ObjectId(User._id),
+        roleId: Types.ObjectId(guestRole._id),
+      });
+      const savedNewContribution = await newContribution.save();
+      console.log("savedNewContribution", savedNewContribution);
+      return savedNewContribution;
+    } else {
+      return { error: "User not found" };
+    }
+  } catch (error) {
+    console.log(error);
+  }
 }
