@@ -1,12 +1,12 @@
 // const nodemailer = require("nodemailer");
 import * as nodemailer from 'nodemailer'
 
-const mailerService = async ( token, name )=> {
+const mailerService = async ( token, name, email='himanshubhatia1996@gmail.com', title='' )=> {
 // create reusable transporter object using the default SMTP transport
-    const link= `${process.env.LOCAL_URL}/auth/resetPassword?token=${token}`;
+    const link= `${process.env.LOCAL_URL}${token}`;
     const mailOptions = {
         from: 'ephraim.kunze3@ethereal.email', // sender address
-        to: "himanshubhatia1996@gmail.com", // list of receivers
+        to: email, // list of receivers
         subject: "Hello ✔", // Subject line
         html: `<table style="background-color: black;width: 100%; text-align: center; padding-bottom: 7%;">
     <thead>
@@ -25,7 +25,7 @@ const mailerService = async ( token, name )=> {
                         <img style=" display: block; margin: 0 auto 18px;" width="46" src='https://cypherchange.s3.us-east-2.amazonaws.com/mailicon' alt="image">
                         <div style="display: inline-block;">
                             <span style="font-size: 18px; color: #777777;font-family: 'Poppins', sans-serif;letter-spacing: 0;line-height: 32px;padding-bottom: 20px">
-                                Verify email address</span>
+                                Verify email address ${title || 'test'}</span>
                             <span style="width:100%; height: 2px;background: #707070;display: block"></span>
                         </div>
                     </td>

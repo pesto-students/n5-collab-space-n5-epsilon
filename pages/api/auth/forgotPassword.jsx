@@ -11,7 +11,7 @@ handler.post(async (req, res) => {
   const jwtToken = sign({ email: req.body.email }, process.env.EMAIL_TOKEN, {
     expiresIn: "300000",
   });
-  mailerService(jwtToken, user.name).then((mailSent) => {
+  mailerService(`/auth/resetPassword?token=${jwtToken}`, user.name).then((mailSent) => {
     if (mailSent) {
       res.status(200).send(`Email Sent`);
     } else {

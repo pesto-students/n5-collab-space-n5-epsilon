@@ -3,23 +3,10 @@ import cookie from "js-cookie";
 import { wrapper } from "../../src/redux/store";
 import { getWorkspaceProject } from "../../src/redux/actions/workSpaceActions";
 import { useSelector, useDispatch } from "react-redux";
+import WorkSpaceTitle from "../../src/components/workspace/WorkSpaceTitle";
+import AuthAPI from "../../src/client_apis/authApis";
+import {verify} from "jsonwebtoken";
 
-export const getServerSideProps = wrapper.getServerSideProps(
-  (store) =>
-    async ({ req, params }) => {
-      if (!req.cookies.token) {
-        return {
-          redirect: {
-            destination: "/",
-            permanent: true,
-          },
-        };
-      }
-
-      await store.dispatch(getWorkspaceProject(req));
-      return { props: { token: req.cookies.token } };
-    }
-);
 
 const UserPanel = (props) => {
   const regex = {
@@ -27,7 +14,6 @@ const UserPanel = (props) => {
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i,
     nameRegex: /^([a-zA-Z]+( [a-zA-Z]+)|[a-zA-Z]){2,50}$/,
   };
-  const [stateChanging, setStateChanging] = useState(false);
   const [submittedForm, setSubmittedForm] = useState({
     formTouched: false,
     error: false,
@@ -36,27 +22,85 @@ const UserPanel = (props) => {
   const [inviteForm, setInviteForm] = useState({
     name: "",
     email: "",
+    projectId: ""
   });
   const [showForm, setShowForm] = useState(false);
   const projects = useSelector((state) => state.WorkSpaceReducer.projects);
   const dispatch = useDispatch();
+  const[usersList, setUsersList] = useState({});
+  const[projectList, setProjectList] = useState({});
+  const[availableProjectList, setAvailableProjectList] = useState([]);
+  const Auth = new AuthAPI();
+
+  useEffect(() => {
+    const userData ={}
+    const availableProjects =[]
+
+    projects.map((item)=>{
+      if(item.role === 'Admin'){
+        availableProjects.push(item);
+      }
+    })
+
+    console.log('===avaialble===', availableProjects);
+    setAvailableProjectList(availableProjects)
+    Auth.getAddedUsers({
+      userId: '6111674d267948b6906ee442'
+    })
+        .then(({ data }) => {
+          console.log('===test===', data);
+
+          data.forEach((project)=>{
+            project.users.forEach((user)=>{
+              if(!userData[user._id]){
+                userData[user._id] = {
+                  [project._id] : {
+                    projectName: project._id
+                  },
+                  name: user.name,
+                  email: user.email
+                }
+              } else{
+                if(!userData[user._id][project._id]) {
+                  userData[user._id][project._id] = {
+                    projectName: project._id
+                  }
+                }
+              }
+
+
+            })
+          });
+          setUsersList(userData);
+          // Object.keys(userData).map((user)=> {
+          //   console.log('===check===', user)
+          // })
+
+          console.log('===check===', userData)
+        })
+        .catch((error) => {
+        });
+  }, []);
+
+
 
   function invite() {
-    props.setFormStatus({
+    setSubmittedForm({
       submitting: true,
     });
-    Auth.emailSignUp(formData)
+    Auth.getAddedUsers({
+      // userId: JSON.parse(localStorage.getItem('user')).id,
+      userId: '611b305bb5aba21c6a3bb31f'
+    })
       .then(({ data: response }) => {
-        props.setFormStatus({
+        setSubmittedForm({
           error: false,
           submitting: false,
         });
-        cookie.set("token", response["auth-token"]);
-        router.push("/workspace");
       })
       .catch((error) => {
-        props.setFormStatus({
-          ...props.formStatus,
+        setSubmittedForm({
+          ...submittedForm,
           error: error.response.data,
           submitting: false,
         });
@@ -64,7 +108,9 @@ const UserPanel = (props) => {
   }
 
   return (
-    <section className="user-panel">
+      <div className="mainContainerBody">
+        <WorkSpaceTitle/>
+        <section className="user-panel">
       <div className="user-list">
         <div className="description">
           <h4>Description</h4>
@@ -90,117 +136,45 @@ const UserPanel = (props) => {
             </span>
             Invite User
           </div>
-          <div className="user">
-            <span className="icon">
-              <span>Himanshu</span>
+          {
+            Object.keys(usersList).map((user)=>{
+              return  <div key={user} className="user" onClick={()=>{
+                setProjectList(usersList[user])
+              }}>
+                <span className="icon">
+              <span>{usersList[user].name}</span>
             </span>
-            <div className="name">abc</div>
-            <div className="email">abc@g.com</div>
-          </div>
-          <div className="user">
-            <span className="icon">
-              <span>Himanshu</span>
-            </span>
-            <div className="name">abc</div>
-            <div className="email">abc@g.com</div>
-          </div>
-          <div className="user">
-            <span className="icon">
-              <span>Himanshu</span>
-            </span>
-            <div className="name">abc</div>
-            <div className="email">abc@g.com</div>
-          </div>
-          <div className="user">
-            <span className="icon">
-              <span>Himanshu</span>
-            </span>
-            <div className="name">abc</div>
-            <div className="email">abc@g.com</div>
-          </div>
-          <div className="user">
-            <span className="icon">
-              <span>Himanshu</span>
-            </span>
-            <div className="name">abc</div>
-            <div className="email">abc@g.com</div>
-          </div>
-          <div className="user">
-            <span className="icon">
-              <span>Himanshu</span>
-            </span>
-            <div className="name">abc</div>
-            <div className="email">abc@g.com</div>
-          </div>
-          <div className="user">
-            <span className="icon">
-              <span>Himanshu</span>
-            </span>
-            <div className="name">abc</div>
-            <div className="email">abc@g.com</div>
-          </div>
-          <div className="user">
-            <span className="icon">
-              <span>Himanshu</span>
-            </span>
-            <div className="name">abc</div>
-            <div className="email">abc@g.com</div>
-          </div>
+                <div className="name">{usersList[user].name}</div>
+                <div className="email">{usersList[user].email}</div>
+              </div>
+            })
+          }
         </div>
       </div>
       <div className="project-list-space">
         <h4>Projects</h4>
-        <div className="project-list">
+        {Object.keys(projectList).length ? <div className="project-list">
           <div className="project">
             <img
-              src="https://api.iconify.design/bi/plus-lg.svg?color=%235c75ac"
-              alt="image"
+                src="https://api.iconify.design/bi/plus-lg.svg?color=%235c75ac"
+                alt="image"
             />
             Nwe Project
           </div>
-          <div className="project">
-            <img
-              src="https://api.iconify.design/clarity/bubble-chart-solid-badged.svg?color=white"
-              alt="image"
-            />
-            Nwe Project
-          </div>
-          <div className="project">
-            <img
-              src="https://api.iconify.design/clarity/bubble-chart-solid-badged.svg?color=white"
-              alt="image"
-            />
-            Nwe Project
-          </div>
-          <div className="project">
-            <img
-              src="https://api.iconify.design/clarity/bubble-chart-solid-badged.svg?color=white"
-              alt="image"
-            />
-            Nwe Project
-          </div>
-          <div className="project">
-            <img
-              src="https://api.iconify.design/clarity/bubble-chart-solid-badged.svg?color=white"
-              alt="image"
-            />
-            Nwe Project
-          </div>
-          <div className="project">
-            <img
-              src="https://api.iconify.design/clarity/bubble-chart-solid-badged.svg?color=white"
-              alt="image"
-            />
-            Nwe Project
-          </div>
-          <div className="project">
-            <img
-              src="https://api.iconify.design/clarity/bubble-chart-solid-badged.svg?color=white"
-              alt="image"
-            />
-            Nwe Project
-          </div>
-        </div>
+          {Object.keys(projectList).map((userKey)=>{
+            return userKey !=='email'&& userKey !== 'name' ? <div key={userKey} className="project">
+              <img
+                  src="https://api.iconify.design/clarity/bubble-chart-solid-badged.svg?color=white"
+                  alt="image"
+              />
+                  {projectList[userKey].projectName}
+            </div>: null
+          })}
+        </div> : <div className='empty-box'>
+          <h1>You have not started sharing projects with others.
+          <span>Please Invite Other Users And Start Collaborating</span></h1>
+          <img src='/empty.gif' alt='empty'/>
+        </div>}
       </div>
 
       {showForm && (
@@ -258,11 +232,21 @@ const UserPanel = (props) => {
                   }
                 }}
               />
+              <select
+                  onChange={(e) =>  setInviteForm({ ...inviteForm, projectId: e.target.value })}
+              >
+                <option value='any'>Any</option>
+                {availableProjectList.length && availableProjectList.map((project) => {
+                  return <option key={project.projectId} value={project.projectId}>{project.projectName}</option>
+                })
+                }
+              </select>
               <button
                 disabled={
                   !submittedForm.formTouched ||
                   !!submittedForm.error ||
-                  submittedForm.submitting
+                  submittedForm.submitting ||
+                  !inviteForm.name || !inviteForm.email || !inviteForm.projectId
                 }
                 onClick={invite}
               >
@@ -276,7 +260,38 @@ const UserPanel = (props) => {
         </div>
       )}
     </section>
+      </div>
   );
 };
 
 export default UserPanel;
+
+
+export const getServerSideProps = wrapper.getServerSideProps(
+    (store) =>
+        async ({ req, params }) => {
+          console.log("this came here");
+          if (!req.cookies.token)
+            return {
+              redirect: {
+                destination: "/",
+                permanent: true,
+              },
+            };
+          const validToken = await verify(
+              req.cookies.token,
+              process.env.REACT_APP_SECRET_TOKEN
+          );
+          if (validToken) {
+            await store.dispatch(getWorkspaceProject(req));
+            return { props: { token: req.cookies.token } };
+          } else {
+            return {
+              redirect: {
+                destination: "/",
+                permanent: false,
+              },
+            };
+          }
+        }
+);

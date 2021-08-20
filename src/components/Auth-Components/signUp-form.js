@@ -27,6 +27,7 @@ export default function SignUpForm(props) {
                     submitting: false,
                 });
                 cookie.set('token', response['auth-token']);
+                localStorage.setItem('user', JSON.stringify(response));
                 router.push('/workspace');
             })
             .catch(error => {

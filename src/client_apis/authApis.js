@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import axios from "axios";
 export const urlBackEnd = process.env.REACT_APP_LOCAL_URL;
 class AuthAPI {
     constructor() {
@@ -19,6 +20,15 @@ class AuthAPI {
     forgotPassword(data) {
         return this.API.post(`/api/auth/forgotPassword`, data);
     }
+
+    updatePassword(data) {
+        return this.API.post(`/api/auth/updatePassword`, data);
+    }
+
+    getAddedUsers(data){
+        return this.API.post(`/api/users/inviteUser`, data);
+    }
+
 
 }
 
