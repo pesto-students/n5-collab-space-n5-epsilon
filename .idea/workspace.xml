@@ -8,8 +8,9 @@
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.env.local" beforeDir="false" afterPath="$PROJECT_DIR$/.env.local" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client_apis/authApis.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client_apis/authApis.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client_apis/workSpaceApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client_apis/workSpaceApi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/workspace/MainContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workspace/MainContainer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/workspace/ProjectContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workspace/ProjectContainer.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +86,7 @@
       <workItem from="1629290020789" duration="266000" />
       <workItem from="1629314640407" duration="5008000" />
       <workItem from="1629394513216" duration="13408000" />
-      <workItem from="1629479427930" duration="8237000" />
+      <workItem from="1629479427930" duration="9574000" />
     </task>
     <servers />
   </component>

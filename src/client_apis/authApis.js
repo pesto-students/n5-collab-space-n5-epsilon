@@ -1,5 +1,4 @@
 import Axios from 'axios';
-import axios from "axios";
 export const urlBackEnd = process.env.REACT_APP_LOCAL_URL;
 class AuthAPI {
     constructor() {
