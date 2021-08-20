@@ -1,8 +1,6 @@
 import axios from "axios";
 
-export const urlBackEnd = process.env.BACK_END_URL;
-
-console.log('=====test====',process.env.REACT_APP_API_KEY)
+export const urlBackEnd = process.env.BACK_END_URL || '';
 
 export const usersURL = axios.create({
   baseURL: `${urlBackEnd}/api/users`,

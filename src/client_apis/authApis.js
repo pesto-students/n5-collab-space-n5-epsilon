@@ -1,4 +1,5 @@
 import Axios from 'axios';
+// import axios from "axios";
 export const urlBackEnd = process.env.REACT_APP_LOCAL_URL;
 class AuthAPI {
     constructor() {
@@ -32,6 +33,19 @@ class AuthAPI {
         return this.API.post(`/api/users/inviteMailer`, data);
     }
 
+
+
+    // projectURLGet(url, params) {
+    //     return this.API.get(`/api/projects${url}`, params);
+    // }
+    //
+    // projectURLDelete(url, params) {
+    //     return this.API.delete(`/api/projects${url}`, params);
+    // }
+    //
+    // projectURLPost(url, params) {
+    //     return this.API.post(`/api/projects${url}`, params);
+    // }
 
 }
 
