@@ -1,9 +1,9 @@
-// const nodemailer = require("nodemailer");
 import * as nodemailer from 'nodemailer'
 
-const mailerService = async ( token, name, email='himanshubhatia1996@gmail.com', title='' )=> {
+const mailerService = async ( token, name, email='himanshubhatia1996@gmail.com' )=> {
 // create reusable transporter object using the default SMTP transport
-    const link= `${process.env.LOCAL_URL}${token}`;
+    const link= `${process.env.STAGING_URL}${token}`;
+    console.log('===test2===',name);
     const mailOptions = {
         from: 'ephraim.kunze3@ethereal.email', // sender address
         to: email, // list of receivers
@@ -25,7 +25,7 @@ const mailerService = async ( token, name, email='himanshubhatia1996@gmail.com',
                         <img style=" display: block; margin: 0 auto 18px;" width="46" src='https://cypherchange.s3.us-east-2.amazonaws.com/mailicon' alt="image">
                         <div style="display: inline-block;">
                             <span style="font-size: 18px; color: #777777;font-family: 'Poppins', sans-serif;letter-spacing: 0;line-height: 32px;padding-bottom: 20px">
-                                Verify email address ${title || 'test'}</span>
+                                Verify email address</span>
                             <span style="width:100%; height: 2px;background: #707070;display: block"></span>
                         </div>
                     </td>
@@ -88,6 +88,10 @@ const mailerService = async ( token, name, email='himanshubhatia1996@gmail.com',
                     reject(false);
                     return false;
                 }
+
+                console.log('Message sent: %s', info.messageId);
+                // Preview only available when sending through an Ethereal account
+                console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
                 resolve(true);
                 return true;
             });

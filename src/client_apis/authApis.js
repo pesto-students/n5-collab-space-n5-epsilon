@@ -29,6 +29,10 @@ class AuthAPI {
         return this.API.post(`/api/users/inviteUser`, data);
     }
 
+    sendInviteToUsers(data){
+        return this.API.post(`/api/users/inviteMailer`, data);
+    }
+
 
 }
 
