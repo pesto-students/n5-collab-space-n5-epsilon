@@ -45,7 +45,7 @@ const UserPanel = (props) => {
     console.log('===avaialble===', availableProjects);
     setAvailableProjectList(availableProjects)
     Auth.getAddedUsers({
-      userId: '6111674d267948b6906ee442'
+      userId: JSON.parse(localStorage.getItem('user')).id
     })
         .then(({ data }) => {
           console.log('===test===', data);
