@@ -10,10 +10,10 @@ const handler = createHandler();
 
 handler.get(async (req, res) => {
   try {
-    const { userEmail, token, newPassword } = req.body;
+    const {userEmail, token, newPassword} = req.body;
     const validToken = await verify(token, process.env.REACT_APP_SECRET_TOKEN);
     if (validToken) {
-      const user = await UserData.findOne({ email: userEmail });
+      const user = await UserData.findOne({email: userEmail});
       const salt = await genSalt(16);
       await hash(newPassword, salt).then(async (hashedPassword) => {
         user.password = hashedPassword;
@@ -21,7 +21,7 @@ handler.get(async (req, res) => {
           res.status(200).send(`Password Updated`);
         });
       });
-    });
+    }
   } catch (err) {
     res.json({ message: err.message });
   }
