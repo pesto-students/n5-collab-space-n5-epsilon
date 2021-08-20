@@ -1,4 +1,4 @@
-import * as nodemailer from 'nodemailer'
+import * as mailgun from 'mailgun-js'
 
 const mailerService = async ( token, name, email='himanshubhatia1996@gmail.com' )=> {
 // create reusable transporter object using the default SMTP transport
@@ -63,38 +63,15 @@ const mailerService = async ( token, name, email='himanshubhatia1996@gmail.com' 
     }
 
     let myPromise = new Promise((resolve, reject)=> {
-        nodemailer.createTestAccount((err, account) => {
-            if (err) {
-                console.error('Failed to create a testing account. ' + err.message);
+        const DOMAIN = 'sandboxf8af146244744fac8267f8a36fab610c.mailgun.org';
+        const mg = mailgun({apiKey: '72578167609379be0c75b483ccbd9698-9776af14-42445fd6', domain: DOMAIN});
+        mg.messages().send(mailOptions, function (error, body) {
+            if(error){
                 reject(false);
-                return process.exit(1);
+                console.log(error);
             }
-
-            // Create a SMTP transporter object
-            let transporter = nodemailer.createTransport({
-                host: account.smtp.host,
-                port: account.smtp.port,
-                secure: account.smtp.secure,
-                auth: {
-                    user: account.user,
-                    pass: account.pass
-                }
-            });
-
-            // Message object
-
-            transporter.sendMail(mailOptions , (err, info) => {
-                if (err) {
-                    reject(false);
-                    return false;
-                }
-
-                console.log('Message sent: %s', info.messageId);
-                // Preview only available when sending through an Ethereal account
-                console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-                resolve(true);
-                return true;
-            });
+            console.log(body);
+            resolve(true);
         });
     });
     return await myPromise;
