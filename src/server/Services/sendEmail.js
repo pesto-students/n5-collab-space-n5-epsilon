@@ -151,6 +151,7 @@ const mailerService = async ( token, name, email, mailType = 'invite' )=> {
     let myPromise = new Promise((resolve, reject)=> {
         const DOMAIN = 'sandboxf8af146244744fac8267f8a36fab610c.mailgun.org';
         const mg = mailgun({apiKey: '72578167609379be0c75b483ccbd9698-9776af14-42445fd6', domain: DOMAIN});
+        console.log('===test===' , name, email, mailType)
         mg.messages().send(mailType==='invite'? mailOptions : mailOptions2, function (error, body) {
             if(error){
                 reject(false);

@@ -42,13 +42,13 @@ const UserPanel = (props) => {
       }
     })
 
-    console.log('===avaialble===', availableProjects);
+    // console.log('===avaialble===', availableProjects);
     setAvailableProjectList(availableProjects)
     Auth.getAddedUsers({
       userId: JSON.parse(localStorage.getItem('user')).id
     })
         .then(({ data }) => {
-          console.log('===test===', data);
+          // console.log('===test===', data);
 
           data.forEach((project)=>{
             project.users.forEach((user)=>{
@@ -76,7 +76,7 @@ const UserPanel = (props) => {
           //   console.log('===check===', user)
           // })
 
-          console.log('===check===', userData)
+          // console.log('===check===', userData)
         })
         .catch((error) => {
         });
@@ -89,7 +89,7 @@ const UserPanel = (props) => {
       submitting: true,
     });
     Auth.sendInviteToUsers({
-      userEmail: inviteForm.email.toLowerCase(),
+      userEmail: inviteForm.email,
       projectId: inviteForm.projectId,
       userName: JSON.parse(localStorage.getItem('user')).name
     })
@@ -98,6 +98,7 @@ const UserPanel = (props) => {
           error: false,
           submitting: false,
         });
+        setShowForm(false);
       })
       .catch((error) => {
         setSubmittedForm({
@@ -195,7 +196,6 @@ const UserPanel = (props) => {
                 type="text"
                 placeholder="User Name"
                 onKeyUp={(e) => {
-                  if (e.charCode !== 13) {
                     if (!regex.nameRegex.test(e.target.value)) {
                       setSubmittedForm({
                         ...submittedForm,
@@ -209,28 +209,25 @@ const UserPanel = (props) => {
                         error: false,
                       });
                     }
-                  }
                 }}
               />
               <input
                 type="email"
                 placeholder="User Email"
                 onKeyUp={(e) => {
-                  if (e.charCode !== 13) {
                     if (!regex.emailRegex.test(e.target.value.toLowerCase())) {
                       setSubmittedForm({
                         ...submittedForm,
                         error: "Enter a valid email address",
                       });
                     } else {
-                      setInviteForm({ ...inviteForm, email: e.target.value });
                       setSubmittedForm({
                         ...submittedForm,
                         formTouched: true,
                         error: false,
                       });
                     }
-                  }
+                  setInviteForm({ ...inviteForm, email: e.target.value.toLowerCase() });
                 }}
               />
               <select
