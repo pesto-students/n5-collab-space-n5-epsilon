@@ -742,6 +742,7 @@ a {
         top: 50%;
         transform: translateY(-50%);
         text-transform: capitalize;
+        white-space: nowrap;
         &:first-letter {
           visibility: visible;
         }

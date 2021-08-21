@@ -90,9 +90,9 @@ const UserPanel = (props) => {
     });
     console.log('===test===',inviteForm);
     Auth.sendInviteToUsers({
-      userEmail: inviteForm.email,
+      userEmail: inviteForm.email.toLowerCase(),
       projectId: inviteForm.projectId,
-      userName: inviteForm.name
+      userName: JSON.parse(localStorage.getItem('user')).name
     })
       .then(({ data: response }) => {
         setSubmittedForm({

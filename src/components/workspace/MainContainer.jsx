@@ -76,6 +76,7 @@ const MainContainer = (props) => {
 
   const regex = {
     nameRegex: /^([a-zA-Z]+( [a-zA-Z]+)|[a-zA-Z]){2,50}$/,
+    description: /^.{4,}$/
   };
 
   return (
@@ -206,7 +207,7 @@ const MainContainer = (props) => {
                 placeholder="Project Name"
                 onKeyUp={(e) => {
                   if (e.charCode !== 13) {
-                    if (!regex.nameRegex.test(e.target.value)) {
+                    if (!regex.nameRegex.test(e.target.value.trim())) {
                       setSubmittedForm({
                         ...submittedForm,
                         error: "Enter a valid name",
@@ -222,11 +223,33 @@ const MainContainer = (props) => {
                   }
                 }}
               />
+              <input
+                  type="text"
+                  placeholder="Project Description"
+                  onKeyUp={(e) => {
+                    if (e.charCode !== 13) {
+                      if (!regex.description.test(e.target.value.trim())) {
+                        setSubmittedForm({
+                          ...submittedForm,
+                          error: "Enter a Some Description",
+                        });
+                      } else {
+                        setProjectForm({ ...projectForm, description: e.target.value.trim() });
+                        setSubmittedForm({
+                          ...submittedForm,
+                          formTouched: true,
+                          error: false,
+                        });
+                      }
+                    }
+                  }}
+              />
               <button
+                  className='transparent-btn'
                 disabled={
                   !submittedForm.formTouched ||
                   !!submittedForm.error ||
-                  submittedForm.submitting
+                  submittedForm.submitting || !projectForm.name || !projectForm.description
                 }
                 onClick={addProjectHandler}
               >
