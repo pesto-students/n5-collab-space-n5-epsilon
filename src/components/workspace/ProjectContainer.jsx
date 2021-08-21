@@ -12,7 +12,6 @@ function ProjectContainer({
         return (
           <Link
             key={project._id}
-            prefetch
             href={`workspace/project/${project.projectId}`}
           >
             <a

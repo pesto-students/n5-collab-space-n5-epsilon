@@ -6,10 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="103cd474-1403-40f5-96a1-636418099c6b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/workspace/user-panel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/workspace/user-panel.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client_apis/authApis.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client_apis/authApis.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client_apis/workSpaceApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client_apis/workSpaceApi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/Services/sendEmail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Services/sendEmail.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +45,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pages/api/users" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -57,6 +54,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/pages/api/users" />
       <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$" />
     </key>
@@ -83,7 +81,8 @@
       <workItem from="1629223048523" duration="7524000" />
       <workItem from="1629290020789" duration="266000" />
       <workItem from="1629314640407" duration="5008000" />
-      <workItem from="1629394513216" duration="13029000" />
+      <workItem from="1629394513216" duration="13408000" />
+      <workItem from="1629479427930" duration="15418000" />
     </task>
     <servers />
   </component>

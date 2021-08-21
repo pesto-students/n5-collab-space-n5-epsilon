@@ -39,7 +39,7 @@ const MainContainer = (props) => {
     setShowForm(false);
   };
   const deleteProjectHandler = (projectId) => {
-      debugger
+      // debugger
     const curr_project = projects.find(
       (project) => project.projectId == projectId
     );

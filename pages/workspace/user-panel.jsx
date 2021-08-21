@@ -45,7 +45,7 @@ const UserPanel = (props) => {
     console.log('===avaialble===', availableProjects);
     setAvailableProjectList(availableProjects)
     Auth.getAddedUsers({
-      userId: '6111674d267948b6906ee442'
+      userId: JSON.parse(localStorage.getItem('user')).id
     })
         .then(({ data }) => {
           console.log('===test===', data);
@@ -88,9 +88,11 @@ const UserPanel = (props) => {
     setSubmittedForm({
       submitting: true,
     });
-    Auth.getAddedUsers({
-      // userId: JSON.parse(localStorage.getItem('user')).id,
-      userId: '611b305bb5aba21c6a3bb31f'
+    console.log('===test===',inviteForm);
+    Auth.sendInviteToUsers({
+      userEmail: inviteForm.email,
+      projectId: inviteForm.projectId,
+      userName: inviteForm.name
     })
       .then(({ data: response }) => {
         setSubmittedForm({
