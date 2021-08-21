@@ -13,12 +13,13 @@ export default function ConformationPopUp({
       <div className={styles.pop_up_actions}>
         <div className={styles.accept_action}>
           <button className="transparent-btn" onClick={onAcceptHandler}>
-            accept
+            Accept
           </button>
+          
         </div>
         <div className={styles.close_pop_up_actions}>
-          <button className="transparent-btn" onClick={onCancelHandler}>
-            close
+          <button className="transparent-btn transparent-close-button" onClick={onCancelHandler}>
+            Close
           </button>
         </div>
       </div>

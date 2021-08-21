@@ -39,7 +39,7 @@ const ProjectPage = () => {
   const [tab, setTab] = useState("TaskList");
   const [layout, setLayout] = useState("");
   const [taskTypeFilter, setTaskTypeFilter] = useState("");
-  const [taskTagFilter, setTaskTagFilter] = useState('');
+  const [taskTagFilter, setTaskTagFilter] = useState("");
   const [taskAssignedFilter, setTaskAssignedFilter] = useState("");
   const [submittedForm, setSubmittedForm] = useState({
     formTouched: false,
@@ -119,7 +119,6 @@ const ProjectPage = () => {
   useEffect(() => {
     setLayout(localStorage.getItem("task-layout") || "vertical");
 
-
     const taskLNames = [];
     const taskTNames = {};
 
@@ -131,16 +130,14 @@ const ProjectPage = () => {
 
       Object.keys(taskLists[taskListId].task).map((singleTask) => {
         // console.log('===test===', taskLists[taskListId].taskListName, taskLists[taskListId].task[singleTask].tags);
-        taskLists[taskListId].task[singleTask].tags.forEach(tag=>{
-          taskTNames[tag]= true;
-        })
+        taskLists[taskListId].task[singleTask].tags.forEach((tag) => {
+          taskTNames[tag] = true;
+        });
       });
-
     });
     setTaskTagNames(taskTNames);
     setTaskListsName(taskLNames);
-    console.log('===test===', taskTNames);
-
+    console.log("===test===", taskTNames);
   }, [taskLists]);
 
   return (
@@ -148,10 +145,7 @@ const ProjectPage = () => {
       {userRole && (
         <div className="mainContainerBody">
           <NoSSR>
-            <WorkSpaceTitle
-              title={projectInfo.projectName}
-              isProject={true}
-            />
+            <WorkSpaceTitle title={projectInfo.projectName} isProject={true} />
             <div className="project-data">
               <div className="tab-list">
                 <span
@@ -179,7 +173,7 @@ const ProjectPage = () => {
                 >
                   <DragDropContext onDragEnd={onDragEnd}>
                     <div className="top-panel-row">
-                      <div className='filter-box'>
+                      <div className="filter-box">
                         <div className="filter-wrapper">
                           <p>Task Type</p>
                           <select
@@ -203,20 +197,17 @@ const ProjectPage = () => {
                         <div className="filter-wrapper">
                           <p>Tag Type</p>
                           <select
-                              onChange={(e) => setTaskTagFilter(e.target.value)}
+                            onChange={(e) => setTaskTagFilter(e.target.value)}
                           >
                             <option value="any">Any</option>
                             {Object.keys(taskTagNames).length &&
-                            Object.keys(taskTagNames).map((tagName) => {
-                              return (
-                                  <option
-                                      key={tagName}
-                                      value={tagName}
-                                  >
+                              Object.keys(taskTagNames).map((tagName) => {
+                                return (
+                                  <option key={tagName} value={tagName}>
                                     {tagName}
                                   </option>
-                              );
-                            })}
+                                );
+                              })}
                           </select>
                         </div>
                       </div>
@@ -343,9 +334,9 @@ const ProjectPage = () => {
                   </DragDropContext>
                 </div>
               )}
-              {tab === "Description" && <div className="description">
-                {projectInfo.description}
-              </div>}
+              {tab === "Description" && (
+                <div className="description">{projectInfo.description}</div>
+              )}
             </div>
             <ToastContainer autoClose={2000} />
             {showForm && (
@@ -381,7 +372,7 @@ const ProjectPage = () => {
                       }}
                     />
                     <button
-                        className='transparent-btn'
+                      className="transparent-btn"
                       disabled={
                         !submittedForm.formTouched ||
                         !!submittedForm.error ||

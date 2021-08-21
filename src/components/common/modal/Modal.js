@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import PropTypes from "prop-types";
+import CrossIcon from "../../layouts/iconComponents/CrossIcon";
 
 function Modal(props) {
   const ref = useRef();
@@ -24,7 +25,7 @@ function Modal(props) {
           ) : null}
           {props.showCloseButton ? (
             <p className={styles.close_modal} onClick={props.closeCallback}>
-              x
+              <CrossIcon width={15} />
             </p>
           ) : null}
         </div>

@@ -84,12 +84,12 @@ a {
     //border-bottom: 0;
     background: transparent;
   }
-  &:disabled{
+  &:disabled {
     pointer-events: none;
   }
 }
-.transparent-btn .grey{
-  background: #ebeef5;
+.transparent-close-button {
+  background: #eeeff0;
 }
 
 .sideLayoutPanel {
@@ -101,7 +101,7 @@ a {
   @media (max-width: 767px) {
     width: 100%;
     height: 100px;
-    img{
+    img {
       display: none;
     }
   }
@@ -126,6 +126,7 @@ a {
   }
   .sideNavStaticList {
     padding: 0;
+    margin-top: 5px;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -143,8 +144,8 @@ a {
       cursor: pointer;
       border-bottom: 1px solid white;
       padding: 20px 0 20px 20px;
-      &.active{
-        color: #004cff;
+      &.active {
+        color: #8c52ff;
       }
       @media (max-width: 767px) {
         padding: 20px;
@@ -187,7 +188,7 @@ a {
       }
       &:hover {
         color: #5d2bff;
-        background: #89eee69e;
+        background: #f4f5f7;
         svg {
           path {
             fill: #5d2bff;
@@ -202,10 +203,10 @@ a {
     justify-content: center;
     padding: 20px;
     font-weight: 500;
-    &:hover{
+    &:hover {
       background: #9771ef;
-      svg{
-        path{
+      svg {
+        path {
           fill: #00e1ff;
         }
       }
@@ -270,7 +271,7 @@ a {
         border: 1px solid #ccc;
         font-family: inherit;
       }
-      select{
+      select {
         width: 100%;
         padding: 15px;
         margin: 10px 0;
@@ -278,7 +279,7 @@ a {
         border: 1px solid #ccc;
         font-family: inherit;
         color: #00000082;
-        &.selected{
+        &.selected {
           color: #000;
         }
       }
@@ -579,10 +580,9 @@ a {
   height: calc(100% - 90px);
   h4 {
     width: 100%;
-    border-bottom: 1px solid #ECECEC;
+    border-bottom: 1px solid #ececec;
     margin: 20px 0 0;
     padding-bottom: 20px;
-
   }
 
   .user-list {
@@ -700,16 +700,16 @@ a {
         }
       }
     }
-    .empty-box{
+    .empty-box {
       position: relative;
       height: calc(100% - 55px);
-      h1{
+      h1 {
         text-align: center;
         margin: 0;
         padding: 20px;
         font-size: 20px;
         font-family: monospace;
-        span{
+        span {
           display: block;
           font-size: 15px;
           font-family: fantasy;
@@ -718,7 +718,7 @@ a {
           color: #8c53ff;
         }
       }
-      img{
+      img {
         max-height: 100%;
         max-width: 100%;
       }
@@ -775,9 +775,9 @@ a {
   justify-content: space-between;
   padding: 0 30px 30px 50px;
 
-  .filter-box{
+  .filter-box {
     display: flex;
-    .filter-wrapper{
+    .filter-wrapper {
       margin-right: 20px;
     }
   }
@@ -827,15 +827,30 @@ a {
   &.grid {
     .user-projects {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       grid-gap: 32px;
       grid-auto-flow: row;
       overflow: visible;
+      
+      .delete{
+        display:none;
+      }
       .projectCard {
-        width: 180px;
-        height: 180px;
+        width: 300px;
+        height: 300px;
         h5 {
-          -webkit-line-clamp: 4 !important;
+          font-size: 12.5px;
+          font-weight: 500;
+          color: rgb(65, 62, 62);
+          -webkit-line-clamp: 10 !important;
+          text-align: start;
+          word-spacing: 0.03em;
+          word-break: break-all;
+        }
+        &:hover {
+          .delete{
+            display: block;
+          }
         }
       }
       &.center {
@@ -859,19 +874,21 @@ a {
 .user-projects {
   display: grid;
   grid-gap: 16px;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-auto-flow: column;
-  grid-auto-columns: minmax(160px, 1fr);
+  grid-auto-columns: minmax(300px, 1fr);
   overflow-x: auto;
   padding: 22px 10px;
 
   .projectCard {
     border-radius: 10px;
+    cursor: pointer;
     text-align: center;
     box-shadow: 3px 8px 14px #a7a6a6;
     width: auto;
-    max-width: 200px;
+    max-width: 500px;
     position: relative;
+    height: 200px;
     &.shared {
       h2 {
         padding-top: 10px;
@@ -881,20 +898,23 @@ a {
       }
     }
     h2 {
-      padding: 40px 15px 10px;
+      font-weight: 320;
+      padding: 20px 15px 10px;
       margin: 0;
       white-space: nowrap;
       width: 100%;
       overflow: hidden;
       text-overflow: ellipsis;
       text-transform: lowercase;
-      &:first-letter{
+      &:first-letter {
         text-transform: capitalize;
       }
     }
     h5 {
       display: -webkit-box;
-      -webkit-line-clamp: 1;
+      -webkit-line-clamp: 4;
+      text-align: start;
+      word-break: break-all;
       -webkit-box-orient: vertical;
       overflow: hidden;
       padding: 0 15px;
@@ -902,6 +922,7 @@ a {
       font-family: monospace;
     }
     .delete {
+      display:none;
       top: 8px;
     }
     .leave {
@@ -920,6 +941,11 @@ a {
       svg {
         height: 100%;
         width: 100%;
+      }
+    }
+    &:hover{
+      .delete{
+        display: block;
       }
     }
   }
@@ -1037,7 +1063,7 @@ a {
             text-overflow: ellipsis;
             max-width: calc(100% - 45px);
             text-transform: lowercase;
-            &:first-letter{
+            &:first-letter {
               text-transform: capitalize;
             }
             span {
@@ -1175,7 +1201,7 @@ a {
     background: #fff;
     border-radius: 10px;
     overflow: hidden;
-    span{
+    span {
       position: relative;
       padding: 15px;
       cursor: pointer;
@@ -1183,16 +1209,16 @@ a {
       display: flex;
       text-transform: capitalize;
       transition: 0.2s;
-      &:nth-last-of-type(1){
+      &:nth-last-of-type(1) {
         margin-bottom: 0;
       }
-      &:hover{
+      &:hover {
         background: rgb(179, 157, 219);
       }
-      img{
+      img {
         margin-right: 10px;
       }
-      &:after{
+      &:after {
         content: "";
         position: absolute;
         height: 9px;
@@ -1213,55 +1239,55 @@ a {
     border-radius: 10px;
     overflow: hidden;
 
-    .tab{
-      h1{
-        border-bottom: 1px solid #ECECEC;
+    .tab {
+      h1 {
+        border-bottom: 1px solid #ececec;
         margin: 0;
         padding: 20px 25px 20px;
       }
-      .content-wrapper{
+      .content-wrapper {
         padding: 10px 25px 20px;
       }
-      .input-wrapper{
+      .input-wrapper {
         position: relative;
         width: 100%;
         max-width: 250px;
-        input{
-          background-color: #F6F6F6;
+        input {
+          background-color: #f6f6f6;
           border-radius: 10px;
           border: 1px solid #0000001f;
           padding: 15px 35px 15px 10px;
           width: 100%;
         }
-        .eye{
+        .eye {
           position: absolute;
           top: 50%;
           transform: translateY(-50%);
           right: 10px;
           cursor: pointer;
-          &:before{
+          &:before {
             content: url("https://api.iconify.design/bi/eye-slash.svg?color=%235d2bff");
           }
-          &:after{
+          &:after {
             content: url("https://api.iconify.design/bi/eye.svg?color=%235d2bff");
             opacity: 0;
             position: absolute;
             left: 0;
           }
-          &.show{
-            &:after{
+          &.show {
+            &:after {
               opacity: 1;
             }
-            &:before{
+            &:before {
               opacity: 0;
             }
           }
         }
       }
-      .error-space{
-        color: #ACACAC;
+      .error-space {
+        color: #acacac;
         font-size: 16px;
-        &.error{
+        &.error {
           color: red;
         }
       }

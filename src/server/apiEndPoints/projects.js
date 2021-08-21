@@ -304,7 +304,7 @@ export async function addUserToProject(inviteUserInfo) {
         userId: Types.ObjectId(User._id),
       }).exec();
       console.log("checkContribution", checkContribution);
-      if (checkContribution) {
+      if (checkContribution.length) {
         return { error: "User already exists" };
       }
       const newContribution = new Contributions({

@@ -15,7 +15,7 @@ const navButtons = [
     icon: <UserIcon />,
   },
   {
-    label: "setting",
+    label: "Settings",
     path: "/workspace/setting",
     icon: <SettingIcon />,
   },

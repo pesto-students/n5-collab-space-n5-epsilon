@@ -21,6 +21,7 @@
     }
     .task_description {
       height: 20vh;
+      margin-top: 60px;
       p {
         overflow-wrap: break-word;
         max-width: 44vw;
@@ -203,6 +204,7 @@
   margin: 20px 20px 20px 30px;
   h1 {
     font-size: x-large;
+    font-weight: 250px;
     color: rgb(133 73 255 / 95%);
   }
   input {

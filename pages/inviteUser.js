@@ -22,7 +22,7 @@ inviteUser.getLayout = getEmptyLayout;
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) =>
     async ({ req, params }) => {
-      console.log("req.query", req.__NEXT_INIT_QUERY);
+      console.log("getServerSideProps", req.__NEXT_INIT_QUERY);
       const { userEmail, projectId } = req.__NEXT_INIT_QUERY;
       if (!req.cookies.token)
         return {

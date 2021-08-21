@@ -40,7 +40,7 @@ export default function TaskHeader({
             >
               {taskInfo.taskName
                 ? taskInfo.taskName
-                : "Double click here to add a task's title"}
+                : "Double Click To Add  Title"}
             </h1>
           ) : (
             <div className={styles.edit_description}>
