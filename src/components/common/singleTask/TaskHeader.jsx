@@ -40,7 +40,7 @@ export default function TaskHeader({
             >
               {taskInfo.taskName
                 ? taskInfo.taskName
-                : "double click here to add a taskName"}
+                : "Double click here to add a task's title"}
             </h1>
           ) : (
             <div className={styles.edit_description}>
@@ -80,7 +80,7 @@ export default function TaskHeader({
             >
               {taskInfo.description
                 ? taskInfo.description
-                : "double click here to add a description"}
+                : "Double click here to add a description"}
             </p>
           ) : (
             <div className={styles.edit_description}>

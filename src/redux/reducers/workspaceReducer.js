@@ -31,10 +31,9 @@ const WorkSpaceReducer = (state = initialState, action) => {
       }
 
       case DELETE_PROJECT: {
-        const newDraft = original(draft);
-        const projectIndex = newDraft.projects.findIndex(
-          (project) => project._id == payload.projectId
-        );
+        const projectIndex = draft.projects.findIndex((project) => {
+          return project.projectId == payload.projectId;
+        });
         draft.projects.splice(projectIndex, 1);
         break;
       }
