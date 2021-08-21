@@ -1,6 +1,6 @@
 import * as mailgun from 'mailgun-js'
 
-const mailerService = async ( token, name, email='himanshubhatia1996@gmail.com', mailType = 'invite' )=> {
+const mailerService = async ( token, name, email, mailType = 'invite' )=> {
 // create reusable transporter object using the default SMTP transport
     const link= `${process.env.STAGING_URL}${token}`;
 
