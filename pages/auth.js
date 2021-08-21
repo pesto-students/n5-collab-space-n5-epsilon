@@ -4,8 +4,16 @@ import SignUpForm from "../src/components/Auth-Components/signUp-form";
 import ForgotPasswordForm from "../src/components/Auth-Components/forgotPassword-form";
 import { getLayout as getEmptyLayout } from "../src/components/layouts/EmptyLayout";
 import cookie from "js-cookie";
+import { useRouter } from "next/router";
 
 export default function Authentication() {
+  const router = useRouter();
+  const token = cookie.get("token");
+  console.log("token: " + token);
+  if (token) {
+    router.push("/workspace");
+  }
+
   const regex = {
     emailRegex:
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i,
@@ -31,7 +39,6 @@ export default function Authentication() {
       });
     }, 1000);
   }
-  cookie.remove("token");
 
   return (
     <section className={`container ${stateChanging ? "stop" : "active"}`}>

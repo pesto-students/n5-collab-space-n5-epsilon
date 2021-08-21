@@ -18,7 +18,7 @@ export default Workspace;
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) =>
     async ({ req, params }) => {
-      console.log("this came here");
+      console.log("this came here", req.cookies);
       if (!req.cookies.token)
         return {
           redirect: {
