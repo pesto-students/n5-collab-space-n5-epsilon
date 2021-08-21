@@ -27,11 +27,15 @@ const ProjectPage = () => {
   resetServerContext();
   const router = useRouter();
   const dispatch = useDispatch();
-  const projectInfo = useSelector((state) => state.ProjectReducer.projectInfo);
+  const projectPageState = useSelector((state) => state.ProjectReducer);
+  const projectInfo = projectPageState.projectInfo;
+  const loading = projectPageState.loading;
+  const is_404 = projectPageState.is_404;
+
   const userRole = projectInfo.roleInfo.name;
   const userPermission = projectInfo.roleInfo;
   const { projectId } = router.query;
-  const { taskLists, taskListsOrder, loading } = projectInfo;
+  const { taskLists, taskListsOrder } = projectInfo;
   const [tab, setTab] = useState("TaskList");
   const [layout, setLayout] = useState("");
   const [taskTypeFilter, setTaskTypeFilter] = useState("");
@@ -47,7 +51,7 @@ const ProjectPage = () => {
   const regex = {
     nameRegex: /^([a-zA-Z]+( [a-zA-Z]+)|[a-zA-Z]){2,50}$/,
   };
-  const [taskListsName, setTaskListsName] = useState([])
+  const [taskListsName, setTaskListsName] = useState([]);
   const addTaskListHandler = () => {
     setTaskListName("");
     setSubmittedForm({
@@ -63,10 +67,12 @@ const ProjectPage = () => {
       return;
     }
     if (result.destination.droppableId === "delete") {
-        dispatch(deleteTask({
-            taskId: result.draggableId,
-            taskListId: result.source.droppableId,
-        }));
+      dispatch(
+        deleteTask({
+          taskId: result.draggableId,
+          taskListId: result.source.droppableId,
+        })
+      );
       return;
     }
     if (result.destination.droppableId === result.source.droppableId) {
@@ -112,13 +118,12 @@ const ProjectPage = () => {
   useEffect(() => {
     setLayout(localStorage.getItem("task-layout") || "vertical");
 
-      const taskLNames = []
-    Object.keys(taskLists).map((taskListId)=>{
-        if(!taskLNames.includes(taskLists[taskListId].taskListName))
-           taskLNames.push(taskLists[taskListId].taskListName);
+    const taskLNames = [];
+    Object.keys(taskLists).map((taskListId) => {
+      if (!taskLNames.includes(taskLists[taskListId].taskListName))
+        taskLNames.push(taskLists[taskListId].taskListName);
     });
-      setTaskListsName(taskLNames)
-
+    setTaskListsName(taskLNames);
   }, [taskLists]);
 
   return (
@@ -164,11 +169,18 @@ const ProjectPage = () => {
                           <select
                             onChange={(e) => setTaskTypeFilter(e.target.value)}
                           >
-                              <option value='any'>Any</option>
-                              {taskListsName.length && taskListsName.map((taskListName) => {
-                                 return <option key={taskListName} value={taskListName}>{taskListName}</option>
-                              })
-                              }
+                            <option value="any">Any</option>
+                            {taskListsName.length &&
+                              taskListsName.map((taskListName) => {
+                                return (
+                                  <option
+                                    key={taskListName}
+                                    value={taskListName}
+                                  >
+                                    {taskListName}
+                                  </option>
+                                );
+                              })}
                           </select>
                         </div>
                       </div>
@@ -383,6 +395,16 @@ export const getServerSideProps = wrapper.getServerSideProps(
         await store.dispatch(
           getProjectInfo({ projectId: params.projectId, cookies: req.cookies })
         );
+
+        const projectReducer = store.getState().ProjectReducer;
+        if (projectReducer.is_404) {
+          return {
+            redirect: {
+              destination: "/workspace",
+              permanent: false,
+            },
+          };
+        }
       } else {
         return {
           redirect: {

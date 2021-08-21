@@ -2,6 +2,7 @@ import produce, { original } from "immer";
 import {
   DELETE_PROJECT,
   GET_PROJECT_INFO,
+  GET_PROJECT_INFO_FAILURE,
   UPDATE_PROJECT,
 } from "../constants/projectActionConstants";
 import {
@@ -24,6 +25,7 @@ import {
 export const initialState = {
   projectInfo: {},
   loading: true,
+  is_404: false,
 };
 
 function move(input, from, to) {
@@ -108,6 +110,10 @@ const ProjectReducer = (state = initialState, action) => {
       }
       case GET_PROJECT_INFO: {
         draft.projectInfo = payload;
+        break;
+      }
+      case GET_PROJECT_INFO_FAILURE: {
+        draft.is_404 = true;
         break;
       }
       case CHANGE_TASK_ORDER: {
