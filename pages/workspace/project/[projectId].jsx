@@ -39,7 +39,7 @@ const ProjectPage = () => {
   const [tab, setTab] = useState("TaskList");
   const [layout, setLayout] = useState("");
   const [taskTypeFilter, setTaskTypeFilter] = useState("");
-  const [taskTagFilter, setTaskTagFilter] = useState("");
+  const [taskTagFilter, setTaskTagFilter] = useState('');
   const [taskAssignedFilter, setTaskAssignedFilter] = useState("");
   const [submittedForm, setSubmittedForm] = useState({
     formTouched: false,
@@ -52,6 +52,7 @@ const ProjectPage = () => {
     nameRegex: /^([a-zA-Z]+( [a-zA-Z]+)|[a-zA-Z]){2,50}$/,
   };
   const [taskListsName, setTaskListsName] = useState([]);
+  const [taskTagNames, setTaskTagNames] = useState({});
   const addTaskListHandler = () => {
     setTaskListName("");
     setSubmittedForm({
@@ -118,12 +119,28 @@ const ProjectPage = () => {
   useEffect(() => {
     setLayout(localStorage.getItem("task-layout") || "vertical");
 
+
     const taskLNames = [];
+    const taskTNames = {};
+
     Object.keys(taskLists).map((taskListId) => {
-      if (!taskLNames.includes(taskLists[taskListId].taskListName))
+      if (!taskLNames.includes(taskLists[taskListId].taskListName)) {
         taskLNames.push(taskLists[taskListId].taskListName);
+      }
+      // console.log('===test===', taskLists[taskListId].taskListName, taskLists[taskListId]);
+
+      Object.keys(taskLists[taskListId].task).map((singleTask) => {
+        // console.log('===test===', taskLists[taskListId].taskListName, taskLists[taskListId].task[singleTask].tags);
+        taskLists[taskListId].task[singleTask].tags.forEach(tag=>{
+          taskTNames[tag]= true;
+        })
+      });
+
     });
+    setTaskTagNames(taskTNames);
     setTaskListsName(taskLNames);
+    console.log('===test===', taskTNames);
+
   }, [taskLists]);
 
   return (
@@ -133,7 +150,6 @@ const ProjectPage = () => {
           <NoSSR>
             <WorkSpaceTitle
               title={projectInfo.projectName}
-              description={projectInfo.description}
               isProject={true}
             />
             <div className="project-data">
@@ -147,12 +163,12 @@ const ProjectPage = () => {
                   Tasks
                 </span>
                 <span
-                  className={`${tab === "Notes" && "active"}`}
+                  className={`${tab === "Description" && "active"}`}
                   onClick={() => {
-                    setTab("Notes");
+                    setTab("Description");
                   }}
                 >
-                  Notes
+                  Description
                 </span>
               </div>
               {tab === "TaskList" && (
@@ -163,7 +179,7 @@ const ProjectPage = () => {
                 >
                   <DragDropContext onDragEnd={onDragEnd}>
                     <div className="top-panel-row">
-                      <div>
+                      <div className='filter-box'>
                         <div className="filter-wrapper">
                           <p>Task Type</p>
                           <select
@@ -181,6 +197,26 @@ const ProjectPage = () => {
                                   </option>
                                 );
                               })}
+                          </select>
+                        </div>
+
+                        <div className="filter-wrapper">
+                          <p>Tag Type</p>
+                          <select
+                              onChange={(e) => setTaskTagFilter(e.target.value)}
+                          >
+                            <option value="any">Any</option>
+                            {Object.keys(taskTagNames).length &&
+                            Object.keys(taskTagNames).map((tagName) => {
+                              return (
+                                  <option
+                                      key={tagName}
+                                      value={tagName}
+                                  >
+                                    {tagName}
+                                  </option>
+                              );
+                            })}
                           </select>
                         </div>
                       </div>
@@ -307,7 +343,9 @@ const ProjectPage = () => {
                   </DragDropContext>
                 </div>
               )}
-              {tab === "TaskList" && <div className="notes" />}
+              {tab === "Description" && <div className="description">
+                {projectInfo.description}
+              </div>}
             </div>
             <ToastContainer autoClose={2000} />
             {showForm && (
@@ -343,6 +381,7 @@ const ProjectPage = () => {
                       }}
                     />
                     <button
+                        className='transparent-btn'
                       disabled={
                         !submittedForm.formTouched ||
                         !!submittedForm.error ||
@@ -359,7 +398,7 @@ const ProjectPage = () => {
                         setShowForm(false);
                       }}
                     >
-                      Add Project
+                      Add Task List
                     </button>
                     {submittedForm.error && (
                       <p className="error">{submittedForm.error}</p>

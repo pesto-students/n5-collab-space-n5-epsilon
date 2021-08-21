@@ -7,7 +7,8 @@ export default function ForgotPasswordForm(props) {
   const [formData, setFormData] = useState({
     password: "",
   });
-  const [emailSent, setemailSent] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
+  // const [form]
 
   function submit() {
     props.setFormStatus({
@@ -19,6 +20,7 @@ export default function ForgotPasswordForm(props) {
           error: false,
           submitting: false,
         });
+          setEmailSent(true);
       })
       .catch((error) => {
         props.setFormStatus({
@@ -75,9 +77,9 @@ export default function ForgotPasswordForm(props) {
           Forgot Password
         </span>
       </div>
-      <div className="forgot-message">
+        {emailSent && <div className="forgot-message">
         An email has been sent to your registered mail to reset the password
-      </div>
+      </div>}
     </form>
   );
 }

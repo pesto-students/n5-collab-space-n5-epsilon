@@ -208,42 +208,38 @@ const MainContainer = ({toggleLoading}) => {
                 type="text"
                 placeholder="Project Name"
                 onKeyUp={(e) => {
-                  if (e.charCode !== 13) {
                     if (!regex.nameRegex.test(e.target.value.trim())) {
                       setSubmittedForm({
                         ...submittedForm,
                         error: "Enter a valid name",
                       });
                     } else {
-                      setProjectForm({ ...projectForm, name: e.target.value });
                       setSubmittedForm({
                         ...submittedForm,
                         formTouched: true,
                         error: false,
                       });
                     }
-                  }
+                  setProjectForm({ ...projectForm, name: e.target.value.trim()});
                 }}
               />
               <input
                   type="text"
                   placeholder="Project Description"
                   onKeyUp={(e) => {
-                    if (e.charCode !== 13) {
                       if (!regex.description.test(e.target.value.trim())) {
                         setSubmittedForm({
                           ...submittedForm,
                           error: "Enter a Some Description",
                         });
                       } else {
-                        setProjectForm({ ...projectForm, description: e.target.value.trim() });
                         setSubmittedForm({
                           ...submittedForm,
                           formTouched: true,
                           error: false,
                         });
                       }
-                    }
+                    setProjectForm({ ...projectForm, description: e.target.value.trim() });
                   }}
               />
               <button

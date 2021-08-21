@@ -88,7 +88,6 @@ const UserPanel = (props) => {
     setSubmittedForm({
       submitting: true,
     });
-    console.log('===test===',inviteForm);
     Auth.sendInviteToUsers({
       userEmail: inviteForm.email.toLowerCase(),
       projectId: inviteForm.projectId,
@@ -235,6 +234,7 @@ const UserPanel = (props) => {
                 }}
               />
               <select
+                  className={`${ inviteForm.projectId? 'selected':''}`}
                   onChange={(e) =>  setInviteForm({ ...inviteForm, projectId: e.target.value })}
               >
                 <option value='any'>Any</option>
@@ -244,6 +244,7 @@ const UserPanel = (props) => {
                 }
               </select>
               <button
+                  className='transparent-btn'
                 disabled={
                   !submittedForm.formTouched ||
                   !!submittedForm.error ||
