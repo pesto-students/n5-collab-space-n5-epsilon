@@ -38,7 +38,6 @@ export default function ForgotPasswordForm(props) {
         type="email"
         placeholder="Email"
         onKeyUp={(e) => {
-          if (e.charCode !== 13) {
             if (!props.regex.emailRegex.test(e.target.value.toLowerCase())) {
               props.setFormStatus({
                 ...props.formStatus,
@@ -52,7 +51,6 @@ export default function ForgotPasswordForm(props) {
                 error: false,
               });
             }
-          }
         }}
       />
       <div className="bottom-row">

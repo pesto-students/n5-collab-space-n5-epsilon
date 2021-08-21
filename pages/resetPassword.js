@@ -1,10 +1,10 @@
 import { getLayout as getEmptyLayout } from "../src/components/layouts/EmptyLayout";
 import styles from "../styles/Home.module.scss";
 import React, {useState} from "react";
-import Authentication from "./auth";
 import {useRouter} from "next/router";
 import cookie from "js-cookie";
 import AuthAPI from "../src/client_apis/authApis";
+import Link from "next/link";
 
 
 export default function ResetPassword() {
@@ -27,7 +27,7 @@ export default function ResetPassword() {
         input1: false,
         input2: false
     });
-    const [resetComplete, setResetComplete] =useState(false)
+    const [resetComplete, setResetComplete] =useState(true)
 
     const regex = {
         passwordRegex: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[ !"#\$%&'\(\)*+,-./:;<=>?@\[\\\]^_`{|}~]).{8,}$/,
@@ -42,7 +42,7 @@ export default function ResetPassword() {
         setSubmittedForm({
             submitting: true,
         });
-        Auth.updatePassword({
+        Auth.resetPassword({
             token: key,
             password: newPassword
         })
@@ -52,9 +52,6 @@ export default function ResetPassword() {
                     submitting: false,
                 });
                 setResetComplete(true)
-                setTimeout(()=>{
-                    router.push("/auth");
-                }, 3000);
             })
             .catch((error) => {
                 setSubmittedForm({
@@ -120,6 +117,9 @@ export default function ResetPassword() {
 
                       {resetComplete && <div className="final-message">
                          You password has been reset.<br/>Please SignIn with your new password.
+                          <Link href="/auth">
+                              <a className='btn'> SignIn </a>
+                          </Link>
                       </div>}
                   </div>
               </div>

@@ -3,7 +3,6 @@ import * as mailgun from 'mailgun-js'
 const mailerService = async ( token, name, email='himanshubhatia1996@gmail.com', mailType = 'invite' )=> {
 // create reusable transporter object using the default SMTP transport
     const link= `${process.env.STAGING_URL}${token}`;
-    console.log('===test2===',name);
 
     const invite = `<table style="background-color:#f4f5f7;width: 100%; text-align: center; padding-bottom: 7%;">
     <thead>

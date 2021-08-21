@@ -16,6 +16,8 @@ a {
   box-sizing: border-box;
 }
 
+
+
 .default-btn {
   background: #5d2bff;
   color: #fff;
@@ -40,7 +42,50 @@ a {
     }
   }
 }
-
+.btn {
+  overflow: hidden;
+  position: relative;
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 7px 10px 9px;
+  transition: border-color 0.3s, color 0.3s;
+  cursor: pointer;
+  font-size: 14px;
+  display: inline-block;
+  font-family: Arial;
+  z-index: 0;
+  transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+  &.disable {
+    opacity: 0.5;
+    color: rgba(16, 16, 16, 0.65);
+    background-color: rgba(239, 239, 239, 0.3);
+    pointer-events: none;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150%;
+    height: 100%;
+    background: #37474f;
+    z-index: -1;
+    transform: rotate3d(0, 0, 1, -45deg) translate3d(0, -3em, 0);
+    transform-origin: 0% 100%;
+    transition: transform 0.3s, opacity 0.3s, background-color 0.3s;
+  }
+  &:hover {
+    color: #fff;
+    border-color: #3f51b5;
+    opacity: 1;
+    &::before {
+      opacity: 1;
+      background-color: #3f51b5;
+      transform: rotate3d(0, 0, 1, 0deg);
+      transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+    }
+  }
+}
 .transparent-btn {
   border: 2px solid #5d2cff00;
   -webkit-transition: all 0.4s cubic-bezier(0.5, 0.24, 0, 1);
@@ -91,6 +136,8 @@ a {
 .transparent-btn .grey{
   background: #ebeef5;
 }
+
+
 
 .sideLayoutPanel {
   height: 100vh;
@@ -448,9 +495,15 @@ a {
       left: 0;
       height: 100%;
       width: 100%;
-      background: #fff;
       align-items: center;
       text-align: center;
+      background: #f4f5f7;
+      flex-direction: column;
+      justify-content: center;
+      line-height: 23px;
+      .btn{
+        margin-top: 30px;
+      }
     }
   }
 
@@ -472,49 +525,6 @@ a {
     width: 140px;
     z-index: 20;
     transition: all 0.5s ease 0.1s;
-  }
-
-  .btn {
-    overflow: hidden;
-    position: relative;
-    border: 1px solid;
-    border-radius: 5px;
-    padding: 7px 10px 9px;
-    transition: border-color 0.3s, color 0.3s;
-    cursor: pointer;
-    font-size: 14px;
-    display: inline-block;
-    font-family: Arial;
-    transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-    &.disable {
-      opacity: 0.5;
-      color: rgba(16, 16, 16, 0.65);
-      background-color: rgba(239, 239, 239, 0.3);
-    }
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 150%;
-      height: 100%;
-      background: #37474f;
-      z-index: -1;
-      transform: rotate3d(0, 0, 1, -45deg) translate3d(0, -3em, 0);
-      transform-origin: 0% 100%;
-      transition: transform 0.3s, opacity 0.3s, background-color 0.3s;
-    }
-    &:hover {
-      color: #fff;
-      border-color: #3f51b5;
-      opacity: 1;
-      &::before {
-        opacity: 1;
-        background-color: #3f51b5;
-        transform: rotate3d(0, 0, 1, 0deg);
-        transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
-      }
-    }
   }
 
   .error {

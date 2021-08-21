@@ -21,8 +21,12 @@ class AuthAPI {
         return this.API.post(`/api/auth/forgotPassword`, data);
     }
 
-    updatePassword(data) {
-        return this.API.post(`/api/auth/updatePassword`, data);
+    // updatePassword(data) {
+    //     return this.API.post(`/api/auth/updatePassword`, data);
+    // }
+
+    resetPassword(data) {
+        return this.API.post(`/api/auth/resetPassword`, data);
     }
 
     getAddedUsers(data){

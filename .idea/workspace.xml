@@ -6,10 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="103cd474-1403-40f5-96a1-636418099c6b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/auth/forgotPassword.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/auth/forgotPassword.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/auth/resetPassword.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/auth/resetPassword.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/resetPassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/resetPassword.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client_apis/authApis.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client_apis/authApis.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Auth-Components/forgotPassword-form.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Auth-Components/forgotPassword-form.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/Services/sendEmail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Services/sendEmail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/Home.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Home.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -87,7 +88,7 @@
       <workItem from="1629290020789" duration="266000" />
       <workItem from="1629314640407" duration="5008000" />
       <workItem from="1629394513216" duration="13408000" />
-      <workItem from="1629479427930" duration="32433000" />
+      <workItem from="1629479427930" duration="34379000" />
     </task>
     <servers />
   </component>
