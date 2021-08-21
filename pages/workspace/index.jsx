@@ -3,12 +3,23 @@ import { getWorkspaceProject } from "../../src/redux/actions/workSpaceActions";
 import { wrapper } from "../../src/redux/store";
 import { verify } from "jsonwebtoken";
 import TourGuide from "../../src/components/TourGuide";
+import Spinner from "../../src/components/common/contentLoader/spinningCircleLoader";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const Workspace = () => {
+  const loading = useSelector((state) => state.WorkSpaceReducer.loading);
+  const dispatch = useDispatch();
+
+  const toggleLoading = (setLoadingTo) => {
+    dispatch({ type: "TOGGLE_LOADING", payload: { loading: setLoadingTo } });
+  };
+  console.log("Loading", loading);
   return (
     <>
-      <MainContainer />
+      <MainContainer toggleLoading={toggleLoading} />
       <TourGuide />
+      {loading ? <Spinner /> : null}
     </>
   );
 };

@@ -5,6 +5,7 @@ function ProjectContainer({
   deleteProjectHandler,
   role,
   projectId,
+  toggleLoading,
 }) {
   return (
     <>
@@ -18,6 +19,9 @@ function ProjectContainer({
               draggable="true"
               onDragStart={() => {
                 projectId(project.projectId);
+              }}
+              onClick={() => {
+                toggleLoading(true);
               }}
               className={`projectCard ${role !== "Admin" && "shared"}`}
               key={project._id}

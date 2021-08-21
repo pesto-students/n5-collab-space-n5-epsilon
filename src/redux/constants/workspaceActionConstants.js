@@ -22,6 +22,8 @@ export const LEAVE_PROJECT = "LEAVE_PROJECT";
 export const LEAVE_PROJECT_SUCCESS = "LEAVE_PROJECT_SUCCESS";
 export const LEAVE_PROJECT_FAILURE = "LEAVE_PROJECT_FAILURE";
 
+export const TOGGLE_LOADING = "TOGGLE_LOADING"
+
 export const EditTitle = (data) => ({
   type: EDIT_TITLE,
   payload: data,
@@ -100,3 +102,5 @@ export const LeaveProjectFailure = (data) => ({
   type: LEAVE_PROJECT_FAILURE,
   payload: data,
 });
+
+

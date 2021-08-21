@@ -8,7 +8,7 @@ import {
 } from "../../redux/actions/workSpaceActions";
 import ProjectContainer from "./ProjectContainer";
 import { useEffect, useState } from "react";
-const MainContainer = (props) => {
+const MainContainer = ({toggleLoading}) => {
   const projects = useSelector((state) => state.WorkSpaceReducer.projects);
   const ownProjects = projects.filter((project) => project.role === "Admin");
   const sharedProjects = projects.filter((project) => project.role === "Guest");
@@ -170,6 +170,7 @@ const MainContainer = (props) => {
               deleteProjectHandler={deleteProjectHandler}
               projectId={setProjectIdForTrash}
               role="Admin"
+              toggleLoading={toggleLoading}
             />
           </div>
         </div>
@@ -184,6 +185,7 @@ const MainContainer = (props) => {
               projectList={sharedProjects}
               deleteProjectHandler={deleteProjectHandler}
               role="Guest"
+              toggleLoading={toggleLoading}
             />
           </div>
         </div>

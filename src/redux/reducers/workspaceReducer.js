@@ -4,17 +4,19 @@ import {
   UPDATE_PROJECT,
 } from "../constants/projectActionConstants";
 import {
+  ADD_USER_SUCCESS,
   CREATE_PROJECT,
   CREATE_PROJECT_SUCCESS,
   GET_ALL_PROJECT,
   GET_ALL_PROJECT_SUCCESS,
   LEAVE_PROJECT,
+  TOGGLE_LOADING,
 } from "../constants/workspaceActionConstants";
 
 export const initialState = {
   projects: [],
   sharedProjects: [],
-  loading: true,
+  loading: false,
 };
 
 const WorkSpaceReducer = (state = initialState, action) => {
@@ -37,11 +39,19 @@ const WorkSpaceReducer = (state = initialState, action) => {
         draft.projects.splice(projectIndex, 1);
         break;
       }
+      case ADD_USER_SUCCESS: {
+        break;
+      }
       case LEAVE_PROJECT: {
         const projectIndex = draft.projects.findIndex(
           (project) => project._id == payload.projectId
         );
         draft.projects.splice(projectIndex, 1);
+        break;
+      }
+      case TOGGLE_LOADING: {
+        const { loading } = payload;
+        draft.loading = loading;
         break;
       }
       case GET_ALL_PROJECT_SUCCESS: {
