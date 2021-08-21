@@ -9,7 +9,7 @@ handler.post(async (req, res) => {
   const { userEmail, projectId, userName } = req.body;
   // const user = await UserData.findOne({ email: userEmail });
   // if (!user) {
-    mailerService(`/inviteUser?userEmail=${userEmail}?projectId=${projectId}`, userName, userEmail).then((mailSent) => {
+    mailerService(`/inviteUser?userEmail=${userEmail}&projectId=${projectId}`, userName, userEmail).then((mailSent) => {
       if (mailSent) {
         res.status(200).send(`Email Sent`);
       } else {
