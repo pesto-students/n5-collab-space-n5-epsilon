@@ -45,7 +45,7 @@ export default function Authentication() {
   }
 
   return (
-    <section className={`container ${stateChanging ? "stop" : "active"}`}>
+    <section className={`auth-container ${stateChanging ? "stop" : "active"}`}>
       <div className="top">
         <span className="feature-image" />
         <span className="feature-image" />
