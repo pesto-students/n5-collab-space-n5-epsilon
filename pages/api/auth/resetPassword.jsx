@@ -8,9 +8,9 @@ import UserData from "../../../src/server/models/userData";
 // handler.use(middleware);
 const handler = createHandler();
 
-handler.get(async (req, res) => {
+handler.post(async (req, res) => {
   try {
-    verify(req.query.token, process.env.EMAIL_TOKEN, async (error, decoded) => {
+    verify(req.body.token, process.env.EMAIL_TOKEN, async (error, decoded) => {
       if (error) return res.status(400).send(`Invalid token`);
       const user = await UserData.findOne({ email: decoded.email });
 

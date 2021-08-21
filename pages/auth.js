@@ -10,7 +10,7 @@ import Spinner from "../src/components/common/contentLoader/spinningCircleLoader
 export default function Authentication() {
   const router = useRouter();
   const token = cookie.get("token");
-  console.log("token: " + token);
+  // console.log("token: " + token);
   if (token) {
     router.push("/workspace");
   }
@@ -26,6 +26,9 @@ export default function Authentication() {
     formTouched: false,
     error: true,
     submitting: false,
+    emailError: false,
+    passwordError: false,
+    nameError: false
   });
 
   const formSubmitHandler = (newState) => {
@@ -40,12 +43,15 @@ export default function Authentication() {
         formTouched: false,
         error: false,
         submitting: false,
+        emailError: false,
+        passwordError: false,
+        nameError: false
       });
     }, 1000);
   }
 
   return (
-    <section className={`container ${stateChanging ? "stop" : "active"}`}>
+    <section className={`auth-container ${stateChanging ? "stop" : "active"}`}>
       <div className="top">
         <span className="feature-image" />
         <span className="feature-image" />

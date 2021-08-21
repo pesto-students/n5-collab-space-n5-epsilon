@@ -72,7 +72,7 @@ const Setting = () => {
                             }}/>
                         </div>
                         <p className={`error-space ${submittedForm.error || copyPassword !== newPassword? 'error':''}`}>{submittedForm.error ? submittedForm.error: copyPassword === newPassword ?'Atleast 8 characters, one lower case character, one upper case character, one number and one special character.':'Both password does not match'}</p>
-                        <button disabled={!submittedForm.formTouched || !!submittedForm.error || copyPassword !== newPassword || submittedForm.submitting}>Save Password</button>
+                        <button className='btn' disabled={!submittedForm.formTouched || !!submittedForm.error || copyPassword !== newPassword || submittedForm.submitting}>Save Password</button>
                     </div>
                 </div>}
                 {tab === 'workspace' &&  <div className='tab'/>}

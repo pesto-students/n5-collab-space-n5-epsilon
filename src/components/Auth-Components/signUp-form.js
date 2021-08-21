@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import AuthAPI from "../../client_apis/authApis";
 import {useRouter} from "next/router";
 import cookie from "js-cookie"
@@ -12,9 +12,8 @@ export default function SignUpForm(props) {
         password: '',
     });
     const router = useRouter();
+    const [passwordShow, setPasswordShow] = useState(false);
 
-    useEffect(()=>{
-    },[]);
 
     function submit() {
         props.setFormStatus({
@@ -27,6 +26,8 @@ export default function SignUpForm(props) {
                     submitting: false,
                 });
                 cookie.set('token', response['auth-token']);
+                cookie.set("userId", response["id"]);
+                cookie.set("userName", response["name"]);
                 localStorage.setItem('user', JSON.stringify(response));
                 router.push('/workspace');
             })
@@ -44,35 +45,55 @@ export default function SignUpForm(props) {
             <h2>Sign Up</h2>
             <input type="text" placeholder="Your name"
                    onKeyUp={e => {
-                       if (e.charCode !== 13) {
-                           if(!props.regex.nameRegex.test(e.target.value)){
-                               props.setFormStatus({ ...props.formStatus, error: 'Enter a valid name'})
+                           if(!props.regex.nameRegex.test(e.target.value.trim().toLowerCase())){
+                               props.setFormStatus({ ...props.formStatus, nameError: 'Enter a valid name',  error: false})
                            } else{
-                               setFormData({ ...formData, name: e.target.value });
-                               props.setFormStatus({...props.formStatus, formTouched: true, error: false });
+                               props.setFormStatus({...props.formStatus, formTouched: true, nameError: false,  error: false });
                            }
-                       }
+                       setFormData({ ...formData, name: e.target.value.trim().toLowerCase() });
                    }}/>
             <input type="email" placeholder="Email"
                    onKeyUp={e => {
-                       if (e.charCode !== 13) {
                            if(!props.regex.emailRegex.test(e.target.value.toLowerCase())){
-                               props.setFormStatus({ ...props.formStatus, error: 'Enter a valid email address'})
+                               props.setFormStatus({ ...props.formStatus, emailError: 'Enter a valid email address', error: false})
                            } else{
-                               setFormData({ ...formData, email: e.target.value });
-                               props.setFormStatus({...props.formStatus, formTouched: true, error: false });
+                               props.setFormStatus({...props.formStatus, formTouched: true, error: false, emailError: false });
                            }
-                       }
+                       setFormData({ ...formData, email: e.target.value.toLowerCase() });
                    }}/>
-            <input type="password" placeholder="Password"
-                   onKeyUp={e => {
-                if (e.charCode !== 13) {
-                    setFormData({ ...formData, password: e.target.value });
-                    props.setFormStatus({...props.formStatus, formTouched: true, error: false });
-                }
-            }} />
+            <div className='input-wrapper'>
+                <input
+                    type={passwordShow?'text':'password'}
+                    placeholder="password"
+                    onKeyUp={(e) => {
+                        if (e.target.value.length < 6) {
+                            props.setFormStatus({
+                                ...props.formStatus,
+                                error: false,
+                                formTouched: true,
+                                passwordError: "Password should be 6 character long"
+                            });
+                        } else {
+                            props.setFormStatus({
+                                ...props.formStatus,
+                                formTouched: true,
+                                passwordError: false,
+                                error: false
+                            });
+                        }
+                        setFormData({ ...formData, password: e.target.value });
+                    }}
+                />
+                <div className={`eye ${passwordShow ? 'show':''}`} onClick={()=>{setPasswordShow(!passwordShow)}}/>
+            </div>
             <div className="bottom-row">
-                <span className={`btn ${!props.formStatus.formTouched || !!props.formStatus.error || props.formStatus.submitting? 'disable':''}`} onClick={submit}>SignUp</span>
+                <span            className={`btn ${
+                    !props.formStatus.formTouched ||
+                    !!props.formStatus.error ||
+                    props.formStatus.submitting || !!props.formStatus.emailError || !!props.formStatus.passwordError || props.formStatus.nameError
+                        ? "disable"
+                        : ""
+                }`} onClick={submit}>SignUp</span>
 
                 <span className='btn'
                     onClick={() => {
@@ -82,7 +103,7 @@ export default function SignUpForm(props) {
                 </span>
             </div>
             
-            {props.formStatus.error && (<p className='error'>{props.formStatus.error}</p>)}
+            <p className='error'>{ props.formStatus.nameError? props.formStatus.nameError: props.formStatus.emailError? props.formStatus.emailError: props.formStatus.passwordError? props.formStatus.passwordError: props.formStatus.error ? props.formStatus.error : ''}</p>
 
         </form>
     )

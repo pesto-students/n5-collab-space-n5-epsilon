@@ -21,8 +21,8 @@ class AuthAPI {
         return this.API.post(`/api/auth/forgotPassword`, data);
     }
 
-    updatePassword(data) {
-        return this.API.post(`/api/auth/updatePassword`, data);
+    resetPassword(data) {
+        return this.API.post(`/api/auth/resetPassword`, data);
     }
 
     getAddedUsers(data){
@@ -34,18 +34,6 @@ class AuthAPI {
     }
 
 
-
-    // projectURLGet(url, params) {
-    //     return this.API.get(`/api/projects${url}`, params);
-    // }
-    //
-    // projectURLDelete(url, params) {
-    //     return this.API.delete(`/api/projects${url}`, params);
-    // }
-    //
-    // projectURLPost(url, params) {
-    //     return this.API.post(`/api/projects${url}`, params);
-    // }
 
 }
 

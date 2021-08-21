@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import cookie from "js-cookie";
 import { wrapper } from "../../src/redux/store";
 import { getWorkspaceProject } from "../../src/redux/actions/workSpaceActions";
@@ -16,8 +16,10 @@ const UserPanel = (props) => {
   };
   const [submittedForm, setSubmittedForm] = useState({
     formTouched: false,
-    error: false,
+    nameError: false,
+    emailError: false,
     submitting: false,
+    apiError: false,
   });
   const [inviteForm, setInviteForm] = useState({
     name: "",
@@ -42,13 +44,13 @@ const UserPanel = (props) => {
       }
     })
 
-    console.log('===avaialble===', availableProjects);
+    // console.log('===avaialble===', availableProjects);
     setAvailableProjectList(availableProjects)
     Auth.getAddedUsers({
       userId: JSON.parse(localStorage.getItem('user')).id
     })
         .then(({ data }) => {
-          console.log('===test===', data);
+          // console.log('===test===', data);
 
           data.forEach((project)=>{
             project.users.forEach((user)=>{
@@ -76,7 +78,7 @@ const UserPanel = (props) => {
           //   console.log('===check===', user)
           // })
 
-          console.log('===check===', userData)
+          // console.log('===check===', userData)
         })
         .catch((error) => {
         });
@@ -89,7 +91,7 @@ const UserPanel = (props) => {
       submitting: true,
     });
     Auth.sendInviteToUsers({
-      userEmail: inviteForm.email.toLowerCase(),
+      userEmail: inviteForm.email,
       projectId: inviteForm.projectId,
       userName: JSON.parse(localStorage.getItem('user')).name
     })
@@ -98,11 +100,25 @@ const UserPanel = (props) => {
           error: false,
           submitting: false,
         });
+        setInviteForm({
+          name: "",
+          email: "",
+          projectId: ""
+        });
+        setSubmittedForm({
+          formTouched: false,
+          nameError: false,
+          emailError: false,
+          submitting: false,
+          apiError: false,
+        });
+
+        setShowForm(false);
       })
       .catch((error) => {
         setSubmittedForm({
           ...submittedForm,
-          error: error.response.data,
+          apiError: error.response.data,
           submitting: false,
         });
       });
@@ -195,42 +211,42 @@ const UserPanel = (props) => {
                 type="text"
                 placeholder="User Name"
                 onKeyUp={(e) => {
-                  if (e.charCode !== 13) {
                     if (!regex.nameRegex.test(e.target.value)) {
                       setSubmittedForm({
                         ...submittedForm,
-                        error: "Enter a valid name",
+                        nameError: "Enter a valid name",
+                        apiError: false,
                       });
                     } else {
-                      setInviteForm({ ...inviteForm, name: e.target.value });
                       setSubmittedForm({
                         ...submittedForm,
                         formTouched: true,
-                        error: false,
+                        nameError: false,
+                        apiError: false,
                       });
                     }
-                  }
+                  setInviteForm({ ...inviteForm, name: e.target.value });
                 }}
               />
               <input
                 type="email"
                 placeholder="User Email"
                 onKeyUp={(e) => {
-                  if (e.charCode !== 13) {
                     if (!regex.emailRegex.test(e.target.value.toLowerCase())) {
                       setSubmittedForm({
                         ...submittedForm,
-                        error: "Enter a valid email address",
+                        emailError: "Enter a valid email address",
+                        apiError: false,
                       });
                     } else {
-                      setInviteForm({ ...inviteForm, email: e.target.value });
                       setSubmittedForm({
                         ...submittedForm,
                         formTouched: true,
-                        error: false,
+                        emailError: false,
+                        apiError: false,
                       });
                     }
-                  }
+                  setInviteForm({ ...inviteForm, email: e.target.value.toLowerCase() });
                 }}
               />
               <select
@@ -247,17 +263,14 @@ const UserPanel = (props) => {
                   className='transparent-btn'
                 disabled={
                   !submittedForm.formTouched ||
-                  !!submittedForm.error ||
                   submittedForm.submitting ||
-                  !inviteForm.name || !inviteForm.email || !inviteForm.projectId
+                  submittedForm.emailError || submittedForm.nameError ||  submittedForm.apiError
                 }
                 onClick={invite}
               >
                 Invite
               </button>
-              {submittedForm.error && (
-                <p className="error">{submittedForm.error}</p>
-              )}
+              <p className="error">{ submittedForm.emailError? submittedForm.emailError: submittedForm.nameError? submittedForm.nameError: submittedForm.apiError ? submittedForm.apiError : ''}</p>
             </form>
           </div>
         </div>

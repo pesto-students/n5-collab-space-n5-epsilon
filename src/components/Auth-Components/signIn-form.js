@@ -11,11 +11,11 @@ export default function SignInForm(props) {
   });
   const router = useRouter();
   const { redirect } = router.query;
-  console.log("router.query", router.query);
+  const [passwordShow, setPasswordShow] = useState(false);
   function submit() {
     props.setFormStatus({
       submitting: true,
-      loading:true,
+      // loading:true,
     });
     Auth.emailLogin(formData)
       .then(({ data: response }) => {
@@ -49,79 +49,74 @@ export default function SignInForm(props) {
   return (
     <form>
       <h2>Sign In</h2>
-      <input
+            <input
         type="email"
         placeholder="email"
         onKeyUp={(e) => {
-          if (e.charCode !== 13) {
-            if (!props.regex.emailRegex.test(e.target.value)) {
-              props.setFormStatus({
-                ...props.formStatus,
-                error: "Enter a valid email address",
+            if (!props.regex.emailRegex.test(e.target.value.toLowerCase())) {
+              props.setFormStatus({...props.formStatus, error: false, emailError: "Enter a valid email address", formTouched: true
               });
             } else {
-              setFormData({ ...formData, email: e.target.value.toLowerCase() });
               props.setFormStatus({
                 ...props.formStatus,
                 formTouched: true,
-                error: false,
+                emailError: false,
+                  error: false
               });
-            }
           }
-        }}
-      />
+            setFormData({ ...formData, email: e.target.value.toLowerCase() });
+        }} />
+        <div className='input-wrapper'>
       <input
-        type="password"
+          type={passwordShow?'text':'password'}
         placeholder="password"
         onKeyUp={(e) => {
-          if (e.charCode !== 13) {
-            if (formData.email && props.regex.emailRegex.test(formData.email)) {
-              props.setFormStatus({ ...props.formStatus, formTouched: true });
-              setFormData({ ...formData, password: e.target.value });
+            if (e.target.value.length < 6) {
+                    props.setFormStatus({
+                        ...props.formStatus,
+                        error: false,
+                        formTouched: true,
+                        passwordError: "Password should be 6 character long"
+                    });
             } else {
-              setFormData({ ...formData, password: e.target.value });
               props.setFormStatus({
-                ...props.formStatus,
-                formTouched: true,
-                error: false,
+                  ...props.formStatus,
+                  formTouched: true,
+                  passwordError: false,
+                  error: false
               });
-            }
           }
+            setFormData({ ...formData, password: e.target.value });
         }}
       />
-      <div className="bottom-row">
-        <span
-          className={`btn`}
-          onClick={() => {
-            props.changeForm("SignUp");
-          }}
-        >
-          SignUp
-        </span>
-        <span
-          className={`btn ${
+        <div className={`eye ${passwordShow ? 'show':''}`} onClick={()=>{setPasswordShow(!passwordShow)}}/>
+        </div>
+            <div className="bottom-row">
+                <span
+                    className={`btn`}
+                    onClick={() => {props.changeForm("SignUp")}}>
+                    SignUp</span>
+                <span
+                    className={`btn ${
             !props.formStatus.formTouched ||
             !!props.formStatus.error ||
-            props.formStatus.submitting
+            props.formStatus.submitting || !!props.formStatus.emailError || !!props.formStatus.passwordError
               ? "disable"
               : ""
           }`}
-          onClick={submit}
-        >
-          SignIn
-        </span>
-        <span
-          className={`btn`}
-          onClick={() => {
+                    onClick={submit} >
+                    SignIn
+                </span>
+                <span
+                    className={`btn`}
+                    onClick={() => {
             props.changeForm("Forgot");
           }}
-        >
+                >
           Forgot Password
         </span>
-      </div>
-      {props.formStatus.error && (
-        <p className="error">{props.formStatus.error}</p>
-      )}
+            </div>
+        <p className="error">{ props.formStatus.emailError? props.formStatus.emailError: props.formStatus.passwordError? props.formStatus.passwordError: props.formStatus.error ? props.formStatus.error : ''}</p>
     </form>
   );
 }
