@@ -67,12 +67,12 @@ export const deleteProject = (projectId) => async (dispatch) => {
 
 export const addUser = (inviteUserInfo) => async (dispatch) => {
   try {
-    dispatch(AddUser(projectId));
+    const { projectId } = inviteUserInfo;
     let response = await usersURL.get("/inviteUser", {
       params: inviteUserInfo,
     });
     if (response) {
-      dispatch(AddUserSuccess(projectId));
+      dispatch(AddUserSuccess(response));
     }
   } catch (err) {
     dispatch(AddUserFailure(err));

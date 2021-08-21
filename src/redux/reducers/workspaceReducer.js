@@ -4,6 +4,7 @@ import {
   UPDATE_PROJECT,
 } from "../constants/projectActionConstants";
 import {
+  ADD_USER_SUCCESS,
   CREATE_PROJECT,
   CREATE_PROJECT_SUCCESS,
   GET_ALL_PROJECT,
@@ -36,6 +37,9 @@ const WorkSpaceReducer = (state = initialState, action) => {
           return project.projectId == payload.projectId;
         });
         draft.projects.splice(projectIndex, 1);
+        break;
+      }
+      case ADD_USER_SUCCESS: {
         break;
       }
       case LEAVE_PROJECT: {

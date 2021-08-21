@@ -295,10 +295,18 @@ export async function addUserToProject(inviteUserInfo) {
     console.log("inviteUserInfo", inviteUserInfo);
     const guestRoleArray = await Roles.find({ name: "Guest" });
     const guestRole = guestRoleArray[0];
-    console.log(guestRole);
+    console.log("guestRole", guestRole);
     const User = await Users.findOne({ email: userEmail }).exec();
-    console.log(User, guestRole, inviteUserInfo);
+    console.log("User", User);
     if (User) {
+      const checkContribution = await Contributions.find({
+        projectId: Types.ObjectId(projectId),
+        userId: Types.ObjectId(User._id),
+      }).exec();
+      console.log("checkContribution", checkContribution);
+      if (checkContribution) {
+        return { error: "User already exists" };
+      }
       const newContribution = new Contributions({
         projectId: Types.ObjectId(projectId),
         userId: Types.ObjectId(User._id),
