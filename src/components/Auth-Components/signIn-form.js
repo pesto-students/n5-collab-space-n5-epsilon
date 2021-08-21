@@ -15,12 +15,14 @@ export default function SignInForm(props) {
   function submit() {
     props.setFormStatus({
       submitting: true,
+      loading:true,
     });
     Auth.emailLogin(formData)
       .then(({ data: response }) => {
         props.setFormStatus({
           error: false,
           submitting: false,
+
         });
         cookie.set("token", response["auth-token"]);
         cookie.set("userId", response["id"]);

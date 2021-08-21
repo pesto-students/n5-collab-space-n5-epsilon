@@ -5,6 +5,7 @@ import ForgotPasswordForm from "../src/components/Auth-Components/forgotPassword
 import { getLayout as getEmptyLayout } from "../src/components/layouts/EmptyLayout";
 import cookie from "js-cookie";
 import { useRouter } from "next/router";
+import Spinner from "../src/components/common/contentLoader/spinningCircleLoader";
 
 export default function Authentication() {
   const router = useRouter();
@@ -27,12 +28,15 @@ export default function Authentication() {
     submitting: false,
   });
 
+  const formSubmitHandler = (newState) => {
+    setFormSubmit({ ...formSubmit, ...newState });
+  };
   function changeForm(formName) {
     setStateChanging(true);
     setTimeout(() => {
       setAuthState(formName);
       setStateChanging(false);
-      setFormSubmit({
+      formSubmitHandler({
         formTouched: false,
         error: false,
         submitting: false,
@@ -55,7 +59,7 @@ export default function Authentication() {
           <SignInForm
             changeForm={changeForm}
             formStatus={formSubmit}
-            setFormStatus={setFormSubmit}
+            setFormStatus={formSubmitHandler}
             regex={regex}
           />
         )}
@@ -63,7 +67,7 @@ export default function Authentication() {
           <SignUpForm
             changeForm={changeForm}
             formStatus={formSubmit}
-            setFormStatus={setFormSubmit}
+            setFormStatus={formSubmitHandler}
             regex={regex}
           />
         )}
@@ -71,11 +75,12 @@ export default function Authentication() {
           <ForgotPasswordForm
             changeForm={changeForm}
             formStatus={formSubmit}
-            setFormStatus={setFormSubmit}
+            setFormStatus={formSubmitHandler}
             regex={regex}
           />
         )}
       </div>
+      {formSubmit.submitting ? <Spinner /> : null}
     </section>
   );
 }
