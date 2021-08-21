@@ -23,7 +23,11 @@ import {
 } from "../constants/taskListActionConstants";
 
 export const initialState = {
-  projectInfo: {},
+  projectInfo: {
+    roleInfo: {
+      name: "null",
+    },
+  },
   loading: true,
   is_404: false,
 };
