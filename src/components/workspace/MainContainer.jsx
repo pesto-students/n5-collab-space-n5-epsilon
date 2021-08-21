@@ -46,6 +46,7 @@ const MainContainer = ({toggleLoading}) => {
     console.log("curr_project", curr_project);
     if (curr_project.role === "Admin") {
       dispatch(deleteProject({ projectId: projectId }));
+      toggleLoading(false)
     } else {
       dispatch(
         leaveProject({

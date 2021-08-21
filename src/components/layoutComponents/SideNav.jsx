@@ -2,10 +2,18 @@ import React from "react";
 import NavButton from "./NavButton";
 import { useRouter } from "next/router";
 import cookie from "js-cookie";
+import Modal from "../common/modal/Modal";
+import ConformationPopUp from "../common/customPopUp/ConformationPopUp";
+import { useState } from "react";
+import modalStyles from "../../../styles/conformationModal.module.scss";
 
 const SideNav = ({ navButtons }) => {
   const router = useRouter();
-
+  const [showLogOutModal, setShowLogOutModal] = useState(false);
+  const toggleModal = () => {
+    let stateShowModal = !showLogOutModal;
+    setShowLogOutModal(stateShowModal);
+  };
   const logout = () => {
     cookie.remove("token");
     router.push("/");
@@ -29,7 +37,7 @@ const SideNav = ({ navButtons }) => {
           })}
         </ul>
 
-        <a className="LogButton" onClick={logout}>
+        <a className="LogButton" onClick={toggleModal}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             aria-hidden="true"
@@ -48,6 +56,19 @@ const SideNav = ({ navButtons }) => {
           Log Out
         </a>
       </div>
+      {showLogOutModal ? (
+        <Modal
+          closeCallback={toggleModal}
+          showModal={showLogOutModal}
+          styles={modalStyles}
+        >
+          <ConformationPopUp
+            title={"Log Out ?"}
+            onAcceptHandler={logout}
+            onCancelHandler={toggleModal}
+          />
+        </Modal>
+      ) : null}
     </div>
   );
 };
