@@ -1,5 +1,7 @@
+import Cookies from "js-cookie";
 import React, { useState, useRef } from "react";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import styles from "../../../../styles/singleTask.module.scss";
 import ResizableTextArea from "../../textArea/ResizeableTextArea";
 import Container from "../contextMenu/ContextMenuContainer";
@@ -10,11 +12,18 @@ export default function CommentBox({
   addCommentHandler,
   setCommentBox,
   value,
+  taskInfo,
 }) {
+  const projectInfo = useSelector((state) => state.ProjectReducer.projectInfo);
+  const userId = projectInfo.userId;
+  const userRole = projectInfo.roleInfo.name;
+  const userPermission = projectInfo.roleInfo;
   const messagesEndRef = useRef(null);
   const scrollToBottom = () => {
     messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
   };
+  console.log("comments", comments);
+
   useEffect(() => {
     scrollToBottom();
   }, [comments]);
@@ -25,6 +34,22 @@ export default function CommentBox({
       </div>
       <div className={styles.existing_comments} ref={messagesEndRef}>
         {comments.map((commentInfo) => {
+          console.log("commentInfo", commentInfo.by, taskInfo);
+          const commenterInfo = taskInfo.userLookup.find((userInfo) => {
+            console.log(
+              "userInfo",
+              userInfo._id,
+              "commentInfo",
+              commentInfo.by
+            );
+            return userInfo._id === commentInfo.by;
+          });
+          const reducedUserName = commenterInfo.name
+            .split(" ")
+            .map((word) => {
+              return word[0].toUpperCase();
+            })
+            .join("");
           return (
             <>
               <div className={styles.comment_card}>
@@ -33,24 +58,30 @@ export default function CommentBox({
                 </div>
                 <div className={styles.commenter}>
                   <div className={styles.profileImage}>
-                    <p>u</p>
+                    <p>{reducedUserName}</p>
                   </div>
                 </div>
+
                 <div className={styles.comment}>
-                  <div className={styles.comment_menu}>
-                    <Container
-                      menuItems={[
-                        {
-                          text: "Delete",
-                          onClick: () => {
-                            deleteCommentHandler(commentInfo._id);
+                  {(userRole == "Admin") |
+                  ((commentInfo.by._id === userId) |
+                    userPermission.hasOwnProperty("taskList") &&
+                    userPermission.taskList.includes("Delete")) ? (
+                    <div className={styles.comment_menu}>
+                      <Container
+                        menuItems={[
+                          {
+                            text: "Delete",
+                            onClick: () => {
+                              deleteCommentHandler(commentInfo._id);
+                            },
                           },
-                        },
-                      ]}
-                    >
-                      ...
-                    </Container>
-                  </div>
+                        ]}
+                      >
+                        ...
+                      </Container>
+                    </div>
+                  ) : null}
 
                   <div className={styles.comment_area}>
                     <p>{commentInfo.commentText}</p>
@@ -72,7 +103,17 @@ export default function CommentBox({
           />
         </div>
         <div className={styles.comment_form_actions}>
-          <button onClick={addCommentHandler}>Post Comment</button>
+          <button
+            onClick={() => {
+              const by = {
+                _id: userId,
+                name: Cookies.get("userName"),
+              };
+              addCommentHandler(by);
+            }}
+          >
+            Post Comment
+          </button>
         </div>
         {/* {commentInput}
         <button onClick={addCommentHandler}>Comment</button> */}

@@ -7,6 +7,7 @@ import SingleTask from "../common/singleTask/SingleTask";
 import modalStyles from "../../../styles/modal.module.scss";
 function Task({ task, index, deleteTaskHandler }) {
   const projectInfo = useSelector((state) => state.ProjectReducer.projectInfo);
+  const userRole = projectInfo.roleInfo.name;
   const userPermission = projectInfo.roleInfo;
   const [showModal, setShowModal] = useState(false);
 
@@ -85,7 +86,13 @@ function Task({ task, index, deleteTaskHandler }) {
           showModal={showModal}
           styles={modalStyles}
         >
-          <SingleTask taskId={task._id} taskListId={taskListId}/>
+          <SingleTask
+            taskId={task._id}
+            taskListId={taskListId}
+            userRole={userRole}
+            userPermission={userPermission}
+            projectInfo={projectInfo}
+          />
         </Modal>
       ) : null}
     </React.Fragment>

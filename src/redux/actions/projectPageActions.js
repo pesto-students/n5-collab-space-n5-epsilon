@@ -19,6 +19,7 @@ export const getProjectInfo =
         },
       });
       if (response) {
+        response.data.userId = userId;
         dispatch(GetProjectInfo(response.data));
       }
     } catch (err) {

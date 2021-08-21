@@ -24,6 +24,7 @@ export default function SignInForm(props) {
         });
         cookie.set("token", response["auth-token"]);
         cookie.set("userId", response["id"]);
+        cookie.set("userName", response["name"]);
         localStorage.setItem('user', JSON.stringify(response));
         if (redirect) {
           router.push({

@@ -7,7 +7,21 @@ import Comments from "../models/comments";
 import { model, Types } from "mongoose";
 
 export async function getTaskInfo(taskInfo, projection = "", populate = "") {
-  const task = await Task.find({ _id: Types.ObjectId(taskInfo.taskId) });
+  const task = await Task.aggregate([
+    {
+      $match: {
+        _id: Types.ObjectId(taskInfo.taskId),
+      },
+    },
+    {
+      $lookup: {
+        from: "users",
+        localField: "comments.by",
+        foreignField: "_id",
+        as: "userLookup",
+      },
+    },
+  ]);
   return task;
 }
 

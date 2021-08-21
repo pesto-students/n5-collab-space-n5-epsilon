@@ -14,8 +14,12 @@ import {
   updateTaskName,
 } from "../../../redux/actions/taskActions";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 function SingleTask({ taskId, taskListId }) {
+  const projectInfo = useSelector((state) => state.ProjectReducer.projectInfo);
+  const userRole = projectInfo.roleInfo.name;
+  const userPermission = projectInfo.roleInfo;
   const taskInfoDetails = { taskId, taskListId };
   const [loading, setLoading] = useState(true);
 
@@ -34,22 +38,30 @@ function SingleTask({ taskId, taskListId }) {
       });
     }
   }, [taskId]);
-  const addCommentHandler = () => {
+  const addCommentHandler = (commenterInfo) => {
     const date = new Date();
     const currentTime = date.toISOString();
+    console.log("projectInfo.userId", projectInfo.userId);
     const newComment = {
       taskId: taskId,
       commentInfo: {
         commentText: commentBox,
-        by: "6111674d267948b6906ee442",
+        by: projectInfo.userId,
         createdAt: currentTime,
       },
     };
-    console.log(newComment);
+    console.log("newComment", newComment);
     setCommentBox("");
     setTaskInfo(
       produce((draft) => {
         draft.comments.push(newComment.commentInfo);
+        const index = draft.userLookup.indexOf(
+          (user) => user._id === commenterInfo._id
+        );
+        console.log("Here is the index of the comment", index);
+        if (index == -1) {
+          draft.userLookup.push(commenterInfo);
+        }
       })
     );
 
@@ -159,6 +171,7 @@ function SingleTask({ taskId, taskListId }) {
                   addCommentHandler={addCommentHandler}
                   setCommentBox={setCommentBox}
                   value={commentBox}
+                  taskInfo={taskInfo}
                 />
               </div>
               <div className={styles.second_panel}>
