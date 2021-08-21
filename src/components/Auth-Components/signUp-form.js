@@ -45,19 +45,19 @@ export default function SignUpForm(props) {
             <h2>Sign Up</h2>
             <input type="text" placeholder="Your name"
                    onKeyUp={e => {
-                           if(!props.regex.nameRegex.test(e.target.value.toLowerCase())){
+                           if(!props.regex.nameRegex.test(e.target.value.trim().toLowerCase())){
                                props.setFormStatus({ ...props.formStatus, nameError: 'Enter a valid name',  error: false})
                            } else{
                                props.setFormStatus({...props.formStatus, formTouched: true, nameError: false,  error: false });
                            }
-                       setFormData({ ...formData, name: e.target.value.toLowerCase() });
+                       setFormData({ ...formData, name: e.target.value.trim().toLowerCase() });
                    }}/>
             <input type="email" placeholder="Email"
                    onKeyUp={e => {
                            if(!props.regex.emailRegex.test(e.target.value.toLowerCase())){
                                props.setFormStatus({ ...props.formStatus, emailError: 'Enter a valid email address', error: false})
                            } else{
-                               props.setFormStatus({...props.formStatus, formTouched: true, error: false });
+                               props.setFormStatus({...props.formStatus, formTouched: true, error: false, emailError: false });
                            }
                        setFormData({ ...formData, email: e.target.value.toLowerCase() });
                    }}/>

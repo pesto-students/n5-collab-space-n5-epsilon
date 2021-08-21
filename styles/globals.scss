@@ -138,6 +138,35 @@ a {
 }
 
 
+.input-wrapper{
+  position: relative;
+  width: 100%;
+  .eye{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+    cursor: pointer;
+    &:before{
+      content: url("https://api.iconify.design/bi/eye-slash.svg?color=%235d2bff");
+    }
+    &:after{
+      content: url("https://api.iconify.design/bi/eye.svg?color=%235d2bff");
+      opacity: 0;
+      position: absolute;
+      left: 0;
+    }
+    &.show{
+      &:after{
+        opacity: 1;
+      }
+      &:before{
+        opacity: 0;
+      }
+    }
+  }
+}
+
 
 .sideLayoutPanel {
   height: 100vh;
