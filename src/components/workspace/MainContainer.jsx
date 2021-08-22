@@ -11,6 +11,8 @@ import ProjectContainer from "./ProjectContainer";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import TrashCanIcon from "../iconComponents/TrashCanIcon";
+import HorizontalAlignIcon from "../iconComponents/HorizontalAlignIcon";
+import GridLayoutIcon from "../iconComponents/GridLayoutIcon";
 const MainContainer = ({ toggleLoading }) => {
   const projects = useSelector((state) => state.WorkSpaceReducer.projects);
   const ownProjects = projects.filter((project) => project.role === "Admin");
@@ -128,18 +130,7 @@ const MainContainer = ({ toggleLoading }) => {
               toggle("grid");
             }}
           >
-            <svg
-              width="15px"
-              height="15px"
-              viewBox="0 0 15 15"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M0,0 L3,0 L3,3 L0,3 L0,0 Z M6,0 L9,0 L9,3 L6,3 L6,0 Z M12,0 L15,0 L15,3 L12,3 L12,0 Z M0,6 L3,6 L3,9 L0,9 L0,6 Z M6,6 L9,6 L9,9 L6,9 L6,6 Z M12,6 L15,6 L15,9 L12,9 L12,6 Z M0,12 L3,12 L3,15 L0,15 L0,12 Z M6,12 L9,12 L9,15 L6,15 L6,12 Z M12,12 L15,12 L15,15 L12,15 L12,12 Z"
-                fillRule="nonzero"
-              />
-            </svg>
+            <GridLayoutIcon />
           </span>
           <span
             className={`icon ${layout === "row" ? "active" : ""}`}
@@ -147,7 +138,7 @@ const MainContainer = ({ toggleLoading }) => {
               toggle("row");
             }}
           >
-            <TrashCanIcon />
+            <HorizontalAlignIcon />
           </span>
         </div>
       </div>
