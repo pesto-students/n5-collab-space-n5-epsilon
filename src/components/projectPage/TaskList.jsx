@@ -9,6 +9,9 @@ import { Droppable } from "react-beautiful-dnd";
 import { createNewTask, deleteTask } from "../../redux/actions/taskActions";
 import { deleteTaskList } from "../../redux/actions/taskListActions";
 import modalStyles from "../../../styles/truncatModal.module.scss";
+import conformationModalStyles from "../../../styles/conformationModal.module.scss";
+import ConformationPopUp from "../common/customPopUp/ConformationPopUp";
+import { toast } from "react-toastify";
 
 function TaskList({
   taskList,
@@ -24,6 +27,11 @@ function TaskList({
   const [taskName, userInput] = useInput({ type: "text" });
   const { taskListName, task, tasksOrder } = taskList;
   const [showAddTaskModal, setShowAddTaskModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const toggleModal = () => {
+    let showDeleteModals = !showDeleteModal;
+    setShowDeleteModal(showDeleteModals);
+  };
   const taskListId = taskList._id;
   const getStatusStyle = (isDraggingOver) => ({
     background: isDraggingOver ? "#b39ddb8a" : "",
@@ -47,6 +55,7 @@ function TaskList({
 
   const deleteTaskListHandler = (taskListInfo) => {
     dispatch(deleteTaskList(taskListInfo));
+    toast.success("TaskList Deleted Successfully!");
   };
 
   const AddTask = (id) => {
@@ -102,7 +111,8 @@ function TaskList({
                 <button
                   className="delete"
                   onClick={() => {
-                    deleteTaskListHandler({ taskListId, projectId });
+                    toggleModal();
+                    //deleteTaskListHandler({ taskListId, projectId });
                   }}
                 >
                   <svg
@@ -229,6 +239,20 @@ function TaskList({
                 taskListId={taskListId}
                 addTaskHandler={addTaskHandler}
                 toggleAddTaskModal={toggleAddTaskModal}
+              />
+            </Modal>
+          ) : null}
+          {showDeleteModal ? (
+            <Modal showModal={showDeleteModal} styles={conformationModalStyles}>
+              <ConformationPopUp
+                title={"Delete TaskList  ?"}
+                onAcceptHandler={() => {
+                  console.log("project.projectId", taskListId, projectId);
+                  deleteTaskListHandler({ taskListId, projectId });
+                  //deleteProjectHandler(project.projectId);
+                  toggleModal();
+                }}
+                onCancelHandler={toggleModal}
               />
             </Modal>
           ) : null}
