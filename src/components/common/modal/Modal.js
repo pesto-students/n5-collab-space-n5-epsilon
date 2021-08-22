@@ -7,13 +7,20 @@ function Modal(props) {
   const { styles } = props;
   useEffect(() => {
     const checkIfClickedOutside = (e) => {
+      e.stopPropagation();
+
       if (props.showModal && ref.current && !ref.current.contains(e.target)) {
+        console.log("thi caee tere");
         props.closeCallback();
       }
     };
-    document.addEventListener("mousedown", checkIfClickedOutside);
+    document.addEventListener("mousedown", checkIfClickedOutside, {
+      capture: true,
+    });
     return () => {
-      document.removeEventListener("mousedown", checkIfClickedOutside);
+      document.removeEventListener("mousedown", checkIfClickedOutside, {
+        capture: true,
+      });
     };
   }, [props.showModal]);
   return (

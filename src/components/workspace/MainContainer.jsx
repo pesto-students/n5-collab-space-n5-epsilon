@@ -1,6 +1,7 @@
 import WorkSpaceTitle from "./WorkSpaceTitle";
 import { useSelector, useDispatch } from "react-redux";
 import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 import {
   addNewProject,
   deleteProject,
@@ -8,7 +9,7 @@ import {
 } from "../../redux/actions/workSpaceActions";
 import ProjectContainer from "./ProjectContainer";
 import { useEffect, useState } from "react";
-const MainContainer = ({toggleLoading}) => {
+const MainContainer = ({ toggleLoading }) => {
   const projects = useSelector((state) => state.WorkSpaceReducer.projects);
   const ownProjects = projects.filter((project) => project.role === "Admin");
   const sharedProjects = projects.filter((project) => project.role === "Guest");
@@ -37,16 +38,17 @@ const MainContainer = ({toggleLoading}) => {
       })
     );
     setShowForm(false);
+    toast.success(`Project ${projectForm.name} Added Successfully `);
   };
   const deleteProjectHandler = (projectId) => {
-      // debugger
+    // debugger
     const curr_project = projects.find(
       (project) => project.projectId == projectId
     );
     console.log("curr_project", curr_project);
     if (curr_project.role === "Admin") {
       dispatch(deleteProject({ projectId: projectId }));
-      toggleLoading(false)
+      toggleLoading(false);
     } else {
       dispatch(
         leaveProject({
@@ -56,6 +58,8 @@ const MainContainer = ({toggleLoading}) => {
         })
       );
     }
+    console.log("came tere  ", curr_project);
+    toast.success("Project Deleted Successfully ");
   };
 
   useEffect(() => {
@@ -77,7 +81,7 @@ const MainContainer = ({toggleLoading}) => {
 
   const regex = {
     nameRegex: /^([a-zA-Z]+( [a-zA-Z]+)|[a-zA-Z]){2,50}$/,
-    description: /^.{4,}$/
+    description: /^.{4,}$/,
   };
 
   return (
@@ -209,46 +213,54 @@ const MainContainer = ({toggleLoading}) => {
                 type="text"
                 placeholder="Project Name"
                 onKeyUp={(e) => {
-                    if (!regex.nameRegex.test(e.target.value.trim())) {
-                      setSubmittedForm({
-                        ...submittedForm,
-                        error: "Enter a valid name",
-                      });
-                    } else {
-                      setSubmittedForm({
-                        ...submittedForm,
-                        formTouched: true,
-                        error: false,
-                      });
-                    }
-                  setProjectForm({ ...projectForm, name: e.target.value.trim()});
+                  if (!regex.nameRegex.test(e.target.value.trim())) {
+                    setSubmittedForm({
+                      ...submittedForm,
+                      error: "Enter a valid name",
+                    });
+                  } else {
+                    setSubmittedForm({
+                      ...submittedForm,
+                      formTouched: true,
+                      error: false,
+                    });
+                  }
+                  setProjectForm({
+                    ...projectForm,
+                    name: e.target.value.trim(),
+                  });
                 }}
               />
               <input
-                  type="text"
-                  placeholder="Project Description"
-                  onKeyUp={(e) => {
-                      if (!regex.description.test(e.target.value.trim())) {
-                        setSubmittedForm({
-                          ...submittedForm,
-                          error: "Enter a Some Description",
-                        });
-                      } else {
-                        setSubmittedForm({
-                          ...submittedForm,
-                          formTouched: true,
-                          error: false,
-                        });
-                      }
-                    setProjectForm({ ...projectForm, description: e.target.value.trim() });
-                  }}
+                type="text"
+                placeholder="Project Description"
+                onKeyUp={(e) => {
+                  if (!regex.description.test(e.target.value.trim())) {
+                    setSubmittedForm({
+                      ...submittedForm,
+                      error: "Enter a Some Description",
+                    });
+                  } else {
+                    setSubmittedForm({
+                      ...submittedForm,
+                      formTouched: true,
+                      error: false,
+                    });
+                  }
+                  setProjectForm({
+                    ...projectForm,
+                    description: e.target.value.trim(),
+                  });
+                }}
               />
               <button
-                  className='transparent-btn'
+                className="transparent-btn"
                 disabled={
                   !submittedForm.formTouched ||
                   !!submittedForm.error ||
-                  submittedForm.submitting || !projectForm.name || !projectForm.description
+                  submittedForm.submitting ||
+                  !projectForm.name ||
+                  !projectForm.description
                 }
                 onClick={addProjectHandler}
               >

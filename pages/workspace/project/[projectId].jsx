@@ -16,12 +16,15 @@ import useInput from "../../../src/hooks/useInput";
 import { verify } from "jsonwebtoken";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import {
   createNewTaskList,
   deleteTaskList,
 } from "../../../src/redux/actions/taskListActions";
 import WorkSpaceTitle from "../../../src/components/workspace/WorkSpaceTitle";
 import { useEffect, useState } from "react";
+import ResizableTextArea from "../../../src/components/textArea/ResizeableTextArea";
+import styles from "../../../styles/description.module.scss";
 
 const ProjectPage = () => {
   resetServerContext();
@@ -46,6 +49,17 @@ const ProjectPage = () => {
     error: false,
     submitting: false,
   });
+  const [toggleDescription, setToggleDescription] = useState(true);
+  const [description, setDescription] = useState(projectInfo.description);
+  const handleDescriptionToggle = () => {
+    const newDescription = !toggleDescription;
+    setToggleDescription(newDescription);
+  };
+  const saveDescriptionHandler = () => {
+    const newDescription = description;
+    setDescription(newDescription);
+    handleDescriptionToggle();
+  };
   const [taskListName, setTaskListName] = useState("");
   const [showForm, setShowForm] = useState(false);
   const regex = {
@@ -68,12 +82,17 @@ const ProjectPage = () => {
       return;
     }
     if (result.destination.droppableId === "delete") {
+      const taskName =
+        projectInfo.taskLists[result.source.droppableId].task[
+          result.draggableId
+        ].name;
       dispatch(
         deleteTask({
           taskId: result.draggableId,
           taskListId: result.source.droppableId,
         })
       );
+      toast.success(`Delete task ${taskName} Successfully `);
       return;
     }
     if (result.destination.droppableId === result.source.droppableId) {
@@ -335,7 +354,46 @@ const ProjectPage = () => {
                 </div>
               )}
               {tab === "Description" && (
-                <div className="description">{projectInfo.description}</div>
+                <>
+                  {toggleDescription ? (
+                    <div
+                      className="description"
+                      onDoubleClick={
+                        handleDescriptionToggle
+                      }
+                    >
+                      {projectInfo.description
+                        ? projectInfo.description
+                        : "Double click here to add a description"}
+                    </div>
+                  ) : (
+                    
+                    <div className={styles.edit_description}>
+                      <h1>{toggleDescription}</h1>
+                      <div className={styles.edit_textArea}>
+                        <ResizableTextArea
+                          className={styles.description_textarea}
+                          setValue={setDescription}
+                          value={description}
+                          maxRows={20}
+                          rows={20}
+                          placeholder="description ..."
+                        />
+                      </div>
+                      <div className={styles.edit_actions}>
+                        <button
+                          className={styles.edit_actions_save}
+                          onClick={saveDescriptionHandler}
+                        >
+                          save
+                        </button>
+                        <button onClick={handleDescriptionToggle}>
+                          cancel
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </>
               )}
             </div>
             <ToastContainer autoClose={2000} />

@@ -108,15 +108,13 @@ function ProjectContainer({
               </a>
             </Link>
             {showDeleteModal ? (
-              <Modal
-                closeCallback={toggleModal}
-                showModal={showDeleteModal}
-                styles={modalStyles}
-              >
+              <Modal showModal={showDeleteModal} styles={modalStyles}>
                 <ConformationPopUp
                   title={"Delete Project ?"}
                   onAcceptHandler={() => {
+                    console.log("project.projectId", project.projectId);
                     deleteProjectHandler(project.projectId);
+                    toggleModal();
                   }}
                   onCancelHandler={toggleModal}
                 />

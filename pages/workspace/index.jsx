@@ -6,7 +6,8 @@ import TourGuide from "../../src/components/TourGuide";
 import Spinner from "../../src/components/common/contentLoader/spinningCircleLoader";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 const Workspace = () => {
   const loading = useSelector((state) => state.WorkSpaceReducer.loading);
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const Workspace = () => {
     <>
       <MainContainer toggleLoading={toggleLoading} />
       <TourGuide />
+      <ToastContainer autoClose={2000} />
       {loading ? <Spinner /> : null}
     </>
   );

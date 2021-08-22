@@ -63,10 +63,7 @@ export default function CommentBox({
                 </div>
 
                 <div className={styles.comment}>
-                  {(userRole == "Admin") |
-                  ((commentInfo.by._id === userId) |
-                    userPermission.hasOwnProperty("taskList") &&
-                    userPermission.taskList.includes("Delete")) ? (
+                  {(userRole == "Admin") | (commentInfo.by === userId) ? (
                     <div className={styles.comment_menu}>
                       <Container
                         menuItems={[

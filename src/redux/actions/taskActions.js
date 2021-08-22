@@ -85,7 +85,7 @@ export const moveTaskAction = (taskInfo) => async (dispatch, getState) => {
     });
     if (response) {
       dispatch(MoveTaskSuccess(taskInfo));
-      toast.success("Task Moved ");
+      toast.success("Task Moved Successfully ");
     }
   } catch (err) {
     dispatch(MoveTaskFailure(prevState));
@@ -107,7 +107,7 @@ export const reorderTask = (taskInfo) => async (dispatch, getState) => {
       });
       if (response) {
         dispatch(ChangeTaskOrderSuccess(taskInfo));
-        toast.success("Task Moved ");
+        toast.success("Task Reorder Successfully ");
       }
     } catch (err) {
       dispatch(ChangeTaskOrderFailure(prevState));
