@@ -67,6 +67,7 @@ const MainContainer = ({ toggleLoading }) => {
   };
 
   useEffect(() => {
+    console.log("this is called automatically");
     setLayout(localStorage.getItem("layout") || "grid");
   }, []);
 

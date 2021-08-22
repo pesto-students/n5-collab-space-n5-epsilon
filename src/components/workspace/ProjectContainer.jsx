@@ -12,13 +12,20 @@ function ProjectContainer({
   toggleLoading,
 }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const toggleModal = () => {
+  const [deleteProjectId, setDeleteProjectId] = useState("initialState");
+  const toggleModal = (projectId) => {
+    console.log("setDeleteProjectId", projectId);
+    setDeleteProjectId(projectId);
     let showDeleteModals = !showDeleteModal;
     setShowDeleteModal(showDeleteModals);
+  };
+  const triggerDeleteHandler = () => {
+    deleteProjectHandler(deleteProjectId);
   };
   return (
     <>
       {projectList.map((project) => {
+        console.log(project.projectId);
         return (
           <React.Fragment key={project._id}>
             <Link href={`workspace/project/${project.projectId}`}>
@@ -43,8 +50,9 @@ function ProjectContainer({
                   <button
                     className="delete"
                     onClick={(e) => {
+                      e.stopPropagation();
                       e.preventDefault();
-                      toggleModal();
+                      toggleModal(project.projectId);
                       //deleteProjectHandler(project.projectId);
                     }}
                   >
@@ -79,8 +87,9 @@ function ProjectContainer({
                   <button
                     className="leave"
                     onClick={(e) => {
+                      e.stopPropagation();
                       e.preventDefault();
-                      toggleModal();
+                      toggleModal(project.projectId);
                     }}
                   >
                     <svg
@@ -102,20 +111,20 @@ function ProjectContainer({
                     </svg>
                   </button>
                 )}
+                {showDeleteModal ? (
+                  <Modal showModal={showDeleteModal} styles={modalStyles}>
+                    <ConformationPopUp
+                      title={"Delete Project ?"}
+                      onAcceptHandler={() => {
+                        triggerDeleteHandler();
+                        toggleModal();
+                      }}
+                      onCancelHandler={toggleModal}
+                    />
+                  </Modal>
+                ) : null}
               </a>
             </Link>
-            {showDeleteModal ? (
-              <Modal showModal={showDeleteModal} styles={modalStyles}>
-                <ConformationPopUp
-                  title={"Delete Project ?"}
-                  onAcceptHandler={() => {
-                    deleteProjectHandler(project.projectId);
-                    toggleModal();
-                  }}
-                  onCancelHandler={toggleModal}
-                />
-              </Modal>
-            ) : null}
           </React.Fragment>
         );
       })}

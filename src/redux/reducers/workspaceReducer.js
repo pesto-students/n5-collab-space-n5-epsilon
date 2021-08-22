@@ -39,7 +39,6 @@ const WorkSpaceReducer = (state = initialState, action) => {
         });
         console.log("projectIndex", projectIndex);
         if (projectIndex > -1) {
-          debugger
           draft.projects.splice(projectIndex, 1);
         }
 
