@@ -24,7 +24,7 @@ export default function Home() {
                 <a className="header-btn">  Get Started</a>
               </Link> }
               {username && <Link href="/workspace">
-                  <a className="header-btn">  Let's Go</a>
+                  <a className="header-btn">Let&apos;s Go</a>
               </Link>
               }
               {username && <div className="user-profile">

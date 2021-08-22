@@ -4,6 +4,7 @@ import Modal from "../common/modal/Modal";
 import ConformationPopUp from "../common/customPopUp/ConformationPopUp";
 import { useState } from "react";
 import modalStyles from "../../../styles/conformationModal.module.scss";
+import sal from "sal.js";
 function ProjectContainer({
   projectList,
   deleteProjectHandler,
@@ -16,6 +17,7 @@ function ProjectContainer({
     let showDeleteModals = !showDeleteModal;
     setShowDeleteModal(showDeleteModals);
   };
+  sal();
   return (
     <>
       {projectList.map((project) => {
@@ -27,6 +29,7 @@ function ProjectContainer({
                 onDragStart={() => {
                   projectId(project.projectId);
                 }}
+                data-sal="fade" data-sal-duration="700"
                 className={`projectCard ${role !== "Admin" && "shared"}`}
                 key={project._id}
                 data-id={project.projectId}

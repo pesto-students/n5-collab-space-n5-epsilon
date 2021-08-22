@@ -752,6 +752,7 @@ footer {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
       grid-gap: 32px;
+      margin-top: 0;
     }
 
     .NavButton {
@@ -855,6 +856,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 99;
   .content-wrapper {
     background: #fff;
     border-radius: 10px;
@@ -1222,7 +1224,8 @@ footer {
     }
     .list {
       height: calc(100% - 193px);
-      overflow: auto;
+      overflow-y: auto;
+      overflow-x: hidden;
 
       .user {
         display: flex;
@@ -1235,7 +1238,7 @@ footer {
         cursor: pointer;
         .icon {
           position: absolute;
-          left: 0;
+          left: 5px;
           background: orange;
           border-radius: 50%;
           padding: 10px;
@@ -1266,6 +1269,15 @@ footer {
         .email {
           color: #959595;
         }
+        &.active{
+          background: #61f0ff75;
+          border-radius: 10px;
+        }
+        .name,.email{
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
         &.invite {
           color: #235c75;
           span {
@@ -1292,7 +1304,7 @@ footer {
       grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
       grid-gap: 32px;
       padding-right: 30px;
-      max-height: calc(100% - 61px);
+      max-height: calc(100% - 161px);
       overflow: auto;
 
       .project {
@@ -1362,6 +1374,12 @@ footer {
           border: 2px dashed #0006;
           background: transparent;
         }
+        span{
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 100%;
+        }
       }
     }
     .empty-box {
@@ -1373,6 +1391,8 @@ footer {
         padding: 20px;
         font-size: 20px;
         font-family: monospace;
+        position: relative;
+        z-index: 1;
         span {
           display: block;
           font-size: 15px;
@@ -1382,9 +1402,36 @@ footer {
           color: #8c53ff;
         }
       }
-      img {
-        max-height: 100%;
-        max-width: 100%;
+      div {
+        position: relative !important;
+        img {
+          position: relative !important;
+          height: 100% !important;
+          width: 100%!important;
+        }
+      }
+    }
+    .select-user-box{
+      position: relative;
+      height: calc(100% - 55px);
+      h1 {
+        text-align: center;
+        margin: 0;
+        padding: 20px;
+        font-size: 20px;
+        font-family: monospace;
+        position: relative;
+        z-index: 1;
+      }
+      div {
+        position: relative !important;
+        height: calc(100% - 161px);
+        img {
+          position: relative !important;
+          height: 100% !important;
+          width: auto!important;
+          min-width: auto !important;
+        }
       }
     }
   }
@@ -1491,17 +1538,12 @@ footer {
   &.grid {
     .user-projects {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       grid-gap: 32px;
       grid-auto-flow: row;
       overflow: visible;
-
-      .delete {
-        display: none;
-      }
       .projectCard {
-        width: 300px;
-        height: 300px;
+        //width: 300px;
         h5 {
           font-size: 12.5px;
           font-weight: 500;
@@ -1512,13 +1554,7 @@ footer {
           word-break: break-all;
         }
         &:hover {
-          width: 320px;
-          height: 320px;
-
           box-shadow: 3px 8px 14px #131218;
-          .delete {
-            display: block;
-          }
         }
       }
       &.center {
@@ -1553,16 +1589,13 @@ footer {
     cursor: pointer;
     text-align: center;
     box-shadow: 3px 8px 14px #a7a6a6;
-    width: auto;
+    width: 300px;
     max-width: 500px;
     position: relative;
-    height: 200px;
+    transition: 0.3s;
     &.shared {
-      h2 {
-        padding-top: 10px;
-      }
       h5 {
-        padding-bottom: 30px;
+        margin-bottom: 50px;
       }
     }
     h2 {
@@ -1580,7 +1613,7 @@ footer {
     }
     h5 {
       display: -webkit-box;
-      -webkit-line-clamp: 4;
+      -webkit-line-clamp: 6;
       text-align: start;
       word-break: break-all;
       -webkit-box-orient: vertical;
@@ -1588,10 +1621,12 @@ footer {
       padding: 0 15px;
       font-weight: 500;
       font-family: monospace;
+      margin-bottom: 25px;
     }
     .delete {
-      display: none;
+      opacity: 0;
       top: 8px;
+      transition: 0.4s;
     }
     .leave {
       bottom: 8px;
@@ -1613,7 +1648,8 @@ footer {
     }
     &:hover {
       .delete {
-        display: block;
+        opacity: 1;
+        z-index: 1;
       }
     }
   }

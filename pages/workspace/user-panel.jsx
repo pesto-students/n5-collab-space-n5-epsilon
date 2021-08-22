@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import cookie from "js-cookie";
 import { wrapper } from "../../src/redux/store";
 import {
   addUser,
@@ -11,7 +10,7 @@ import AuthAPI from "../../src/client_apis/authApis";
 import { verify } from "jsonwebtoken";
 import Image from "next/image";
 
-const UserPanel = (props) => {
+const UserPanel = () => {
   const regex = {
     emailRegex:
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i,
@@ -30,17 +29,16 @@ const UserPanel = (props) => {
     projectId: "",
   });
   const [showForm, setShowForm] = useState(false);
-  const [showProjectList, setShowProjectList] = useState(false);
   const [showAddToProjectList, setShowAddToProjectList] = useState(false);
   const projects = useSelector((state) => state.WorkSpaceReducer.projects);
   const dispatch = useDispatch();
   const [usersList, setUsersList] = useState({});
   const [projectList, setProjectList] = useState({});
   const [availableProjectList, setAvailableProjectList] = useState([]);
+  const [selectedUser, setSelectedUser] = useState('');
   const Auth = new AuthAPI();
 
-  useEffect(() => {
-    const userData = {};
+  useEffect( () => {
     const availableProjects = [];
 
     projects.map((item) => {
@@ -59,9 +57,15 @@ const UserPanel = (props) => {
     };
   }, [projects]);
 
-  async function addExistingUser(userInfo) {
+  async function addExistingUser(userInfo, selectedProject) {
     await dispatch(addUser(userInfo));
-    mapUserToProjectList();
+
+    const newProjectList = projectList;
+    newProjectList[selectedProject.projectId] = {
+      projectName: selectedProject.projectName,
+      projectId: selectedProject.projectId,
+    }
+    setProjectList( newProjectList);
     setShowAddToProjectList(false);
   }
 
@@ -164,7 +168,7 @@ const UserPanel = (props) => {
               will not appear here.
             </p>
           </div>
-          <h4>Members</h4>
+          <h4>Members List</h4>
           <div className="list available-users">
             <div
               className="user invite"
@@ -185,9 +189,9 @@ const UserPanel = (props) => {
               return (
                 <div
                   key={user}
-                  className="user"
+                  className={`user ${selectedUser === user? 'active':''}`}
                   onClick={() => {
-                    console.log("====my====", usersList[user]);
+                    setSelectedUser(user);
                     setProjectList(usersList[user]);
                   }}
                 >
@@ -233,11 +237,12 @@ const UserPanel = (props) => {
                         <span
                           data-id={project.projectId}
                           data-email={projectList.email}
+                          key={project.projectId}
                           onClick={async () => {
                             await addExistingUser({
                               userEmail: projectList.email,
                               projectId: project.projectId,
-                            });
+                            },project);
                           }}
                         >
                           {project.projectName}
@@ -265,12 +270,19 @@ const UserPanel = (props) => {
                         width="162"
                       />
                     </div>
-                    {projectList[userKey].projectName}
+                    <span>{projectList[userKey].projectName}</span>
                   </div>
                 ) : null;
               })}
             </div>
           ) : (
+              Object.keys(usersList).length ? <div className="select-user-box">
+                    <h1>
+                      Please select a user from members list to view projects you have shared to them
+                    </h1>
+                    <Image src="/choose.jpeg" alt="empty" layout="fill" />
+
+                  </div> :
             <div className="empty-box">
               <h1>
                 You have not started sharing projects with others.

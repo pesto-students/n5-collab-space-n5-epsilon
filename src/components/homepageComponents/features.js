@@ -7,7 +7,7 @@ return <section className="choose-cypherchange">
         </div>
         <div className="outer-wrapper">
             <div className="feature" data-sal="slide-up"
-                 data-sal-delay=""
+                 data-sal-duration="1200"
                  data-sal-easing="ease-in-back">
                 <div className="image-wrapper">
                     <img src="https://api.iconify.design/la/user-lock.svg?color=white" alt="icon"/>
@@ -19,6 +19,7 @@ return <section className="choose-cypherchange">
             </div>
             <div className="feature" data-sal="slide-up"
                  data-sal-delay="150"
+                 data-sal-duration="1200"
                  data-sal-easing="ease-in-back">
                 <div className="image-wrapper">
                     <img src="https://api.iconify.design/bi/kanban.svg?color=white" alt="icon"/>
@@ -30,6 +31,7 @@ return <section className="choose-cypherchange">
             </div>
             <div className="feature" data-sal="slide-up"
                  data-sal-delay="300"
+                 data-sal-duration="1200"
                  data-sal-easing="ease-in-back">
                 <div className="image-wrapper">
                     <img src="https://api.iconify.design/teenyicons/nextjs-outline.svg?color=white" alt="icon"/>
@@ -41,6 +43,7 @@ return <section className="choose-cypherchange">
             </div>
             <div className="feature" data-sal="slide-up"
                  data-sal-delay="450"
+                 data-sal-duration="1200"
                  data-sal-easing="ease-in-back">
                 <div className="image-wrapper">
                     <img src="https://api.iconify.design/whh/salealt.svg?color=white" alt="" srcSet=""/>
@@ -52,6 +55,7 @@ return <section className="choose-cypherchange">
             </div>
             <div className="feature" data-sal="slide-up"
                  data-sal-delay="600"
+                 data-sal-duration="1200"
                  data-sal-easing="ease-in-back">
                 <div className="image-wrapper">
                     <img src="https://api.iconify.design/eos-icons/secure-data-outlined.svg?color=white" alt="" srcSet=""/>
@@ -63,6 +67,7 @@ return <section className="choose-cypherchange">
             </div>
             <div className="feature" data-sal="slide-up"
                  data-sal-delay="750"
+                 data-sal-duration="1200"
                  data-sal-easing="ease-in-back">
                 <div className="image-wrapper">
                     <img src="https://api.iconify.design/carbon/share-knowledge.svg?color=white" alt="" srcSet=""/>

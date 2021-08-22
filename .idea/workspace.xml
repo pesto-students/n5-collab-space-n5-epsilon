@@ -5,13 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="103cd474-1403-40f5-96a1-636418099c6b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/public/choose.jpeg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/users/updatePassword.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/users/updatePassword.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/workspace/setting.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/workspace/setting.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/workspace/user-panel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/workspace/user-panel.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/homepageComponents/aboutUs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/homepageComponents/aboutUs.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/homepageComponents/features.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/homepageComponents/features.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/homepageComponents/joinUs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/homepageComponents/joinUs.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layoutComponents/SideNav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layoutComponents/SideNav.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/workspace/WorkSpaceTitle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workspace/WorkSpaceTitle.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/workspace/MainContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workspace/MainContainer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/workspace/ProjectContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workspace/ProjectContainer.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -97,7 +100,7 @@
       <workItem from="1629290020789" duration="266000" />
       <workItem from="1629314640407" duration="5008000" />
       <workItem from="1629394513216" duration="13408000" />
-      <workItem from="1629479427930" duration="72376000" />
+      <workItem from="1629479427930" duration="82744000" />
     </task>
     <servers />
   </component>

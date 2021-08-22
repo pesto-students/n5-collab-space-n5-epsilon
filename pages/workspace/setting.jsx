@@ -27,11 +27,12 @@ const Setting = () => {
 
     function submit() {
        setSubmittedForm({
+           ...submittedForm,
             submitting: true,
         });
         Auth.updatePassword({
             userEmail: JSON.parse(localStorage.getItem('user')).email,
-            token: JSON.parse(localStorage.getItem('user')).id,
+            token: JSON.parse(localStorage.getItem('user'))['auth-token'],
             newPassword: newPassword
         })
             .then(() => {
@@ -41,10 +42,10 @@ const Setting = () => {
                 });
                 JSON.parse(localStorage.getItem('user')).id;
             })
-            .catch(error => {
+            .catch((error) => {
                 setSubmittedForm({
                     ...submittedForm,
-                    error: error.response.data,
+                    error: error.message,
                     submitting : false
                 })
             });

@@ -11,9 +11,9 @@ const handler = createHandler();
 handler.post(async (req, res) => {
   try {
     const {userEmail, token, newPassword} = req.body;
+    const user = await UserData.findOne({email: userEmail});
     const validToken = await verify(token, process.env.REACT_APP_SECRET_TOKEN);
     if (validToken) {
-      const user = await UserData.findOne({email: userEmail});
       const salt = await genSalt(16);
       await hash(newPassword, salt).then(async (hashedPassword) => {
         user.password = hashedPassword;
@@ -23,7 +23,9 @@ handler.post(async (req, res) => {
       });
     }
   } catch (err) {
-    res.json({ message: err.message });
+    console.log('===error=== ',err )
+    // res.json({ message: err.message });
+    res.status(400).send({ message: err.message });
   }
 });
 

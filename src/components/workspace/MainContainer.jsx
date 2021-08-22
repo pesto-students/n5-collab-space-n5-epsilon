@@ -13,6 +13,7 @@ import Image from "next/image";
 import TrashCanIcon from "../iconComponents/TrashCanIcon";
 import HorizontalAlignIcon from "../iconComponents/HorizontalAlignIcon";
 import GridLayoutIcon from "../iconComponents/GridLayoutIcon";
+import sal from "sal.js";
 const MainContainer = ({ toggleLoading }) => {
   const projects = useSelector((state) => state.WorkSpaceReducer.projects);
   const ownProjects = projects.filter((project) => project.role === "Admin");
@@ -68,6 +69,7 @@ const MainContainer = ({ toggleLoading }) => {
 
   useEffect(() => {
     setLayout(localStorage.getItem("layout") || "grid");
+    sal();
   }, []);
 
   function toggle(layout) {
