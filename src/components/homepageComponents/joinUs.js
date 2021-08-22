@@ -3,6 +3,7 @@
 export default function JoinUs( ) {
     return <section className='joinUs'>
         <img className='background-graph' src='graph.png' alt='graph'/>
+        <div className='gradient-div'/>
         <div className='container'>
             <div className='head-wrapper'  data-sal="fade" data-sal-duration="900" data-sal-delay="200">
                 <span className='title'>Get Early Access</span>

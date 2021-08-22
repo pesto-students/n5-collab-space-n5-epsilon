@@ -7,10 +7,11 @@
     <list default="true" id="103cd474-1403-40f5-96a1-636418099c6b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/workspace/project/[projectId].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/workspace/project/[projectId].jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/homepageComponents/footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/homepageComponents/footer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/projectPage/TaskTab.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projectPage/TaskTab.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/workspace/ProjectContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workspace/ProjectContainer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/homepageComponents/aboutUs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/homepageComponents/aboutUs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/homepageComponents/features.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/homepageComponents/features.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/homepageComponents/joinUs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/homepageComponents/joinUs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layoutComponents/SideNav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layoutComponents/SideNav.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/workspace/WorkSpaceTitle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workspace/WorkSpaceTitle.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -96,7 +97,7 @@
       <workItem from="1629290020789" duration="266000" />
       <workItem from="1629314640407" duration="5008000" />
       <workItem from="1629394513216" duration="13408000" />
-      <workItem from="1629479427930" duration="66532000" />
+      <workItem from="1629479427930" duration="72376000" />
     </task>
     <servers />
   </component>

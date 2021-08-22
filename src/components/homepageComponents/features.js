@@ -6,7 +6,9 @@ return <section className="choose-cypherchange">
             <p>The most safest and trusted cryptocurrency exchange platform</p>
         </div>
         <div className="outer-wrapper">
-            <div className="feature">
+            <div className="feature" data-sal="slide-up"
+                 data-sal-delay=""
+                 data-sal-easing="ease-in-back">
                 <div className="image-wrapper">
                     <img src="https://api.iconify.design/la/user-lock.svg?color=white" alt="icon"/>
                 </div>
@@ -15,7 +17,9 @@ return <section className="choose-cypherchange">
                     <p>Secure your money with multi layer protection.</p>
                 </div>
             </div>
-            <div className="feature">
+            <div className="feature" data-sal="slide-up"
+                 data-sal-delay="150"
+                 data-sal-easing="ease-in-back">
                 <div className="image-wrapper">
                     <img src="https://api.iconify.design/bi/kanban.svg?color=white" alt="icon"/>
                 </div>
@@ -24,7 +28,9 @@ return <section className="choose-cypherchange">
                     <p>Link your bank accounts and cards for a faster transaction</p>
                 </div>
             </div>
-            <div className="feature">
+            <div className="feature" data-sal="slide-up"
+                 data-sal-delay="300"
+                 data-sal-easing="ease-in-back">
                 <div className="image-wrapper">
                     <img src="https://api.iconify.design/teenyicons/nextjs-outline.svg?color=white" alt="icon"/>
                 </div>
@@ -33,7 +39,9 @@ return <section className="choose-cypherchange">
                     <p>Cypherchange supports multiple digital currencies</p>
                 </div>
             </div>
-            <div className="feature">
+            <div className="feature" data-sal="slide-up"
+                 data-sal-delay="450"
+                 data-sal-easing="ease-in-back">
                 <div className="image-wrapper">
                     <img src="https://api.iconify.design/whh/salealt.svg?color=white" alt="" srcSet=""/>
                 </div>
@@ -42,7 +50,9 @@ return <section className="choose-cypherchange">
                     <p>Personalize your transaction limits in accordance to your needs.</p>
                 </div>
             </div>
-            <div className="feature">
+            <div className="feature" data-sal="slide-up"
+                 data-sal-delay="600"
+                 data-sal-easing="ease-in-back">
                 <div className="image-wrapper">
                     <img src="https://api.iconify.design/eos-icons/secure-data-outlined.svg?color=white" alt="" srcSet=""/>
                 </div>
@@ -51,7 +61,9 @@ return <section className="choose-cypherchange">
                     <p>We value your time. Get instant help any time of the day.</p>
                 </div>
             </div>
-            <div className="feature">
+            <div className="feature" data-sal="slide-up"
+                 data-sal-delay="750"
+                 data-sal-easing="ease-in-back">
                 <div className="image-wrapper">
                     <img src="https://api.iconify.design/carbon/share-knowledge.svg?color=white" alt="" srcSet=""/>
                 </div>
