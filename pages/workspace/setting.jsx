@@ -1,6 +1,7 @@
 import { getLayout as getSiteLayout } from "../../src/components/layouts/SiteLayout";
 import WorkSpaceTitle from "../../src/components/workspace/WorkSpaceTitle";
 import {useState} from "react";
+import AuthAPI from "../../src/client_apis/authApis";
 
 const Setting = () => {
     const [submittedForm, setSubmittedForm] = useState({
@@ -20,6 +21,34 @@ const Setting = () => {
     const regex = {
         passwordRegex: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[ !"#\$%&'\(\)*+,-./:;<=>?@\[\\\]^_`{|}~]).{8,}$/,
     }
+
+    const Auth = new AuthAPI();
+
+    function submit() {
+       setSubmittedForm({
+            submitting: true,
+        });
+        Auth.updatePassword({
+            userEmail: JSON.parse(localStorage.getItem('user')).email,
+            token: JSON.parse(localStorage.getItem('user')).id,
+            newPassword: newPassword
+        })
+            .then(() => {
+                setSubmittedForm({
+                    error: false,
+                    submitting: false,
+                });
+                JSON.parse(localStorage.getItem('user')).id;
+            })
+            .catch(error => {
+                setSubmittedForm({
+                    ...submittedForm,
+                    error: error.response.data,
+                    submitting : false
+                })
+            });
+    }
+
 
     return  <div className='mainContainerBody'>
         <WorkSpaceTitle title='Workspace Name'/>
@@ -45,11 +74,13 @@ const Setting = () => {
                                         setSubmittedForm({
                                             ...submittedForm,
                                             error: "Enter a valid name",
+                                            formTouched: true,
                                         });
                                     } else {
                                         setNewPassword(e.target.value);
                                         setSubmittedForm({
                                             ...submittedForm,
+                                            formTouched: true,
                                             error: false,
                                         });
                                     }
@@ -72,7 +103,7 @@ const Setting = () => {
                             }}/>
                         </div>
                         <p className={`error-space ${submittedForm.error || copyPassword !== newPassword? 'error':''}`}>{submittedForm.error ? submittedForm.error: copyPassword === newPassword ?'Atleast 8 characters, one lower case character, one upper case character, one number and one special character.':'Both password does not match'}</p>
-                        <button className='btn' disabled={!submittedForm.formTouched || !!submittedForm.error || copyPassword !== newPassword || submittedForm.submitting}>Save Password</button>
+                        <button onClick={submit} className='btn' disabled={!submittedForm.formTouched || submittedForm.error || copyPassword !== newPassword || submittedForm.submitting}>Save Password</button>
                     </div>
                 </div>}
                 {tab === 'workspace' &&  <div className='tab'/>}
