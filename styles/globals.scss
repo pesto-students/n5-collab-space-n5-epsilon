@@ -927,13 +927,11 @@ footer {
         top: 10vh;
         transform: translateX(-50%);
         left: 50%;
-        background-image: url("../public/im1.png");
       }
       &:nth-of-type(2) {
         bottom: 10vh;
         transform: translateX(-50%);
         left: 50%;
-        background-image: url("../public/im2.png");
       }
     }
     &:before {
@@ -952,13 +950,11 @@ footer {
         top: 50%;
         transform: translateY(-50%);
         left: 25vw;
-        background-image: url("../public/im3.png");
       }
       &:nth-of-type(2) {
         top: 50%;
         transform: translateY(-50%);
         right: 25vw;
-        background-image: url("../public/im4.png");
       }
     }
     &:before {
@@ -1460,6 +1456,10 @@ footer {
           word-break: break-all;
         }
         &:hover {
+          width: 320px;
+          height: 320px;
+
+          box-shadow: 3px 8px 14px #131218;
           .delete {
             display: block;
           }
@@ -1912,4 +1912,12 @@ footer {
       }
     }
   }
+}
+
+.errorPage {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  color: grey;
 }
