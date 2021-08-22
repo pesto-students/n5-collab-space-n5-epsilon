@@ -25,6 +25,7 @@ export default function TaskTab({
   layout,
   taskLists,
   taskTagFilter,
+    toggle
 }) {
   const router = useRouter();
   const dispatch = useDispatch();

@@ -139,7 +139,7 @@ $Segoe:  'SegoeUI', sans-serif;
   background: #eeeff0;
 }
 .header-btn{
-  color: #ffffff;
+  color: #ffffff !important;
   //background-color: #9a5cff;
   background: transparent linear-gradient(90deg, #9A5CFF 0%, #7892FF 51%, #9A5CFF 100%) 0% 0% no-repeat padding-box;
   transition: all 0.4s ease-in-out !important;
@@ -158,6 +158,7 @@ $Segoe:  'SegoeUI', sans-serif;
 
 .Homepage{
   background: #ffffff;
+  overflow: hidden;
   //background: linear-gradient(90deg, #d0df53cf -40%, #d9fefeb5 80%);
   .container {
     max-width: 1210px;
@@ -172,7 +173,7 @@ header{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  background: linear-gradient( 90deg, #2A265D 30%, #71DEDF 60%);
+  background: linear-gradient(90deg, #c125d33b 30%, #71dedf69 60%);
   height: 87px;
   padding: 15px;
   align-items: center;
@@ -765,6 +766,7 @@ footer {
     justify-content: center;
     padding: 20px;
     font-weight: 500;
+    cursor: pointer;
     &:hover {
       background: #9771ef;
       svg {
@@ -1789,6 +1791,10 @@ footer {
       text-transform: capitalize;
       margin: 15px 8px 0 0;
       cursor: pointer;
+      min-width: 50px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
   .delete {
@@ -1828,6 +1834,9 @@ footer {
       display: flex;
       text-transform: capitalize;
       transition: 0.2s;
+      div{
+        margin-right: 10px;
+      }
       &:nth-last-of-type(1) {
         margin-bottom: 0;
       }

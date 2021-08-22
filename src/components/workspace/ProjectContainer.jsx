@@ -79,7 +79,7 @@ function ProjectContainer({
                   <button
                     className="leave"
                     onClick={(e) => {
-                      e.stopPropagation();
+                      e.preventDefault();
                       toggleModal();
                     }}
                   >

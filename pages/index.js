@@ -18,9 +18,12 @@ export default function Home() {
         <header>
           <img src='/transparentLogo.png'/>
           <div>
-              <span className="header-btn">
-                  Sign Up
-              </span>
+              <Link href="/auth">
+                <a className="header-btn">  Get Started</a>
+              </Link>
+              <Link href="/workspace">
+                  <a className="header-btn">  Let's Go</a>
+              </Link>
           </div>
       </header>
         <AboutUs/>

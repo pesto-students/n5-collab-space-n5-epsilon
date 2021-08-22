@@ -37,7 +37,7 @@ export default function FooterBase(){
                 <input
                   placeholder='Email Address'/>
               </fieldset>
-              <button type='submit' className='default-btn'><img src='https://api.iconify.design/fa-solid/paper-plane.svg?color=white' alt=''/></button>
+              <button  className='default-btn'><img src='https://api.iconify.design/fa-solid/paper-plane.svg?color=white' alt=''/></button >
             </form>
           </div>
         </div>
