@@ -10,7 +10,7 @@ import Spinner from "../src/components/common/contentLoader/spinningCircleLoader
 export default function Authentication() {
   const router = useRouter();
   const token = cookie.get("token");
-  // console.log("token: " + token);
+
   if (token) {
     router.push("/workspace");
   }
@@ -28,7 +28,7 @@ export default function Authentication() {
     submitting: false,
     emailError: false,
     passwordError: false,
-    nameError: false
+    nameError: false,
   });
 
   const formSubmitHandler = (newState) => {
@@ -45,7 +45,7 @@ export default function Authentication() {
         submitting: false,
         emailError: false,
         passwordError: false,
-        nameError: false
+        nameError: false,
       });
     }, 1000);
   }

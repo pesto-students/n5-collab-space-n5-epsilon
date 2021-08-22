@@ -87,7 +87,6 @@ export const leaveProject = (leaveProjectInfo) => async (dispatch) => {
       dispatch(LeaveProject(leaveProjectInfo));
     }
   } catch (err) {
-    console.log(err);
     dispatch(LeaveProjectFailure(err));
   }
 };

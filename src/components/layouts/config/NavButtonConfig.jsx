@@ -1,7 +1,7 @@
 import React from "react";
-import ProjectIcon from "../iconComponents/ProjectIcon";
-import SettingIcon from "../iconComponents/SettingIcon";
-import UserIcon from "../iconComponents/UserIcon";
+import ProjectIcon from "../../iconComponents/ProjectIcon";
+import SettingIcon from "../../iconComponents/SettingIcon";
+import UserIcon from "../../iconComponents/UserIcon";
 const navButtons = [
   {
     label: "Projects",

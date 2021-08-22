@@ -3,7 +3,7 @@ import { withRouter } from "next/router";
 import Styles from "../../../styles/siteLayout.module.scss";
 
 const NavButton = ({ path, icon, label, router }) => (
-  <Link href={path}>
+  <Link href={path} passHref>
     <div
       className={`NavButton ${router.pathname === path ? "active" : ""}`}
     >

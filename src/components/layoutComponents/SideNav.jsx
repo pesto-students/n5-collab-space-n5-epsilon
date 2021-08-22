@@ -6,6 +6,7 @@ import Modal from "../common/modal/Modal";
 import ConformationPopUp from "../common/customPopUp/ConformationPopUp";
 import { useState } from "react";
 import modalStyles from "../../../styles/conformationModal.module.scss";
+import Image from "next/image";
 
 const SideNav = ({ navButtons }) => {
   const router = useRouter();
@@ -20,7 +21,10 @@ const SideNav = ({ navButtons }) => {
   };
   return (
     <div className="sideLayoutPanel">
-      <img src="/logo.png" alt="logo" />
+      <div className="image">
+        <Image src="/logo.png" alt="logo" height="70" width="300" />
+      </div>
+
       <div className="side-wrapper">
         <ul className="sideNavStaticList">
           {navButtons.map((button, index) => {

@@ -22,7 +22,6 @@ export default function CommentBox({
   const scrollToBottom = () => {
     messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
   };
-  console.log("comments", comments);
 
   useEffect(() => {
     scrollToBottom();
@@ -34,14 +33,7 @@ export default function CommentBox({
       </div>
       <div className={styles.existing_comments} ref={messagesEndRef}>
         {comments.map((commentInfo) => {
-          console.log("commentInfo", commentInfo.by, taskInfo);
           const commenterInfo = taskInfo.userLookup.find((userInfo) => {
-            console.log(
-              "userInfo",
-              userInfo._id,
-              "commentInfo",
-              commentInfo.by
-            );
             return userInfo._id === commentInfo.by;
           });
           const reducedUserName = commenterInfo.name

@@ -8,8 +8,6 @@ const handler = createHandler();
 handler.get(async (req, res) => {
   try {
     const { userEmail, projectId } = req.query;
-    console.log("req.quesafsfdry", req.query);
-    console.log("projectId", req.query);
 
     if (userEmail && projectId) {
       const addedUser = await addUserToProject(req.query);

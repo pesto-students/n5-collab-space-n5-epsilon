@@ -1,10 +1,10 @@
-import * as mailgun from 'mailgun-js'
+import * as mailgun from "mailgun-js";
 
-const mailerService = async ( token, name, email, mailType = 'invite' )=> {
-// create reusable transporter object using the default SMTP transport
-    const link= `${process.env.STAGING_URL}${token}`;
+const mailerService = async (token, name, email, mailType = "invite") => {
+  // create reusable transporter object using the default SMTP transport
+  const link = `${process.env.STAGING_URL}${token}`;
 
-    const invite = `<table style="background-color:#f4f5f7;width: 100%; text-align: center; padding-bottom: 7%;">
+  const invite = `<table style="background-color:#f4f5f7;width: 100%; text-align: center; padding-bottom: 7%;">
     <thead>
     <tr>
         <th style="padding: 15px 0">
@@ -67,7 +67,7 @@ const mailerService = async ( token, name, email, mailType = 'invite' )=> {
     </tr>
     </tbody>
 </table>`;
-    const resetPassword = `<table style="background-color:#f4f5f7;width: 100%; text-align: center; padding-bottom: 7%;">
+  const resetPassword = `<table style="background-color:#f4f5f7;width: 100%; text-align: center; padding-bottom: 7%;">
     <thead>
     <tr>
         <th style="padding: 15px 0">
@@ -134,34 +134,39 @@ const mailerService = async ( token, name, email, mailType = 'invite' )=> {
     </tbody>
 </table>`;
 
-    const mailOptions = {
-        from: 'CollabSpace.subdomain@CollabSpace.com', // sender address
-        to: email, // list of receivers
-        subject: `Invite To Collaborate With ${name} 👋`, // Subject line
-        html: invite // html body
-    }
+  const mailOptions = {
+    from: "CollabSpace.subdomain@CollabSpace.com", // sender address
+    to: email, // list of receivers
+    subject: `Invite To Collaborate With ${name} 👋`, // Subject line
+    html: invite, // html body
+  };
 
-    const mailOptions2 = {
-        from: 'CollabSpace.subdomain@CollabSpace.com', // sender address
-        to: email, // list of receivers
-        subject: `Reset Password of you CollabSpace Account ${name} ⁉️`, // Subject line
-        html: resetPassword // html body
-    }
+  const mailOptions2 = {
+    from: "CollabSpace.subdomain@CollabSpace.com", // sender address
+    to: email, // list of receivers
+    subject: `Reset Password of you CollabSpace Account ${name} ⁉️`, // Subject line
+    html: resetPassword, // html body
+  };
 
-    let myPromise = new Promise((resolve, reject)=> {
-        const DOMAIN = 'sandboxf8af146244744fac8267f8a36fab610c.mailgun.org';
-        const mg = mailgun({apiKey: '72578167609379be0c75b483ccbd9698-9776af14-42445fd6', domain: DOMAIN});
-        console.log('===test===' , name, email, mailType)
-        mg.messages().send(mailType==='invite'? mailOptions : mailOptions2, function (error, body) {
-            if(error){
-                reject(false);
-                console.log(error);
-            }
-            console.log(body);
-            resolve(true);
-        });
+  let myPromise = new Promise((resolve, reject) => {
+    const DOMAIN = "sandboxf8af146244744fac8267f8a36fab610c.mailgun.org";
+    const mg = mailgun({
+      apiKey: "72578167609379be0c75b483ccbd9698-9776af14-42445fd6",
+      domain: DOMAIN,
     });
-    return await myPromise;
-}
 
-export default mailerService
+    mg.messages().send(
+      mailType === "invite" ? mailOptions : mailOptions2,
+      function (error, body) {
+        if (error) {
+          reject(false);
+        }
+
+        resolve(true);
+      }
+    );
+  });
+  return await myPromise;
+};
+
+export default mailerService;

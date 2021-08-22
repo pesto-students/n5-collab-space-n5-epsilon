@@ -10,7 +10,6 @@ export default function TagBox({
   const [value, setValue] = useState("");
   const handleTagInputKeyDown = (e) => {
     if (e.key === "Enter") {
-      console.log(value);
       const formattedValue = value
         .replace(/\w\S*/g, function (txt) {
           return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();

@@ -17,7 +17,7 @@ handler.get(async (req, res) => {
 
 handler.post(async (req, res) => {
   const { taskId } = req.query;
-  console.log("req.body.tag", req.body.tag);
+
   const tagData = {
     taskId,
     tag: req.body.tag,
@@ -34,7 +34,7 @@ handler.delete(async (req, res) => {
     taskId,
     tag: req.body.tag,
   };
-  console.log(tagData);
+
   if (!req.body)
     return res.status(400).send(JSON.stringify({ error: "Invalid Request" }));
   const deletedTask = await deleteTags(tagData);
