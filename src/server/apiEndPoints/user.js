@@ -26,7 +26,7 @@ export async function getAllInvitedUser(userInfo) {
         users: {
           $elemMatch: {
             $and: [
-              { userId: Types.ObjectId("611a2e0e00e72d91b1fadb6b") },
+              { userId: Types.ObjectId(userId) },
               { roleId: Types.ObjectId("6116adfa723a11f42539b0e2") },
             ],
           },
