@@ -1,0 +1,26 @@
+.context_menu {
+  position: fixed;
+  border: 1px solid black;
+  background-color: white;
+  padding: 2px;
+  clear: both;
+  width: 8vw;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.context_menu .context_menu__item {
+  padding: 4px;
+}
+
+.context_menu .context_menu__item:not(:first-child) {
+  border-top: 1px solid black;
+}
+
+.context_menu .context_menu__item:hover {
+  background-color: rgb(211, 224, 228);
+  cursor: pointer;
+}
+.container {
+  cursor: pointer;
+}

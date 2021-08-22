@@ -1,0 +1,12 @@
+.siteLayout {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: 0fr auto;
+  margin: 0;
+
+  @media (max-width: 767px) {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+  }
+}
