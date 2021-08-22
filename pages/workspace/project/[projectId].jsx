@@ -137,6 +137,8 @@ const ProjectPage = () => {
                     taskLists={taskLists}
                     taskTagFilter={taskTagFilter}
                     toggle={toggle}
+                    setTaskTagFilter={setTaskTagFilter}
+                    setTaskTypeFilter={setTaskTypeFilter}
                   />
                 </div>
               )}

@@ -25,7 +25,9 @@ export default function TaskTab({
   layout,
   taskLists,
   taskTagFilter,
-    toggle
+  toggle,
+  setTaskTagFilter,
+  setTaskTypeFilter
 }) {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -88,6 +90,8 @@ export default function TaskTab({
           <FilterBox
             taskListsName={taskListsName}
             taskTagNames={taskTagNames}
+            setTaskTagFilter={setTaskTagFilter}
+            setTaskTypeFilter={setTaskTypeFilter}
           />
           <div className="layout-toggle">
             <Droppable droppableId="delete">
