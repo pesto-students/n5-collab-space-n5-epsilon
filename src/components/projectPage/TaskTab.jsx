@@ -13,6 +13,7 @@ import {
   moveTaskAction,
   reorderTask,
 } from "../../../src/redux/actions/taskActions";
+import { toast } from "react-toastify";
 export default function TaskTab({
   projectInfo,
   taskListsName,
@@ -27,7 +28,7 @@ export default function TaskTab({
   taskTagFilter,
   toggle,
   setTaskTagFilter,
-  setTaskTypeFilter
+  setTaskTypeFilter,
 }) {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -36,17 +37,13 @@ export default function TaskTab({
       return;
     }
     if (result.destination.droppableId === "delete") {
-      const taskName =
-        projectInfo.taskLists[result.source.droppableId].task[
-          result.draggableId
-        ].name;
       dispatch(
         deleteTask({
           taskId: result.draggableId,
           taskListId: result.source.droppableId,
         })
       );
-      toast.success(`Delete task ${taskName} Successfully `);
+      toast.success(`Deleted task Successfully `);
       return;
     }
     if (result.destination.droppableId === result.source.droppableId) {
