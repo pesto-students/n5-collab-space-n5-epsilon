@@ -5,6 +5,9 @@ import styles from "../styles/Home.module.scss";
 import Link from "next/link";
 import sal from 'sal.js'
 import AboutUs from "../src/components/homepageComponents/aboutUs";
+import FooterBase from "../src/components/homepageComponents/footer";
+import Features from "../src/components/homepageComponents/features";
+import JoinUs from "../src/components/homepageComponents/joinUs";
 
 export default function Home() {
     sal();
@@ -21,6 +24,9 @@ export default function Home() {
           </div>
       </header>
         <AboutUs/>
+        <Features/>
+        <JoinUs/>
+        <FooterBase/>
         {/*<Link href="/workspace">*/}
         {/*  <a> Let&apos;s Go</a>*/}
         {/*</Link>*/}
