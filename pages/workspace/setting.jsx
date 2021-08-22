@@ -1,26 +1,27 @@
 import { getLayout as getSiteLayout } from "../../src/components/layouts/SiteLayout";
 import WorkSpaceTitle from "../../src/components/workspace/WorkSpaceTitle";
-import {useState} from "react";
+import { useState } from "react";
+import Image from "next/image";
 import AuthAPI from "../../src/client_apis/authApis";
 
 const Setting = () => {
-    const [submittedForm, setSubmittedForm] = useState({
-        formTouched: false,
-        error: false,
-        submitting: false,
-    });
-    const [newPassword, setNewPassword] = useState('');
-    const [copyPassword, setCopyPassword] = useState('');
-    const [passwordShow, setPasswordShow] = useState({
-        input1: false,
-        input2: false
-    });
-    const [tab, setTab] = useState('password');
+  const [submittedForm, setSubmittedForm] = useState({
+    formTouched: false,
+    error: false,
+    submitting: false,
+  });
+  const [newPassword, setNewPassword] = useState("");
+  const [copyPassword, setCopyPassword] = useState("");
+  const [passwordShow, setPasswordShow] = useState({
+    input1: false,
+    input2: false,
+  });
+  const [tab, setTab] = useState("password");
 
-
-    const regex = {
-        passwordRegex: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[ !"#\$%&'\(\)*+,-./:;<=>?@\[\\\]^_`{|}~]).{8,}$/,
-    }
+  const regex = {
+    passwordRegex:
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[ !"#\$%&'\(\)*+,-./:;<=>?@\[\\\]^_`{|}~]).{8,}$/,
+  };
 
     const Auth = new AuthAPI();
 
@@ -50,16 +51,28 @@ const Setting = () => {
     }
 
 
-    return  <div className='mainContainerBody'>
+    return  (<div className='mainContainerBody'>
         <WorkSpaceTitle title='Workspace Name'/>
         <section className='settings-tab'>
             <div className='tab-list'>
                 <span onClick={()=>{
                     setTab('workspace')
-                }} className={`${tab === 'workspace'? 'active':''}`}><img src='https://api.iconify.design/icon-park-outline/edit-name.svg' alt='name'/>change workspace name</span>
+                }} className={`${tab === 'workspace'? 'active':''}`}>
+                    <Image
+                    src="https://api.iconify.design/icon-park-outline/edit-name.svg"
+                    alt="name"
+                    width="15"
+                    height="15"
+                />change workspace name</span>
                 <span onClick={()=>{
                     setTab('password')
-                }} className={`${tab === 'password'? 'active':''}`}><img src='https://api.iconify.design/teenyicons/password-outline.svg' alt='lock'/>change password</span>
+                }} className={`${tab === 'password'? 'active':''}`}>
+                    <Image
+                    src="https://api.iconify.design/teenyicons/password-outline.svg"
+                    alt="lock"
+                    width="15"
+                    height="15"
+                />change password</span>
             </div>
             <div className='tab-container'>
                 {tab === 'password' &&     <div className='tab'>
@@ -110,7 +123,7 @@ const Setting = () => {
             </div>
         </section>
     </div>
-};
+)};
 
 Setting.getLayout = getSiteLayout;
 

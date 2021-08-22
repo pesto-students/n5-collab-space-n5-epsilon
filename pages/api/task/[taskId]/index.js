@@ -12,7 +12,6 @@ handler.get(async (req, res) => {
 });
 
 handler.put(async (req, res) => {
-  console.log("req.body", { taskId: req.query.taskId, updatedField: req.body });
   if (!req.body)
     return res.status(400).send(JSON.stringify({ error: "Invalid Request" }));
   const task = await updateTask({

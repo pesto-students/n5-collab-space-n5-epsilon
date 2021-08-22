@@ -17,7 +17,6 @@ function AddSingleTask({ taskListId, addTaskHandler, toggleAddTaskModal }) {
 
   const saveNewTask = () => {
     if (taskInfo.taskName) {
-      console.log("taskInfo", taskInfo);
       addTaskHandler(taskInfo);
       toggleAddTaskModal();
     } else {

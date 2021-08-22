@@ -59,7 +59,6 @@ export async function deleteTask(taskInfo, projection = "", populate = "") {
 export async function updateTask(taskInfo, projection = "", populate = "") {
   const { taskId, updatedField } = taskInfo;
 
-  console.log("updatedField", { _id: Types.ObjectId(taskId) }, updatedField);
   const foundTask = Task.findOneAndUpdate(
     { _id: Types.ObjectId(taskId) },
     updatedField,

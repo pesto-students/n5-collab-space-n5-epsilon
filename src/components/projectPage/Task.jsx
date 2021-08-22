@@ -41,7 +41,7 @@ function Task({ task, index, deleteTaskHandler }) {
             <div className="tags">
               {task.tags?.map((tag, index) => {
                 return (
-                  <span key={tag + index} className>
+                  <span key={tag + index}>
                     {tag}
                   </span>
                 );

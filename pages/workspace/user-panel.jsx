@@ -5,8 +5,8 @@ import {addUser, getWorkspaceProject} from "../../src/redux/actions/workSpaceAct
 import { useSelector, useDispatch } from "react-redux";
 import WorkSpaceTitle from "../../src/components/workspace/WorkSpaceTitle";
 import AuthAPI from "../../src/client_apis/authApis";
-import {verify} from "jsonwebtoken";
-
+import { verify } from "jsonwebtoken";
+import Image from "next/image";
 
 const UserPanel = (props) => {
   const regex = {
@@ -24,23 +24,24 @@ const UserPanel = (props) => {
   const [inviteForm, setInviteForm] = useState({
     name: "",
     email: "",
-    projectId: ""
+    projectId: "",
   });
   const [showForm, setShowForm] = useState(false);
   const [showProjectList, setShowProjectList] = useState(false);
   const [showAddToProjectList, setShowAddToProjectList] = useState(false);
   const projects = useSelector((state) => state.WorkSpaceReducer.projects);
   const dispatch = useDispatch();
-  const[usersList, setUsersList] = useState({});
-  const[projectList, setProjectList] = useState({});
-  const[availableProjectList, setAvailableProjectList] = useState([]);
+  const [usersList, setUsersList] = useState({});
+  const [projectList, setProjectList] = useState({});
+  const [availableProjectList, setAvailableProjectList] = useState([]);
   const Auth = new AuthAPI();
 
   useEffect(() => {
-    const availableProjects =[]
+    const userData = {};
+    const availableProjects = [];
 
-    projects.map((item)=>{
-      if(item.role === 'Admin'){
+    projects.map((item) => {
+      if (item.role === "Admin") {
         availableProjects.push(item);
       }
     })
@@ -64,7 +65,7 @@ const UserPanel = (props) => {
   function mapUserToProjectList(){
     const userData ={}
     Auth.getAddedUsers({
-      userId: JSON.parse(localStorage.getItem('user')).id
+      userId: JSON.parse(localStorage.getItem("user")).id,
     })
         .then(({ data }) => {
           // console.log('===test===', data);
@@ -110,7 +111,7 @@ const UserPanel = (props) => {
     Auth.sendInviteToUsers({
       userEmail: inviteForm.email,
       projectId: inviteForm.projectId,
-      userName: JSON.parse(localStorage.getItem('user')).name
+      userName: JSON.parse(localStorage.getItem("user")).name,
     })
       .then(({ data: response }) => {
         setSubmittedForm({
@@ -120,7 +121,7 @@ const UserPanel = (props) => {
         setInviteForm({
           name: "",
           email: "",
-          projectId: ""
+          projectId: "",
         });
         setSubmittedForm({
           formTouched: false,
@@ -172,10 +173,11 @@ const UserPanel = (props) => {
             }}
           >
             <span className="icon">
-              <img
-                src="https://api.iconify.design/fluent/add-circle-32-regular.svg?color=%235c75ac"
-                alt="image"
-              />
+                   <Image
+                       src="https://api.iconify.design/fluent/add-circle-32-regular.svg?color=%235c75ac"
+                       alt="image"
+                       layout="fill"
+                   />
             </span>
             Invite User
           </div>
@@ -224,10 +226,12 @@ const UserPanel = (props) => {
           </div>
           {Object.keys(projectList).map((userKey)=>{
             return userKey !=='email'&& userKey !== 'name' ? <div key={userKey} className="project">
-              <img
+              <Image
                   style={{background: '#'+ Math.floor(Math.random()*16777215).toString(16)}}
                   src="https://api.iconify.design/clarity/bubble-chart-solid-badged.svg?color=white"
                   alt="image"
+                  height="32"
+                  width="162"
               />
                   {projectList[userKey].projectName}
             </div>: null
@@ -235,27 +239,30 @@ const UserPanel = (props) => {
         </div> : <div className='empty-box'>
           <h1>You have not started sharing projects with others.
           <span>Please Invite Other Users And Start Collaborating</span></h1>
-          <img src='/empty.gif' alt='empty'/>
+          <Image src="/empty.gif" alt="empty" layout="fill" />
         </div>}
       </div>
 
-      {showForm && (
-        <div className="modal-form">
-          <div className="content-wrapper">
-            <img
-              className="cross"
-              onClick={() => {
-                setShowForm(false);
-              }}
-              src="https://api.iconify.design/maki/cross.svg?color=black"
-              alt="cross"
-            />
-            <h1>Send Invite</h1>
-            <form>
-              <input
-                type="text"
-                placeholder="User Name"
-                onKeyUp={(e) => {
+        {showForm && (
+          <div className="modal-form">
+            <div className="content-wrapper">
+              <div className="cross">
+                <Image
+                  onClick={() => {
+                    setShowForm(false);
+                  }}
+                  src="https://api.iconify.design/maki/cross.svg?color=black"
+                  alt="cross"
+                  height="15"
+                  width="15"
+                />
+              </div>
+              <h1>Send Invite</h1>
+              <form>
+                <input
+                  type="text"
+                  placeholder="User Name"
+                  onKeyUp={(e) => {
                     if (!regex.nameRegex.test(e.target.value)) {
                       setSubmittedForm({
                         ...submittedForm,
@@ -270,13 +277,13 @@ const UserPanel = (props) => {
                         apiError: false,
                       });
                     }
-                  setInviteForm({ ...inviteForm, name: e.target.value });
-                }}
-              />
-              <input
-                type="email"
-                placeholder="User Email"
-                onKeyUp={(e) => {
+                    setInviteForm({ ...inviteForm, name: e.target.value });
+                  }}
+                />
+                <input
+                  type="email"
+                  placeholder="User Email"
+                  onKeyUp={(e) => {
                     if (!regex.emailRegex.test(e.target.value.toLowerCase())) {
                       setSubmittedForm({
                         ...submittedForm,
@@ -291,42 +298,63 @@ const UserPanel = (props) => {
                         apiError: false,
                       });
                     }
-                  setInviteForm({ ...inviteForm, email: e.target.value.toLowerCase() });
-                }}
-              />
-              <select
-                  className={`${ inviteForm.projectId? 'selected':''}`}
-                  onChange={(e) =>  setInviteForm({ ...inviteForm, projectId: e.target.value })}
-              >
-                <option value='any'>Any</option>
-                {availableProjectList.length && availableProjectList.map((project) => {
-                  return <option key={project.projectId} value={project.projectId}>{project.projectName}</option>
-                })
-                }
-              </select>
-              <button
-                  className='transparent-btn'
-                disabled={
-                  !submittedForm.formTouched ||
-                  submittedForm.submitting ||
-                  submittedForm.emailError || submittedForm.nameError ||  submittedForm.apiError
-                }
-                onClick={invite}
-              >
-                Invite
-              </button>
-              <p className="error">{ submittedForm.emailError? submittedForm.emailError: submittedForm.nameError? submittedForm.nameError: submittedForm.apiError ? submittedForm.apiError : ''}</p>
-            </form>
+                    setInviteForm({
+                      ...inviteForm,
+                      email: e.target.value.toLowerCase(),
+                    });
+                  }}
+                />
+                <select
+                  className={`${inviteForm.projectId ? "selected" : ""}`}
+                  onChange={(e) =>
+                    setInviteForm({ ...inviteForm, projectId: e.target.value })
+                  }
+                >
+                  <option value="any">Any</option>
+                  {availableProjectList.length &&
+                    availableProjectList.map((project) => {
+                      return (
+                        <option
+                          key={project.projectId}
+                          value={project.projectId}
+                        >
+                          {project.projectName}
+                        </option>
+                      );
+                    })}
+                </select>
+                <button
+                  className="transparent-btn"
+                  disabled={
+                    !submittedForm.formTouched ||
+                    submittedForm.submitting ||
+                    submittedForm.emailError ||
+                    submittedForm.nameError ||
+                    submittedForm.apiError
+                  }
+                  onClick={invite}
+                >
+                  Invite
+                </button>
+                <p className="error">
+                  {submittedForm.emailError
+                    ? submittedForm.emailError
+                    : submittedForm.nameError
+                    ? submittedForm.nameError
+                    : submittedForm.apiError
+                    ? submittedForm.apiError
+                    : ""}
+                </p>
+              </form>
+            </div>
           </div>
-        </div>
-      )}
-    </section>
-      </div>
+        )}
+      </section>
+    </div>
   );
 };
 
 export default UserPanel;
-
 
 export const getServerSideProps = wrapper.getServerSideProps(
     (store) =>

@@ -15,7 +15,7 @@ const Workspace = () => {
   const toggleLoading = (setLoadingTo) => {
     dispatch({ type: "TOGGLE_LOADING", payload: { loading: setLoadingTo } });
   };
-  console.log("Loading", loading);
+
   return (
     <>
       <MainContainer toggleLoading={toggleLoading} />
@@ -31,7 +31,6 @@ export default Workspace;
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) =>
     async ({ req, params }) => {
-      console.log("this came here", req.cookies);
       if (!req.cookies.token)
         return {
           redirect: {

@@ -31,7 +31,12 @@ export async function deleteTags(tagData, projection = "", populate = "") {
     ).exec();
 
     return deleteTag;
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
+}
+
+export async function getTags(tagData, projection = "", populate = "") {
+  const foundTag = await Task.findOne({
+    _id: Types.ObjectId(tagData.taskId),
+  }).exec();
+  return foundTag;
 }

@@ -9,6 +9,8 @@ import {
 } from "../../redux/actions/workSpaceActions";
 import ProjectContainer from "./ProjectContainer";
 import { useEffect, useState } from "react";
+import Image from "next/image";
+import TrashCanIcon from "../iconComponents/TrashCanIcon";
 const MainContainer = ({ toggleLoading }) => {
   const projects = useSelector((state) => state.WorkSpaceReducer.projects);
   const ownProjects = projects.filter((project) => project.role === "Admin");
@@ -45,7 +47,7 @@ const MainContainer = ({ toggleLoading }) => {
     const curr_project = projects.find(
       (project) => project.projectId == projectId
     );
-    console.log("curr_project", curr_project);
+
     if (curr_project.role === "Admin") {
       dispatch(deleteProject({ projectId: projectId }));
       toggleLoading(false);
@@ -58,7 +60,7 @@ const MainContainer = ({ toggleLoading }) => {
         })
       );
     }
-    console.log("came tere  ", curr_project);
+
     toast.success("Project Deleted Successfully ");
   };
 
@@ -145,18 +147,7 @@ const MainContainer = ({ toggleLoading }) => {
               toggle("row");
             }}
           >
-            <svg
-              width="15px"
-              height="15px"
-              viewBox="0 0 15 15"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M0,0 L15,0 L15,3 L0,3 L0,0 Z M0,6 L15,6 L15,9 L0,9 L0,6 Z M0,12 L15,12 L15,15 L0,15 L0,12 Z"
-                fillRule="nonzero"
-              />
-            </svg>
+            <TrashCanIcon />
           </span>
         </div>
       </div>
@@ -199,14 +190,17 @@ const MainContainer = ({ toggleLoading }) => {
       {showForm && (
         <div className="modal-form">
           <div className="content-wrapper">
-            <img
-              className="cross"
-              onClick={() => {
-                setShowForm(false);
-              }}
-              src="https://api.iconify.design/maki/cross.svg?color=black"
-              alt="cross"
-            />
+            <div className="cross">
+              <Image
+                onClick={() => {
+                  setShowForm(false);
+                }}
+                src="https://api.iconify.design/maki/cross.svg?color=black"
+                alt="cross"
+                height="15"
+                width="15"
+              />
+            </div>
             <h1>Add New Project</h1>
             <form>
               <input

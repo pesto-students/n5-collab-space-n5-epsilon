@@ -292,18 +292,18 @@ export async function updateProject(projectInfo) {
 export async function addUserToProject(inviteUserInfo) {
   try {
     const { projectId, userEmail } = inviteUserInfo;
-    console.log("inviteUserInfo", inviteUserInfo);
+
     const guestRoleArray = await Roles.find({ name: "Guest" });
     const guestRole = guestRoleArray[0];
-    console.log("guestRole", guestRole);
+
     const User = await Users.findOne({ email: userEmail }).exec();
-    console.log("User", User);
+
     if (User) {
       const checkContribution = await Contributions.find({
         projectId: Types.ObjectId(projectId),
         userId: Types.ObjectId(User._id),
       }).exec();
-      console.log("checkContribution", checkContribution);
+
       if (checkContribution.length) {
         return { error: "User already exists" };
       }
@@ -313,17 +313,14 @@ export async function addUserToProject(inviteUserInfo) {
         roleId: Types.ObjectId(guestRole._id),
       });
       const savedNewContribution = await newContribution.save();
-      console.log("savedNewContribution", savedNewContribution);
+
       return savedNewContribution;
     } else {
       return { error: "User not found" };
     }
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 }
 export async function removeUserFoProject(removeUserInfo) {
-  console.log(removeUserInfo);
   const { projectId, userId, userToBeRemovedId } = removeUserInfo;
   const allRolesArray = await Roles.find({});
   const adminRole = allRolesArray.map((role) => role.name == "Admin");

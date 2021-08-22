@@ -31,10 +31,8 @@ function SingleTask({ taskId, taskListId }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("taskId", taskId);
     if (taskId) {
       const taskInfo = taskURL.get(`/${taskId}`).then((response) => {
-        console.log(response.data);
         setTaskInfo(response.data[0]);
         setLoading(false);
       });
@@ -43,7 +41,7 @@ function SingleTask({ taskId, taskListId }) {
   const addCommentHandler = (commenterInfo) => {
     const date = new Date();
     const currentTime = date.toISOString();
-    console.log("projectInfo.userId", projectInfo.userId);
+
     const newComment = {
       taskId: taskId,
       commentInfo: {
@@ -52,7 +50,7 @@ function SingleTask({ taskId, taskListId }) {
         createdAt: currentTime,
       },
     };
-    console.log("newComment", newComment);
+
     setCommentBox("");
     setTaskInfo(
       produce((draft) => {
@@ -60,16 +58,14 @@ function SingleTask({ taskId, taskListId }) {
         const index = draft.userLookup.indexOf(
           (user) => user._id === commenterInfo._id
         );
-        console.log("Here is the index of the comment", index);
+
         if (index == -1) {
           draft.userLookup.push(commenterInfo);
         }
       })
     );
 
-    taskURL.post(`/${taskId}/comments`, newComment).then((response) => {
-      console.log(response.data);
-    });
+    taskURL.post(`/${taskId}/comments`, newComment).then((response) => {});
   };
   const updateTaskDescription = (updateTaskDescriptionText) => {
     setTaskInfo(
@@ -81,9 +77,7 @@ function SingleTask({ taskId, taskListId }) {
       .put(`/${taskId}`, {
         data: { description: updateTaskDescriptionText },
       })
-      .then((response) => {
-        console.log(response.data);
-      });
+      .then((response) => {});
   };
 
   const updateTaskNameHandler = (updateTaskNameText) => {
@@ -103,9 +97,6 @@ function SingleTask({ taskId, taskListId }) {
       ...taskInfoDetails,
       tag: tagInputValue,
     };
-    // taskURL.post(`/${taskId}/tags`, newTag).then((response) => {
-    //   console.log(response.data);
-    // });
 
     setTaskInfo(
       produce((draft) => {
@@ -122,31 +113,22 @@ function SingleTask({ taskId, taskListId }) {
     taskURL
       .delete(`/${taskId}/comments`, { data: data })
       .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-    console.log(taskInfo);
-    setTaskInfo(
-      produce((draft) => {
-        const index = draft.comments.findIndex(
-          (comment) => comment._id === commentID
+        setTaskInfo(
+          produce((draft) => {
+            const index = draft.comments.findIndex(
+              (comment) => comment._id === commentID
+            );
+            draft.comments.splice(index, 1);
+          })
         );
-        draft.comments.splice(index, 1);
       })
-    );
+      .catch((error) => {});
   };
   const deleteTagsHandler = (tag) => {
     const tagToBeDeletedInfo = {
       ...taskInfoDetails,
       tag: tag,
     };
-    // taskURL
-    //   .delete(`/${taskId}/tags`, { data: tagToBeDeleted })
-    //   .then((response) => {
-    //     console.log(response.data);
-    //   });
     dispatch(deleteTags(tagToBeDeletedInfo));
     setTaskInfo(
       produce((draft) => {

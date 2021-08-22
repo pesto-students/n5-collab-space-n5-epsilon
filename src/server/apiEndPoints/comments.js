@@ -10,7 +10,7 @@ export async function addComment(commentData, projection = "", populate = "") {
   commentData.commentInfo.by = Types.ObjectId(commentData.commentInfo.by);
   const newComment = new Comments(commentData.commentInfo);
   const savedComment = await newComment.save();
-  console.log(savedComment);
+
   // let date = new Date();
   // const currentTime = date.toISOString();
   const addedComment = await Task.findOneAndUpdate(
@@ -31,7 +31,7 @@ export async function deleteComment(
 ) {
   try {
     const { commentId, taskId } = commentInfo;
-    console.log(commentInfo);
+
     const removeFromTask = await Task.findOneAndUpdate(
       { _id: Types.ObjectId(taskId) },
       {
@@ -45,7 +45,7 @@ export async function deleteComment(
     const deleteComment = await Comments.findOneAndDelete({
       _id: Types.ObjectId(commentId),
     }).exec();
-    console.log(deleteComment);
+
     return deleteComment;
   } catch (error) {
     console.error(error);

@@ -20,11 +20,8 @@ function ProjectContainer({
     <>
       {projectList.map((project) => {
         return (
-          <>
-            <Link
-              key={project._id}
-              href={`workspace/project/${project.projectId}`}
-            >
+          <React.Fragment key={project._id}>
+            <Link href={`workspace/project/${project.projectId}`}>
               <a
                 draggable="true"
                 onDragStart={() => {
@@ -112,7 +109,6 @@ function ProjectContainer({
                 <ConformationPopUp
                   title={"Delete Project ?"}
                   onAcceptHandler={() => {
-                    console.log("project.projectId", project.projectId);
                     deleteProjectHandler(project.projectId);
                     toggleModal();
                   }}
@@ -120,7 +116,7 @@ function ProjectContainer({
                 />
               </Modal>
             ) : null}
-          </>
+          </React.Fragment>
         );
       })}
     </>

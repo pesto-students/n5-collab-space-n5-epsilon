@@ -1,17 +1,18 @@
 import React, { useRef, useEffect } from "react";
 import PropTypes from "prop-types";
-import CrossIcon from "../../layouts/iconComponents/CrossIcon";
+import CrossIcon from "../../iconComponents/CrossIcon";
 
 function Modal(props) {
   const ref = useRef();
   const { styles } = props;
+  const showModal = props.showModal;
+  const closeCallback = props.closeCallback;
   useEffect(() => {
     const checkIfClickedOutside = (e) => {
       e.stopPropagation();
 
-      if (props.showModal && ref.current && !ref.current.contains(e.target)) {
-        console.log("thi caee tere");
-        props.closeCallback();
+      if (showModal && ref.current && !ref.current.contains(e.target)) {
+        closeCallback();
       }
     };
     document.addEventListener("mousedown", checkIfClickedOutside, {
@@ -22,7 +23,7 @@ function Modal(props) {
         capture: true,
       });
     };
-  }, [props.showModal]);
+  }, [showModal, closeCallback]);
   return (
     <div className={styles.modal}>
       <div className={styles.modal_content} ref={ref}>
