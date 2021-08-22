@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import styles from "../../../../styles/singleTask.module.scss";
 import useInput from "../../../hooks/useInput";
 export default function TagBox({
@@ -10,8 +11,17 @@ export default function TagBox({
   const handleTagInputKeyDown = (e) => {
     if (e.key === "Enter") {
       console.log(value);
-      setValue("");
-      addTagsHandler(value);
+      const formattedValue = value
+        .replace(/\w\S*/g, function (txt) {
+          return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        })
+        .trim();
+      if (tagsCollection.includes(formattedValue)) {
+        toast.warn("already exists");
+      } else {
+        addTagsHandler(formattedValue);
+        setValue("");
+      }
     }
   };
   return (
@@ -30,7 +40,11 @@ export default function TagBox({
       <div className={styles.existing_tags}>
         {tagsCollection.map((tag) => {
           return (
-            <div key={tag} className={styles.tags} onClick={() => deleteTagsHandler(tag)}>
+            <div
+              key={tag}
+              className={styles.tags}
+              onClick={() => deleteTagsHandler(tag)}
+            >
               <span>{tag}</span>
             </div>
           );

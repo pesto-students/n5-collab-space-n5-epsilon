@@ -15,6 +15,8 @@ import {
 } from "../../../redux/actions/taskActions";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function SingleTask({ taskId, taskListId }) {
   const projectInfo = useSelector((state) => state.ProjectReducer.projectInfo);
@@ -187,6 +189,7 @@ function SingleTask({ taskId, taskListId }) {
       ) : (
         <SingleTaskLoader />
       )}
+      <ToastContainer autoClose={2000} />
     </>
   );
 }

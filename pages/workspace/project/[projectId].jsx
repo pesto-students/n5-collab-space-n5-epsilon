@@ -358,16 +358,13 @@ const ProjectPage = () => {
                   {toggleDescription ? (
                     <div
                       className="description"
-                      onDoubleClick={
-                        handleDescriptionToggle
-                      }
+                      onDoubleClick={handleDescriptionToggle}
                     >
                       {projectInfo.description
                         ? projectInfo.description
                         : "Double click here to add a description"}
                     </div>
                   ) : (
-                    
                     <div className={styles.edit_description}>
                       <h1>{toggleDescription}</h1>
                       <div className={styles.edit_textArea}>
@@ -438,13 +435,29 @@ const ProjectPage = () => {
                       }
                       onClick={async (e) => {
                         e.preventDefault();
-                        await dispatch(
-                          createNewTaskList({
-                            taskListName: taskListName,
-                            projectId: projectId,
-                          })
-                        );
-                        setShowForm(false);
+                        let nameAlreadyTaken = false;
+                        for (const [key, value] of Object.entries(
+                          projectInfo.taskLists
+                        )) {
+                          if (
+                            projectInfo.taskLists[key].taskListName ==
+                            taskListName
+                          ) {
+                            nameAlreadyTaken = true;
+                          }
+                        }
+
+                        if (nameAlreadyTaken) {
+                          toast.warn(`${taskListName} already exists`);
+                        } else {
+                          await dispatch(
+                            createNewTaskList({
+                              taskListName: taskListName,
+                              projectId: projectId,
+                            })
+                          );
+                          setShowForm(false);
+                        }
                       }}
                     >
                       Add Task List
