@@ -8,7 +8,7 @@ import UserData from "../../../src/server/models/userData";
 // handler.use(middleware);
 const handler = createHandler();
 
-handler.get(async (req, res) => {
+handler.post(async (req, res) => {
   try {
     const {userEmail, token, newPassword} = req.body;
     const validToken = await verify(token, process.env.REACT_APP_SECRET_TOKEN);

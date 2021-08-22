@@ -5,10 +5,52 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="103cd474-1403-40f5-96a1-636418099c6b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/500.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/common/modal/AddNewTaskListModal.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/iconComponents/CircularAddIcon.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/iconComponents/HorizontalAlignIcon.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/iconComponents/TrashCanIcon.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/iconComponents/VerticalAlignIcon.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/projectPage/DescriptionTab.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/projectPage/FilterBox.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/projectPage/TaskTab.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/users/inviteMailer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/users/inviteMailer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/task/[taskId]/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/task/[taskId]/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/task/[taskId]/tags.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/task/[taskId]/tags.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/users/inviteUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/users/inviteUser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/api/users/leaveProject.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/api/users/leaveProject.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/inviteUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/inviteUser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/resetPassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/resetPassword.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/workspace/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/workspace/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/workspace/project/[projectId].jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/workspace/project/[projectId].jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/workspace/setting.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/workspace/setting.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/workspace/user-panel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/workspace/user-panel.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/modal/Modal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/modal/Modal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/singleTask/AddSingleTask.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/singleTask/AddSingleTask.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/singleTask/CommentBox.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/singleTask/CommentBox.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/singleTask/SingleTask.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/singleTask/SingleTask.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/singleTask/TagBox.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/singleTask/TagBox.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layoutComponents/NavButton.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layoutComponents/NavButton.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layoutComponents/SideNav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layoutComponents/SideNav.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layouts/config/NavButtonConfig.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layouts/config/NavButtonConfig.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layouts/iconComponents/CrossIcon.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/iconComponents/CrossIcon.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layouts/iconComponents/ProjectIcon.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/iconComponents/ProjectIcon.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layouts/iconComponents/SettingIcon.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/iconComponents/SettingIcon.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layouts/iconComponents/UserIcon.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/iconComponents/UserIcon.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/projectPage/Task.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projectPage/Task.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/projectPage/TaskList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/projectPage/TaskList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/workspace/MainContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workspace/MainContainer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/workspace/ProjectContainer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workspace/ProjectContainer.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/workspace/WorkSpaceTitle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/workspace/WorkSpaceTitle.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/actions/workSpaceActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions/workSpaceActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/Services/sendEmail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Services/sendEmail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/apiEndPoints/comments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/apiEndPoints/comments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/apiEndPoints/projects.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/apiEndPoints/projects.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/apiEndPoints/tags.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/apiEndPoints/tags.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/apiEndPoints/task.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/apiEndPoints/task.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +89,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/pages" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/homepageComponents" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -56,9 +98,10 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/homepageComponents" />
+      <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$/pages" />
       <recent name="$PROJECT_DIR$/pages/api/users" />
-      <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -85,7 +128,7 @@
       <workItem from="1629290020789" duration="266000" />
       <workItem from="1629314640407" duration="5008000" />
       <workItem from="1629394513216" duration="13408000" />
-      <workItem from="1629479427930" duration="42621000" />
+      <workItem from="1629479427930" duration="58419000" />
     </task>
     <servers />
   </component>
