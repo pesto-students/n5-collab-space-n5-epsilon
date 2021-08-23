@@ -155,6 +155,7 @@ function TaskList({
               {tasksOrder &&
                 tasksOrder.map((taskId, index) => {
                   const taskObj = task[taskId];
+                  console.log("taskObj", taskObj, task, taskId);
                   let filtersApplied = "";
                   // if(taskTagFilter === taskLists[taskListId].taskListName.toLowerCase())
                   if (taskTypeFilter && taskTypeFilter !== "any")
@@ -187,7 +188,7 @@ function TaskList({
                       break;
                     }
                     case 2: {
-                      if (taskObj.tags?.includes(taskTagFilter))
+                      if (taskObj && taskObj.tags?.includes(taskTagFilter))
                         return (
                           <>
                             {taskObj && (
@@ -205,7 +206,7 @@ function TaskList({
                     }
                     case 3: {
                       if (
-                        taskTypeFilter === taskListName.toLowerCase() &&
+                        taskTypeFilter === taskListName.toLowerCase() && taskObj &&
                         taskObj?.tags?.includes(taskTagFilter)
                       )
                         return (

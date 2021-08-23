@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
-import cookie from "js-cookie";
 import { wrapper } from "../../src/redux/store";
-import { getWorkspaceProject } from "../../src/redux/actions/workSpaceActions";
+import {
+  addUser,
+  getWorkspaceProject,
+} from "../../src/redux/actions/workSpaceActions";
 import { useSelector, useDispatch } from "react-redux";
 import WorkSpaceTitle from "../../src/components/workspace/WorkSpaceTitle";
 import AuthAPI from "../../src/client_apis/authApis";
 import { verify } from "jsonwebtoken";
 import Image from "next/image";
 
-const UserPanel = (props) => {
+const UserPanel = () => {
   const regex = {
     emailRegex:
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i,
@@ -27,15 +29,16 @@ const UserPanel = (props) => {
     projectId: "",
   });
   const [showForm, setShowForm] = useState(false);
+  const [showAddToProjectList, setShowAddToProjectList] = useState(false);
   const projects = useSelector((state) => state.WorkSpaceReducer.projects);
   const dispatch = useDispatch();
   const [usersList, setUsersList] = useState({});
   const [projectList, setProjectList] = useState({});
   const [availableProjectList, setAvailableProjectList] = useState([]);
+  const [selectedUser, setSelectedUser] = useState('');
   const Auth = new AuthAPI();
 
-  useEffect(() => {
-    const userData = {};
+  useEffect( () => {
     const availableProjects = [];
 
     projects.map((item) => {
@@ -43,18 +46,44 @@ const UserPanel = (props) => {
         availableProjects.push(item);
       }
     });
-
     setAvailableProjectList(availableProjects);
+
+    mapUserToProjectList();
+
+    document.addEventListener("click", outsideClickListen);
+
+    return () => {
+      document.removeEventListener("click", outsideClickListen);
+    };
+  }, [projects]);
+
+  async function addExistingUser(userInfo, selectedProject) {
+    await dispatch(addUser(userInfo));
+
+    const newProjectList = projectList;
+    newProjectList[selectedProject.projectId] = {
+      projectName: selectedProject.projectName,
+      projectId: selectedProject.projectId,
+    }
+    setProjectList( newProjectList);
+    setShowAddToProjectList(false);
+  }
+
+  function mapUserToProjectList() {
+    const userData = {};
     Auth.getAddedUsers({
       userId: JSON.parse(localStorage.getItem("user")).id,
     })
       .then(({ data }) => {
+        // console.log('===test===', data);
+
         data.forEach((project) => {
           project.users.forEach((user) => {
             if (!userData[user._id]) {
               userData[user._id] = {
                 [project._id]: {
-                  projectName: project._id,
+                  projectName: project.projectInfo.projectName,
+                  projectId: project._id,
                 },
                 name: user.name,
                 email: user.email,
@@ -62,17 +91,22 @@ const UserPanel = (props) => {
             } else {
               if (!userData[user._id][project._id]) {
                 userData[user._id][project._id] = {
-                  projectName: project._id,
+                  projectName: project.projectInfo.projectName,
+                  projectId: project._id,
                 };
               }
             }
           });
         });
         setUsersList(userData);
-        
+        // Object.keys(userData).map((user)=> {
+        //   console.log('===check===', user)
+        // })
+
+        // console.log('===check===', userData)
       })
       .catch((error) => {});
-  }, []);
+  }
 
   function invite() {
     setSubmittedForm({
@@ -112,6 +146,15 @@ const UserPanel = (props) => {
       });
   }
 
+  function outsideClickListen(e) {
+    if (
+      !e.target.closest(".add-project") &&
+      !e.target.classList.contains("add-project")
+    ) {
+      setShowAddToProjectList(false);
+    }
+  }
+
   return (
     <div className="mainContainerBody">
       <WorkSpaceTitle />
@@ -125,7 +168,7 @@ const UserPanel = (props) => {
               will not appear here.
             </p>
           </div>
-          <h4>Members</h4>
+          <h4>Members List</h4>
           <div className="list available-users">
             <div
               className="user invite"
@@ -146,12 +189,19 @@ const UserPanel = (props) => {
               return (
                 <div
                   key={user}
-                  className="user"
+                  className={`user ${selectedUser === user? 'active':''}`}
                   onClick={() => {
+                    setSelectedUser(user);
                     setProjectList(usersList[user]);
                   }}
                 >
-                  <span className="icon">
+                  <span
+                    className="icon"
+                    style={{
+                      background:
+                        "#" + Math.floor(Math.random() * 16777215).toString(16),
+                    }}
+                  >
                     <span>{usersList[user].name}</span>
                   </span>
                   <div className="name">{usersList[user].name}</div>
@@ -165,34 +215,74 @@ const UserPanel = (props) => {
           <h4>Projects</h4>
           {Object.keys(projectList).length ? (
             <div className="project-list">
-              <div className="project">
+              <div
+                className="project add-project"
+                onClick={() => {
+                  setShowAddToProjectList(true);
+                }}
+              >
                 <div className="first-image">
                   <Image
                     src="https://api.iconify.design/bi/plus-lg.svg?color=%235c75ac"
                     alt="image"
                     height="32"
-                    width="32"
+                    width="162"
                   />
                 </div>
-                Nwe Project
+                Add User to a Project
+                {showAddToProjectList && (
+                  <div className="projects-to-add">
+                    {availableProjectList.map((project) => {
+                      return !projectList[project.projectId] ? (
+                        <span
+                          data-id={project.projectId}
+                          data-email={projectList.email}
+                          key={project.projectId}
+                          onClick={async () => {
+                            await addExistingUser({
+                              userEmail: projectList.email,
+                              projectId: project.projectId,
+                            },project);
+                          }}
+                        >
+                          {project.projectName}
+                        </span>
+                      ) : (
+                        ""
+                      );
+                    })}
+                  </div>
+                )}
               </div>
               {Object.keys(projectList).map((userKey) => {
                 return userKey !== "email" && userKey !== "name" ? (
                   <div key={userKey} className="project">
                     <div className="image">
                       <Image
+                        style={{
+                          background:
+                            "#" +
+                            Math.floor(Math.random() * 16777215).toString(16),
+                        }}
                         src="https://api.iconify.design/clarity/bubble-chart-solid-badged.svg?color=white"
                         alt="image"
                         height="32"
                         width="162"
                       />
                     </div>
-                    {projectList[userKey].projectName}
+                    <span>{projectList[userKey].projectName}</span>
                   </div>
                 ) : null;
               })}
             </div>
           ) : (
+              Object.keys(usersList).length ? <div className="select-user-box">
+                    <h1>
+                      Please select a user from members list to view projects you have shared to them
+                    </h1>
+                    <Image src="/choose.jpeg" alt="empty" layout="fill" />
+
+                  </div> :
             <div className="empty-box">
               <h1>
                 You have not started sharing projects with others.

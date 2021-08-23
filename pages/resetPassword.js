@@ -25,7 +25,7 @@ export default function ResetPassword() {
     input1: false,
     input2: false,
   });
-  const [resetComplete, setResetComplete] = useState(true);
+  const [resetComplete, setResetComplete] = useState(false);
 
   const regex = {
     passwordRegex:

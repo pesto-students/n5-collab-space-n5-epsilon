@@ -45,11 +45,11 @@ export async function deleteTask(taskInfo, projection = "", populate = "") {
   const foundTask = Task.findOneAndDelete({ _id: taskInfo.taskId });
   const updatedTaskOrder = TasksOrder.updateOne(
     {
-      taskListId: taskInfo.taskListId,
+      taskListId: Types.ObjectId(taskInfo.taskListId),
     },
     {
       $pull: {
-        tasksOrder: taskInfo.taskId,
+        tasksOrder: Types.ObjectId(taskInfo.taskId),
       },
     }
   ).exec();

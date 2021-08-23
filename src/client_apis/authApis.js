@@ -33,7 +33,9 @@ class AuthAPI {
         return this.API.post(`/api/users/inviteMailer`, data);
     }
 
-
+    updatePassword(data) {
+        return this.API.post(`/api/users/updatePassword`, data);
+    }
 
 }
 

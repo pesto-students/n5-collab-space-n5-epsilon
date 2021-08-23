@@ -4,7 +4,7 @@ const WorkSpaceTitle = ({ title, isProject }) => {
   const [username, setUsername] = useState("");
   useEffect(() => {
     setUsername(JSON.parse(localStorage.getItem("user")).name);
-  }, [setUsername]);
+  }, []);
   return (
     <section className="common-header">
       <h1>{title}</h1>

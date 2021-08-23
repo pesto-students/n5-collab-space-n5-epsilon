@@ -1,6 +1,11 @@
 import React from "react";
 
-function FilterBox({ taskListsName, taskTagNames }) {
+function FilterBox({
+  taskListsName,
+  taskTagNames,
+  setTaskTagFilter,
+  setTaskTypeFilter,
+}) {
   return (
     <div className="filter-box">
       <div className="filter-wrapper">

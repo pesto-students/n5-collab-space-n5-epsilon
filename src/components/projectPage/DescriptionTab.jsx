@@ -15,8 +15,8 @@ function DescriptionTab({
     <>
       {toggleDescription ? (
         <div className="description" onDoubleClick={handleDescriptionToggle}>
-          {projectInfo.description
-            ? projectInfo.description
+          {description
+            ? description
             : "Double click here to add a description"}
         </div>
       ) : (

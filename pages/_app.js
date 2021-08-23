@@ -1,4 +1,5 @@
 import "../styles/globals.scss";
+import 'sal.js/dist/sal.css';
 
 import SiteLayout from "../src/components/layouts/SiteLayout";
 import { wrapper } from "../src/redux/store";

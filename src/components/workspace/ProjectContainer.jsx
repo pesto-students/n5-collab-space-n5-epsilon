@@ -4,6 +4,7 @@ import Modal from "../common/modal/Modal";
 import ConformationPopUp from "../common/customPopUp/ConformationPopUp";
 import { useState } from "react";
 import modalStyles from "../../../styles/conformationModal.module.scss";
+import sal from "sal.js";
 function ProjectContainer({
   projectList,
   deleteProjectHandler,
@@ -12,13 +13,22 @@ function ProjectContainer({
   toggleLoading,
 }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const toggleModal = () => {
+  const [deleteProjectId, setDeleteProjectId] = useState("initialState");
+  const toggleModal = (projectId) => {
+    console.log("setDeleteProjectId", projectId);
+    setDeleteProjectId(projectId);
     let showDeleteModals = !showDeleteModal;
     setShowDeleteModal(showDeleteModals);
   };
+  const triggerDeleteHandler = () => {
+    deleteProjectHandler(deleteProjectId);
+  };
+
+  sal();
   return (
     <>
       {projectList.map((project) => {
+        console.log(project.projectId);
         return (
           <React.Fragment key={project._id}>
             <Link href={`workspace/project/${project.projectId}`}>
@@ -27,12 +37,14 @@ function ProjectContainer({
                 onDragStart={() => {
                   projectId(project.projectId);
                 }}
+                data-sal="fade"
+                data-sal-duration="700"
                 className={`projectCard ${role !== "Admin" && "shared"}`}
                 key={project._id}
                 data-id={project.projectId}
               >
                 <h2
-                  onClick={() => {
+                  onClick={(e) => {
                     toggleLoading(true);
                   }}
                 >
@@ -43,8 +55,9 @@ function ProjectContainer({
                   <button
                     className="delete"
                     onClick={(e) => {
+                      e.stopPropagation();
                       e.preventDefault();
-                      toggleModal();
+                      toggleModal(project.projectId);
                       //deleteProjectHandler(project.projectId);
                     }}
                   >
@@ -80,7 +93,8 @@ function ProjectContainer({
                     className="leave"
                     onClick={(e) => {
                       e.stopPropagation();
-                      toggleModal();
+                      e.preventDefault();
+                      toggleModal(project.projectId);
                     }}
                   >
                     <svg
@@ -102,20 +116,24 @@ function ProjectContainer({
                     </svg>
                   </button>
                 )}
+                {showDeleteModal ? (
+                  <Modal showModal={showDeleteModal} styles={modalStyles}>
+                    <ConformationPopUp
+                      title={"Delete Project ?"}
+                      onAcceptHandler={(e) => {
+                        e.preventDefault();
+                        triggerDeleteHandler();
+                        toggleModal("");
+                      }}
+                      onCancelHandler={(e) => {
+                        e.preventDefault();
+                        toggleModal("");
+                      }}
+                    />
+                  </Modal>
+                ) : null}
               </a>
             </Link>
-            {showDeleteModal ? (
-              <Modal showModal={showDeleteModal} styles={modalStyles}>
-                <ConformationPopUp
-                  title={"Delete Project ?"}
-                  onAcceptHandler={() => {
-                    deleteProjectHandler(project.projectId);
-                    toggleModal();
-                  }}
-                  onCancelHandler={toggleModal}
-                />
-              </Modal>
-            ) : null}
           </React.Fragment>
         );
       })}
