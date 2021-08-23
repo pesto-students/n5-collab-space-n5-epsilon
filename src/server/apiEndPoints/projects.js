@@ -352,3 +352,12 @@ export async function removeUserFoProject(removeUserInfo) {
     return {};
   }
 }
+
+export async function getAllContributions(projectInfo) {
+  const foundProjectInfo = await Contributions.find({
+    projectId: Types.ObjectId(projectInfo.projectId),
+  })
+    .populate("userId")
+    .exec();
+  return foundProjectInfo;
+}

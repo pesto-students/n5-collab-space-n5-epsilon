@@ -42,6 +42,7 @@
     "react-motion": "^0.5.2",
     "react-no-ssr": "^1.1.0",
     "react-redux": "^7.2.4",
+    "react-select-search": "^3.0.8",
     "react-spring": "^9.2.4",
     "react-toastify": "^7.0.4",
     "react-toastify-redux": "^1.0.0-rc.2",
