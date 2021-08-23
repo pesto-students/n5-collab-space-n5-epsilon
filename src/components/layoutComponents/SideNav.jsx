@@ -7,6 +7,7 @@ import ConformationPopUp from "../common/customPopUp/ConformationPopUp";
 import { useState } from "react";
 import modalStyles from "../../../styles/conformationModal.module.scss";
 import Image from "next/image";
+import Link from "next/link";
 
 const SideNav = ({ navButtons }) => {
   const router = useRouter();
@@ -17,12 +18,17 @@ const SideNav = ({ navButtons }) => {
   };
   const logout = () => {
     cookie.remove("token");
+    localStorage.removeItem("user");
     router.push("/");
   };
   return (
     <div className="sideLayoutPanel">
       <div className="image">
-        <Image src="/logo.png" alt="logo" height="70" width="300" />
+        <Link href="/">
+          <a>
+            <Image src="/logo.png" alt="logo" height="70" width="300" />
+          </a>
+        </Link>
       </div>
 
       <div className="side-wrapper">

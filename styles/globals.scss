@@ -180,6 +180,44 @@ header{
   img{
     max-height: 100%;
   }
+  .side-wrapper{
+    display: flex;
+    .user-profile {
+      position: relative;
+      height: 40px;
+      width: 40px;
+      cursor: pointer;
+      .icon {
+        position: absolute;
+        left: 0;
+        background: orange;
+        border-radius: 50%;
+        padding: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        height: 100%;
+        width: 100%;
+        font-weight: 700;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        span {
+          display: block;
+          visibility: hidden;
+          position: absolute;
+          left: 14px;
+          top: 50%;
+          transform: translateY(-50%);
+          text-transform: capitalize;
+          white-space: nowrap;
+          &:first-letter {
+            visibility: visible;
+          }
+        }
+      }
+    }
+  }
 }
 
 .aboutUs{
@@ -282,8 +320,6 @@ header{
     font-size: 32px;
     line-height: 1;
   }
-  .section-intro {
-  }
   .heading {
     width: 469px;
     border-bottom: 1px solid #b6b6b6;
@@ -312,17 +348,19 @@ header{
 
   }
   .outer-wrapper {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    grid-gap: 32px;
     margin: 56px auto 0;
-    max-width: 1138px;
-    padding-left: 22px;
-    justify-content: space-between;
+    padding: 0 20px;
+    max-width: 1000px;
     .feature {
       display: flex;
-      width: calc(33.33% - 35px);
       margin: 35px 0 25px;
       flex-wrap: wrap;
+      @media (max-width: 576px ) {
+        margin: 0;
+      }
       .image-wrapper {
         border-radius: 50%;
         background: transparent linear-gradient(180deg, #9A5CFF 0%, #7892FF 100%) 0% 0% no-repeat padding-box;
@@ -365,12 +403,25 @@ header{
 .joinUs{
   position: relative;
   padding-bottom: 35px;
-  background: transparent linear-gradient(180deg, #F2F7FE 37%, #FFFFFF 100%) 0% 0% no-repeat padding-box;
+  //background: transparent linear-gradient(180deg, #F2F7FE 37%, #FFFFFF 100%) 0% 0% no-repeat padding-box;
+  .gradient-div{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 260%;
+    z-index: 0;
+    background: linear-gradient(180deg, #c125d324 30%, #71dedf29 70%);
+    @media (max-width: 767px){
+      height: 310%
+    }
+  }
   .background-graph{
     margin-bottom: -6px;
     width: 100%;
     position: relative;
     top: -2px;
+    z-index: 1;
     @media (max-width: 992px) {
       margin-bottom: -90px;
       width: 200vw;
@@ -438,6 +489,9 @@ header{
 footer {
   background-color: transparent;
   padding: 104px 0 0;
+  @media (max-width: 992px){
+    padding-top: 15px;
+  }
   @media (max-width: 576px ) {
     padding-top: 70px;
   }
@@ -698,6 +752,7 @@ footer {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(25%, 1fr));
       grid-gap: 32px;
+      margin-top: 0;
     }
 
     .NavButton {
@@ -801,6 +856,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 99;
   .content-wrapper {
     background: #fff;
     border-radius: 10px;
@@ -1168,7 +1224,8 @@ footer {
     }
     .list {
       height: calc(100% - 193px);
-      overflow: auto;
+      overflow-y: auto;
+      overflow-x: hidden;
 
       .user {
         display: flex;
@@ -1181,7 +1238,7 @@ footer {
         cursor: pointer;
         .icon {
           position: absolute;
-          left: 0;
+          left: 5px;
           background: orange;
           border-radius: 50%;
           padding: 10px;
@@ -1212,6 +1269,15 @@ footer {
         .email {
           color: #959595;
         }
+        &.active{
+          background: #61f0ff75;
+          border-radius: 10px;
+        }
+        .name,.email{
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
         &.invite {
           color: #235c75;
           span {
@@ -1238,7 +1304,7 @@ footer {
       grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
       grid-gap: 32px;
       padding-right: 30px;
-      max-height: calc(100% - 61px);
+      max-height: calc(100% - 161px);
       overflow: auto;
 
       .project {
@@ -1308,6 +1374,12 @@ footer {
           border: 2px dashed #0006;
           background: transparent;
         }
+        span{
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 100%;
+        }
       }
     }
     .empty-box {
@@ -1319,6 +1391,8 @@ footer {
         padding: 20px;
         font-size: 20px;
         font-family: monospace;
+        position: relative;
+        z-index: 1;
         span {
           display: block;
           font-size: 15px;
@@ -1328,9 +1402,36 @@ footer {
           color: #8c53ff;
         }
       }
-      img {
-        max-height: 100%;
-        max-width: 100%;
+      div {
+        position: relative !important;
+        img {
+          position: relative !important;
+          height: 100% !important;
+          width: 100%!important;
+        }
+      }
+    }
+    .select-user-box{
+      position: relative;
+      height: calc(100% - 55px);
+      h1 {
+        text-align: center;
+        margin: 0;
+        padding: 20px;
+        font-size: 20px;
+        font-family: monospace;
+        position: relative;
+        z-index: 1;
+      }
+      div {
+        position: relative !important;
+        height: calc(100% - 161px);
+        img {
+          position: relative !important;
+          height: 100% !important;
+          width: auto!important;
+          min-width: auto !important;
+        }
       }
     }
   }
@@ -1437,17 +1538,12 @@ footer {
   &.grid {
     .user-projects {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       grid-gap: 32px;
       grid-auto-flow: row;
       overflow: visible;
-
-      .delete {
-        display: none;
-      }
       .projectCard {
-        width: 300px;
-        height: 300px;
+        //width: 300px;
         h5 {
           font-size: 12.5px;
           font-weight: 500;
@@ -1458,13 +1554,7 @@ footer {
           word-break: break-all;
         }
         &:hover {
-          width: 320px;
-          height: 320px;
-
           box-shadow: 3px 8px 14px #131218;
-          .delete {
-            display: block;
-          }
         }
       }
       &.center {
@@ -1499,16 +1589,13 @@ footer {
     cursor: pointer;
     text-align: center;
     box-shadow: 3px 8px 14px #a7a6a6;
-    width: auto;
+    width: 300px;
     max-width: 500px;
     position: relative;
-    height: 200px;
+    transition: 0.3s;
     &.shared {
-      h2 {
-        padding-top: 10px;
-      }
       h5 {
-        padding-bottom: 30px;
+        margin-bottom: 50px;
       }
     }
     h2 {
@@ -1526,7 +1613,7 @@ footer {
     }
     h5 {
       display: -webkit-box;
-      -webkit-line-clamp: 4;
+      -webkit-line-clamp: 6;
       text-align: start;
       word-break: break-all;
       -webkit-box-orient: vertical;
@@ -1534,10 +1621,12 @@ footer {
       padding: 0 15px;
       font-weight: 500;
       font-family: monospace;
+      margin-bottom: 25px;
     }
     .delete {
-      display: none;
+      opacity: 0;
       top: 8px;
+      transition: 0.4s;
     }
     .leave {
       bottom: 8px;
@@ -1559,7 +1648,8 @@ footer {
     }
     &:hover {
       .delete {
-        display: block;
+        opacity: 1;
+        z-index: 1;
       }
     }
   }
