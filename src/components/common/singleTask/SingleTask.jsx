@@ -25,7 +25,9 @@ function SingleTask({ taskId, taskListId }) {
   const userPermission = projectInfo.roleInfo;
   const taskInfoDetails = { taskId, taskListId };
   const [loading, setLoading] = useState(true);
-  const [allCollaborators, setAllCollaborators] = useState([]);
+  const [allCollaborators, setAllCollaborators] = useState(
+    projectInfo.contributions
+  );
   const [assignedTo, setAssignedTo] = useState("initialState");
   const [taskInfo, setTaskInfo] = useState();
 
@@ -38,14 +40,6 @@ function SingleTask({ taskId, taskListId }) {
         setTaskInfo(response.data[0]);
         setLoading(false);
       });
-      const allCollaborators = taskURL
-        .get(`/${taskId}/assignedTo`, {
-          params: { projectId: projectInfo._id, taskId },
-        })
-        .then((response) => {
-          setAllCollaborators(response.data);
-          setLoading(false);
-        });
     }
   }, [taskId]);
   console.log("taskInfo", taskInfo);

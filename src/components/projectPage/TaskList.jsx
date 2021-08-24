@@ -20,6 +20,7 @@ function TaskList({
   taskTagFilter,
   taskAssignedFilter,
   taskListKey,
+  
 }) {
   const dispatch = useDispatch();
   const projectInfo = useSelector((state) => state.ProjectReducer.projectInfo);
@@ -29,6 +30,10 @@ function TaskList({
   const { taskListName, task, tasksOrder } = taskList;
   const [showAddTaskModal, setShowAddTaskModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [allCollaborators, setAllCollaborators] = useState(
+    projectInfo.contributions
+  );
+  const assignedTo = allCollaborators.filter((contributions)=>contributions.userId._id == projectInfo.userId)[0].userId
   const toggleModal = () => {
     let showDeleteModals = !showDeleteModal;
     setShowDeleteModal(showDeleteModals);
@@ -253,7 +258,8 @@ function TaskList({
                   taskListId={taskListId}
                   addTaskHandler={addTaskHandler}
                   toggleAddTaskModal={toggleAddTaskModal}
-                  assignedTo={projectInfo.userId}
+                  assignedTo={assignedTo}
+                  allCollaborators={allCollaborators}
                 />
               </Modal>
             ) : null}

@@ -16,6 +16,7 @@ handler.get(async (req, res) => {
       res.send(projectInfo);
     }
   } catch (error) {
+    console.log(error);
     res.status(500).send("Internal Server Error");
   }
 });

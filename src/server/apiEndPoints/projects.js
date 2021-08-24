@@ -215,13 +215,17 @@ export async function getProject(
   ]);
 
   const Project = ProjectArray[0];
-  const userRoleArray = await Contributions.find(
-    { projectId, userId },
-    "roleId"
-  )
-    .populate("roleId")
+  const allProjectContribution = await Contributions.find({
+    projectId: Types.ObjectId(projectId),
+  })
+    .populate("userId roleId")
     .exec();
-  const userRole = userRoleArray[0];
+
+  Project.contributions = allProjectContribution;
+  const userRole = allProjectContribution.filter((contribution) => {
+    return contribution.userId._id == userId;
+  })[0];
+
   Project.roleInfo = userRole.roleId;
 
   Project.taskLists = Project.taskLists.map((taskList) => {

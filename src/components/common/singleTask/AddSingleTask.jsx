@@ -6,11 +6,14 @@ import React from "react";
 import TagBox from "./TagBox";
 import TaskHeader from "./TaskHeader";
 import { toast } from "react-toastify";
+import AssignSelect from "./AssignSelect";
+import CustomSelect from "../customSelect/CustomSelect";
 function AddSingleTask({
   taskListId,
   addTaskHandler,
   toggleAddTaskModal,
   assignedTo,
+  allCollaborators,
 }) {
   const [taskInfo, setTaskInfo] = useState({
     taskName: "",
@@ -20,6 +23,34 @@ function AddSingleTask({
     tags: [],
     assignedTo,
   });
+
+  const collaboratorOptions = allCollaborators.map((user) => {
+    return {
+      _id: user.userId._id,
+      name: user.userId.name,
+      value: user.userId.email,
+    };
+  });
+  const assignedToCollaborators = {
+    _id: assignedTo._id,
+    name: assignedTo.name,
+    value: assignedTo.email,
+  };
+  console.log("assignedToCollaborators", assignedTo);
+  const [value, setValue] = useState(assignedToCollaborators);
+  const assignCollaboratorsHandler = (option) => {
+    const selectedUserId = option._id;
+    if (value._id === selectedUserId) {
+      toast.info("Task Already Assigned to " + option.name);
+    } else {
+      setValue(option);
+      setTaskInfo(
+        produce((draft) => {
+          draft.assignedTo = selectedUserId;
+        })
+      );
+    }
+  };
 
   const saveNewTask = () => {
     if (taskInfo.taskName) {
@@ -76,6 +107,18 @@ function AddSingleTask({
             addTagsHandler={addTagsHandler}
             deleteTagsHandler={deleteTagsHandler}
           />
+        </div>
+        <div className="assigned-box">
+          <span>Assigned to:</span>
+          {collaboratorOptions.length > 0 && (
+            <CustomSelect
+              prompt="Assign To"
+              options={collaboratorOptions}
+              value={value}
+              onChange={assignCollaboratorsHandler}
+              label="name"
+            />
+          )}
         </div>
         <div className={styles.edit_actions}>
           <button className={styles.edit_actions_save} onClick={saveNewTask}>
