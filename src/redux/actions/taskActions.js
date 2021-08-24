@@ -164,3 +164,16 @@ export const deleteTags = (tagToBeDeletedInfo) => async (dispatch) => {
     dispatch(DeleteTagFailure(err));
   }
 };
+
+export const assignTaskTo = (assignTaskInfo) => async (dispatch) => {
+  try {
+    const { taskId, assignedTo } = assignTaskInfo;
+    let response = await taskURL.post(`/${taskId}/assignedTo`, assignTaskInfo);
+
+    if (response) {
+      console.log("response", response);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};

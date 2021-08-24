@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-
+import users from "./userData";
 const MODEL_NAME = "Contributions";
 
 const ContributionSchema = new Schema({
@@ -9,7 +9,7 @@ const ContributionSchema = new Schema({
   },
   userId: {
     type: Schema.Types.ObjectId,
-    ref: "UserData",
+    ref: "users",
   },
   roleId: {
     type: Schema.Types.ObjectId,

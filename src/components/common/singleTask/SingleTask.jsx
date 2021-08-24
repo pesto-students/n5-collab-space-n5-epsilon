@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AssignSelect from "./AssignSelect";
 
 function SingleTask({ taskId, taskListId }) {
   const projectInfo = useSelector((state) => state.ProjectReducer.projectInfo);
@@ -24,7 +25,8 @@ function SingleTask({ taskId, taskListId }) {
   const userPermission = projectInfo.roleInfo;
   const taskInfoDetails = { taskId, taskListId };
   const [loading, setLoading] = useState(true);
-
+  const [allCollaborators, setAllCollaborators] = useState([]);
+  const [assignedTo, setAssignedTo] = useState("initialState");
   const [taskInfo, setTaskInfo] = useState();
 
   const [commentBox, setCommentBox] = useState("");
@@ -36,8 +38,17 @@ function SingleTask({ taskId, taskListId }) {
         setTaskInfo(response.data[0]);
         setLoading(false);
       });
+      const allCollaborators = taskURL
+        .get(`/${taskId}/assignedTo`, {
+          params: { projectId: projectInfo._id, taskId },
+        })
+        .then((response) => {
+          setAllCollaborators(response.data);
+          setLoading(false);
+        });
     }
   }, [taskId]);
+  console.log("taskInfo", taskInfo);
   const addCommentHandler = (commenterInfo) => {
     const date = new Date();
     const currentTime = date.toISOString();
@@ -163,6 +174,11 @@ function SingleTask({ taskId, taskListId }) {
                   tagsCollection={taskInfo.tags}
                   addTagsHandler={addTagsHandler}
                   deleteTagsHandler={deleteTagsHandler}
+                />
+                <AssignSelect
+                  taskId={taskId}
+                  assignedTo={taskInfo.assignedTo}
+                  allCollaborators={allCollaborators}
                 />
               </div>
             </>

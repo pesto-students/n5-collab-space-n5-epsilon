@@ -21,6 +21,17 @@ export async function getTaskInfo(taskInfo, projection = "", populate = "") {
         as: "userLookup",
       },
     },
+    {
+      $lookup: {
+        from: "users",
+        localField: "assignedTo",
+        foreignField: "_id",
+        as: "assignedTo",
+      },
+    },
+    {
+      $unwind: "$assignedTo",
+    },
   ]);
   return task;
 }
@@ -101,6 +112,17 @@ export async function reorderTask(taskInfo, projection = "", populate = "") {
     { taskListsId: taskInfo.taskListId },
     {
       tasksOrder: taskInfo.tasksOrder,
+    }
+  );
+  return foundTask;
+}
+
+export async function assignTask(taskInfo, projection = "", populate = "") {
+  const { taskId, assignedTo } = taskInfo;
+  const foundTask = Task.findOneAndUpdate(
+    { _id: Types.ObjectId(taskId) },
+    {
+      assignedTo: Types.ObjectId(assignedTo),
     }
   );
   return foundTask;

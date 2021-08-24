@@ -6,13 +6,19 @@ import React from "react";
 import TagBox from "./TagBox";
 import TaskHeader from "./TaskHeader";
 import { toast } from "react-toastify";
-function AddSingleTask({ taskListId, addTaskHandler, toggleAddTaskModal }) {
+function AddSingleTask({
+  taskListId,
+  addTaskHandler,
+  toggleAddTaskModal,
+  assignedTo,
+}) {
   const [taskInfo, setTaskInfo] = useState({
     taskName: "",
     status: "inactive",
     description: "",
     taskListId: taskListId,
     tags: [],
+    assignedTo,
   });
 
   const saveNewTask = () => {

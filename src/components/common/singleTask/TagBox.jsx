@@ -37,7 +37,7 @@ export default function TagBox({
         />
       </div>
       <div className={styles.existing_tags}>
-        {tagsCollection.map((tag) => {
+        {tagsCollection &&tagsCollection.map((tag) => {
           return (
             <div
               key={tag}

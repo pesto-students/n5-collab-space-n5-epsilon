@@ -32,7 +32,7 @@ export default function CommentBox({
         <h1>Discussion</h1>
       </div>
       <div className={styles.existing_comments} ref={messagesEndRef}>
-        {comments.map((commentInfo) => {
+        {comments && comments.map((commentInfo) => {
           const commenterInfo = taskInfo.userLookup.find((userInfo) => {
             return userInfo._id === commentInfo.by;
           });
