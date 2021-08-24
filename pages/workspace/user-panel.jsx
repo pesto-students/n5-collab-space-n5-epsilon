@@ -36,6 +36,7 @@ const UserPanel = () => {
   const [projectList, setProjectList] = useState({});
   const [availableProjectList, setAvailableProjectList] = useState([]);
   const [selectedUser, setSelectedUser] = useState('');
+  const [completeCheckShow, setCompleteCheckShow] = useState(false);
   const Auth = new AuthAPI();
 
   useEffect( () => {
@@ -135,7 +136,11 @@ const UserPanel = () => {
           apiError: false,
         });
 
-        setShowForm(false);
+        setCompleteCheckShow(true);
+        setTimeout(()=>{
+          setCompleteCheckShow(false);
+          setShowForm(false);
+        }, 2000);
       })
       .catch((error) => {
         setSubmittedForm({
@@ -396,6 +401,7 @@ const UserPanel = () => {
                     : ""}
                 </p>
               </form>
+              {completeCheckShow &&  <div className='complete-check'/>}
             </div>
           </div>
         )}
