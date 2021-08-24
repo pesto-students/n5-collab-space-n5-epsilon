@@ -156,6 +156,28 @@ $Segoe: "SegoeUI", sans-serif;
   }
 }
 
+
+.complete-check{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  top: 0;
+  left: 0;
+ &:after{
+   content: '';
+   position: absolute;
+   height: 70px;
+   width: 70px;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   background: url(https://api.iconify.design/akar-icons/circle-check.svg);
+   background-repeat: no-repeat;
+   background-size: contain;
+ }
+}
+
 .Homepage {
   background: #ffffff;
   overflow: hidden;
@@ -880,6 +902,7 @@ footer {
     text-align: center;
     position: relative;
     min-width: 400px;
+    overflow: hidden;
     .cross {
       position: absolute;
       right: 15px;
@@ -2062,6 +2085,7 @@ footer {
     background: #fff;
     border-radius: 10px;
     overflow: hidden;
+    position: relative;
 
     .tab {
       h1 {
@@ -2071,6 +2095,7 @@ footer {
       }
       .content-wrapper {
         padding: 10px 25px 20px;
+        position: relative;
       }
       .input-wrapper {
         position: relative;

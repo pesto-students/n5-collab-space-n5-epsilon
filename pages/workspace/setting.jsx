@@ -1,8 +1,9 @@
 import { getLayout as getSiteLayout } from "../../src/components/layouts/SiteLayout";
 import WorkSpaceTitle from "../../src/components/workspace/WorkSpaceTitle";
-import { useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import AuthAPI from "../../src/client_apis/authApis";
+import Spinner from "../../src/components/common/contentLoader/spinningCircleLoader";
 
 const Setting = () => {
   const [submittedForm, setSubmittedForm] = useState({
@@ -17,6 +18,7 @@ const Setting = () => {
     input2: false,
   });
   const [tab, setTab] = useState("password");
+  const [completeCheckShow, setCompleteCheckShow] = useState(false);
 
   const regex = {
     passwordRegex:
@@ -41,6 +43,10 @@ const Setting = () => {
                     submitting: false,
                 });
                 JSON.parse(localStorage.getItem('user')).id;
+                setCompleteCheckShow(true);
+                setTimeout(()=>{
+                    setCompleteCheckShow(false);
+                }, 2000);
             })
             .catch((error) => {
                 setSubmittedForm({
@@ -118,11 +124,13 @@ const Setting = () => {
                         </div>
                         <p className={`error-space ${submittedForm.error || copyPassword !== newPassword? 'error':''}`}>{submittedForm.error ? submittedForm.error: copyPassword === newPassword ?'Atleast 8 characters, one lower case character, one upper case character, one number and one special character.':'Both password does not match'}</p>
                         <button onClick={submit} className='btn' disabled={!submittedForm.formTouched || submittedForm.error || copyPassword !== newPassword || submittedForm.submitting}>Save Password</button>
+                        {completeCheckShow &&  <div className='complete-check'/>}
                     </div>
                 </div>}
                 {tab === 'workspace' &&  <div className='tab'/>}
             </div>
         </section>
+            {submittedForm.submitting && <Spinner />}
     </div>
 )};
 
