@@ -73,7 +73,12 @@ export default function CustomSelect({
               }}
               key={option[label]}
             >
-              {option[label]}
+              <div className="user-profile">
+                <span className="icon">
+                  <span>{option[label]}</span>
+                </span>
+              </div>
+              <span className="label">{option[label]}</span>
             </div>
           ))}
         </div>
