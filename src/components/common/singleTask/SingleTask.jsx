@@ -171,6 +171,7 @@ function SingleTask({ taskId, taskListId }) {
                 />
                 <AssignSelect
                   taskId={taskId}
+                  taskListId={taskListId}
                   assignedTo={taskInfo.assignedTo}
                   allCollaborators={allCollaborators}
                 />

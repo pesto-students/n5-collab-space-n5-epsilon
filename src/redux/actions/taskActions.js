@@ -25,6 +25,7 @@ import {
   ReorderTaskSuccess,
   UpdateTaskName,
   UpdateTaskNameSuccess,
+  AssignTaskTo,
 } from "../constants/taskActionConstants";
 import { toast } from "react-toastify";
 import { taskListURL, taskURL } from "../../client_apis/workSpaceApi";
@@ -171,7 +172,7 @@ export const assignTaskTo = (assignTaskInfo) => async (dispatch) => {
     let response = await taskURL.post(`/${taskId}/assignedTo`, assignTaskInfo);
 
     if (response) {
-      console.log("response", response);
+      dispatch(AssignTaskTo(assignTaskInfo));
     }
   } catch (err) {
     console.error(err);

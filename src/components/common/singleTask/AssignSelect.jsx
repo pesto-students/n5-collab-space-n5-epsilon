@@ -8,7 +8,7 @@ import CustomSelect from "../customSelect/CustomSelect";
 import { toast } from "react-toastify";
 import { assignTaskTo } from "../../../redux/actions/taskActions";
 import { useDispatch } from "react-redux";
-function AssignSelect({ taskId, assignedTo, allCollaborators }) {
+function AssignSelect({ taskId, assignedTo, allCollaborators ,taskListId}) {
   const dispatch = useDispatch();
   console.log("value", assignedTo);
   const searchInput = useRef();
@@ -36,6 +36,7 @@ function AssignSelect({ taskId, assignedTo, allCollaborators }) {
       const reassignTaskInfo = {
         taskId: taskId,
         assignedTo: selectedUserId,
+        taskListId
       };
       dispatch(assignTaskTo(reassignTaskInfo));
     }
