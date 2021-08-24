@@ -43,7 +43,7 @@ function AssignSelect({ taskId, assignedTo, allCollaborators ,taskListId}) {
   };
   return (
     <div className="assigned-box">
-      <span>Assigned to:</span>
+      <h1>Assigned to:</h1>
       {collaboratorOptions.length > 0 && (
         <CustomSelect
           prompt="Assign To"
