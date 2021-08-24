@@ -29,7 +29,7 @@ export const tourConfig = [
   },
 
   {
-    selector: ".default-btn",
+    selector: ".add-project-button",
     content: "you can create new project from here ",
   },
   {
