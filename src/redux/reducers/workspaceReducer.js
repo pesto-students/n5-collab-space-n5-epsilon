@@ -34,10 +34,9 @@ const WorkSpaceReducer = (state = initialState, action) => {
 
       case DELETE_PROJECT: {
         const projectIndex = draft.projects.findIndex((project) => {
-          console.log("payload.projectId", payload.projectId);
           return project.projectId == payload.projectId;
         });
-        console.log("projectIndex", projectIndex);
+
         if (projectIndex > -1) {
           draft.projects.splice(projectIndex, 1);
         }
@@ -48,10 +47,13 @@ const WorkSpaceReducer = (state = initialState, action) => {
         break;
       }
       case LEAVE_PROJECT: {
-        const projectIndex = draft.projects.findIndex(
-          (project) => project._id == payload.projectId
-        );
-        draft.projects.splice(projectIndex, 1);
+        const projectIndex = draft.projects.findIndex((project) => {
+          return project.projectId == payload.projectId;
+        });
+
+        if (projectIndex > -1) {
+          draft.projects.splice(projectIndex, 1);
+        }
         break;
       }
       case TOGGLE_LOADING: {

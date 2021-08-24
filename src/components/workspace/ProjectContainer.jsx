@@ -21,6 +21,7 @@ function ProjectContainer({
     setShowDeleteModal(showDeleteModals);
   };
   const triggerDeleteHandler = () => {
+    console.log("deleteProjectId", deleteProjectId);
     deleteProjectHandler(deleteProjectId);
   };
 
@@ -118,7 +119,11 @@ function ProjectContainer({
                 {showDeleteModal ? (
                   <Modal showModal={showDeleteModal} styles={modalStyles}>
                     <ConformationPopUp
-                      title={"Delete Project ?"}
+                      title={
+                        role === "Admin"
+                          ? "Delete Project ?"
+                          : "Leave Project ?"
+                      }
                       onAcceptHandler={(e) => {
                         e.preventDefault();
                         triggerDeleteHandler();
