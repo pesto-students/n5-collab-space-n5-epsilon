@@ -1543,7 +1543,7 @@ footer {
     .icon {
       position: absolute;
       left: 0;
-      background: #d2c7ef;;
+      background: #d2c7ef;
       border-radius: 50%;
       padding: 10px;
       top: 50%;
@@ -2154,6 +2154,7 @@ footer {
 
 .dropdown {
   position: relative;
+  margin-top: 20px;
   color: #333;
   cursor: default;
 }

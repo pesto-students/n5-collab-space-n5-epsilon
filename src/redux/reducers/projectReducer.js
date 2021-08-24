@@ -7,6 +7,7 @@ import {
 } from "../constants/projectActionConstants";
 import {
   ADD_TAG,
+  ASSIGN_TASK_TO,
   CHANGE_TASK_ORDER,
   CREATE_TASK,
   DELETE_TAG,
@@ -129,6 +130,19 @@ const ProjectReducer = (state = initialState, action) => {
       case MOVE_TASK_FAILURE: {
         return payload;
       }
+      case ASSIGN_TASK_TO: {
+        const { taskId, assignedTo, taskListId } = payload;
+        // const newCollaborator = draft.projectInfo.contributions.filter(
+        //   (contributions) => {
+        //     console.log("contributions",contributions.userId._id, assignedTo);
+        //     return contributions.userId._id == assignedTo;
+        //   }
+        // )[0].userId;
+        draft.projectInfo.taskLists[taskListId].task[taskId].assignedTo =
+        assignedTo;
+        break;
+      }
+
       case MOVE_TASK: {
         const {
           taskId,
