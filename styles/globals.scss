@@ -454,8 +454,9 @@ header {
     }
   }
   &:before {
-    content: url("../public/image2.png");
+    content: url("../public/organizing_projects.svg");
     position: absolute;
+    transform: scale(.5);
     left: 37px;
     top: 237px;
     z-index: 2;
@@ -469,11 +470,12 @@ header {
     }
   }
   &:after {
-    content: url("../public/image1.png");
+    content: url("../public/selecting_team.svg");
     position: absolute;
     right: 24px;
     top: 185px;
     z-index: 2;
+    transform: scale(.5);
     @media (max-width: 1400px) {
       max-width: 300px;
       right: 0;

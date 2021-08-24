@@ -19,7 +19,7 @@ export const tourConfig = [
     content: "User panel is your go to place to manage user in your workspace ",
   },
   {
-    selector: ".setting",
+    selector: ".Settings",
     content: "Setting panel to Control your workspace as you please ",
   },
   {

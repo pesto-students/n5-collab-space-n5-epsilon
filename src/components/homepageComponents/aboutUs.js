@@ -11,21 +11,22 @@ export default function AboutUs(prop) {
             className="content-wrapper"
           >
             <span className="title">ABOUT US</span>
-            <h3>Revolutionizing the way People Use Crypto</h3>
+            <h3>Revolutionizing the way People Manage Themselves </h3>
             <img
               className="responsive-image"
               src={"about-us.png"}
               alt="about us"
             />
             <p>
-              Rupeso is a multi cryptocurrency wallet for both Android and iOS
-              devices that supports Bitcoin, Ethereum, Bitcoin Cash, Litecoin
-              and Stellar assets. It is designed to store your cryptocurrencies
-              in a decentralized and a non-custodial way.
+              CollabSpace Provides a way for people to create their Task, Manage
+              Themselves Or Collaborate with others through simplicity. With
+              CollabSpace We Offer freedom to model platform as needed
             </p>
             <p>{prop.additionalData}</p>
             <div className="btn-wrapper">
-              <span className="default-btn">Features</span>
+              <span className="default-btn" onClick={prop.handleFeatureClick}>
+                Features
+              </span>
               <span className={"play-btn"}>Watch Video</span>
             </div>
           </div>
