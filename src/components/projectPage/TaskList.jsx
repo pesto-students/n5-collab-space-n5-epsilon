@@ -253,6 +253,7 @@ function TaskList({
                   taskListId={taskListId}
                   addTaskHandler={addTaskHandler}
                   toggleAddTaskModal={toggleAddTaskModal}
+                  assignedTo={projectInfo.userId}
                 />
               </Modal>
             ) : null}
