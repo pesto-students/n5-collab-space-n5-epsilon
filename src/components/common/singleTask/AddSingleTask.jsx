@@ -14,6 +14,7 @@ function AddSingleTask({
   toggleAddTaskModal,
   assignedTo,
   allCollaborators,
+    taskAssignedFilter
 }) {
   const [taskInfo, setTaskInfo] = useState({
     taskName: "",

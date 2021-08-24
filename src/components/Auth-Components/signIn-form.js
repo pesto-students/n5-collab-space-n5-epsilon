@@ -48,7 +48,6 @@ export default function SignInForm(props) {
 
   return (
     <form>
-      <h2>Sign In</h2>
             <input
         type="email"
         placeholder="email"
@@ -91,11 +90,7 @@ export default function SignInForm(props) {
       />
         <div className={`eye ${passwordShow ? 'show':''}`} onClick={()=>{setPasswordShow(!passwordShow)}}/>
         </div>
-            <div className="bottom-row">
-                <span
-                    className={`btn`}
-                    onClick={() => {props.changeForm("SignUp")}}>
-                    SignUp</span>
+            <div className="bottom-row signIn-form">
                 <span
                     className={`btn ${
             !props.formStatus.formTouched ||
@@ -108,12 +103,12 @@ export default function SignInForm(props) {
                     SignIn
                 </span>
                 <span
-                    className={`btn`}
+                    className='forgot-text'
                     onClick={() => {
-            props.changeForm("Forgot");
-          }}
+                        props.changeForm("Forgot");
+                    }}
                 >
-          Forgot Password
+          Forgot Password ?
         </span>
             </div>
         <p className="error">{ props.formStatus.emailError? props.formStatus.emailError: props.formStatus.passwordError? props.formStatus.passwordError: props.formStatus.error ? props.formStatus.error : ''}</p>

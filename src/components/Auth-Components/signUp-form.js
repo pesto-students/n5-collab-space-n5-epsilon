@@ -42,7 +42,6 @@ export default function SignUpForm(props) {
 
     return (
         <form>
-            <h2>Sign Up</h2>
             <input type="text" placeholder="Your name"
                    onKeyUp={e => {
                            if(!props.regex.nameRegex.test(e.target.value.trim().toLowerCase())){
@@ -94,13 +93,6 @@ export default function SignUpForm(props) {
                         ? "disable"
                         : ""
                 }`} onClick={submit}>SignUp</span>
-
-                <span className='btn'
-                    onClick={() => {
-                        props.changeForm('SignIn');
-                    }}
-                > SignIn
-                </span>
             </div>
             
             <p className='error'>{ props.formStatus.nameError? props.formStatus.nameError: props.formStatus.emailError? props.formStatus.emailError: props.formStatus.passwordError? props.formStatus.passwordError: props.formStatus.error ? props.formStatus.error : ''}</p>

@@ -61,6 +61,11 @@ export default function Authentication() {
         <span className="feature-image" />
       </div>
       <div className="center">
+        {authState !== "Forgot"  && <div className='tab-list'>
+          <span className={`btn ${authState === "SignIn"? 'active':''}`} onClick={() => {changeForm("SignIn")}}>I AM A MEMBER</span>
+          <span className={`btn ${authState === "SignUp"? 'active':''}`} onClick={() => {changeForm("SignUp")}}>I AM NEW HERE</span>
+        </div>
+        }
         {authState === "SignIn" && (
           <SignInForm
             changeForm={changeForm}

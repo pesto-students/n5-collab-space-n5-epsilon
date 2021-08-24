@@ -1330,6 +1330,7 @@
   dependencies:
     "anymatch" "~3.1.1"
     "braces" "~3.0.2"
+    "fsevents" "~2.3.1"
     "glob-parent" "~5.1.0"
     "is-binary-path" "~2.1.0"
     "is-glob" "~4.0.1"
@@ -2043,6 +2044,7 @@
     "estraverse" "^4.2.0"
     "esutils" "^2.0.2"
     "optionator" "^0.8.1"
+    "source-map" "~0.6.1"
   optionalDependencies:
     "source-map" "~0.6.1"
 
@@ -3562,6 +3564,7 @@
     "denque" "^1.4.1"
     "optional-require" "^1.0.3"
     "safe-buffer" "^5.1.2"
+    "saslprep" "^1.0.0"
   optionalDependencies:
     "saslprep" "^1.0.0"
 
@@ -4587,6 +4590,8 @@
   "integrity" "sha512-9RfhAr7mv0NUGA2NDs50OHfqPplU3NAhJQlfKqB1pfSPO9uHu4J0Uc0LLRCym7zkp+7Ps+UMKyJoYBtt1fUJNg=="
   "resolved" "https://registry.npmjs.org/react-select-search/-/react-select-search-3.0.8.tgz"
   "version" "3.0.8"
+  dependencies:
+    "fuse.js" "^3.4.5"
   optionalDependencies:
     "fuse.js" "^3.4.5"
 

@@ -28,7 +28,6 @@ function ProjectContainer({
   return (
     <>
       {projectList.map((project) => {
-        console.log(project.projectId);
         return (
           <React.Fragment key={project._id}>
             <Link href={`workspace/project/${project.projectId}`}>

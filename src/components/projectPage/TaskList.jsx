@@ -13,7 +13,7 @@ import conformationModalStyles from "../../../styles/conformationModal.module.sc
 import ConformationPopUp from "../common/customPopUp/ConformationPopUp";
 import { toast } from "react-toastify";
 
-function TaskList({
+export default function TaskList({
   taskList,
   layout,
   taskTypeFilter,
@@ -160,91 +160,30 @@ function TaskList({
               {tasksOrder &&
                 tasksOrder.map((taskId, index) => {
                   const taskObj = task[taskId];
-                  console.log("taskObj", taskObj, task, taskId);
-                  let filtersApplied = "";
-                  // if(taskTagFilter === taskLists[taskListId].taskListName.toLowerCase())
-                  if (taskTypeFilter && taskTypeFilter !== "any")
-                    filtersApplied = 1;
-                  if (taskTagFilter && taskTagFilter !== "any")
-                    filtersApplied = 2;
-                  if (
-                    taskTagFilter &&
-                    taskTypeFilter &&
-                    taskTypeFilter !== "any" &&
-                    taskTagFilter !== "any"
-                  )
-                    filtersApplied = 3;
-                  switch (filtersApplied) {
-                    case 1: {
-                      if (taskTypeFilter === taskListName.toLowerCase())
-                        return (
-                          <>
-                            {taskObj && (
-                              <Task
-                                key={taskObj._id}
-                                taskListId={taskListId}
-                                deleteTaskHandler={deleteTaskHandler}
-                                index={index}
-                                task={taskObj}
-                              />
-                            )}
-                          </>
-                        );
-                      break;
-                    }
-                    case 2: {
-                      if (taskObj && taskObj.tags?.includes(taskTagFilter))
-                        return (
-                          <>
-                            {taskObj && (
-                              <Task
-                                key={taskObj._id}
-                                taskListId={taskListId}
-                                deleteTaskHandler={deleteTaskHandler}
-                                index={index}
-                                task={taskObj}
-                              />
-                            )}
-                          </>
-                        );
-                      break;
-                    }
-                    case 3: {
-                      if (
-                        taskTypeFilter === taskListName.toLowerCase() && taskObj &&
-                        taskObj?.tags?.includes(taskTagFilter)
-                      )
-                        return (
-                          <>
-                            {taskObj && (
-                              <Task
-                                key={taskObj._id}
-                                taskListId={taskListId}
-                                deleteTaskHandler={deleteTaskHandler}
-                                index={index}
-                                task={taskObj}
-                              />
-                            )}
-                          </>
-                        );
-                      break;
-                    }
-                    default: {
-                      return (
+                  let tagFilter = false;
+                  let listFilter = false;
+                  let userFilter = false;
+                  if (taskTypeFilter && taskTypeFilter !== "any") {listFilter = true } else{listFilter = false;}
+                  if (taskTagFilter && taskTagFilter !== "any") { tagFilter = true} else {tagFilter = false;}
+                  if (taskAssignedFilter && taskAssignedFilter!=="any") {userFilter = true} else{ userFilter = false;}
+
+                  console.log('===check===', tagFilter, listFilter, userFilter, taskObj)
+
+                    return (
                         <>
-                          {taskObj && (
-                            <Task
+                          {taskObj
+                          && (listFilter ? taskTypeFilter === taskListName.toLowerCase() : true)
+                          && (tagFilter ? taskObj.tags?.includes(taskTagFilter) : true)
+                          && (userFilter ? taskObj.assignedTo === taskAssignedFilter : true) &&
+                          <Task
                               key={taskObj._id}
                               taskListId={taskListId}
                               deleteTaskHandler={deleteTaskHandler}
                               index={index}
                               task={taskObj}
-                            />
-                          )}
+                          />}
                         </>
-                      );
-                    }
-                  }
+                    );
                 })}
               {provided.placeholder}
             </div>
@@ -285,5 +224,3 @@ function TaskList({
     </React.Fragment>
   );
 }
-
-export default TaskList;

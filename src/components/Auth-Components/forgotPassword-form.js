@@ -53,14 +53,14 @@ export default function ForgotPasswordForm(props) {
             }
         }}
       />
-      <div className="bottom-row">
+      <div className="bottom-row forgot-password">
         <span
           className={`btn`}
           onClick={() => {
-            props.changeForm("SignUp");
+            props.changeForm("SignIn");
           }}
         >
-          SignUp
+          SignIn
         </span>
         <span
           className={`btn ${

@@ -30,7 +30,7 @@ const ProjectPage = () => {
   const userRole = projectInfo.roleInfo.name;
   const userPermission = projectInfo.roleInfo;
   const { projectId } = router.query;
-  const { taskLists, taskListsOrder } = projectInfo;
+  const { taskLists, taskListsOrder, contributions } = projectInfo;
   const [tab, setTab] = useState("TaskList");
   const [layout, setLayout] = useState("");
   const [taskTypeFilter, setTaskTypeFilter] = useState("");
@@ -57,6 +57,7 @@ const ProjectPage = () => {
 
   const [taskListsName, setTaskListsName] = useState([]);
   const [taskTagNames, setTaskTagNames] = useState({});
+  const [projectUserNames, setProjectUserNames] = useState({});
   const addTaskListHandler = () => {
     setTaskListName("");
     setSubmittedForm({
@@ -77,6 +78,7 @@ const ProjectPage = () => {
 
     const taskLNames = [];
     const taskTNames = {};
+    const projectContributers = {};
 
     Object.keys(taskLists).map((taskListId) => {
       if (!taskLNames.includes(taskLists[taskListId].taskListName)) {
@@ -89,8 +91,16 @@ const ProjectPage = () => {
         });
       });
     });
+    contributions.map((item)=>{
+      projectContributers[item.userId._id] = {
+        userId: item.userId._id,
+        userName: item.userId.name,
+      };
+    });
+
     setTaskTagNames(taskTNames);
     setTaskListsName(taskLNames);
+    setProjectUserNames(projectContributers)
   }, [taskLists]);
 
   return (
@@ -128,6 +138,7 @@ const ProjectPage = () => {
                     projectInfo={projectInfo}
                     taskListsName={taskListsName}
                     taskTagNames={taskTagNames}
+                    projectUserNames={projectUserNames}
                     taskListsOrder={taskListsOrder}
                     taskTypeFilter={taskTypeFilter}
                     taskAssignedFilter={taskAssignedFilter}
@@ -139,6 +150,7 @@ const ProjectPage = () => {
                     toggle={toggle}
                     setTaskTagFilter={setTaskTagFilter}
                     setTaskTypeFilter={setTaskTypeFilter}
+                    setTaskAssignedFilter={setTaskAssignedFilter}
                   />
                 </div>
               )}

@@ -5,10 +5,12 @@ function FilterBox({
   taskTagNames,
   setTaskTagFilter,
   setTaskTypeFilter,
+    projectUserNames,
+    setTaskAssignedFilter
 }) {
   return (
     <div className="filter-box">
-      <div className="filter-wrapper">
+        <div className="filter-wrapper">
         <p>Task Type</p>
         <select onChange={(e) => setTaskTypeFilter(e.target.value)}>
           <option value="any">Any</option>
@@ -23,7 +25,7 @@ function FilterBox({
         </select>
       </div>
 
-      <div className="filter-wrapper">
+        <div className="filter-wrapper">
         <p>Tag Type</p>
         <select onChange={(e) => setTaskTagFilter(e.target.value)}>
           <option value="any">Any</option>
@@ -37,6 +39,21 @@ function FilterBox({
             })}
         </select>
       </div>
+
+        <div className="filter-wrapper">
+            <p>Assigned User</p>
+            <select onChange={(e) => setTaskAssignedFilter(e.target.value)}>
+                <option value="any">Any</option>
+                {Object.keys(projectUserNames).length>1 &&
+                Object.keys(projectUserNames).map((userName) => {
+                    return (
+                        <option key={userName} value={userName}>
+                            {projectUserNames[userName].userName}
+                        </option>
+                    );
+                })}
+            </select>
+        </div>
     </div>
   );
 }
