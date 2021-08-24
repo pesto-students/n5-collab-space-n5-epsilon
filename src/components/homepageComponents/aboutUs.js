@@ -27,7 +27,6 @@ export default function AboutUs(prop) {
               <span className="default-btn" onClick={prop.handleFeatureClick}>
                 Features
               </span>
-              <span className={"play-btn"}>Watch Video</span>
             </div>
           </div>
           <div
