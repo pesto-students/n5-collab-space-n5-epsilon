@@ -482,9 +482,6 @@ header {
   &:before {
     content: '';
     position: absolute;
-    transform: scale(0.5);
-    left: 37px;
-    top: 237px;
     z-index: 2;
     background-image: url("../public/organizing_projects.svg");
     height: 240px;
