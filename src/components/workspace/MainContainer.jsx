@@ -14,6 +14,7 @@ import TrashCanIcon from "../iconComponents/TrashCanIcon";
 import HorizontalAlignIcon from "../iconComponents/HorizontalAlignIcon";
 import GridLayoutIcon from "../iconComponents/GridLayoutIcon";
 import sal from "sal.js";
+import CircularAddIcon from "../iconComponents/CircularAddIcon";
 const MainContainer = ({ toggleLoading }) => {
   const projects = useSelector((state) => state.WorkSpaceReducer.projects);
   const ownProjects = projects.filter((project) => project.role === "Admin");
@@ -50,10 +51,11 @@ const MainContainer = ({ toggleLoading }) => {
     const curr_project = projects.find(
       (project) => project.projectId == projectId
     );
-
+    console.log("curr_project", curr_project);
     if (curr_project.role === "Admin") {
       dispatch(deleteProject({ projectId: projectId }));
       toggleLoading(false);
+      toast.success("Project Deleted Successfully ");
     } else {
       dispatch(
         leaveProject({
@@ -62,9 +64,8 @@ const MainContainer = ({ toggleLoading }) => {
           userToBeRemovedId: userId,
         })
       );
+      toast.success("Left     Project Successfully ");
     }
-
-    toast.success("Project Deleted Successfully ");
   };
 
   useEffect(() => {
@@ -95,14 +96,17 @@ const MainContainer = ({ toggleLoading }) => {
     <div className="mainContainerBody">
       <WorkSpaceTitle title="Workspace Name" />
       <div className="top-panel-row">
-        <span
-          className="default-btn image-btn"
-          onClick={() => {
-            setShowForm(true);
-          }}
-        >
-          Add new project
-        </span>
+        <div className="add-project">
+          <button
+            className="add-project-button"
+            onClick={() => {
+              setShowForm(true);
+            }}
+          >
+            <CircularAddIcon />
+            <span>Add new project</span>
+          </button>
+        </div>
 
         <div className="layout-toggle">
           <span

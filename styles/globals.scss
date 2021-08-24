@@ -456,7 +456,7 @@ header {
   &:before {
     content: url("../public/organizing_projects.svg");
     position: absolute;
-    transform: scale(.5);
+    transform: scale(0.5);
     left: 37px;
     top: 237px;
     z-index: 2;
@@ -475,7 +475,7 @@ header {
     right: 24px;
     top: 185px;
     z-index: 2;
-    transform: scale(.5);
+    transform: scale(0.5);
     @media (max-width: 1400px) {
       max-width: 300px;
       right: 0;
@@ -827,10 +827,11 @@ footer {
     font-weight: 500;
     cursor: pointer;
     &:hover {
-      background: #9771ef;
+      background: #f4f5f7;
+      color: #5d2bff;
       svg {
         path {
-          fill: #00e1ff;
+          fill: #5d2bff;
         }
       }
     }
@@ -1457,7 +1458,7 @@ footer {
     .icon {
       position: absolute;
       left: 0;
-      background: orange;
+      background: #d2c7ef;;
       border-radius: 50%;
       padding: 10px;
       top: 50%;
@@ -1525,7 +1526,7 @@ footer {
         width: 100%;
       }
       &:hover {
-        background: #0000001f;
+        background: #dbd4ed;
       }
     }
   }
@@ -1559,7 +1560,7 @@ footer {
           word-break: break-all;
         }
         &:hover {
-          box-shadow: 3px 8px 14px #131218;
+          box-shadow: 3px 8px 14px #5a575744;
         }
       }
       &.center {
@@ -1593,7 +1594,7 @@ footer {
     border-radius: 10px;
     cursor: pointer;
     text-align: center;
-    box-shadow: 3px 8px 14px #a7a6a6;
+    box-shadow: 3px 8px 14px #6967672a;
     width: 300px;
     max-width: 500px;
     position: relative;
@@ -1652,6 +1653,7 @@ footer {
       }
     }
     &:hover {
+      box-shadow: 3px 8px 14px #4d474744;
       .delete {
         opacity: 1;
         z-index: 1;
@@ -1843,6 +1845,43 @@ footer {
         }
       }
     }
+  }
+}
+.add-project-button {
+  cursor: pointer;
+  border-radius: 25px;
+  background-color: #5d2bff;
+  border: 0;
+  outline: none;
+  color: white;
+  overflow: hidden;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  min-height: 40px;
+  min-width: 40px;
+  transition: 0.5s;
+  justify-content: space-between;
+  svg {
+    height: 100%;
+    width: 25px;
+    margin-left: 3px;
+
+    g {
+      stroke: white;
+    }
+    path {
+      stroke: white;
+    }
+  }
+  span {
+    position: absolute;
+    margin-left: 40px;
+    width: 130px;
+  }
+  &:hover {
+    min-width: 180px;
   }
 }
 
