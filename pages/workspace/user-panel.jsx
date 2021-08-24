@@ -9,6 +9,7 @@ import WorkSpaceTitle from "../../src/components/workspace/WorkSpaceTitle";
 import AuthAPI from "../../src/client_apis/authApis";
 import { verify } from "jsonwebtoken";
 import Image from "next/image";
+import Spinner from "../../src/components/common/contentLoader/spinningCircleLoader";
 
 const UserPanel = () => {
   const regex = {
@@ -405,6 +406,7 @@ const UserPanel = () => {
             </div>
           </div>
         )}
+        {submittedForm.submitting ? <Spinner /> : null}
       </section>
     </div>
   );
