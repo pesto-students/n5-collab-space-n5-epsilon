@@ -156,26 +156,25 @@ $Segoe: "SegoeUI", sans-serif;
   }
 }
 
-
-.complete-check{
+.complete-check {
   position: absolute;
   width: 100%;
   height: 100%;
   background: #fff;
   top: 0;
   left: 0;
- &:after{
-   content: '';
-   position: absolute;
-   height: 70px;
-   width: 70px;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%, -50%);
-   background: url(https://api.iconify.design/akar-icons/circle-check.svg);
-   background-repeat: no-repeat;
-   background-size: contain;
- }
+  &:after {
+    content: "";
+    position: absolute;
+    height: 70px;
+    width: 70px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: url(https://api.iconify.design/akar-icons/circle-check.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
 }
 
 .Homepage {
@@ -480,7 +479,7 @@ header {
     }
   }
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     z-index: 2;
     background-image: url("../public/organizing_projects.svg");
@@ -496,7 +495,7 @@ header {
     }
   }
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     right: 24px;
     background-image: url("../public/selecting_team.svg");
@@ -511,7 +510,7 @@ header {
       display: none;
     }
   }
-  .container{
+  .container {
     position: relative;
     z-index: 5;
   }
@@ -1079,20 +1078,20 @@ footer {
     transition-delay: 0s;
     color: #333;
 
-    .tab-list{
+    .tab-list {
       display: flex;
       width: 100%;
       border-bottom: 1px solid #0000001f;
       justify-content: space-between;
-      .btn{
+      .btn {
         width: calc(50% - 10px);
         text-align: center;
         border: 0;
         border-radius: 0;
-        &.active{
+        &.active {
           position: relative;
-          &:after{
-            content: '';
+          &:after {
+            content: "";
             position: absolute;
             background: #3f51b5;
             height: 2px;
@@ -1148,26 +1147,26 @@ footer {
     justify-content: space-between;
     margin-top: 20px;
     position: relative;
-    .btn{
+    .btn {
       width: 100%;
       max-width: 120px;
       text-align: center;
       margin: 0 auto;
     }
-    &.signIn-form{
+    &.signIn-form {
       margin-top: 50px;
-      .forgot-text{
+      .forgot-text {
         position: absolute;
         right: 0;
         top: -40px;
         cursor: pointer;
-        &:hover{
-         color: #586dbb;
+        &:hover {
+          color: #586dbb;
         }
       }
     }
-    &.forgot-password{
-      .btn{
+    &.forgot-password {
+      .btn {
         width: auto;
         max-width: 140px;
         margin: 0;
@@ -1818,6 +1817,8 @@ footer {
               margin-bottom: 20px;
               height: auto;
             }
+            .done {
+            }
           }
         }
       }
@@ -2027,6 +2028,11 @@ footer {
   }
   &:nth-last-of-type(1) {
     margin-bottom: 20px;
+  }
+}
+.done {
+  .name {
+    text-decoration: line-through;
   }
 }
 

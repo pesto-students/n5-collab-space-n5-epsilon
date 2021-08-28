@@ -127,3 +127,18 @@ export async function assignTask(taskInfo, projection = "", populate = "") {
   );
   return foundTask;
 }
+
+export async function updateTaskStatus(
+  taskInfo,
+  projection = "",
+  populate = ""
+) {
+  const { taskId, status } = taskInfo;
+  const foundTask = Task.findOneAndUpdate(
+    { _id: Types.ObjectId(taskId) },
+    {
+      status: status,
+    }
+  );
+  return foundTask;
+}

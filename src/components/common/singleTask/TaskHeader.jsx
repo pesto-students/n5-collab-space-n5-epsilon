@@ -53,6 +53,7 @@ export default function TaskHeader({
                   minRows={1}
                   rows={1}
                   placeholder="task Name ..."
+                  outsideClickCallback={saveTaskNameHandler}
                 />
               </div>
               <div className={styles.edit_actions}>
@@ -91,6 +92,7 @@ export default function TaskHeader({
                   value={description}
                   maxRows={5}
                   placeholder="description ..."
+                  outsideClickCallback={saveDescriptionHandler}
                 />
               </div>
               <div className={styles.edit_actions}>

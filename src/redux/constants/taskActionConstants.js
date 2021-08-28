@@ -40,6 +40,10 @@ export const DELETE_COMMENT_SUCCESS = "DELETE_COMMENT_SUCCESS";
 export const DELETE_COMMENT_FAILURE = "DELETE_COMMENT_FAILURE";
 
 export const ASSIGN_TASK_TO = "ASSIGN_TASK_TO";
+export const UPDATE_TASK_STATUS = "UPDATE_TASK_STATUS";
+export const UPDATE_TASK_STATUS_SUCCESS = "UPDATE_TASK_STATUS_SUCCESS";
+export const UPDATE_TASK_STATUS_FAILURE = "UPDATE_TASK_STATUS_FAILURE";
+
 export const GetAllTasks = (data) => ({
   type: GET_ALL_TASKS,
   payload: data,
@@ -190,8 +194,22 @@ export const DeleteCommentFailure = (data) => ({
   payload: data,
 });
 
-
 export const AssignTaskTo = (data) => ({
   type: ASSIGN_TASK_TO,
+  payload: data,
+});
+
+export const UpdateTaskStatus = (data) => ({
+  type: UPDATE_TASK_STATUS,
+  payload: data,
+});
+
+export const UpdateTaskStatusSuccess = (data) => ({
+  type: UPDATE_TASK_STATUS_SUCCESS,
+  payload: data,
+});
+
+export const UpdateTaskStatusFailure = (data) => ({
+  type: UPDATE_TASK_STATUS_FAILURE,
   payload: data,
 });

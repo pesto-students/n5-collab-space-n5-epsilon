@@ -26,6 +26,9 @@ import {
   UpdateTaskName,
   UpdateTaskNameSuccess,
   AssignTaskTo,
+  UpdateTaskStatus,
+  UpdateTaskStatusSuccess,
+  UpdateTaskStatusFailure,
 } from "../constants/taskActionConstants";
 import { toast } from "react-toastify";
 import { taskListURL, taskURL } from "../../client_apis/workSpaceApi";
@@ -176,5 +179,19 @@ export const assignTaskTo = (assignTaskInfo) => async (dispatch) => {
     }
   } catch (err) {
     console.error(err);
+  }
+};
+export const updateTaskStatus = (taskInfo) => async (dispatch) => {
+  try {
+    dispatch(UpdateTaskStatus(taskInfo));
+    const { taskId, status } = taskInfo;
+    let response = await taskURL.post(`/${taskId}/changeStatus`, taskInfo);
+
+    if (response) {
+      dispatch(UpdateTaskStatusSuccess(taskInfo));
+    }
+  } catch (err) {
+    console.error(err);
+    dispatch(UpdateTaskStatusFailure(taskInfo));
   }
 };

@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { useRef } from "react";
+import useOutsideClick from "../../hooks/useOutSideClick";
 function ResizableTextArea(props) {
+  const textareaRef = useRef();
   const [rows, setRows] = useState(props.rows);
   const [minRows, setMinRows] = useState(props.minRows);
   const [maxRows, setMaxRows] = useState(props.maxRows);
+
+  useOutsideClick(textareaRef, props.outsideClickCallback);
+
   const handleChange = (event) => {
     const textareaLineHeight = 24;
 
@@ -26,6 +32,7 @@ function ResizableTextArea(props) {
 
   return (
     <textarea
+      ref={textareaRef}
       value={props.value}
       rows={rows}
       placeholder={props.placeholder}
@@ -42,6 +49,7 @@ ResizableTextArea.defaultProps = {
   minRows: 3,
   className: "textarea",
   placeholder: "this is a placeholder",
+  outsideClickCallback: () => {},
 };
 
 ResizableTextArea.propTypes = {
@@ -51,6 +59,7 @@ ResizableTextArea.propTypes = {
   minRows: PropTypes.number,
   className: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
+  outsideClickCallback: PropTypes.func,
 };
 
 export default ResizableTextArea;

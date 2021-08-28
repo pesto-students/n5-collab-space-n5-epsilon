@@ -77,12 +77,21 @@
       overflow: auto;
       .comment_card {
         display: flex;
+        
         .comment {
           width: 39vw;
           padding: 4px;
           padding-left: 1.1vw;
           margin-bottom: 2vh;
           margin-left: 1vw;
+          &:nth-child(odd) {
+            border: 1px solid #80808040;
+            background-color: #99deff40;
+          }
+          &:nth-child(even) {
+            border: 1px solid #80808040;
+            background-color: #99deff40;
+          }
           .comment_menu {
             float: right;
             margin-right: 2vw;
@@ -156,7 +165,7 @@
       .existing_tags {
         display: flex;
         max-width: 30vw;
-        
+
         overflow: auto;
         padding: 10px 20px;
         cursor: pointer;

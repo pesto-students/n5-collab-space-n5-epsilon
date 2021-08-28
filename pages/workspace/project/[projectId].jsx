@@ -81,6 +81,7 @@ const ProjectPage = () => {
     const projectContributers = {};
 
     Object.keys(taskLists).map((taskListId) => {
+      console.log("issue ", taskLNames, taskLists[taskListId].taskListName);
       if (!taskLNames.includes(taskLists[taskListId].taskListName)) {
         taskLNames.push(taskLists[taskListId].taskListName);
       }
@@ -91,7 +92,7 @@ const ProjectPage = () => {
         });
       });
     });
-    contributions.map((item)=>{
+    contributions.map((item) => {
       projectContributers[item.userId._id] = {
         userId: item.userId._id,
         userName: item.userId.name,
@@ -100,7 +101,7 @@ const ProjectPage = () => {
 
     setTaskTagNames(taskTNames);
     setTaskListsName(taskLNames);
-    setProjectUserNames(projectContributers)
+    setProjectUserNames(projectContributers);
   }, [taskLists]);
 
   return (

@@ -3,6 +3,8 @@ import {
   DELETE_PROJECT,
   GET_PROJECT_INFO,
   GET_PROJECT_INFO_FAILURE,
+  MARK_TASK_STATUS_COMPLETE,
+  MARK_TASK_STATUS_INCOMPLETE,
   UPDATE_PROJECT,
 } from "../constants/projectActionConstants";
 import {
@@ -16,6 +18,7 @@ import {
   MOVE_TASK,
   MOVE_TASK_FAILURE,
   UPDATE_TASK_NAME,
+  UPDATE_TASK_STATUS,
 } from "../constants/taskActionConstants";
 import {
   CREATE_TASK_LIST,
@@ -139,10 +142,14 @@ const ProjectReducer = (state = initialState, action) => {
         //   }
         // )[0].userId;
         draft.projectInfo.taskLists[taskListId].task[taskId].assignedTo =
-        assignedTo;
+          assignedTo;
         break;
       }
-
+      case UPDATE_TASK_STATUS: {
+        const { taskId, taskListId, status } = payload;
+        draft.projectInfo.taskLists[taskListId].task[taskId].status = status;
+        break;
+      }
       case MOVE_TASK: {
         const {
           taskId,
