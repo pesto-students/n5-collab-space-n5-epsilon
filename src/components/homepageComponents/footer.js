@@ -7,7 +7,7 @@ export default function FooterBase() {
     let currentValue = e.target.currentValue;
     setNewsLetter(currentValue);
   };
-  const subscribeNewsLetter = (e) => {
+  const subscribeNewsLetter = (e) =>  {
     e.preventDefault();
     toast.info("Subscribe to newsletter with " + newsLetter);
   };
