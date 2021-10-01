@@ -18,7 +18,11 @@ export default function Home() {
   const featureRef = useRef();
   function handleFeatureClick() {
     // Scroll back to the title element...
-    featureRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+    featureRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+      inline: "start",
+    });
   }
   return (
     <div className="Homepage">

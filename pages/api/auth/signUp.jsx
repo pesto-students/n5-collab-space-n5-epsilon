@@ -15,7 +15,7 @@ handler.post( async (req, res)=>{
   const emailExist = await UserData.findOne({email: req.body.email})
   if(emailExist) return res.status(400).send('Email already exists');
 
-  const salt = await genSalt(16);
+  const salt = await genSalt(6);
   const hashedPassword = await hash(req.body.password, salt);
 
   const newData = new UserData({

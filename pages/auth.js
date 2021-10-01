@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SignInForm from "../src/components/Auth-Components/signIn-form";
 import SignUpForm from "../src/components/Auth-Components/signUp-form";
 import ForgotPasswordForm from "../src/components/Auth-Components/forgotPassword-form";
@@ -11,16 +11,18 @@ export default function Authentication() {
   const router = useRouter();
   const token = cookie.get("token");
 
-  if (token) {
-    router.push("/workspace");
-  }
+  useEffect(() => {
+    if (token) {
+      router.push("/workspace");
+    }
+  }, [token]);
 
   const regex = {
     emailRegex:
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i,
     nameRegex: /^([a-zA-Z]+( [a-zA-Z]+)|[a-zA-Z]){2,50}$/,
   };
-  const [authState, setAuthState] = useState("SignUp");
+  const [authState, setAuthState] = useState("SignIn");
   const [stateChanging, setStateChanging] = useState(false);
   const [formSubmit, setFormSubmit] = useState({
     formTouched: false,
@@ -61,11 +63,26 @@ export default function Authentication() {
         <span className="feature-image" />
       </div>
       <div className="center">
-        {authState !== "Forgot"  && <div className='tab-list'>
-          <span className={`btn ${authState === "SignIn"? 'active':''}`} onClick={() => {changeForm("SignIn")}}>I AM A MEMBER</span>
-          <span className={`btn ${authState === "SignUp"? 'active':''}`} onClick={() => {changeForm("SignUp")}}>I AM NEW HERE</span>
-        </div>
-        }
+        {authState !== "Forgot" && (
+          <div className="tab-list">
+            <span
+              className={`btn ${authState === "SignIn" ? "active" : ""}`}
+              onClick={() => {
+                changeForm("SignIn");
+              }}
+            >
+              I AM A MEMBER
+            </span>
+            <span
+              className={`btn ${authState === "SignUp" ? "active" : ""}`}
+              onClick={() => {
+                changeForm("SignUp");
+              }}
+            >
+              I AM NEW HERE
+            </span>
+          </div>
+        )}
         {authState === "SignIn" && (
           <SignInForm
             changeForm={changeForm}

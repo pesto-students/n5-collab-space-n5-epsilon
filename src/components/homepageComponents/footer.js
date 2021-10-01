@@ -1,5 +1,16 @@
 import Link from "next/link";
+import { useState } from "react";
+import { toast } from "react-toastify";
 export default function FooterBase() {
+  const [newsLetter, setNewsLetter] = useState("");
+  const handleNewsLetter = (e) => {
+    let currentValue = e.target.currentValue;
+    setNewsLetter(currentValue);
+  };
+  const subscribeNewsLetter = (e) => {
+    e.preventDefault();
+    toast.info("Subscribe to newsletter with " + newsLetter);
+  };
   return (
     <footer>
       <div className="container">
@@ -7,59 +18,12 @@ export default function FooterBase() {
           <div className="col">
             <img src="/footerlogo.png" className="logo" alt="logo" />
             <p>
-              CollabSpace Provides a way for people to create their Task, Manage
-              Themselves Or Collaborate with others through simplicity
+              <p>
+                <b>CollabSpace</b> provides a way for people to create their
+                task, manage themselves or collaborate with others through
+                simplicity. With
+              </p>
             </p>
-          </div>
-          <div className="col list">
-            <h5>Quick Links</h5>
-            <ul>
-              <li>
-                <Link href="#">
-                  <a>About</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="#">
-                  <a>Features</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="#">
-                  <a>Blog</a>
-                </Link>
-              </li>
-              <li>
-                <span>Career</span>
-              </li>
-              <li>
-                <span>FAQs</span>
-              </li>
-              <li>
-                <Link href="#">Contact</Link>
-              </li>
-            </ul>
-          </div>
-          <div className="col list">
-            <h5>Social</h5>
-            <ul>
-              <li>
-                <Link href="#">
-                  <a>Facebook</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="#">
-                  <a>Twitter</a>
-                </Link>
-              </li>
-              <li>
-                <span>YouTube</span>
-              </li>
-              <li>
-                <span>Linkedin</span>
-              </li>
-            </ul>
           </div>
           <div className="col contact">
             <h5>Newsletter</h5>
@@ -69,9 +33,12 @@ export default function FooterBase() {
             </p>
             <form className={`formSet`}>
               <fieldset>
-                <input placeholder="Email Address" />
+                <input
+                  placeholder="Email Address"
+                  onChange={handleNewsLetter}
+                />
               </fieldset>
-              <button className="default-btn">
+              <button className="default-btn" onClick={subscribeNewsLetter}>
                 <img
                   src="https://api.iconify.design/fa-solid/paper-plane.svg?color=white"
                   alt=""

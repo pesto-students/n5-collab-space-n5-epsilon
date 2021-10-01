@@ -11,16 +11,18 @@ export default function AboutUs(prop) {
             className="content-wrapper"
           >
             <span className="title">ABOUT US</span>
-            <h3>Revolutionizing the way People Manage Themselves </h3>
+            <h3>Revolutionizing the way people manage themselves </h3>
             <img
               className="responsive-image"
               src={"about-us.png"}
               alt="about us"
             />
             <p>
-              CollabSpace Provides a way for people to create their Task, Manage
-              Themselves Or Collaborate with others through simplicity. With
-              CollabSpace We Offer freedom to model platform as needed
+              <b>CollabSpace</b> provides a way for people to create their task,
+              manage themselves or collaborate with others through simplicity.
+              With
+              <br />
+              <b>CollabSpace</b> we offer freedom to model platform as needed
             </p>
             <p>{prop.additionalData}</p>
             <div className="btn-wrapper">

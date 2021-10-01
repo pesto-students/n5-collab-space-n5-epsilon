@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function Features({ featureRef }) {
   return (
     <section className="choose-cypherchange">
@@ -21,7 +23,7 @@ export default function Features({ featureRef }) {
             </div>
             <div className="content-wrapper">
               <h4>Multi level protection</h4>
-              <p>Secure your projects with multi layer protection.</p>
+              <p>Secure your projects with multi-layer protection.</p>
             </div>
           </div>
           <div
@@ -39,7 +41,7 @@ export default function Features({ featureRef }) {
             </div>
             <div className="content-wrapper">
               <h4>Faster Collaboration</h4>
-              <p>Link your Projects and Task for a faster Collaboration</p>
+              <p>Link your Projects and Tasks for a faster collaboration</p>
             </div>
           </div>
           <div
@@ -57,7 +59,7 @@ export default function Features({ featureRef }) {
             </div>
             <div className="content-wrapper">
               <h4>Best industry practice</h4>
-              <p>CollabSpace is built on multiple hot technology</p>
+              <p>CollabSpace is built on multiple hot technologies</p>
             </div>
           </div>
           <div
@@ -77,8 +79,7 @@ export default function Features({ featureRef }) {
             <div className="content-wrapper">
               <h4>Defining Package Limits</h4>
               <p>
-                Personalize your project in accordance to your needs with no
-                cost
+                Personalize your projects in accordance to your needs for free
               </p>
             </div>
           </div>
@@ -124,6 +125,7 @@ export default function Features({ featureRef }) {
             </div>
           </div>
         </div>
+        
       </div>
     </section>
   );
