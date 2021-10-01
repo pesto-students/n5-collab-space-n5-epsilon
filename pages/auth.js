@@ -31,6 +31,7 @@ export default function Authentication() {
     emailError: false,
     passwordError: false,
     nameError: false,
+    loading: false,
   });
 
   const formSubmitHandler = (newState) => {
@@ -108,7 +109,7 @@ export default function Authentication() {
           />
         )}
       </div>
-      {formSubmit.submitting ? <Spinner /> : null}
+      { formSubmit.loading ? <Spinner /> : null}
     </section>
   );
 }
