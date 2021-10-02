@@ -18,6 +18,7 @@ function CompletedTaskList({
   const getStatusStyle = (isDraggingOver) => ({
     background: isDraggingOver ? "#4dff863d" : "",
   });
+  const completedTaskListMap = {};
   const tasks = taskListsOrder.map((taskListId) => {
     console.log(
       "taskLists[taskListId].task",
@@ -26,6 +27,7 @@ function CompletedTaskList({
       taskLists[taskListId]?.task,
       taskLists[taskListId]?.task.length
     );
+
     const completedTask = Object.keys(taskLists[taskListId]?.task).map(
       (taskKey) => {
         if (
@@ -36,11 +38,14 @@ function CompletedTaskList({
         }
       }
     );
+    completedTaskListMap[taskListId] = completedTask.filter(
+      (task) => task !== undefined
+    );
     return completedTask;
   });
   const merged = [].concat.apply([], tasks);
   const filterTasks = merged.filter((task) => task !== undefined);
-  console.log("task", filterTasks);
+  console.log("task", filterTasks, completedTaskListMap);
   return (
     <React.Fragment>
       <React.Fragment>
@@ -57,56 +62,68 @@ function CompletedTaskList({
                 </div>
               </div>
               <div className="list-wrapper">
-                {filterTasks.map((taskObj, index) => {
-                  let tagFilter = false;
-                  let listFilter = false;
-                  let userFilter = false;
-                  if (taskTypeFilter && taskTypeFilter !== "any") {
-                    listFilter = true;
-                  } else {
-                    listFilter = false;
-                  }
-                  if (taskTagFilter && taskTagFilter !== "any") {
-                    tagFilter = true;
-                  } else {
-                    tagFilter = false;
-                  }
-                  if (taskAssignedFilter && taskAssignedFilter !== "any") {
-                    userFilter = true;
-                  } else {
-                    userFilter = false;
-                  }
-
-                  return (
+                {Object.keys(completedTaskListMap).map((taskListId, index) => {
+                  const filterTasks = completedTaskListMap[taskListId];
+                  return !!filterTasks.length ? (
                     <>
-                      {taskObj &&
-                        (listFilter
-                          ? taskTypeFilter.toLowerCase() ===
-                            "completed".toLowerCase()
-                          : true) &&
-                        (tagFilter
-                          ? taskObj.tags?.includes(taskTagFilter)
-                          : true) &&
-                        (userFilter
-                          ? taskObj.assignedTo === taskAssignedFilter
-                          : true) &&
-                        (taskObj.status
-                          ? taskObj.status == "completed"
-                          : true) && (
+                      <h6 key={taskListId}>
+                        {projectInfo.taskLists[taskListId].taskListName}
+                      </h6>
+                      {filterTasks.map((taskObj, index) => {
+                        let tagFilter = false;
+                        let listFilter = false;
+                        let userFilter = false;
+                        if (taskTypeFilter && taskTypeFilter !== "any") {
+                          listFilter = true;
+                        } else {
+                          listFilter = false;
+                        }
+                        if (taskTagFilter && taskTagFilter !== "any") {
+                          tagFilter = true;
+                        } else {
+                          tagFilter = false;
+                        }
+                        if (
+                          taskAssignedFilter &&
+                          taskAssignedFilter !== "any"
+                        ) {
+                          userFilter = true;
+                        } else {
+                          userFilter = false;
+                        }
+
+                        return (
                           <>
-                            <h6>{projectInfo.taskLists[taskObj.taskListId].taskListName}</h6>
-                            <Task
-                              key={taskObj._id}
-                              taskListId={taskObj.taskListId}
-                              deleteTaskHandler={deleteTaskHandler}
-                              index={index}
-                              task={taskObj}
-                              taskCssClassName={"task done"}
-                            />
+                            {taskObj &&
+                              (listFilter
+                                ? taskTypeFilter.toLowerCase() ===
+                                  "completed".toLowerCase()
+                                : true) &&
+                              (tagFilter
+                                ? taskObj.tags?.includes(taskTagFilter)
+                                : true) &&
+                              (userFilter
+                                ? taskObj.assignedTo === taskAssignedFilter
+                                : true) &&
+                              (taskObj.status
+                                ? taskObj.status == "completed"
+                                : true) && (
+                                <>
+                                  <Task
+                                    key={taskObj._id}
+                                    taskListId={taskObj.taskListId}
+                                    deleteTaskHandler={deleteTaskHandler}
+                                    index={index}
+                                    task={taskObj}
+                                    taskCssClassName={"task done"}
+                                  />
+                                </>
+                              )}
                           </>
-                        )}
+                        );
+                      })}
                     </>
-                  );
+                  ) : null;
                 })}
 
                 {provided.placeholder}

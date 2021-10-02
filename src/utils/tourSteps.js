@@ -33,9 +33,18 @@ export const tourConfig = [
     content: "you can create new project from here ",
   },
   {
-    selector: ".projectContainer",
-    content: "you can create new project from here ",
+    selector: ".project-space-wrapper ",
+    content: "All of your Projects are available here ",
   },
+  {
+    selector: ".trash-can",
+    content: "Drag and Drop Projects to Remove",
+  },
+  {
+    selector: ".layout-toggle",
+    content: "Toggle Between Layouts ",
+  },
+
   {
     selector: siteLayoutStyles.siteLayout,
     content: "Now All yours to explore",

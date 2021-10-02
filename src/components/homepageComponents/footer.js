@@ -21,7 +21,7 @@ export default function FooterBase() {
               <p>
                 <b>CollabSpace</b> provides a way for people to create their
                 task, manage themselves or collaborate with others through
-                simplicity. With
+                simplicity.
               </p>
             </p>
           </div>

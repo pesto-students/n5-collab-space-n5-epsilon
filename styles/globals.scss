@@ -1829,8 +1829,8 @@ footer {
       grid-gap: 32px;
       max-height: calc(100% - 69px);
       width: 100%;
-      overflow-x: auto;
-      overflow-y: hidden;
+      overflow: auto;
+      height: 100vh;
       .taskList {
         display: flex;
         flex-direction: column;
