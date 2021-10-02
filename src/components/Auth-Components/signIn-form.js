@@ -29,7 +29,7 @@ export default function SignInForm(props) {
   function submit() {
     props.setFormStatus({
       submitting: true,
-      loading:true,
+      loading: true,
     });
     Auth.emailLogin(formData)
       .then(({ data: response }) => {

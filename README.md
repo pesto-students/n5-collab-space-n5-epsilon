@@ -11,7 +11,8 @@ Tech Stack
 - ReactJs 
 - Redux
 - Immer 
-- Scss 
+- Scss
+- MongoDb 
 
 Deployment
 -----------

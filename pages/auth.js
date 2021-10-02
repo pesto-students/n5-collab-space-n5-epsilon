@@ -35,7 +35,7 @@ export default function Authentication() {
   });
 
   const formSubmitHandler = (newState) => {
-    setFormSubmit({ ...formSubmit, ...newState });
+    setFormSubmit((prevState) => ({ ...prevState, ...newState }));
   };
   function changeForm(formName) {
     setStateChanging(true);
@@ -109,7 +109,7 @@ export default function Authentication() {
           />
         )}
       </div>
-      { formSubmit.loading ? <Spinner /> : null}
+      {formSubmit.loading ? <Spinner /> : null}
     </section>
   );
 }
