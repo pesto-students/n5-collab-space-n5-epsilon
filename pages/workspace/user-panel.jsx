@@ -38,6 +38,7 @@ const UserPanel = () => {
   const [availableProjectList, setAvailableProjectList] = useState([]);
   const [selectedUser, setSelectedUser] = useState('');
   const [completeCheckShow, setCompleteCheckShow] = useState(false);
+  const [initialScreen, setInitialScreen] = useState(false);
   const Auth = new AuthAPI();
 
   useEffect( () => {
@@ -51,6 +52,10 @@ const UserPanel = () => {
     setAvailableProjectList(availableProjects);
 
     mapUserToProjectList();
+
+    setTimeout(()=>{
+      setInitialScreen(true);
+    }, 1000);
 
     document.addEventListener("click", outsideClickListen);
 
@@ -203,10 +208,11 @@ const UserPanel = () => {
                 >
                   <span
                     className="icon"
-                    style={{
-                      background:
-                        "#" + Math.floor(Math.random() * 16777215).toString(16),
-                    }}
+                    style={{background: "#1877F2"}}
+                    // style={{
+                    //   background:
+                    //     "#" + Math.floor(Math.random() * 16777215).toString(16),
+                    // }}
                   >
                     <span>{usersList[user].name}</span>
                   </span>
@@ -219,7 +225,9 @@ const UserPanel = () => {
         </div>
         <div className="project-list-space">
           <h4>Projects</h4>
-          {Object.keys(projectList).length ? (
+          {
+            initialScreen ?
+            Object.keys(projectList).length ? (
             <div className="project-list">
               <div
                 className="project add-project"
@@ -296,7 +304,7 @@ const UserPanel = () => {
               </h1>
               <Image src="/empty.gif" alt="empty" layout="fill" />
             </div>
-          )}
+          ): null}
         </div>
 
         {showForm && (

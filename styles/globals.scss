@@ -488,8 +488,8 @@ header {
     background-size: contain;
     background-repeat: no-repeat;
     left: 17px;
-    top: 40%;
-    max-width: 25vw;
+    top: 35%;
+    max-width: 22vw;
     @media (max-width: 992px) {
       display: none;
     }
@@ -504,8 +504,8 @@ header {
     width: 350px;
     background-size: contain;
     background-repeat: no-repeat;
-    max-width: 28vw;
-    bottom: -15%;
+    max-width: 25vw;
+    bottom: -20%;
     @media (max-width: 992px) {
       display: none;
     }
@@ -1825,7 +1825,7 @@ footer {
     }
     .taskListContainer {
       display: flex;
-      align-items: end;
+      align-items: baseline;
       grid-gap: 32px;
       max-height: calc(100% - 69px);
       height: 100vh;
