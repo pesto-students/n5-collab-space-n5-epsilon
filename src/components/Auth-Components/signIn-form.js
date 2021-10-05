@@ -66,7 +66,7 @@ export default function SignInForm(props) {
         type="email"
         placeholder="email"
         value={formData.email}
-        onKeyUp={(e) => {
+        onChange={(e) => {
           if (!props.regex.emailRegex.test(e.target.value.toLowerCase())) {
             props.setFormStatus({
               ...props.formStatus,
@@ -90,7 +90,7 @@ export default function SignInForm(props) {
           type={passwordShow ? "text" : "password"}
           placeholder="password"
           value={formData.password}
-          onKeyUp={(e) => {
+          onChange={(e) => {
             if (e.target.value.length < 6) {
               props.setFormStatus({
                 ...props.formStatus,
