@@ -43,7 +43,7 @@ function Task({ task, index, deleteTaskHandler,taskCssClassName="task"
             <div className="status">{task.status}</div>
             <div className="tags">
               {task.tags?.map((tag, index) => {
-                return <span key={tag + index}>{tag}</span>;
+                return <p key={tag + index}>{tag}</p>;
               })}
             </div>
             {userPermission.hasOwnProperty("taskList") &&

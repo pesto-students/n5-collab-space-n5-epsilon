@@ -1998,7 +1998,7 @@ footer {
   .tags {
     display: flex;
     overflow: auto;
-    span {
+    p {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -2009,9 +2009,9 @@ footer {
       text-transform: capitalize;
       margin: 15px 8px 0 0;
       cursor: pointer;
-      min-width: 50px;
+
       white-space: nowrap;
-      overflow: hidden;
+
       text-overflow: ellipsis;
     }
   }
@@ -2036,7 +2036,14 @@ footer {
     text-decoration: line-through;
   }
 }
-
+::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
+html {
+  overflow: scroll;
+  overflow-x: hidden;
+}
 .settings-tab {
   display: flex;
   flex-wrap: wrap;

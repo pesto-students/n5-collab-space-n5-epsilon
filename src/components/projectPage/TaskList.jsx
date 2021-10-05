@@ -185,6 +185,7 @@ export default function TaskList({
                     toggleModal();
                   }}
                   onCancelHandler={toggleModal}
+                  acceptButtonContent="Ok"
                 />
               </Modal>
             ) : null}

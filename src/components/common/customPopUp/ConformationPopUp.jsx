@@ -2,6 +2,8 @@ import React from "react";
 import styles from "../../../../styles/conformationModal.module.scss";
 export default function ConformationPopUp({
   title,
+  acceptButtonContent = "Accept",
+  cancelButtonContent = "Cancel",
   onAcceptHandler,
   onCancelHandler,
 }) {
@@ -13,13 +15,13 @@ export default function ConformationPopUp({
       <div className={styles.pop_up_actions}>
         <div className={styles.accept_action}>
           <button className="transparent-btn" onClick={onAcceptHandler}>
-            Accept
+            {acceptButtonContent}
           </button>
           
         </div>
         <div className={styles.close_pop_up_actions}>
           <button className="transparent-btn transparent-close-button" onClick={onCancelHandler}>
-            Close
+            {cancelButtonContent}
           </button>
         </div>
       </div>
