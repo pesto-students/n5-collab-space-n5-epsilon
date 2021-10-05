@@ -1,22 +1,40 @@
 import Axios from 'axios';
+// import axios from "axios";
 export const urlBackEnd = process.env.REACT_APP_LOCAL_URL;
 class AuthAPI {
     constructor() {
         this.API = Axios.create({
-            baseURL: 'http://localhost:3000/api',
+            baseURL: urlBackEnd,
         });
     }
 
+
     emailLogin(data) {
-        return this.API.post(`/auth/signIn`, data);
+        return this.API.post(`/api/auth/signIn`, data);
     }
 
     emailSignUp(data) {
-        return this.API.post(`/auth/signUp`, data);
+        return this.API.post(`/api/auth/signUp`, data);
     }
 
     forgotPassword(data) {
-        return this.API.post(`/auth/forgotPassword`, data);
+        return this.API.post(`/api/auth/forgotPassword`, data);
+    }
+
+    resetPassword(data) {
+        return this.API.post(`/api/auth/resetPassword`, data);
+    }
+
+    getAddedUsers(data){
+        return this.API.post(`/api/users/inviteUser`, data);
+    }
+
+    sendInviteToUsers(data){
+        return this.API.post(`/api/users/inviteMailer`, data);
+    }
+
+    updatePassword(data) {
+        return this.API.post(`/api/users/updatePassword`, data);
     }
 
 }

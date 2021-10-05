@@ -1,4 +1,4 @@
-import { validation } from "./validator";
+const validation = require('@hapi/joi');
 
 const signUp_UserValidation = (data) => {
   const signUp_User = {
