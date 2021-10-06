@@ -1825,7 +1825,7 @@ footer {
     }
     .taskListContainer {
       display: flex;
-      align-items: baseline;
+      align-items: flex-start;
       grid-gap: 32px;
       max-height: calc(100% - 69px);
       height: 100vh;
