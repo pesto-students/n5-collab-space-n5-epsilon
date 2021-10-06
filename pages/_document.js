@@ -15,6 +15,12 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+            <link
+                rel="preload"
+                href="/public/fonts/SegoeUIFont/Segoe UI.woff"
+                as="font"
+                crossOrigin=""
+            />
         </Head>
         <body>
           <Main />

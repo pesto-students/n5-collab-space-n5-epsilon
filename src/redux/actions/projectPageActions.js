@@ -1,22 +1,31 @@
-import { projectURL } from "../../client_apis/configUrl";
+import { projectURL } from "../../client_apis/workSpaceApi";
 
 import {
   GetProjectInfo,
-  ErrorProject,
   DeleteProject,
+  GetProjectInfoFailure,
 } from "../constants/projectActionConstants";
 
-export const getProjectInfo = (projectId) => async (dispatch, getState) => {
-  try {
-    // getState is to collect data from current state from store
-    const response = await projectURL.get(`/${projectId}`);
-    if (response) {
-      dispatch(GetProjectInfo(response.data));
+export const getProjectInfo =
+  ({ projectId, cookies }) =>
+  async (dispatch, getState) => {
+    try {
+      // getState is to collect data from current state from store
+      const { userId, token } = cookies;
+      const response = await projectURL.get(`/${projectId}`, {
+        params: {
+          userId,
+          token,
+        },
+      });
+      if (response) {
+        response.data.userId = userId;
+        dispatch(GetProjectInfo(response.data));
+      }
+    } catch (err) {
+      dispatch(GetProjectInfoFailure(err));
     }
-  } catch (err) {
-    dispatch(ErrorProject(err));
-  }
-};
+  };
 
 export const deleteProject = (projectId) => async (dispatch) => {
   try {

@@ -1,3 +1,4 @@
+import { taskListURL } from "../../client_apis/workSpaceApi";
 import {
   CreateTaskList,
   CreateTaskListFailure,
@@ -9,7 +10,7 @@ import {
 
 export const createNewTaskList = (taskListInfo) => async (dispatch) => {
   try {
-    dispatch(CreateTaskList(taskListInfo));
+    //dispatch(CreateTaskList(taskListInfo));
     let response = await taskListURL.post("", taskListInfo);
     if (response) {
       dispatch(CreateTaskListSuccess(response.data));

@@ -1,9 +1,12 @@
 import "../styles/globals.scss";
-import SiteLayout from "../src/components/Layouts/SiteLayout";
+import 'sal.js/dist/sal.css';
+
+import SiteLayout from "../src/components/layouts/SiteLayout";
 import { wrapper } from "../src/redux/store";
 
 function MyApp({ Component, pageProps }) {
-  const getLayout = Component.getLayout || ((page) => <SiteLayout children={page} />);
+  const getLayout =
+    Component.getLayout || ((page) => <SiteLayout>{page}</SiteLayout>);
   return getLayout(<Component {...pageProps} />);
 }
 

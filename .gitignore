@@ -1,3 +1,4 @@
+
 # Logs
 logs
 *.log
@@ -106,3 +107,8 @@ dist
 .tern-port
 
 ExpressServer
+
+
+.idea
+
+.vercel

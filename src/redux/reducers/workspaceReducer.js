@@ -4,14 +4,19 @@ import {
   UPDATE_PROJECT,
 } from "../constants/projectActionConstants";
 import {
+  ADD_USER_SUCCESS,
   CREATE_PROJECT,
+  CREATE_PROJECT_SUCCESS,
   GET_ALL_PROJECT,
+  GET_ALL_PROJECT_SUCCESS,
+  LEAVE_PROJECT,
+  TOGGLE_LOADING,
 } from "../constants/workspaceActionConstants";
 
 export const initialState = {
   projects: [],
   sharedProjects: [],
-  loading: true,
+  loading: false,
 };
 
 const WorkSpaceReducer = (state = initialState, action) => {
@@ -22,21 +27,41 @@ const WorkSpaceReducer = (state = initialState, action) => {
         const index = draft.findIndex((project) => project._id === payload._id);
         return (draft[index] = payload);
       }
-      case CREATE_PROJECT: {
+      case CREATE_PROJECT_SUCCESS: {
         draft.projects.push(payload);
         break;
-        //return draft;
       }
 
       case DELETE_PROJECT: {
-        const newDraft = original(draft);
-        const some = newDraft.projects.findIndex(
-          (project) => project._id == payload.projectId
-        );
-        draft.projects.splice(some, 1);
+        const projectIndex = draft.projects.findIndex((project) => {
+          return project.projectId == payload.projectId;
+        });
+
+        if (projectIndex > -1) {
+          draft.projects.splice(projectIndex, 1);
+        }
+
         break;
       }
-      case GET_ALL_PROJECT: {
+      case ADD_USER_SUCCESS: {
+        break;
+      }
+      case LEAVE_PROJECT: {
+        const projectIndex = draft.projects.findIndex((project) => {
+          return project.projectId == payload.projectId;
+        });
+
+        if (projectIndex > -1) {
+          draft.projects.splice(projectIndex, 1);
+        }
+        break;
+      }
+      case TOGGLE_LOADING: {
+        const { loading } = payload;
+        draft.loading = loading;
+        break;
+      }
+      case GET_ALL_PROJECT_SUCCESS: {
         draft.projects = payload;
         break;
       }

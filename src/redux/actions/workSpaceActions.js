@@ -1,4 +1,5 @@
-import { projectURL } from "../../client_apis/configUrl";
+import { Types } from "mongoose";
+import { projectURL, usersURL } from "../../client_apis/workSpaceApi";
 import {
   DeleteProject,
   DeleteProjectFailure,
@@ -11,14 +12,21 @@ import {
   GetAllProjectFailure,
   CreateProjectSuccess,
   CreateProjectFailure,
+  AddUser,
+  AddUserSuccess,
+  AddUserFailure,
+  LeaveProject,
+  LeaveProjectSuccess,
+  LeaveProjectFailure,
 } from "../constants/workspaceActionConstants";
 
-export const getWorkspaceProject = () => async (dispatch, getState) => {
+export const getWorkspaceProject = (req) => async (dispatch, getState) => {
   // getState is to collect data from current state from store
+  const { userId, token } = req.cookies;
   dispatch(GetAllProject({ loading: true }));
   try {
     await projectURL
-      .get()
+      .get("", { params: { userId, token } })
       .then((response) => {
         dispatch(GetAllProjectSuccess(response.data.projects));
       })
@@ -33,15 +41,9 @@ export const getWorkspaceProject = () => async (dispatch, getState) => {
 
 export const addNewProject = (newProject) => async (dispatch) => {
   try {
-    dispatch(CreateProject(newProject));
     let response = await projectURL.post("/", newProject);
     if (response) {
-      const data = response.data;
-      const payload = {
-        _id: data._id,
-        projectName: data.projectName,
-        description: response.data.description,
-      };
+      const payload = response.data;
       dispatch(CreateProjectSuccess(payload));
     }
   } catch (err) {
@@ -60,5 +62,31 @@ export const deleteProject = (projectId) => async (dispatch) => {
     }
   } catch (err) {
     dispatch(DeleteProjectFailure(err));
+  }
+};
+
+export const addUser = (inviteUserInfo) => async (dispatch) => {
+  try {
+    const { projectId } = inviteUserInfo;
+    let response = await usersURL.get("/inviteUser", {
+      params: inviteUserInfo,
+    });
+    if (response) {
+      dispatch(AddUserSuccess(response));
+    }
+  } catch (err) {
+    dispatch(AddUserFailure(err));
+  }
+};
+
+export const leaveProject = (leaveProjectInfo) => async (dispatch) => {
+  try {
+    //dispatch(LeaveProject(leaveProjectInfo));
+    let response = await usersURL.post("/leaveProject", leaveProjectInfo);
+    if (response) {
+      dispatch(LeaveProject(leaveProjectInfo));
+    }
+  } catch (err) {
+    dispatch(LeaveProjectFailure(err));
   }
 };

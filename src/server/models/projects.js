@@ -5,15 +5,10 @@ const MODEL_NAME = "Projects";
 const ProjectSchema = new Schema({
   projectName: String,
   description: String,
-  contributor: [
-    {
-      _id: {
-        type: Schema.Types.ObjectId,
-        ref: "Users",
-      },
-      role: String,
-    },
-  ],
+  projectOwner: {
+    type: Schema.Types.ObjectId,
+    ref: "Users",
+  },
 });
 
 ProjectSchema.post("findOneAndDelete", async function (doc) {
